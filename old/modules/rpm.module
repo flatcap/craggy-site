@@ -1,0 +1,142 @@
+<?php
+/**
+ * Copyright 2005 Richard Russon
+ *
+ * This file may be copied under the terms of the GNU Public License.
+ * http://www.gnu.org/licenses/gpl.html
+ */
+
+function rpm_help($section) {
+  switch ($section) {
+    case 'admin/modules#name':
+      return 'rpm';
+    case 'admin/modules#description':
+      return 'Manage the NTFS RPMs';
+    case 'admin/help#rpm':
+      return 'Main help page for rpms';
+  }
+}
+
+function rpm_perm() {
+  return array('Administer NTFS RPMs', 'Maintain NTFS RPMs', 'Contribute NTFS RPMs');
+}
+
+function rpm_menu($may_cache) {
+  $items = array();
+
+  if ($may_cache) {
+    $items[] = array('path' => 'rpm', 'title' => 'Manage RPMs',
+      'callback' => 'rpm_manage',
+      'access' => user_access('Administer NTFS RPMs'),
+      'type' => MENU_LOCAL_TASK);
+  } else {
+  }
+
+  return $items;
+}
+
+function rpm_manage() {
+  $base = "http://prdownloads.sourceforge.net/linux-ntfs";
+
+  if ($_POST) {
+    $distro = $_POST['edit']['rpm_distro'];
+    $type   = $_POST['edit']['rpm_suffix'];
+  } else {
+    $distro = 3;
+    $type   = 2;
+  }
+
+  $sql = 'SELECT did,vname,version,dname FROM {ntfs_vendor} AS v LEFT JOIN {ntfs_distro} AS d ON d.vid = v.vid';
+  $result = db_query($sql);
+  $list = array();
+  while ($d = db_fetch_object ($result)) {
+    $list += array ($d->did => $d->vname . ' ' . $d->version . ' (' . $d->dname . ')');
+  }
+  $output .= form_select('Select Distro', 'rpm_distro', $distro, $list);
+
+  $sql = 'SELECT sid,sname FROM {ntfs_suffix}';
+  $result = db_query($sql);
+  $list = array();
+  while ($t = db_fetch_object ($result)) {
+    $list += array ($t->sid => $t->sname);
+  }
+  $output .= form_select('Select File Type', 'rpm_suffix', $type, $list);
+
+  $output .= form_submit('Search');
+
+  if ($_POST) {
+    $archs   = array();
+    $archcat = array();
+    $cats    = array();
+
+    $sql = "SELECT aid,aname,cname FROM {ntfs_category} AS c LEFT JOIN {ntfs_arch} AS a ON a.cid = c.cid";
+    $result = db_query($sql);
+    while ($a = db_fetch_object ($result)) {
+      $archcat += array ($a->aid => array ($a->aname, $a->cname, 0));
+      $archs   += array ($a->aid => '');
+    }
+
+    $rels = array();
+    $sql = 'SELECT aid,rname,fname FROM {ntfs_files} as f LEFT JOIN {ntfs_thanks} AS t ON f.tid = t.tid LEFT JOIN {ntfs_release} AS r ON f.rid = r.rid WHERE r.did = %d AND f.sid = %d AND f.tid IS NULL ORDER BY f.rid DESC';
+    $result = db_query($sql, $distro, $type);
+    while ($file = db_fetch_object ($result)) {
+
+      if (!isset ($rels["$file->rname"])) {
+        $rels["$file->rname"] = $archs;
+      }
+
+      $rels["$file->rname"]["$file->aid"] = $file->fname;
+      $archcat["$file->aid"][2]++;
+    }
+
+    foreach ($archcat as $a => $c) {
+      if ($c[2] > 0) {
+        if (!isset ($cats["$c[1]"])) {
+          $cats += array ($c[1] => 0);
+        }
+        $cats["$c[1]"]++;
+      }
+    }
+
+    $output .= "<table class='rpms' border='1'>";
+    $output .= "<tr>";
+    $output .= "<th>Version</th>";
+    foreach ($cats as $name => $count) {
+      switch ($count) {
+        case 0:
+          break;
+        case 1:
+          $output .= "<th>$name</th>";
+          break;
+        default:
+          $output .= "<th colspan='$count'>$name</th>";
+          break;
+      }
+    }
+
+    $even = TRUE;
+    foreach ($rels as $r => $a) {
+      if ($even) {
+        $output .= "<tr class='even'>";
+      } else {
+        $output .= "<tr class='odd'>";
+      }
+      $even = !$even;
+
+      $output .= "<td>$r</td>";
+      foreach ($a as $aid => $name) {
+        if ($name <> '') {
+          $arch = $archcat[$aid][0];
+          $url  = $base . '/' . $name;
+          $output .= "<td><a href='$url'>$arch</a></td>";
+        }
+      }
+      $output .= "</tr>";
+    }
+    $output .= "</table>";
+  }
+
+  print theme('page', form($output, 'post'));
+}
+
+?>

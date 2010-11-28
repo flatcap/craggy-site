@@ -1,0 +1,138 @@
+<?php
+
+include "db.php";
+include "utils.php";
+
+$g_col_sort = array (
+	"colour" => "colour",
+	"difficulty" => "difficulty",
+	"grade" => "grade",
+	"height" => "height",
+	"panel" => "panel"
+);
+
+function six_list ($columns, $options)
+{
+	$table   = "v_routes";
+	$where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'lead'");
+
+	switch ($options["sort"]) {
+		case "colour":     $order = "colour, panel, grade_num";             break;
+		case "grade":      $order = "grade_num, panel, colour";             break;
+		case "height":     $order = "height, grade_num, panel, colour";     break;
+		case "difficulty": $order = "difficulty, panel, grade_num, colour"; break;
+		default:           $order = "panel, grade_num, colour";             break;
+	}
+
+	return db_select($table, $columns, $where, $order);
+}
+
+function six_command_line ($format, $def_format, $sort)
+{
+	$longopts  = array("format:", "sort:");
+
+	$options = getopt(NULL, $longopts);
+
+	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+		$options["format"] = $format[$def_format];
+	}
+
+	if (!array_key_exists ("sort", $options) || !in_array ($options["sort"], $sort)) {
+		$options["sort"] = NULL;
+	}
+
+	return $options;
+}
+
+function six_browser_options ($format, $def_format, $sort)
+{
+	$options = array();
+
+	$f = get_url_variable ("format");
+	if (!in_array ($f, $format))
+		$f = $format[$def_format];
+
+	$s = get_url_variable ("sort");
+	if (!in_array ($s, $sort))
+		$s = NULL;
+
+	$options["format"] = $f;
+	$options["sort"]   = $s;
+
+	return $options;
+}
+
+function six_main ($options)
+{
+	// "difficulty"
+	$columns = array ("id", "panel", "colour", "grade", "height");
+	$list = six_list ($columns, $options);
+
+	$total_height = process_height_total ($list);
+	process_height_abbreviate ($list);
+
+	array_shift ($columns);		// Ignore the id column
+	$widths = column_widths ($list, $columns, TRUE);
+	fix_justification ($widths);
+
+	$count  = count ($list);
+	$output = "";
+	//header("Pragma: no-cache");
+	switch ($options["format"]) {
+		case "html":
+			$last_update = date ("j M Y", strtotime (db_get_last_update()));
+
+			$output .= html_header ("6a");
+			$output .= "<body>";
+
+			$output .= "<div class='download'>";
+			$output .= "<h1>Route Data</h1>";
+			$output .= "<a href='files/guildford_6a.pdf'><img src='img/pdf.png'></a>";
+			$output .= "&nbsp;&nbsp;";
+			$output .= "<a href='?format=text'><img src='img/txt.png'></a>";
+			$output .= "&nbsp;&nbsp;";
+			$output .= "<a href='?format=csv'><img src='img/ss.png'></a>";
+			$output .= "</div>";
+
+			$output .= "<div class='header'>Top Roped 6a Routes <span>(Last updated: $last_update)</span></div>\n";
+			$output .= html_menu();
+			$output .= "<div class='content'>\n";
+			$output .= list_render_html ($list, $columns, $widths);
+			$output .= "<p>$count climbs ({$total_height}m)</p>";
+			$output .= "</div>";
+			$output .= get_errors();
+			$output .= "</body>";
+			$output .= "</html>";
+			break;
+
+		case "csv":
+			header('Content-type: text/csv');
+			header('Content-Disposition: attachment; filename="guildford_6a.csv"');
+			$output .= list_render_csv ($list, $columns);
+			break;
+
+		case "text":
+		default:
+			header('Content-type: text/plain');
+			header('Content-Disposition: attachment; filename="guildford_6a.txt"');
+			$output .= list_render_text ($list, $columns, $widths);
+			$output .= "\r\n$count climbs ({$total_height}m)\r\n";
+			break;
+	}
+
+	return $output;
+}
+
+
+date_default_timezone_set("UTC");
+
+$format = array ("csv", "html", "text");
+$sort   = array ("colour", "grade", "difficulty", "height", "panel");
+
+if (isset ($argc))
+	$options = six_command_line ($format, 2, $sort);
+else
+	$options = six_browser_options ($format, 1, $sort);
+
+echo six_main ($options);
+

@@ -1,0 +1,146 @@
+56 gn,rd,blu = 56 Green, 56 Red, 56 Blue
+48 Yellow
+74 all = 74 x, 74 y, 74 z in grade order
+
+need lists of unique abbreviations of all colours
+
+find delimiters "," anything else? CR, LF
+
+look for keywords "clean", "success", "failed"
+
+notes in "", or ''
+
+after decoding, any ambiguities need to be left for the climber to add info
+eg, 66 bl (Blue or Black)
+too difficult to resolve, did they mean 65 Blue or 67 Black
+
+after extra editing, hit search again to fill in details
+
+verify button - errors tagged with red bg
+
+need management console: add/del panel/setter/colour/...
+colours need abbr list
+
+climb list: climb id, date, notes
+current flag? (indexed)
+altering routes can invalidate the climbs
+tickboxes for clean (enough), downclimb, no feet, etc
+
+tickbox fuzzy grade +/- 2 options, panel +/- 2 nums
+tickbox all matches
+tickbox nice climb
+tickbox search csv output
+tickbox cumulative output (combine with tickbox set on results)
+(sort and uniq the results)
+tickbox search results only
+search by _age_ days 3,4-8,-30,30-
+search by date: start, end (and/or)
+
+traverse stats (/m^2)
+square meterage
+bouldering meterage
+
+add/remove colour/setter/?
+actually remove? just mark inactive? (for historic routes)
+
+change panel "number" to "name"
+
+--------------------------------------------------------------------------------
+
+replace spaces with &nbsp in setter, date_set, date_climbed, climb_type
+
+list.php?sort=panel,grade,colour
+
+climb notes:
+    Left arete allowed
+    Right arete allowed
+    Aretes allowed
+    Hands allowed on features
+    Feet allowed on features
+    Hands and feet allowed on features
+    Hands allowed on discs
+    Feet allowed on discs
+    Hands and feet allowed on features
+    No chimney
+    Chimney allowed
+    Competition route
+
+Work list:
+    Abbr    Name       Pri Tots SQL1                SQL2
+    T       Todo        H   27  success <> clean    grade < 6c
+    D       Downclimb   M   20  downclimb = 0       grade < 6a
+    6       6 Months    M   0   age > 6             grade < 6c
+    4       4 Months    L   4   age > 4, age < 6    grade < 6c
+    2       2 Months    VL  25  age > 2, age < 4    grade < 6c
+    C       Coverage T  L   3   success = ""        grade < 7a
+    C       Coverage C  L   5   success <> clean    grade < 7a
+    C       Coverage D  L   12  downclimb = 0       grade < 6b
+
+check edits of parse/get_id
+coalesce google/import
+colour parsing based on abbrev (explode abbrev, search)
+tidy db cols, more name,id fewer reserved names
+stats functions -> array, then print
+generic parse function (x, table, match_field, out_field)
+count db actions and time them
+
+--------------------------------------------------------------------------------
+
+check text output is all \r\n
+
+process_date => 2009-12-15 -> 15 Dec 09
+date_tidy
+date_add_month
+date_add_days
+
+refactor seldom to a array of arrays
+
+is everyone using the array form of db_select?
+
+sort out titles and headings on all the html pages
+
+add get_errors to all?
+or just in php
+or just in txt
+
+--------------------------------------------------------------------------------
+
+Sort routes by:
+	panel
+	colour
+	grade
+	setter
+	date/age
+
+Presets
+	Panel	= panel,grade,colour
+	Age	= date_set,panel,grade,colour
+	Grade	= grade,panel,colour
+	Colour	= colour,panel,grade
+
+Current		Click		New
+x,y,z		a		a,x,y,z
+x,y,z		x		x,y,z
+x,y,z		y		y,x,z
+
+--------------------------------------------------------------------------------
+
+combine & sort by panel,grade,colour
+merge duplicates - keep highest priority
+tag the priorities like the 6a sheets - High = visible, Low = Faint
+print
+
+options --high only high priority
+	--medium medium and high priority
+
+
+two craggy database users:
+	craggy_ro	= read only for general use
+	craggy		= read/write for updates
+	backup		= read only
+
+remove privileges from craggy:
+	drop table
+	create table
+	delete data rows?
+

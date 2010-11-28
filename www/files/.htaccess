@@ -1,0 +1,29 @@
+#========================================================================
+# .htaccess file for Indices
+#
+# Place this file at the top of the directory tree whose directory
+# indices you want to affect.  Be sure that the AddIcon directives
+# point to the correct URLs on your server.
+#
+# Indices: http://antisleep.com/software/indices
+#========================================================================
+
+Options +Indexes
+
+IndexOptions FancyIndexing
+IndexOptions FoldersFirst IgnoreCase XHTML NameWidth=*
+IndexOptions SuppressHTMLPreamble SuppressRules HTMLTable
+IndexOptions IconHeight=16 IconWidth=16
+IndexOptions SuppressDescription
+
+IndexIgnore readme.html /files/indices
+
+HeaderName /files/indices/header.php
+ReadmeName /files/indices/footer.html
+
+DefaultIcon /files/indices/icons/text.png
+
+AddIcon /files/indices/icons/blank.gif        ^^BLANKICON^^
+AddIcon /files/indices/icons/dir.png          ^^DIRECTORY^^
+AddIcon /files/indices/icons/cd.jpg            .iso
+

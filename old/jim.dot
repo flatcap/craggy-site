@@ -1,0 +1,20 @@
+digraph "bla" {
+	graph [ rankdir = "LR", bgcolor = white ];
+	node [ shape = record, color = black, fillcolor = lightcyan, style = filled ];
+
+	climb_type [ label = "climb_type|id\ltype\l" ];
+	colour     [ label = "colour|id\lcolour\l" ];
+	grade      [ label = "grade|id\lorder\lgrade\l" ];
+	panel      [ label = "panel|id\lnumber\ltype\lheight\larch\larete\lchimney\lchockstone\lfeatured\lflake\loverhang\lroof\lslab\lwall\l" ];
+	route      [ label = "route|id\lpanel\lcolour\lgrade\lnotes\lsetter\ldate_set\ldate_end\l" ];
+	setter     [ label = "setter|id\linitials\lname\l" ];
+
+	route -> colour     [ label = "colour" ];
+	route -> grade      [ label = "grade" ];
+	route -> panel      [ label = "panel" ];
+	route -> setter     [ label = "setter" ];
+
+	panel -> climb_type [ label = "type" ];
+};
+
+

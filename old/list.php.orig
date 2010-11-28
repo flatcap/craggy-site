@@ -1,0 +1,387 @@
+<?php
+
+include "db.php";
+include "utils.php";
+
+function grade_block($grade)
+{
+    if ($grade[0] < "6")
+        return $grade[0];
+
+    $g = substr($grade, 0, 2);
+    switch ($g) {
+        case "6a": return 6;
+        case "6b": return 7;
+        default:   return 8;
+    }
+}
+
+function cmp_age($a, $b)
+{
+    $a1 = strtotime ($a['date_set']);
+    $p1 = $a['panel']['number'];
+    $g1 = $a['grade']['order'];
+    $c1 = $a['colour']['colour'];
+
+    $a2 = strtotime ($b['date_set']);
+    $p2 = $b['panel']['number'];
+    $g2 = $b['grade']['order'];
+    $c2 = $b['colour']['colour'];
+
+    if ($a1 != $a2)
+        return ($a1 < $a2) ? -1 : 1;
+
+    if ($p1 != $p2)
+        return ($p1 < $p2) ? -1 : 1;
+
+    if ($g1 != $g2)
+        return ($g1 < $g2) ? -1 : 1;
+
+    return ($c1 < $c2) ? -1 : 1;
+}
+
+function cmp_checklist($a, $b)
+{
+    $b1 = grade_block ($a['grade']['grade']);
+    $p1 = $a['panel']['number'];
+    $g1 = $a['grade']['order'];
+    $c1 = $a['colour']['colour'];
+
+    $b2 = grade_block ($b['grade']['grade']);
+    $p2 = $b['panel']['number'];
+    $g2 = $b['grade']['order'];
+    $c2 = $b['colour']['colour'];
+
+    if ($b1 != $b2)
+        return ($b1 < $b2) ? -1 : 1;
+
+    if ($p1 != $p2)
+        return ($p1 < $p2) ? -1 : 1;
+
+    if ($g1 != $g2)
+        return ($g1 < $g2) ? -1 : 1;
+
+    return ($c1 < $c2) ? -1 : 1;
+}
+
+function cmp_grade($a, $b)
+{
+    $g1 = $a['grade']['order'];
+    $p1 = $a['panel']['number'];
+    $c1 = $a['colour']['colour'];
+
+    $g2 = $b['grade']['order'];
+    $p2 = $b['panel']['number'];
+    $c2 = $b['colour']['colour'];
+
+    if ($g1 != $g2)
+        return ($g1 < $g2) ? -1 : 1;
+
+    if ($p1 != $p2)
+        return ($p1 < $p2) ? -1 : 1;
+
+    return ($c1 < $c2) ? -1 : 1;
+}
+
+function cmp_panel($a, $b)
+{
+    $p1 = $a['panel']['number'];
+    $g1 = $a['grade']['order'];
+    $c1 = $a['colour']['colour'];
+
+    $p2 = $b['panel']['number'];
+    $g2 = $b['grade']['order'];
+    $c2 = $b['colour']['colour'];
+
+    if ($p1 != $p2)
+        return ($p1 < $p2) ? -1 : 1;
+
+    if ($g1 != $g2)
+        return ($g1 < $g2) ? -1 : 1;
+
+    return ($c1 < $c2) ? -1 : 1;
+}
+
+
+function list_age($routes)
+{
+    usort($routes, "cmp_age");
+
+    $today = strtotime("today");
+    $output  = "<table border='1' cellpadding='3' cellspacing='0'>";
+    $output .= "<tr>";
+    $output .= "<td>Panel</td>";
+    $output .= "<td>Type</td>";
+    $output .= "<td>Colour</td>";
+    $output .= "<td>Grade</td>";
+    $output .= "<td>Notes</td>";
+    $output .= "<td>Setter</td>";
+    $output .= "<td>Date</td>";
+    $output .= "<td>Age</td>";
+    $output .= "<td>Months</td>";
+    $output .= "</tr>";
+
+    foreach ($routes as $id => $route) {
+
+        $p = $route['panel']['number'];
+        $t = $route['type']['type'];
+        $c = $route['colour']['colour'];
+        $g = $route['grade']['grade'];
+        $s = $route['setter']['initials'];
+        $n = $route['notes'];
+        $d = $route['date_set'];
+
+        if ($d == "0000-00-00")
+            $d = "";
+
+        if (empty($d)) {
+            $a = "";
+            $m = "";
+        } else {
+            $a = floor (($today - strtotime($d)) / 86400);
+            $m = sprintf ("%.1f", $a / 30.44);
+        }
+
+        if (empty($n)) $n = "&nbsp;";
+        if (empty($s)) $s = "&nbsp;";
+        if (empty($d)) { $d = "&nbsp;"; $a = "&nbsp;"; }
+
+        $output .= "<tr>";
+        $output .= "<td>$p</td>";
+        $output .= "<td>$t</td>";
+        $output .= "<td>$c</td>";
+        $output .= "<td>$g</td>";
+        $output .= "<td>$n</td>";
+        $output .= "<td>$s</td>";
+        $output .= "<td>$d</td>";
+        $output .= "<td>$a</td>";
+        $output .= "<td>$m</td>";
+        $output .= "</tr>";
+    }
+    $output .= "</table>";
+
+    $output .= "</div>";
+    $output .= "</html>";
+
+    return $output;
+}
+
+function list_checklist($routes)
+{
+    header('Content-type: text/plain');
+    header('Content-Disposition: attachment; filename="checklist.txt"');
+
+    usort($routes, "cmp_checklist");
+
+    $gb = 0;
+    $output = "";
+
+    foreach ($routes as $id => $route) {
+
+        $p = $route['panel']['number'];
+        $c = $route['colour']['colour'];
+        $g = $route['grade']['grade'];
+
+        if ($route['type']['type'] == "Lead")
+            $t = "L";
+        else
+            $t = "";
+
+        $tmp = grade_block ($g);
+        if ($gb != $tmp) {
+            switch ($gb) {
+                case "0": $output .= "Grade 3\n"; break;
+                case "3": $output .= "\nGrade 4\n"; break;
+                case "4": $output .= "\nGrade 5\n"; break;
+                case "5": $output .= "\nGrade 6a\n"; break;
+                case "6": $output .= "\nGrade 6b\n"; break;
+                case "7": $output .= "\nGrade 6c...\n"; break;
+            }
+            $gb = $tmp;
+        }
+
+        $output .= "$p\t$c\t$t\t$g\n";
+    }
+    return $output;
+}
+
+function list_csv($routes)
+{
+    header('Content-type: text/csv');
+    header('Content-Disposition: attachment; filename="routes.csv"');
+
+    usort($routes, "cmp_panel");
+
+    $output .= "\"Panel\",\"Type\",\"Colour\",\"Grade\",\"Notes\",\"Setter\",\"Date Set\"\n";
+
+    foreach ($routes as $id => $route) {
+
+        $p = $route['panel']['number'];
+        $t = $route['type']['type'];
+        $c = $route['colour']['colour'];
+        $g = $route['grade']['grade'];
+        $s = $route['setter']['name'];
+        $n = $route['notes'];
+        $d = $route['date_set'];
+
+        if ($d == "0000-00-00")
+            $d = "";
+
+        $output .= "\"$p\",\"$t\",\"$c\",\"$g\",\"$n\",\"$s\",\"$d\"\n";
+    }
+
+    return $output;
+}
+
+function list_grade($routes)
+{
+    usort($routes, "cmp_grade");
+
+    $today = strtotime("today");
+    $output  = "<table border='1' cellpadding='3' cellspacing='0'>";
+    $output .= "<tr>";
+    $output .= "<td>Panel</td>";
+    $output .= "<td>Type</td>";
+    $output .= "<td>Colour</td>";
+    $output .= "<td>Grade</td>";
+    $output .= "<td>Notes</td>";
+    $output .= "<td>Setter</td>";
+    $output .= "<td>Date</td>";
+    $output .= "<td>Age</td>";
+    $output .= "</tr>";
+
+    foreach ($routes as $id => $route) {
+
+        $p = $route['panel']['number'];
+        $t = $route['type']['type'];
+        $c = $route['colour']['colour'];
+        $g = $route['grade']['grade'];
+        $s = $route['setter']['initials'];
+        $n = $route['notes'];
+        $d = $route['date_set'];
+
+        if ($d == "0000-00-00")
+            $d = "";
+
+        if (empty($d)) {
+            $a = "";
+        } else {
+            $a = floor (($today - strtotime($d)) / 86400);
+        }
+
+        if (empty($n)) $n = "&nbsp;";
+        if (empty($s)) $s = "&nbsp;";
+        if (empty($d)) { $d = "&nbsp;"; $a = "&nbsp;"; }
+
+        $output .= "<tr>";
+        $output .= "<td>$p</td>";
+        $output .= "<td>$t</td>";
+        $output .= "<td>$c</td>";
+        $output .= "<td>$g</td>";
+        $output .= "<td>$n</td>";
+        $output .= "<td>$s</td>";
+        $output .= "<td>$d</td>";
+        $output .= "<td>$a</td>";
+        $output .= "</tr>";
+    }
+    $output .= "</table>";
+
+    $output .= "</div>";
+    $output .= "</html>";
+
+    return $output;
+}
+
+function list_panel($routes)
+{
+    usort($routes, "cmp_panel");
+
+    $today = strtotime("today");
+    $output  = "<table border='1' cellpadding='3' cellspacing='0'>";
+    $output .= "<tr>";
+    $output .= "<td>Panel</td>";
+    $output .= "<td>Type</td>";
+    $output .= "<td>Colour</td>";
+    $output .= "<td>Grade</td>";
+    $output .= "<td>Notes</td>";
+    $output .= "<td>Setter</td>";
+    $output .= "<td>Date</td>";
+    $output .= "<td>Age</td>";
+    $output .= "</tr>";
+
+    foreach ($routes as $id => $route) {
+
+        $p = $route['panel']['number'];
+        $t = $route['type']['type'];
+        $c = $route['colour']['colour'];
+        $g = $route['grade']['grade'];
+        $s = $route['setter']['initials'];
+        $n = $route['notes'];
+        $d = $route['date_set'];
+
+        if ($d == "0000-00-00")
+            $d = "";
+
+        if (empty($d)) {
+            $a = "";
+        } else {
+            $a = floor (($today - strtotime($d)) / 86400);
+        }
+
+        if (empty($n)) $n = "&nbsp;";
+        if (empty($s)) $s = "&nbsp;";
+        if (empty($d)) { $d = "&nbsp;"; $a = "&nbsp;"; }
+
+        $output .= "<tr>";
+        $output .= "<td>$p</td>";
+        $output .= "<td>$t</td>";
+        $output .= "<td>$c</td>";
+        $output .= "<td>$g</td>";
+        $output .= "<td>$n</td>";
+        $output .= "<td>$s</td>";
+        $output .= "<td>$d</td>";
+        $output .= "<td>$a</td>";
+        $output .= "</tr>";
+    }
+    $output .= "</table>";
+
+    return $output;
+}
+
+
+function list_main()
+{
+    $type = get_url_variable('type');
+
+    if (($type != "checklist") && ($type != "csv")) {
+        $output  = html_header ("Craggy Routes");
+        $output .= "<body>";
+        $output .= "<div class='header'>Craggy Routes</div>\n";
+        $output .= html_menu();
+        $output .= "<div class='content'>\n";
+    }
+
+    $routes = db_get_routes();
+
+    switch ($type) {
+        case "age":         $output .= list_age($routes);       break;
+        case "checklist":   $output .= list_checklist($routes); break;
+        case "grade":       $output .= list_grade($routes);     break;
+        case "csv":         $output .= list_csv($routes);       break;
+        case "panel":
+        default:            $output .= list_panel($routes);     break;
+    }
+
+    if (($type != "checklist") && ($type != "csv")) {
+        $output .= "</div>";
+        $output .= get_errors();
+        $output .= "</body>";
+        $output .= "</html>";
+    }
+
+    return $output;
+}
+
+date_default_timezone_set("UTC");
+echo list_main();
+

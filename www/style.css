@@ -1,0 +1,160 @@
+body {
+  background: #fff;
+  color: #000;
+}
+
+div.grade {
+  background-image: url(img/grades.png);
+  border: 1px solid black;
+  width: 500px;
+  height: 30px;
+}
+
+div.marker {
+  background: red;
+  width: 2px;
+  height: 30px;
+}
+
+div.header {
+  background: #ddf;
+  color: #000;
+  margin: 0 0 0.5em 0;
+  padding: 0.5em;
+  font-weight: bold;
+}
+
+span {
+  font-size: 75%;
+  font-weight: normal;
+}
+
+div.menu {
+  width: 9em;
+  float: left;
+}
+
+div.menu h1 {
+  background: #ddf;
+  color: #000;
+  padding-left: 0.5em;
+  margin: 0;
+  font-size: 120%;
+}
+
+div.menu ul {
+  list-style: none;
+  padding-left: 1em;
+  margin-top: 0;
+}
+
+li.selected {
+  font-weight: bold;
+}
+
+div.content {
+  margin-left: 0.5em;
+  float: left;
+}
+
+input, textarea, .checkbox {
+  border: 1px solid #ccc;
+  padding: 2px;
+  background: inherit;
+  color: #000;
+}
+
+input.default {
+  border: 2px solid #ccc;
+  background: inherit;
+}
+
+input:focus, textarea:focus {
+  border: 1px solid #000;
+}
+
+input.default:focus {
+  border: 2px solid #000;
+}
+
+input.mand, textarea.mand, tr.mand {
+  color: inherit;
+  background: #fee;
+}
+
+form label {
+  display: block;
+  float: left;
+  width: 8em;
+}
+
+input.checkbox {
+  margin-left: 0;
+  width: 1em;
+  height: 1em;
+}
+
+table {
+  border-collapse: collapse;
+  /*
+  font-size: 75%;
+  */
+}
+
+th, dt {
+  font-weight: bold;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  text-align: left;
+  padding: 0 0.5em 0 0.5em;
+}
+
+tr.mark {
+  color: inherit;
+  background: #eff;
+}
+
+td.right {
+  text-align: right;
+}
+
+table input {
+  border: 1px solid transparent;
+}
+
+h2 {
+  margin: 0 0 1em 0;
+  font-size: 110%;
+}
+
+div.error {
+  clear: both;
+  border: 3px solid red;
+}
+
+img {
+  border: 0px;
+}
+
+div.download {
+  float: right;
+  border: 2px solid #333;
+  background: #fff;
+  color: #000;
+  margin: 1em;
+  padding: 0 1em 1em 1em;
+}
+
+div.download h1 {
+  font-size: 100%;
+}
+
+/*
+.quiet {
+  background: inherit;
+  color: #ccc;
+}
+*/
+

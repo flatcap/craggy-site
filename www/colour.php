@@ -1,77 +1,101 @@
 <?php
 
+set_include_path ("www");
+
 include "db.php";
 include "utils.php";
 
-function colour_list()
+$g_colours = NULL;
+
+function colours_process ($colours)
 {
-	//
+	$lookup = array();
+
+	foreach ($colours as $ckey => $c) {
+		$lookup[strtolower ($c['colour'])] = &$colours[$ckey];
+		$abbr = explode (',', $c['abbr']);
+		foreach ($abbr as $a) {
+			$lookup[$a] = &$colours[$ckey];
+		}
+	}
+
+	return $lookup;
 }
 
-function colour_colour()
+function colours_match_single ($lookup, $test)
 {
-	$output = "";
+	if (array_key_exists ($test, $lookup))
+		return $lookup[$test]['id'];
+	else
+		return NULL;
+}
 
-	$table   = "v_routes";
-	$columns = "colour";
-	$order   = "colour";
+function colours_match ($lookup, $test)
+{
+	global $g_colours;
 
-	$list = db_select($table, $columns, NULL, $order);
+	$test = strtolower ($test);
 
-	$totals = array();
-	foreach ($list as $row) {
-		$c = $row['colour'];
-		if (array_key_exists ($c, $totals))
-			$totals[$c]++;
+	$id = colours_match_single ($lookup, $test);
+	if ($id !== NULL)
+		return $id;
+
+	$pos = strpos ($test, '/');
+	if ($pos === FALSE)
+		return $id;
+
+	$id1 = colours_match_single ($lookup, substr($test, 0, $pos));
+	$id2 = colours_match_single ($lookup, substr($test, $pos+1));
+
+	if (($id1 === NULL) || ($id2 === NULL))
+		return NULL;
+
+	$col1 = $g_colours[$id1]['colour'];
+	$col2 = $g_colours[$id2]['colour'];
+
+	$test = strtolower ($col1.'/'.$col2);
+	$id = colours_match_single ($lookup, $test);
+
+	return $id;
+}
+
+function colours_main()
+{
+	global $argc;
+	global $argv;
+	global $g_colours;
+
+	if (!isset ($argc) || ($argc < 2))
+		return 0;
+
+	// Format: NUMBER SPACE COLOUR [[,] COLOUR] ...
+
+	array_shift ($argv);
+	$text = implode (' ', $argv);
+	$colours = preg_split("/[\s,]+/", $text);
+
+	$first = array_shift ($colours);
+	if (!is_numeric ($first)) {
+		printf ("Not numeric: %s\n", $first);
+		return 0;
+	}
+
+	$g_colours = db_select("colour");
+	$lookup    = colours_process ($g_colours);
+
+	$panel = intval ($first);
+	printf ("Panel: %d\n", $panel);
+
+	foreach ($colours as $c) {
+		$id = colours_match ($lookup, $c);
+		if ($id !== NULL)
+			$col = $g_colours[$id]['colour'];
 		else
-			$totals[$c] = 1;
+			$col = "Unknown ($c)";
+		printf ("\tColour: %s\n", $col);
 	}
-
-	$output .= "<h2>Stats - Colour</h2>";
-	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
-	$output .= "<tr>";
-	$output .= "<th>Colour</th>";
-	$output .= "<th>Count</th>";
-	$output .= "<th>Total</th>";
-	$output .= "</tr>";
-
-	$total = 0;
-	foreach ($totals as $colour => $count) {
-		$total += $count;
-		$output .= "<tr>";
-		$output .= "<td>$colour</td>";
-		$output .= "<td>$count</td>";
-		$output .= "<td>$total</td>";
-		$output .= "</tr>";
-	}
-	$output .= "</table>";
-
-	return $output;
-}
-
-function colour_main()
-{
-	$type = get_url_variable('type');
-
-	$last_update = date ("j M Y", strtotime (db_get_last_update()));
-
-	//header("Pragma: no-cache");
-	$output  = html_header ("Craggy Routes");
-	$output .= "<body>";
-	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
-	$output .= html_menu();
-	$output .= "<div class='content'>\n";
-	$output .= colour_colour();
-	$output .= "</div>";
-	$output .= get_errors();
-	$output .= "</body>";
-	$output .= "</html>";
-
-	return $output;
 }
 
 
-date_default_timezone_set("UTC");
-
-echo colour_main();
+colours_main();
 

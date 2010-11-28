@@ -21,19 +21,19 @@
 					document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
 				}
 			}
-			xmlhttp.open("GET","gethint.php?q="+str,true);
+			xmlhttp.open("GET","getclimbs.php?q="+str,true);
 			xmlhttp.send();
 		}
 		</script>
 		<title>Ajax Test</title>
 	</head>
 	<body>
-		<h3>Start typing a name in the input field below:</h3>
 		<form action="">
-			First name: <input type="text" id="txt1" onkeyup="showHint(this.value)">
+			Climb: <input type="text" id="txt1" onkeyup="showHint(this.value)">
 		</form>
-		<p>
-			Suggestions: <span id="txtHint"></span>
-		</p>
+		<div id="txtHint"></div>
 	</body>
+	<script type='text/javascript'>
+	document.getElementById('txt1').focus();
+	</script>
 </html>

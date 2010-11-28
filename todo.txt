@@ -144,3 +144,10 @@ remove privileges from craggy:
 	create table
 	delete data rows?
 
+-----------------------
+
+two pane dialog for climb/route add
+
+pane1 typing area
+pane2 matches ajax as you type
+

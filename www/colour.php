@@ -5,6 +5,8 @@ set_include_path ("www");
 include "db.php";
 include "utils.php";
 
+$g_routes  = NULL;
+$g_panels  = NULL;
 $g_colours = NULL;
 
 function colours_process ($colours)
@@ -63,6 +65,7 @@ function colours_main()
 {
 	global $argc;
 	global $argv;
+	global $g_routes;
 	global $g_colours;
 
 	if (!isset ($argc) || ($argc < 2))
@@ -80,20 +83,86 @@ function colours_main()
 		return 0;
 	}
 
+	$g_routes  = db_select("route");
 	$g_colours = db_select("colour");
-	$lookup    = colours_process ($g_colours);
+	$g_panels  = db_select("panel");
+
+	printf ("\n");
+	printf ("%d Routes\n",  count ($g_routes));
+	printf ("%d Colours\n", count ($g_colours));
+	printf ("%d Panels\n",  count ($g_panels));
+	printf ("\n");
+
+	$lookup = colours_process ($g_colours);
 
 	$panel = intval ($first);
-	printf ("Panel: %d\n", $panel);
 
+	$panel_id = NULL;
+	foreach ($g_panels as $id => $p) {
+		if ($p['number'] == $panel) {
+			$panel_id = $p['id'];
+			break;
+		}
+	}
+
+	if ($panel_id === NULL) {
+		printf ("Panel '%d' doesn't exist\n", $panel);
+		return 0;
+	}
+
+	$matches = array();
+	foreach ($g_routes as $id => $r) {
+		if ($r['panel'] == $panel_id) {
+			$col_id = $r['colour'];
+			$col = $g_colours[$r['colour']]['colour'];
+			$matches[$col] = $r;
+		}
+	}
+
+	$num_routes = count ($matches);
+	if ($num_routes == 0) {
+		printf ("Panel '%d' doesn't have any routes\n", $panel);
+		return 0;
+	}
+
+	printf ("Found %d routes on panel %d\n", $num_routes, $panel);
+	foreach ($matches as $m) {
+		printf ("\t%d %s\n", $panel, $g_colours[$m['colour']]['colour']);
+	}
+	printf ("\n");
+
+	$valid = array();
+	$bad   = array();
 	foreach ($colours as $c) {
 		$id = colours_match ($lookup, $c);
-		if ($id !== NULL)
-			$col = $g_colours[$id]['colour'];
-		else
-			$col = "Unknown ($c)";
-		printf ("\tColour: %s\n", $col);
+		if ($id === NULL) {
+			// Unknown colour
+			$bad[] = "Unknown colour: '$c'";
+			continue;
+		}
+		$col = $g_colours[$id]['colour'];
+		if (!array_key_exists ($col, $matches)) {
+			$bad[] = "Panel $panel doesn't have a $col route";
+			continue;
+		}
+		$valid[] = $matches[$col];
 	}
+
+	if (count ($bad) > 0) {
+		printf ("Errors:\n");
+		foreach ($bad as $b) {
+			printf ("\t%s\n", $b);
+		}
+		return 0;
+	}
+
+	printf ("Matched panel %s:\n", $panel);
+	foreach ($valid as $v) {
+		printf ("\t%s\n", $g_colours[$v['colour']]['colour']);
+	}
+	printf ("\n");
+
+	return 1;
 }
 
 

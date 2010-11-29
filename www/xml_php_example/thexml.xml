@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<people>
+	<person>
+		<firstname title="Mr">Steve</firstname>
+		<surname>Reynolds</surname>
+	</person>
+	<person>
+		<firstname title="Mr">David</firstname>
+		<surname>Grohl</surname>
+	</person>
+</people>

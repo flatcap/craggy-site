@@ -1,7 +1,44 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
+		<style type="text/css">
+		body {
+			background: black;
+			color: white;
+		}
+		input {
+			background: #ccc;
+			color: black;
+		}
+		div.space {
+			display: block;
+			float: left;
+			width: 4em;
+			clear: both;
+		}
+		</style>
+
 		<script type="text/javascript">
+		function MyFormCommands(form) {
+			if (window.XMLHttpRequest) {
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			} else {
+				// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			xmlhttp.onreadystatechange=function()
+			{
+				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+					form.results.innerHTML = form.results.innerHTML + xmlhttp.responseText + "\n";
+					form.txt1.value = "";
+					form.txt1.focus();
+				}
+			}
+			xmlhttp.open("GET","getclimbs.php?r="+form.txt1.value,true);
+			xmlhttp.send();
+			return false;
+		}
 		function showHint(str)
 		{
 			if (str.length==0) { 
@@ -28,8 +65,10 @@
 		<title>Ajax Test</title>
 	</head>
 	<body>
-		<form action="">
-			Climb: <input type="text" id="txt1" onkeyup="showHint(this.value)">
+		<form action="" onsubmit="return MyFormCommands(this)">
+			<div class="space">Climb:</div><input type="text" size="40" id="txt1" onkeyup="showHint(this.value)"><br>
+			<div class="space">&nbsp;</div><textarea readonly rows=10 cols=40 id="results"></textarea>
+
 		</form>
 		<div id="txtHint"></div>
 	</body>
@@ -37,3 +76,4 @@
 	document.getElementById('txt1').focus();
 	</script>
 </html>
+

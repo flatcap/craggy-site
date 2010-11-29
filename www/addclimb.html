@@ -19,7 +19,8 @@
 		</style>
 
 		<script type="text/javascript">
-		function MyFormCommands(form) {
+		function MyFormCommands(form)
+		{
 			if (window.XMLHttpRequest) {
 				// code for IE7+, Firefox, Chrome, Opera, Safari
 				xmlhttp=new XMLHttpRequest();
@@ -61,12 +62,21 @@
 			xmlhttp.open("GET","getclimbs.php?q="+str,true);
 			xmlhttp.send();
 		}
+		function showHint2(input)
+		{
+			var str = input.value;
+			str = str.toUpperCase() + " ";
+			input.value = str;
+		}
 		</script>
 		<title>Ajax Test</title>
 	</head>
 	<body>
 		<form action="" onsubmit="return MyFormCommands(this)">
+			<!--
 			<div class="space">Climb:</div><input type="text" size="40" id="txt1" onkeyup="showHint(this.value)"><br>
+			-->
+			<div class="space">Climb:</div><input type="text" size="40" id="txt1" onkeyup="showHint2(this)"><br>
 			<div class="space">&nbsp;</div><textarea readonly rows=10 cols=40 id="results"></textarea>
 
 		</form>

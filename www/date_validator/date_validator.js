@@ -23,8 +23,8 @@ function date_callback()
 		var bra = response.indexOf ('(');
 		var ket = response.indexOf (')', bra);
 
-		if (reponse.length == 0) {
-			response = "empty";
+		if (response.length == 0) {
+			return;
 		}
 		if ((bra == -1) || (ket == -1)) {
 			datef.innerHTML = response;
@@ -48,7 +48,7 @@ function date_onblur (input, field)
 		xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp.onreadystatechange = date_callback;
-	xmlhttp.open ("GET", "date_validator.php?q = " + str, true);
+	xmlhttp.open ("GET", "date_validator.php?q=" + str, true);
 	xmlhttp.send();
 }
 

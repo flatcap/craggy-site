@@ -58,7 +58,7 @@
 				xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 			}
 			xmlhttp.onreadystatechange = date_callback;
-			xmlhttp.open ("GET", "date_validator.php?q = " + str, true);
+			xmlhttp.open ("GET", "date_validator.php?q=" + str, true);
 			xmlhttp.send();
 		}
 

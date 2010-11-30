@@ -28,9 +28,6 @@ if (isset ($argc)) {
 $date = strtotime ($q);
 $now  = strtotime ("now");
 
-printf ("q: (%s)", $q);
-return;
-
 if ($date == FALSE)
 	$result = "Invalid date";
 else if ($date > $now)

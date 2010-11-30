@@ -1,29 +1,13 @@
 <?php
 
-if (isset ($argc)) {
-	if ($argc < 2) {
-		printf ("args\n");
-		return;
-	}
-	array_shift ($argv);
-	$q = implode (" ", $argv);
-} else {
-	if (!isset ($_GET)) {
-		//echo "bad call: no get";
-		return;
-	}
-		
-	if (!array_key_exists ('q', $_GET)) {
-		//echo "bad call: no q";
-		return;
-	}
+if (!isset ($_GET))
+	return;
+if (!array_key_exists ('q', $_GET))
+	return;
 
-	$q=trim ($_GET["q"]);
-	if (empty ($q)) {
-		//echo "empty";
-		return;
-	}
-}
+$q=trim ($_GET["q"]);
+if (empty ($q))
+	return;
 
 $date = strtotime ($q);
 $now  = strtotime ("now");
@@ -36,5 +20,4 @@ else
 	$result = date ("D j M Y", $date);
 
 printf ("%s (%s)", $q, $result);
-if (isset ($argc))
-	printf ("\n");
+

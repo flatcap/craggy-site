@@ -1,46 +1,52 @@
-var default_date;
+var date_entry;
+var date_match;
+var date_default;
 
-function date_initialise (input, date)
+function date_initialise (date_id, match_id, date_def)
 {
-	default_date = date;
-	input.value = date;
-	date_onblur (input);
+	date_entry   = document.getElementById (date_id);
+	date_match   = document.getElementById (match_id);
+	date_default = date_def;
+
+	// Set event handlers
+	date_entry.onfocus = date_onfocus;
+	date_entry.onblur  = date_onblur;
+
+	date_entry.value = date_def;
+	date_onblur();
 }
 
 function date_onfocus (input)
 {
-	if (input.value == default_date) {
-		input.value = "";
+	if (date_entry.value == date_default) {
+		date_entry.value = "";
 	}
 }
 
 function date_callback()
 {
 	if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
-		var datef = document.getElementById ('date_formatted');
-
 		var response = xmlhttp.responseText;
+		if (response.length == 0)
+			return;
+
 		var bra = response.indexOf ('(');
 		var ket = response.indexOf (')', bra);
 
-		if (response.length == 0) {
-			return;
-		}
 		if ((bra == -1) || (ket == -1)) {
-			datef.innerHTML = response;
+			date_match.innerHTML = response;
 		} else {
-			datef.innerHTML = response.substring (bra+1, ket);
+			date_match.innerHTML = response.substring (bra+1, ket);
 		}
 	}
 }
 
-function date_onblur (input, field)
+function date_onblur()
 {
-	var datef = document.getElementById (field);
-	str = input.value;
+	str = date_entry.value;
 	if (str.length == 0) { 
-		input.value = default_date;
-		str = default_date;
+		date_entry.value = date_default;
+		str = date_default;
 	}
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
@@ -50,5 +56,10 @@ function date_onblur (input, field)
 	xmlhttp.onreadystatechange = date_callback;
 	xmlhttp.open ("GET", "date_validator.php?q=" + str, true);
 	xmlhttp.send();
+}
+
+function date_get_match()
+{
+	return date_match.value;
 }
 

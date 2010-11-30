@@ -3,13 +3,6 @@
 <head>
 	<link rel="stylesheet" href="date.css" type="text/css">
 	<script type="text/javascript" src="date_validator.js"></script>
-	<script type="text/javascript">
-		function initialise()
-		{
-			date_initialise (document.getElementById ('date'), "today");
-			document.getElementById ('first').focus();
-		}
-	</script>
 	<title>Add Climb</title>
 </head>
 <body>
@@ -19,14 +12,16 @@
 	<input type="text" id="first"><br>
 
 	<span class="label">Enter date:</span>
-	<input type="text" id="date" onfocus="date_onfocus (this)" onblur="date_onblur (this, 'date_formatted')">
-	<span id="date_formatted"></span><br>
+	<input type="text" id="date">
+	<span id="match"></span><br>
 
 	<span class="label">Another field:</span>
 	<input type="text" id="other">
 </body>
 <script type='text/javascript'>
-	initialise();
+	// Initialise everything
+	date_initialise ("date", "match", "today");
+	document.getElementById ('first').focus();
 </script>
 </html>
 

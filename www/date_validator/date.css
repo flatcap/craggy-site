@@ -5,7 +5,7 @@ input {
 input:focus {
 	border: 2px solid #000;
 }
-span#date_formatted {
+span#match {
 	color: grey;
 }
 span.label {

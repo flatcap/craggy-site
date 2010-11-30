@@ -9,12 +9,12 @@ if (isset ($argc)) {
 	$q = implode (" ", $argv);
 } else {
 	if (!isset ($_GET)) {
-		echo "bad call: no get";
+		//echo "bad call: no get";
 		return;
 	}
 		
 	if (!array_key_exists ('q', $_GET)) {
-		echo "bad call: no q";
+		//echo "bad call: no q";
 		return;
 	}
 
@@ -27,6 +27,9 @@ if (isset ($argc)) {
 
 $date = strtotime ($q);
 $now  = strtotime ("now");
+
+printf ("q: (%s)", $q);
+return;
 
 if ($date == FALSE)
 	$result = "Invalid date";

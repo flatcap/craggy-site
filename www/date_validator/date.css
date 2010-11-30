@@ -1,0 +1,16 @@
+input {
+	border: 2px solid #ddd;
+	margin-bottom: 3px;
+}
+input:focus {
+	border: 2px solid #000;
+}
+span#date_formatted {
+	color: grey;
+}
+span.label {
+	display: block;
+	float: left;
+	width: 8em;
+	clear: both;
+}

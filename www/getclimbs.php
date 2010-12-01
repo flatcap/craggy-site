@@ -7,15 +7,6 @@ $g_routes  = NULL;
 $g_panels  = NULL;
 $g_colours = NULL;
 
-
-if (array_key_exists ('q', $_GET)) $q = trim ($_GET["q"]); else $q = "";
-if (array_key_exists ('r', $_GET)) $r = trim ($_GET["r"]); else $r = "";
-
-if (!empty ($r)) {
-	echo "$r";
-	return;
-}
-
 if (isset ($argc)) {
 	if ($argc < 2) {
 		printf ("args\n");

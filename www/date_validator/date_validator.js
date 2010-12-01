@@ -16,7 +16,7 @@ function date_initialise (date_id, match_id, date_def)
 	date_onblur();
 }
 
-function date_onfocus (input)
+function date_onfocus()
 {
 	if (date_entry.value == date_default) {
 		date_entry.value = "";

@@ -70,6 +70,8 @@ function routes_main($options)
 	process_key ($list);
 
 	array_shift ($columns);		// Lose the id column
+	$columns[] = "age";
+	$columns[] = "months";
 
 	// calculate widths (include headers?)
 	$widths = column_widths ($list, $columns, TRUE);

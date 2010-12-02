@@ -37,7 +37,7 @@ function coverage_browser_options ($format, $def_format)
 function coverage_get_data()
 {
 	$table   = "climbs";
-	$columns = array ("id", "route_id", "success", "onsight", "downclimb");
+	$columns = array ("id", "route_id", "success", "onsight");
 	$where   = "climber_id = 1";
 	$order   = "route_id";
 
@@ -66,10 +66,10 @@ function coverage_get_data()
 			$route = $r;
 		}
 
-		if (!empty ($climb['success']))   $t++;
-		if ($climb['success'] == "clean") $c++;
-		if ($climb['onsight'] == "1")     $o++;
-		if ($climb['downclimb'] == "1")   $d++;
+		if (!empty ($climb['success'])) $t++;
+		if ($climb['success'] >= 3)     $c++;
+		if ($climb['onsight'] == 1)     $o++;
+		if ($climb['success'] == 4)     $d++;
 	}
 
 	if ($t > 0) $num_tried++;

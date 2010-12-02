@@ -15,7 +15,6 @@ $g_col_sort   = array (
 	"panel" => "panel",
 	"success" => "success",
 	"type" => "type",
-	"d" => "d",
 	"n" => "n",
 	"o" => "o",
 );
@@ -71,8 +70,8 @@ function climbs_main($options)
 	$last_update = date ("j M Y", strtotime (db_get_last_update()));
 
 	$climber_id = 1;
-	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number)";
-	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "downclimb as d", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
+	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number) left join success on (climbs.success = success.id) left join difficulty on (climbs.difficulty = difficulty.id)";
+	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success.outcome as success", "nice as n", "onsight as o", "difficulty.description as diff", "climbs.notes as notes");
 	$where   = NULL;
 
 	switch ($options["sort"]) {
@@ -81,7 +80,6 @@ function climbs_main($options)
 		case "grade":   $order = "grade_num, panel, colour";                    $mark = "mark_grade";        break;
 		case "success": $order = "success, panel, grade, colour";               $mark = "mark_success";      break;
 		case "type":    $order = "climb_type, panel, grade, colour";            $mark = "mark_climb_type";   break;
-		case "d":       $order = "d desc, panel, grade, colour";                $mark = "mark_downclimb";    break;
 		case "n":       $order = "n desc, panel, grade, colour";                $mark = "mark_nice";         break;
 		case "o":       $order = "o desc, panel, grade, colour";                $mark = "mark_onsight";      break;
 		default:        $order = "panel, grade_num, colour";                    $mark = "mark_panel";        break;
@@ -90,13 +88,12 @@ function climbs_main($options)
 	$list = db_select($table, $columns, $where, $order);
 	$count = count($list);
 
-	process_binary ($list, "d", "D");
 	process_binary ($list, "n", "N");
 	process_binary ($list, "o", "O");
 	process_date ($list, "date_climbed", TRUE);
 	process_type ($list);
 
-	$columns = array ("panel", "colour", "grade", "date_climbed", "climb_type", "success", "d", "n", "o", "diff", "notes");
+	$columns = array ("panel", "colour", "grade", "date_climbed", "climb_type", "success", "n", "o", "diff", "notes");
 
 	// calculate widths (include headers?)
 	$widths = column_widths ($list, $columns, TRUE);
@@ -152,7 +149,7 @@ function climbs_main($options)
 date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text");
-$sort   = array ("age", "colour", "grade", "panel", "success", "type", "d", "n", "o");
+$sort   = array ("age", "colour", "grade", "panel", "success", "type", "n", "o");
 
 if (isset ($argc))
 	$options = climbs_command_line ($format, 2, $sort);

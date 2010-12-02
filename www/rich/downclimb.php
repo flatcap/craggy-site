@@ -54,10 +54,10 @@ function downclimb_main ($options)
 	$table   = "v_routes";
 
 	$climber_id = 1;
-	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number)";
-	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "downclimb as d", "nice as n", "onsight as o", "difficulty as difficulty", "climbs.notes as notes");
+	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number) left join difficulty on (climbs.difficulty = difficulty.id)";
+	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "nice as n", "onsight as o", "difficulty.description as difficulty", "climbs.notes as notes");
 
-	$where   = array ("downclimb <> 1", "grade.order < 400");
+	$where   = array ("success <> 4", "grade.order < 400");
 
 	switch ($options["sort"]) {
 		case "colour":     $order = "colour, panel, grade";                 break;

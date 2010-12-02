@@ -141,8 +141,8 @@ function work_todo()
 {
 	$climber_id = 1;
 	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number)";
-	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "downclimb as d", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
-	$where   = array ("((success <> 'clean') OR (success is NULL))", "grade.order < 600");
+	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
+	$where   = array ("((success < 3) OR (success is NULL))", "grade.order < 600");
 
 	$list = db_select($table, $columns, $where);
 
@@ -154,8 +154,8 @@ function work_downclimb()
 {
 	$climber_id = 1;
 	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number)";
-	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "downclimb as d", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
-	$where   = array ("downclimb <> 1", "grade.order < 400");
+	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
+	$where   = array ("success <> 4", "grade.order < 400");
 
 	$list = db_select($table, $columns, $where);
 
@@ -169,7 +169,7 @@ function work_seldom_range ($m_start, $m_finish)
 
 	$climber_id = 1;
 	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number)";
-	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "downclimb as d", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
+	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
 	$where   = array ("grade.order < 600", "date_climbed < '$when_start'");
 
 	if (isset ($m_finish)) {

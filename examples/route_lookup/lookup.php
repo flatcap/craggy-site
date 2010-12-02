@@ -39,6 +39,7 @@ if (!is_numeric ($panel)) {
 $g_routes  = db_select("route");
 $g_colours = db_select("colour");
 $g_panels  = db_select("panel");
+$g_grades  = db_select("grade");
 
 $panel_id = NULL;
 foreach ($g_panels as $id => $p) {
@@ -56,8 +57,11 @@ if ($panel_id === NULL) {
 $matches = array();
 foreach ($g_routes as $id => $r) {
 	if ($r['panel'] == $panel_id) {
-		$col_id = $r['colour'];
+		$col_id   = $r['colour'];
+		$grade_id = $r['grade'];
 		$col = $g_colours[$r['colour']]['colour'];
+		$grade = $g_grades[$r['grade']]['grade'];
+		$r['grade'] = $grade;
 		$matches[$col] = $r;
 	}
 }
@@ -70,7 +74,7 @@ if ($num_routes == 0) {
 
 $list = array();
 foreach ($matches as $m) {
-	$list[] = $g_colours[$m['colour']]['colour'];
+	$list[] = $g_colours[$m['colour']]['colour'] . " " . $m['grade'];
 }
 
 function colours_process ($colours)

@@ -43,7 +43,7 @@ function route_onkeyup()
 		xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp.onreadystatechange = route_callback;
-	xmlhttp.open ("GET", "getclimbs.php?q=" + encodeURI(str), true);
+	xmlhttp.open ("GET", "lookup.php?q=" + encodeURI(str), true);
 	xmlhttp.send();
 }
 

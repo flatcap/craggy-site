@@ -1,5 +1,7 @@
 <?php
 
+set_include_path (".:..");
+
 include "db.php";
 include "utils.php";
 

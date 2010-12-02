@@ -9,24 +9,33 @@ function route_initialise (entry_id, matches_id, results_id)
 	route_results = document.getElementById(results_id);
 
 	route_entry.onkeyup = route_onkeyup;
+	route_entry.focus();
 }
 
 function route_callback()
 {
 	if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
 		var response = xmlhttp.responseText;
-		if (response.length == 0)
-			return;
 
-		route_matches.innerHTML = response;
+		split = response.indexOf (" - ");
+		if (split >= 0) {
+			start = response.substring (0, split);
+			end   = response.substring (split+3);
+			route_entry.value = start;
+			route_matches.innerHTML = end;
+		} else {
+			route_matches.innerHTML = response;
+		}
 	}
 }
 
 function route_onkeyup()
 {
 	str = route_entry.value;
-	if (str.length == 0)
+	if (str.length == 0) {
+		route_matches.innerHTML = "";
 		return;
+	}
 
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
@@ -34,7 +43,7 @@ function route_onkeyup()
 		xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp.onreadystatechange = route_callback;
-	xmlhttp.open ("GET", "getclimbs.php?q=" + str, true);
+	xmlhttp.open ("GET", "getclimbs.php?q=" + encodeURI(str), true);
 	xmlhttp.send();
 }
 

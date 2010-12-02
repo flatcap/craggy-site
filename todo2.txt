@@ -101,3 +101,6 @@ colour suffix
 date
 
 move schema into craggy git
+
+.bashrc - when running git shell, do nothing
+

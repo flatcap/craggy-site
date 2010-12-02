@@ -17,13 +17,19 @@ if (!array_key_exists ('q', $_GET))
 
 $q=$_GET["q"];
 $len = strlen ($q);
-$trail_space = ($q[$len-1] == " ");
+$last = $q[$len-1];
+$trail_space = (($last == " ") || ($last == ","));
 $q=trim ($q);
 if (empty ($q))
 	return;
 
 $parts = preg_split("/[\s,]+/", $q);
 $panel = array_shift ($parts);
+foreach ($parts as $key => $p) {
+	if ($p == "") {
+		unset ($parts[$key]);
+	}
+}
 
 if (!is_numeric ($panel)) {
 	printf ("Not a panel number: '%s'", $panel);
@@ -122,10 +128,12 @@ function colours_match ($lookup, $test)
 
 $lookup = colours_process ($g_colours);
 
-foreach ($parts as &$p) {
-	$id = colours_match ($lookup, $p);
-	if ($id !== NULL) {
-		$p = $g_colours[$id]['colour'];
+if ($trail_space) {
+	foreach ($parts as &$p) {
+		$id = colours_match ($lookup, $p);
+		if ($id !== NULL) {
+			$p = $g_colours[$id]['colour'];
+		}
 	}
 }
 

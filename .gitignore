@@ -17,3 +17,4 @@
 .vimrc
 bin/
 logs/
+www/conf.php

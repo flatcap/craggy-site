@@ -99,3 +99,5 @@ colour suffix
 	only need to combine success + nice
 "text"	description
 date
+
+move schema into craggy git

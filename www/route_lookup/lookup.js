@@ -1,12 +1,10 @@
 var route_entry;
 var route_matches;
-var route_results;
 
-function route_initialise (entry_id, matches_id, results_id)
+function route_initialise (entry_id, matches_id)
 {
 	route_entry   = document.getElementById(entry_id);
 	route_matches = document.getElementById(matches_id);
-	route_results = document.getElementById(results_id);
 
 	route_entry.onkeyup = route_onkeyup;
 	route_entry.focus();

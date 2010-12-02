@@ -8,7 +8,7 @@ include "utils.php";
 function grade_main()
 {
 	$table   = "v_routes";
-	$columns = array ("grade", "climb_type");
+	$columns = array ("id", "grade", "climb_type");
 	$order   = "grade_num";
 
 	$list = db_select($table, $columns, NULL, $order);

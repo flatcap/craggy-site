@@ -8,7 +8,7 @@ include "utils.php";
 function colour_main()
 {
 	$table   = "v_routes";
-	$columns = array ("colour");
+	$columns = array ("id", "colour");
 	$order   = "colour";
 
 	$list = db_select($table, $columns, NULL, $order);

@@ -17,4 +17,11 @@
 .vimrc
 bin/
 logs/
+
+# Local config file
 www/conf.php
+
+# These are generated
+www/img/age.png
+www/img/colour.png
+www/img/grade.png

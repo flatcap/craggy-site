@@ -109,3 +109,8 @@ singularise tables
 	v_routes -> v_route
 
 db: check all the compulsory fields are NOT NULL
+
+db compare
+	download the text versions of all the pages on
+	russon and flatcap and compare them
+

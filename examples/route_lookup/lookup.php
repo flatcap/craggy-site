@@ -1,6 +1,6 @@
 <?php
 
-set_include_path (".:..");
+set_include_path (".:../../www");
 
 include "db.php";
 include "utils.php";

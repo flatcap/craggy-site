@@ -104,3 +104,8 @@ move schema into craggy git
 
 .bashrc - when running git shell, do nothing
 
+singularise tables
+	climbs -> climb
+	v_routes -> v_route
+
+db: check all the compulsory fields are NOT NULL

@@ -4,6 +4,7 @@
 .bashrc
 .fontconfig/
 .format
+.gitconfig
 .home/
 .htpasswd
 .hushlogin

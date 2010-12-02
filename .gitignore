@@ -1,28 +1,15 @@
-.*.swp
-.bash_login
-.bash_logout
-.bashrc
-.fontconfig/
-.format
-.gitconfig
-.home/
-.htpasswd
-.hushlogin
-.inputrc
-.lesshst
-.multitailrc
-.my.cnf
-.mysql_history
-.ssh/
-.vim/
-.vimrc
+# Local dirs
 bin/
 logs/
+
+# Local dot files
+/.*
+.*.swp
 
 # Local config file
 www/conf.php
 
-# These are generated
+# Generated files
 www/img/age.png
 www/img/colour.png
 www/img/grade.png

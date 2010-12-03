@@ -101,3 +101,8 @@ db compare
 	russon and flatcap and compare them
 
 change db column names to something distinct, e.g. craggy_*
+
+make reldir in utils.php a bit smarter
+
+utils.php format_string{,2} aren't used
+

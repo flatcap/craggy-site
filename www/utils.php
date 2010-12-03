@@ -7,7 +7,7 @@ function html_header ($title, $reldir = "")
 	$output .= "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>\n";
 	$output .= "<html>";
 	$output .= "<head>";
-	$output .= "<link rel='stylesheet' title='Purple' href='{$reldir}style.css' type='text/css'>";
+	$output .= "<link rel='stylesheet' title='Purple' href='{$reldir}style/style.css' type='text/css'>";
 	$output .= "<link rel='alternate stylesheet' title='Dark' href='{$reldir}style_dark.css' type='text/css'>";
 	$output .= "<link rel='alternate' title='Craggy RSS' href='http://craggy.russon.org/rss.xml' type='application/rss+xml'>";
 	$output .= "<title>$title - Craggy Island</title>";
@@ -23,6 +23,18 @@ function html_header ($title, $reldir = "")
 	$output .= "    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);";
 	$output .= "  })();";
 	$output .= "";
+	$output .= "</script>";
+
+	// Table Sorter
+	$output .= "<link rel='stylesheet' href='{$reldir}style/tablesorter.css' type='text/css'>";
+	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.js'></script> ";
+	$output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script> ";
+	$output .= "<script type='text/javascript'>";
+	$output .= "$(document).ready(function() ";
+	$output .= "{ ";
+	$output .= "	$('#table_6a').tablesorter( {sortList: [[0,0], [2,0], [1,0]]} ); ";
+	$output .= "	} ";
+	$output .= "); ";
 	$output .= "</script>";
 
 	$output .= "</head>";
@@ -515,25 +527,16 @@ function text_table_header (&$columns, &$widths)
 
 function html_table_header ($columns, $sort = NULL)
 {
-	global $g_col_sort;
+	$output = "<thead><tr>";
 
-	$output = "<tr>";
-
-	//XXX $output .= sprintf ("<th class='quiet'>No.</th>");
 	foreach ($columns as $name) {
 		$split = explode("_", $name);
 		$n = array_pop($split);
-		$s = array_key_exists ($n, $g_col_sort) ? $g_col_sort[$n] : NULL;
 		$n = ucfirst ($n);
-		if (empty ($s)) {
-			$output .= sprintf ("<th>%s</th>", $n);
-		} else {
-			$s = "?sort=" . $s;
-			$output .= sprintf ("<th><a href='%s'>%s</a></th>", $s, $n);
-		}
+		$output .= sprintf ("<th>%s&nbsp;&nbsp;&nbsp;&nbsp;</th>", $n);
 	}
 
-	$output .= "</tr>";
+	$output .= "</tr></thead>";
 
 	return $output;
 }
@@ -746,16 +749,15 @@ function list_render_html (&$list, &$columns, &$widths, $mark = NULL)
 {
 	$output = "";
 
-	$output .= "<table>";
+	$output .= "<table id='table_6a' class='tablesorter'>";
 	$output .= html_table_header ($columns);
+	$output .= "<tbody>";
 
 	$old_mark = NULL;
 	$toggle = 1;
 
-	//XXX $count = 0;
 	// foreach row of list
 	foreach ($list as $row) {
-		//XXX $count++;
 
 		if ($mark && $mark ($row, $old_mark)) {
 			$toggle = 1 - $toggle;
@@ -767,7 +769,6 @@ function list_render_html (&$list, &$columns, &$widths, $mark = NULL)
 		else
 			$output .= "<tr class='mark'>";
 
-		//XXX $output .= "<td class='quiet'>$count</td>";
 		// foreach col of columns
 		foreach ($columns as $col) {
 
@@ -783,6 +784,7 @@ function list_render_html (&$list, &$columns, &$widths, $mark = NULL)
 		$output .= "</tr>";
 	}
 
+	$output .= "</tbody>";
 	$output .= "</table>";
 
 	return $output;

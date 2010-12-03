@@ -338,7 +338,6 @@ function stats_main()
 
 	$last_update = date ("j M Y", strtotime (db_get_last_update()));
 
-	//header("Pragma: no-cache");
 	$output  = "<body>";
 	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
 	$output .= html_menu();

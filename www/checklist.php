@@ -57,7 +57,6 @@ function checklist_main ($options)
 	}
 
 	$output = "";
-	//header("Pragma: no-cache");
 	//switch ($options["format"]) {
 	switch ($options["f"]) {
 		case "html":
@@ -152,46 +151,32 @@ function checklist_main ($options)
 }
 
 
-function checklist_command_line ($format, $def_format)
-{
-//	$longopts  = array("format:");
-
-//	$options = getopt(NULL, $longopts);
-//	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-//		$options["format"] = $format[$def_format];
-//	}
-
-	$options = getopt("f:");
-	if (!array_key_exists ("f", $options) || !in_array ($options["f"], $format)) {
-		$options["f"] = $format[$def_format];
-	}
-
-	return $options;
-}
-
-function checklist_browser_options ($format, $def_format)
-{
-	$options = array();
-
-	$f = get_url_variable ("format");
-	if (!in_array ($f, $format))
-		$f = $format[$def_format];
-
-	//$options["format"] = $f;
-	$options["f"] = $f;
-
-	return $options;
-}
-
-
 date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text", "tabs");
 
-if (isset ($argc))
-	$options = checklist_command_line ($format, 2);
-else
-	$options = checklist_browser_options ($format, 1);
+if (isset ($argc)) {
+//	$longopts  = array("format:");
+
+//	$options = getopt(NULL, $longopts);
+//	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+//		$options["format"] = $format[2];
+//	}
+
+	$options = getopt("f:");
+	if (!array_key_exists ("f", $options) || !in_array ($options["f"], $format)) {
+		$options["f"] = $format[2];
+	}
+} else {
+	$options = array();
+
+	$f = get_url_variable ("format");
+	if (!in_array ($f, $format))
+		$f = $format[1];
+
+	//$options["format"] = $f;
+	$options["f"] = $f;
+}
 
 echo checklist_main ($options);
 

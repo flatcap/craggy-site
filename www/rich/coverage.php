@@ -148,7 +148,7 @@ if (isset ($argc)) {
 
 	$f = get_url_variable ("format");
 	if (!in_array ($f, $format))
-		$f = $format[2];
+		$f = $format[1];
 
 	$options["format"] = $f;
 }

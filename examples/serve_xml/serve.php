@@ -20,7 +20,7 @@ $g_colours = db_select("colour");
 $g_panels  = db_select("panel");
 
 $table   = "climbs";
-$columns = array ("id", "route_id", "date_climbed", "success", "downclimb", "nice", "onsight", "difficulty", "notes");
+$columns = array ("id", "route_id", "date_climbed", "success", "nice", "onsight", "difficulty", "notes");
 $where   = array ("climber_id = 1"); 
 $order   = NULL;
 $climbs = db_select($table, $columns, $where, $order);
@@ -46,7 +46,7 @@ foreach ($climbs as $c) {
 	}
 	$output .= "</tr>";
 	$count++;
-	if ($count > 30)
+	if ($count > 10)
 		break;
 }
 

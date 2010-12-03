@@ -34,7 +34,6 @@ function boards_main ($options)
 
 	$list = db_select($table, $columns, $where, $order);
 
-	//header("Pragma: no-cache");
 	$output = html_header ("Boards");
 	$boards = array();
 	$panel = 0;

@@ -279,7 +279,6 @@ function work_main ($options)
 
 	$count  = count ($all);
 	$output = "";
-	//header("Pragma: no-cache");
 	switch ($options["format"]) {
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));

@@ -116,7 +116,6 @@ function coverage_main ($options)
 
 	$count = $list[0]["To Do"] + $list[1]["To Do"] + $list[2]["To Do"];
 	$output = "";
-	//header("Pragma: no-cache");
 	switch ($options["format"]) {
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));

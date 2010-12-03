@@ -116,7 +116,6 @@ function seldom_main ($options)
 	$output = "";
 	$ranges = array (12, 6, 4, 3, 2);
 
-	//header("Pragma: no-cache");
 	switch ($options["format"]) {
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));

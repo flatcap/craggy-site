@@ -87,7 +87,6 @@ function downclimb_main ($options)
 
 	$count  = count ($list);
 	$output = "";
-	//header("Pragma: no-cache");
 	switch ($options["format"]) {
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));

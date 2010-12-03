@@ -106,3 +106,5 @@ make reldir in utils.php a bit smarter
 
 utils.php format_string{,2} aren't used
 
+remove mark or make it smarter
+

@@ -6,19 +6,6 @@ include "db.php";
 include "utils.php";
 include "mark.php";
 
-$g_col_sort   = array (
-	"age" => "age",
-	"climbed" => "age",
-	"colour" => "colour",
-	"grade" => "grade",
-	"months" => "age",
-	"panel" => "panel",
-	"success" => "success",
-	"type" => "type",
-	"n" => "n",
-	"o" => "o",
-);
-
 function process_binary(&$list, $field, $value)
 {
 	foreach ($list as $index => $row) {
@@ -30,41 +17,6 @@ function process_binary(&$list, $field, $value)
 	}
 }
 
-function climbs_command_line ($format, $def_format, $sort)
-{
-	$longopts  = array("format:", "sort:");
-
-	$options = getopt(NULL, $longopts);
-
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[$def_format];
-	}
-
-	if (!array_key_exists ("sort", $options) || !in_array ($options["sort"], $sort)) {
-		$options["sort"] = NULL;
-	}
-
-	return $options;
-}
-
-function climbs_browser_options ($format, $def_format, $sort)
-{
-	$options = array();
-
-	$f = get_url_variable ("format");
-	if (!in_array ($f, $format))
-		$f = $format[$def_format];
-
-	$s = get_url_variable ("sort");
-	if (!in_array ($s, $sort))
-		$s = NULL;
-
-	$options["format"] = $f;
-	$options["sort"]   = $s;
-
-	return $options;
-}
-
 function climbs_main($options)
 {
 	$last_update = date ("j M Y", strtotime (db_get_last_update()));
@@ -73,17 +25,7 @@ function climbs_main($options)
 	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number) left join success on (climbs.success = success.id) left join difficulty on (climbs.difficulty = difficulty.id)";
 	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success.outcome as success", "nice as n", "onsight as o", "difficulty.description as diff", "climbs.notes as notes");
 	$where   = NULL;
-
-	switch ($options["sort"]) {
-		case "age":     $order = "date_climbed desc, panel, grade_num, colour"; $mark = "mark_date_climbed"; break;
-		case "colour":  $order = "colour, panel, grade";                        $mark = "mark_colour";       break;
-		case "grade":   $order = "grade_num, panel, colour";                    $mark = "mark_grade";        break;
-		case "success": $order = "success, panel, grade, colour";               $mark = "mark_success";      break;
-		case "type":    $order = "climb_type, panel, grade, colour";            $mark = "mark_climb_type";   break;
-		case "n":       $order = "n desc, panel, grade, colour";                $mark = "mark_nice";         break;
-		case "o":       $order = "o desc, panel, grade, colour";                $mark = "mark_onsight";      break;
-		default:        $order = "panel, grade_num, colour";                    $mark = "mark_panel";        break;
-	}
+	$order   = "panel, grade_num, colour";
 
 	$list = db_select($table, $columns, $where, $order);
 	$count = count($list);
@@ -120,7 +62,7 @@ function climbs_main($options)
 			$output .= html_menu("../");
 			$output .= "<div class='content'>";
 			$output .= "<h2>Climbs ({$count})</h2>";
-			$output .= list_render_html ($list, $columns, $widths, $mark);
+			$output .= list_render_html ($list, $columns, $widths);
 			$output .= "</div>";
 			$output .= get_errors();
 			$output .= "</body>";
@@ -148,12 +90,24 @@ function climbs_main($options)
 date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text");
-$sort   = array ("age", "colour", "grade", "panel", "success", "type", "n", "o");
 
-if (isset ($argc))
-	$options = climbs_command_line ($format, 2, $sort);
-else
-	$options = climbs_browser_options ($format, 1, $sort);
+if (isset ($argc)) {
+		$longopts = array("format:");
+
+		$options = getopt(NULL, $longopts);
+
+		if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+			$options["format"] = $format[2];
+		}
+} else {
+		$options = array();
+
+		$f = get_url_variable ("format");
+		if (!in_array ($f, $format))
+			$f = $format[1];
+
+		$options["format"] = $f;
+}
 
 echo climbs_main ($options);
 

@@ -4,52 +4,6 @@ set_include_path (".:..");
 
 include "db.php";
 include "utils.php";
-include "mark.php";
-
-$g_col_sort   = array (
-	"climbed" => "age",
-	"colour" => "colour",
-	"grade" => "grade",
-	"months" => "age",
-	"panel" => "panel",
-	"success" => "success",
-	"type" => "type"
-);
-
-function seldom_command_line ($format, $def_format, $sort)
-{
-	$longopts  = array("format:", "sort:");
-
-	$options = getopt(NULL, $longopts);
-
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[$def_format];
-	}
-
-	if (!array_key_exists ("sort", $options) || !in_array ($options["sort"], $sort)) {
-		$options["sort"] = NULL;
-	}
-
-	return $options;
-}
-
-function seldom_browser_options ($format, $def_format, $sort)
-{
-	$options = array();
-
-	$f = get_url_variable ("format");
-	if (!in_array ($f, $format))
-		$f = $format[$def_format];
-
-	$s = get_url_variable ("sort");
-	if (!in_array ($s, $sort))
-		$s = NULL;
-
-	$options["format"] = $f;
-	$options["sort"]   = $s;
-
-	return $options;
-}
 
 function seldom_range ($m_start, $m_finish, $options)
 {
@@ -61,6 +15,7 @@ function seldom_range ($m_start, $m_finish, $options)
 	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number)";
 	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
 	$where   = array ("grade.order < 600");
+	$order = "panel, grade_num, colour";
 
 	if (isset ($m_finish)) {
 		array_push ($where, "date_climbed < '$when_start'");
@@ -68,15 +23,6 @@ function seldom_range ($m_start, $m_finish, $options)
 		array_push ($where, "date_climbed > '$when_finish'");
 	} else {
 		array_push ($where, "((date_climbed < '$when_start') or (date_climbed is null))");
-	}
-
-	switch ($options["sort"]) {
-		case "age":     $order = "date_climbed, panel, grade_num, colour"; break;
-		case "colour":  $order = "colour, panel, grade";                   break;
-		case "grade":   $order = "grade_num, panel, colour";               break;
-		case "success": $order = "success, panel, grade, colour";          break;
-		case "type":    $order = "climb_type, panel, grade, colour";       break;
-		default:        $order = "panel, grade_num, colour";               break;
 	}
 
 	// print data (based on column names)
@@ -209,12 +155,24 @@ function seldom_main ($options)
 date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text");
-$sort   = array ("age", "colour", "grade", "panel", "success", "type");
 
-if (isset ($argc))
-	$options = seldom_command_line ($format, 2, $sort);
-else
-	$options = seldom_browser_options ($format, 1, $sort);
+if (isset ($argc)) {
+	$longopts = array("format:");
+
+	$options = getopt(NULL, $longopts);
+
+	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+		$options["format"] = $format[2];
+	}
+} else {
+	$options = array();
+
+	$f = get_url_variable ("format");
+	if (!in_array ($f, $format))
+		$f = $format[1];
+
+	$options["format"] = $f;
+}
 
 echo seldom_main ($options);
 

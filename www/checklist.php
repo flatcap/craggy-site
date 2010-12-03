@@ -3,8 +3,6 @@
 include "db.php";
 include "utils.php";
 
-$g_col_sort = array();
-
 function checklist_grade_block($grade)
 {
 	if ($grade[0] < "6")

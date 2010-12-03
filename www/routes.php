@@ -2,67 +2,12 @@
 
 include "db.php";
 include "utils.php";
-include "mark.php";
-
-$g_col_sort   = array (
-	"age" => "age",
-	"colour" => "colour",
-	"grade" => "grade",
-	"months" => "age",
-	"panel" => "panel",
-	"set" => "age",
-	"setter" => "setter",
-	"type" => "type"
-);
-
-function routes_command_line ($format, $def_format, $sort)
-{
-	$longopts  = array("format:", "sort:");
-
-	$options = getopt(NULL, $longopts);
-
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[$def_format];
-	}
-
-	if (!array_key_exists ("sort", $options) || !in_array ($options["sort"], $sort)) {
-		$options["sort"] = NULL;
-	}
-
-	return $options;
-}
-
-function routes_browser_options ($format, $def_format, $sort)
-{
-	$options = array();
-
-	$f = get_url_variable ("format");
-	if (!in_array ($f, $format))
-		$f = $format[$def_format];
-
-	$s = get_url_variable ("sort");
-	if (!in_array ($s, $sort))
-		$s = NULL;
-
-	$options["format"] = $f;
-	$options["sort"]   = $s;
-
-	return $options;
-}
 
 function routes_main($options)
 {
 	$table   = "v_routes";
 	$columns = array ("id", "panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
-
-	switch ($options["sort"]) {
-		case "age":    $order = "date_set desc, panel, grade_num, colour"; $mark = "mark_date_set";   break;
-		case "colour": $order = "colour, panel, grade";                    $mark = "mark_colour";     break;
-		case "grade":  $order = "grade_num, panel, colour";                $mark = "mark_grade";      break;
-		case "setter": $order = "setter, panel, grade, colour";            $mark = "mark_setter";     break;
-		case "type":   $order = "climb_type, panel, grade, colour";        $mark = "mark_climb_type"; break;
-		default:       $order = "panel, grade_num, colour";                $mark = "mark_panel";      break;
-	}
+	$order   = "panel, grade_num, colour";
 
 	$list = db_select($table, $columns, NULL, $order);
 
@@ -99,7 +44,7 @@ function routes_main($options)
 			$output .= "<div class='header'>All Routes <span>(Last updated: $last_update)</span></div>\n";
 			$output .= html_menu();
 			$output .= "<div class='content'>\n";
-			$output .= list_render_html ($list, $columns, $widths, $mark);
+			$output .= list_render_html ($list, $columns, $widths);
 			$output .= "</div>";
 			$output .= get_errors();
 			$output .= "</body>";
@@ -127,12 +72,24 @@ function routes_main($options)
 date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text");
-$sort   = array ("age", "colour", "grade", "panel", "setter", "type");
 
-if (isset ($argc))
-	$options = routes_command_line ($format, 2, $sort);
-else
-	$options = routes_browser_options ($format, 1, $sort);
+if (isset ($argc)) {
+		$longopts = array("format:");
+
+		$options = getopt(NULL, $longopts);
+
+		if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+			$options["format"] = $format[2];
+		}
+} else {
+		$options = array();
+
+		$f = get_url_variable ("format");
+		if (!in_array ($f, $format))
+			$f = $format[1];
+
+		$options["format"] = $f;
+}
 
 echo routes_main ($options);
 

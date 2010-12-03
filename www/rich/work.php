@@ -5,15 +5,6 @@ set_include_path (".:..");
 include "db.php";
 include "utils.php";
 
-$g_col_sort  = array (
-	"colour"   => "colour",
-	"grade"    => "grade",
-	"panel"    => "panel",
-	"priority" => "priority",
-	"score"    => "score",
-	"type"     => "type"
-);
-
 function cmp_panel2($a, $b)
 {
 	$p1 = $a['panel'];
@@ -262,14 +253,7 @@ function work_main ($options)
 	$all = work_flatten ($all);
 	$score = work_score ($all);
 
-	switch ($options["sort"]) {
-		case "colour":   $cmp = "cmp_colour";   break;
-		case "grade":    $cmp = "cmp_grade";    break;
-		case "priority": $cmp = "cmp_priority"; break;
-		case "score":    $cmp = "cmp_score";    break;
-		case "type":     $cmp = "cmp_type";     break;
-		default:         $cmp = "cmp_panel2";   break;
-	}
+	$cmp = cmp_panel2;
 	usort ($all, $cmp);
 
 	process_type ($all);
@@ -322,51 +306,28 @@ function work_main ($options)
 	return $output;
 }
 
-function work_command_line ($format, $def_format, $sort)
-{
-	$longopts  = array("format:", "sort:");
-
-	$options = getopt(NULL, $longopts);
-
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[$def_format];
-	}
-
-	if (!array_key_exists ("sort", $options) || !in_array ($options["sort"], $sort)) {
-		$options["sort"] = NULL;
-	}
-
-	return $options;
-}
-
-function work_browser_options ($format, $def_format, $sort)
-{
-	$options = array();
-
-	$f = get_url_variable ("format");
-	if (!in_array ($f, $format))
-		$f = $format[$def_format];
-
-	$s = get_url_variable ("sort");
-	if (!in_array ($s, $sort))
-		$s = NULL;
-
-	$options["format"] = $f;
-	$options["sort"]   = $s;
-
-	return $options;
-}
-
 
 date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text");
-$sort   = array ("age", "colour", "grade", "panel", "priority", "success", "type", "score");
 
-if (isset ($argc))
-	$options = work_command_line ($format, 2, $sort);
-else
-	$options = work_browser_options ($format, 1, $sort);
+if (isset ($argc)) {
+	$longopts = array("format:");
+
+	$options = getopt(NULL, $longopts);
+
+	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+		$options["format"] = $format[2];
+	}
+} else {
+	$options = array();
+
+	$f = get_url_variable ("format");
+	if (!in_array ($f, $format))
+		$f = $format[1];
+
+	$options["format"] = $f;
+}
 
 echo work_main($options);
 

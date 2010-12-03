@@ -4,50 +4,6 @@ set_include_path (".:..");
 
 include "db.php";
 include "utils.php";
-include "mark.php";
-
-$g_col_sort = array (
-	"colour" => "colour",
-	"difficulty" => "difficulty",
-	"grade" => "grade",
-	"panel" => "panel",
-	"type" => "type"
-);
-
-function downclimb_command_line ($format, $def_format, $sort)
-{
-	$longopts  = array("format:", "sort:");
-
-	$options = getopt(NULL, $longopts);
-
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[$def_format];
-	}
-
-	if (!array_key_exists ("sort", $options) || !in_array ($options["sort"], $sort)) {
-		$options["sort"] = NULL;
-	}
-
-	return $options;
-}
-
-function downclimb_browser_options ($format, $def_format, $sort)
-{
-	$options = array();
-
-	$f = get_url_variable ("format");
-	if (!in_array ($f, $format))
-		$f = "html";
-
-	$s = get_url_variable ("sort");
-	if (!in_array ($s, $sort))
-		$s = NULL;
-
-	$options["format"] = $f;
-	$options["sort"]   = $s;
-
-	return $options;
-}
 
 function downclimb_main ($options)
 {
@@ -56,16 +12,8 @@ function downclimb_main ($options)
 	$climber_id = 1;
 	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number) left join difficulty on (climbs.difficulty = difficulty.id)";
 	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "nice as n", "onsight as o", "difficulty.description as difficulty", "climbs.notes as notes");
-
 	$where   = array ("success <> 4", "grade.order < 400");
-
-	switch ($options["sort"]) {
-		case "colour":     $order = "colour, panel, grade";                 break;
-		case "difficulty": $order = "difficulty, panel, grade_num, colour"; break;
-		case "grade":      $order = "grade_num, panel, colour";             break;
-		case "type":       $order = "climb_type, panel, grade, colour";     break;
-		default:           $order = "panel, grade_num, colour";             break;
-	}
+	$order = "panel, grade_num, colour";
 
 	$list = db_select($table, $columns, $where, $order);
 
@@ -134,12 +82,24 @@ function downclimb_main ($options)
 date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text");
-$sort   = array ("colour", "difficulty", "grade", "panel", "type");
 
-if (isset ($argc))
-	$options = downclimb_command_line ($format, 2, $sort);
-else
-	$options = downclimb_browser_options ($format, 1, $sort);
+if (isset ($argc)) {
+	$longopts = array("format:");
+
+	$options = getopt(NULL, $longopts);
+
+	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+		$options["format"] = $format[2];
+	}
+} else {
+	$options = array();
+
+	$f = get_url_variable ("format");
+	if (!in_array ($f, $format))
+		$f = $format[1];
+
+	$options["format"] = $f;
+}
 
 echo downclimb_main($options);
 

@@ -4,35 +4,6 @@ set_include_path (".:..");
 
 include "db.php";
 include "utils.php";
-include "mark.php";
-
-$g_col_sort = array();
-
-function coverage_command_line ($format, $def_format)
-{
-	$longopts  = array("format:");
-
-	$options = getopt(NULL, $longopts);
-
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[$def_format];
-	}
-
-	return $options;
-}
-
-function coverage_browser_options ($format, $def_format)
-{
-	$options = array();
-
-	$f = get_url_variable ("format");
-	if (!in_array ($f, $format))
-		$f = $format[$def_format];
-
-	$options["format"] = $f;
-
-	return $options;
-}
 
 function coverage_get_data()
 {
@@ -41,7 +12,7 @@ function coverage_get_data()
 	$where   = "climber_id = 1";
 	$order   = "route_id";
 
-	$climbs = db_select($table, $columns, $where);
+	$climbs = db_select($table, $columns, $where, $order);
 
 	$num_routes  = db_count ('route', 'id', NULL);
 	$num_tried   = 0;
@@ -164,10 +135,23 @@ date_default_timezone_set("UTC");
 
 $format = array ("csv", "html", "text");
 
-if (isset ($argc))
-	$options = coverage_command_line ($format, 2);
-else
-	$options = coverage_browser_options ($format, 1);
+if (isset ($argc)) {
+	$longopts  = array("format:");
+
+	$options = getopt(NULL, $longopts);
+
+	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+		$options["format"] = $format[1];
+	}
+} else {
+	$options = array();
+
+	$f = get_url_variable ("format");
+	if (!in_array ($f, $format))
+		$f = $format[2];
+
+	$options["format"] = $f;
+}
 
 echo coverage_main ($options);
 

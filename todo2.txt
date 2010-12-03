@@ -8,21 +8,7 @@ symlink conf.php from somewhere else?
 
 remove onsight, generate it
 
-combine success and downclimb
-	0	fail
-	10	success
-	20	clean
-	30	downclimb
-
 nice -> star
-
-difficulty
-	0	unknown
-	10	easy
-	20	quite easy
-	30	medium
-	40	quite hard
-	50	hard
 
 to update routes
 	correction	overwrite row

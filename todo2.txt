@@ -100,3 +100,4 @@ db compare
 	download the text versions of all the pages on
 	russon and flatcap and compare them
 
+change db column names to something distinct, e.g. craggy_*

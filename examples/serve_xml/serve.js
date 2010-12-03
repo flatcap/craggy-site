@@ -37,7 +37,7 @@ function route_callback()
 		"<th>Notes</th>" +
 		"</tr>";
 
-	x=xmlhttp.responseXML.documentElement.getElementsByTagName("climb");
+	x = xmlhttp.responseXML.documentElement.getElementsByTagName("climb");
 	for (i = 0; i < x.length; i++) {
 
 		txt = txt + "<tr>";

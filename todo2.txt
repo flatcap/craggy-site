@@ -108,3 +108,13 @@ utils.php format_string{,2} aren't used
 
 remove mark or make it smarter
 
+how do I mass delete?
+	x=1 or x=2 or x=3
+	x in [1,2,3]
+
+test cascade on delete
+
+calculate how many climbs will be deleted
+
+keep an undo buffer
+

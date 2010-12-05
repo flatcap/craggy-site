@@ -118,3 +118,20 @@ calculate how many climbs will be deleted
 
 keep an undo buffer
 
+create a setter-input-matcher
+	matcher on name or initials
+
+for new routes, queue the changes
+	delete routes grid  [tick] remove from list button
+	add routes grid - editable [tick] remove from list
+	commit changes button -> update db; create rss!
+	backup data first?
+
+test NULL foreign keys
+
+cascade delete on routes
+
+mysql docs	pre.programlisting	- grey region
+		code			- dark highlight
+		strong.userinput	- darker highlight
+

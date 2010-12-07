@@ -3,47 +3,36 @@
 set_include_path (".:../../www");
 
 include "db.php";
-#include "utils.php";
 
-#if (!isset ($_GET))
-#	return;
-#	
-#if (!array_key_exists ('q', $_GET))
-#	return;
-#
-#$q=trim($_GET["q"]);
-#if ($q != "climb")
-#	return;
+if (!isset ($_GET))
+	return;
+	
+if (!array_key_exists ('q', $_GET))
+	return;
 
-#$g_routes  = db_select("route");
-#$g_colours = db_select("colour");
-#$g_panels  = db_select("panel");
+$q=trim($_GET["q"]);
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$table   = "climbs";
-$columns = array ("id", "route_id", "date_climbed", "success", "nice", "onsight", "difficulty", "notes");
-$where   = array ("climber_id = 1"); 
+$table   = "setter";
+$columns = array ("id", "initials", "name");
+$where   = array ("initials like '{$q}%' or name like '{$q}%'"); 
 $order   = NULL;
 
-$climb_list = db_select($table, $columns, $where, $order);
+$setter_list = db_select($table, $columns, $where, $order);
 
-$count = 0;
 $output = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>\n";
-$output .= "<climbs>\n";
+$output .= "<setters>\n";
 
-foreach ($climb_list as $climb) {
-	$output .= "\t<climb>\n";
+foreach ($setter_list as $setter) {
+	$output .= "\t<setter>\n";
 	foreach ($columns as $name) {
-		$value = $climb[$name];
+		$value = $setter[$name];
 		$output .= "\t\t<$name>$value</$name>\n";
 	}
-	$output .= "\t</climb>\n";
-	$count++;
-	if ($count >= 10)
-		break;
+	$output .= "\t</setter>\n";
 }
 
-$output .= "</climbs>\n";
+$output .= "</setters>\n";
 
 echo $output;

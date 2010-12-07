@@ -28,7 +28,6 @@ $order   = NULL;
 
 $climb_list = db_select($table, $columns, $where, $order);
 
-$count = 0;
 $output = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?>\n";
 $output .= "<climbs>\n";
 
@@ -39,9 +38,6 @@ foreach ($climb_list as $climb) {
 		$output .= "\t\t<$name>$value</$name>\n";
 	}
 	$output .= "\t</climb>\n";
-	$count++;
-	if ($count >= 10)
-		break;
 }
 
 $output .= "</climbs>\n";

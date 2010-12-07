@@ -112,8 +112,6 @@ how do I mass delete?
 	x=1 or x=2 or x=3
 	x in [1,2,3]
 
-test cascade on delete
-
 calculate how many climbs will be deleted
 
 keep an undo buffer
@@ -127,9 +125,10 @@ for new routes, queue the changes
 	commit changes button -> update db; create rss!
 	backup data first?
 
-test NULL foreign keys
+test NULL foreign keys - OK
 
-cascade delete on routes
+cascade delete on routes?
+test cascade on delete - OK
 
 mysql docs	pre.programlisting	- grey region
 		code			- dark highlight

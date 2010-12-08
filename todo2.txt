@@ -88,12 +88,6 @@ date
 
 move schema into craggy git
 
-.bashrc - when running git shell, do nothing
-
-singularise tables
-	climbs -> climb
-	v_routes -> v_route
-
 db: check all the compulsory fields are NOT NULL
 
 db compare
@@ -114,9 +108,6 @@ calculate how many climbs will be deleted
 
 keep an undo buffer
 
-create a setter-input-matcher
-	matcher on name or initials
-
 for new routes, queue the changes
 	delete routes grid  [tick] remove from list button
 	add routes grid - editable [tick] remove from list
@@ -131,8 +122,6 @@ test cascade on delete - OK
 mysql docs	pre.programlisting	- grey region
 		code			- dark highlight
 		strong.userinput	- darker highlight
-
-change db column names to something distinct, e.g. craggy_*
 
 eliminate the views?
 make them more useful?
@@ -151,6 +140,4 @@ to one of:
 	/user/1/work.php
 	/user/work.php?id=1
 	/work.php?id=1
-
-sort out git prompt on craggy.russon.org
 

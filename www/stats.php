@@ -204,9 +204,9 @@ function stats_grade_mean ($grade_list)
 	$g_lead = round ($g_lead / $c_lead);
 	$g_topr = round ($g_topr / $c_topr);
 
-	$table   = "grade";
-	$columns = array("id", "grade", "grade.order");
-	$order   = "grade.order";
+	$table   = "craggy_grade";
+	$columns = array("id", "grade", "craggy_grade.order");
+	$order   = "craggy_grade.order";
 
 	$grades = db_select ($table, $columns, NULL, $order);
 
@@ -299,7 +299,7 @@ function stats_style()
 {
 	$output = "";
 
-	$table   = "panel";
+	$table   = "craggy_panel";
 	$columns = array("id", "arch", "arete", "chimney", "chockstone", "featured", "flake", "overhang", "roof", "slab", "wall");
 	$where   = NULL;
 

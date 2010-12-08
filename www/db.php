@@ -160,7 +160,7 @@ function db_get_last_update()
 {
 	$db = db_get_database();
 
-	$query = "select value from data where name = 'last_update'";
+	$query = "select value from craggy_data where name = 'last_update'";
 
 	$result = mysql_query($query);
 

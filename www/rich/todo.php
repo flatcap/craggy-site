@@ -10,9 +10,30 @@ function todo_main($options)
 	$last_update = date ("j M Y", strtotime (db_get_last_update()));
 
 	$climber_id = 1;
-	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number) left join success on (climbs.success = success.id)";
-	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success.outcome as success", "nice as n", "onsight as o", "difficulty as diff", "climbs.notes as notes");
-	$where   = array ("((success < 3) OR (success is NULL))", "grade.order < 600");
+
+	$table   = "craggy_route" .
+			" left join craggy_climbs on ((craggy_climbs.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
+			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
+			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
+			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
+			" left join v_panel on (craggy_route.panel = v_panel.number)" .
+			" left join craggy_success on (craggy_climbs.success = craggy_success.id)";
+
+	$columns = array ("craggy_route.id as id",
+			"craggy_panel.number as panel",
+			"craggy_colour.colour as colour",
+			"craggy_grade.grade as grade",
+			"craggy_grade.order as grade_num",
+			"climber_id",
+			"date_climbed",
+			"v_panel.climb_type as climb_type",
+			"craggy_success.outcome as success",
+			"nice as n",
+			"onsight as o",
+			"difficulty as diff",
+			"craggy_climbs.notes as notes");
+
+	$where   = array ("((success < 3) OR (success is NULL))", "craggy_grade.order < 600");
 	$order = "panel, grade_num, colour";
 
 	$list = db_select($table, $columns, $where, $order);

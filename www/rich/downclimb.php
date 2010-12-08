@@ -7,12 +7,31 @@ include "utils.php";
 
 function downclimb_main ($options)
 {
-	$table   = "v_routes";
-
 	$climber_id = 1;
-	$table   = "route left join climbs on ((climbs.route_id = route.id) and (climber_id = {$climber_id})) left join colour on (route.colour = colour.id) left join panel on (route.panel = panel.id) left join grade on (route.grade = grade.id) left join v_panel on (route.panel = v_panel.number) left join difficulty on (climbs.difficulty = difficulty.id)";
-	$columns = array ("route.id as id", "panel.number as panel", "colour.colour as colour", "grade.grade as grade", "grade.order as grade_num", "climber_id", "date_climbed", "v_panel.climb_type as climb_type", "success", "nice as n", "onsight as o", "difficulty.description as difficulty", "climbs.notes as notes");
-	$where   = array ("success <> 4", "grade.order < 400");
+
+	$table   = "craggy_route" .
+			" left join craggy_climbs on ((craggy_climbs.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
+			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
+			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
+			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
+			" left join v_panel on (craggy_route.panel = v_panel.number)" .
+			" left join craggy_difficulty on (craggy_climbs.difficulty = craggy_difficulty.id)";
+
+	$columns = array ("craggy_route.id as id",
+			"craggy_panel.number as panel",
+			"craggy_colour.colour as colour",
+			"craggy_grade.grade as grade",
+			"craggy_grade.order as grade_num",
+			"climber_id",
+			"date_climbed",
+			"v_panel.climb_type as climb_type",
+			"success",
+			"nice as n",
+			"onsight as o",
+			"craggy_difficulty.description as difficulty",
+			"craggy_climbs.notes as notes");
+
+	$where   = array ("success <> 4", "craggy_grade.order < 400");
 	$order = "panel, grade_num, colour";
 
 	$list = db_select($table, $columns, $where, $order);

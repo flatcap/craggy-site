@@ -7,14 +7,14 @@ include "utils.php";
 
 function coverage_get_data()
 {
-	$table   = "climbs";
+	$table   = "craggy_climbs";
 	$columns = array ("id", "route_id", "success", "onsight");
 	$where   = "climber_id = 1";
 	$order   = "route_id";
 
 	$climbs = db_select($table, $columns, $where, $order);
 
-	$num_routes  = db_count ('route', 'id', NULL);
+	$num_routes  = db_count ('craggy_route', 'id', NULL);
 	$num_tried   = 0;
 	$num_clean   = 0;
 	$num_onsight = 0;

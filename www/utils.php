@@ -8,7 +8,7 @@ function html_header ($title, $reldir = "")
 	$output .= "<html>";
 	$output .= "<head>";
 	$output .= "<link rel='stylesheet' title='Purple' href='{$reldir}style/style.css' type='text/css'>";
-	$output .= "<link rel='alternate stylesheet' title='Dark' href='{$reldir}style_dark.css' type='text/css'>";
+	$output .= "<link rel='alternate stylesheet' title='Dark' href='{$reldir}style/style_dark.css' type='text/css'>";
 	$output .= "<link rel='alternate' title='Craggy RSS' href='http://craggy.russon.org/rss.xml' type='application/rss+xml'>";
 	$output .= "<title>$title - Craggy Island</title>";
 

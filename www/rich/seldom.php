@@ -18,6 +18,7 @@ function seldom_range ($m_start, $m_finish, $options)
 			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
 			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
 			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
+			" left join craggy_success on (craggy_climb.success = craggy_success.id)" .
 			" left join v_panel on (craggy_route.panel = v_panel.number)";
 
 	$columns = array ("craggy_route.id as id",
@@ -28,7 +29,7 @@ function seldom_range ($m_start, $m_finish, $options)
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
-			"success",
+			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",
 			"difficulty as diff",

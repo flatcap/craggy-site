@@ -43,7 +43,7 @@ function db_select($table, $columns = NULL, $where = NULL, $order = NULL)
 
 	$db = db_get_database();
 
-	//var_dump ($query);
+	//echo "$query;<br>";
 	$result = mysql_query($query);
 
 	$list = array();

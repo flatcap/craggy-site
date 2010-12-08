@@ -205,8 +205,8 @@ function stats_grade_mean ($grade_list)
 	$g_topr = round ($g_topr / $c_topr);
 
 	$table   = "craggy_grade";
-	$columns = array("id", "grade", "craggy_grade.order");
-	$order   = "craggy_grade.order";
+	$columns = array("id", "grade", "sequence");
+	$order   = "sequence";
 
 	$grades = db_select ($table, $columns, NULL, $order);
 

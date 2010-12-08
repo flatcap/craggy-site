@@ -134,26 +134,28 @@ function work_todo()
 
 	$table = "craggy_route" .
 			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
-			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
-			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
-			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
-			" left join v_panel on (craggy_route.panel = v_panel.number)";
+			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
+			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
+			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
+			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
+			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)" .
+			" left join v_panel on (craggy_route.panel_id = v_panel.name)";
 
 	$columns = array ("craggy_route.id as id",
-			"craggy_panel.number as panel",
+			"craggy_panel.name as panel",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.order as grade_num",
+			"craggy_grade.sequence as grade_num",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
-			"success",
+			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",
-			"difficulty as diff",
+			"craggy_difficulty.description as diff",
 			"craggy_climb.notes as notes");
 
-	$where   = array ("((success < 3) OR (success is NULL))", "craggy_grade.order < 600");
+	$where   = array ("((success_id < 3) OR (success_id is NULL))", "craggy_grade.sequence < 600");
 
 	$list = db_select($table, $columns, $where);
 
@@ -167,26 +169,28 @@ function work_downclimb()
 
 	$table = "craggy_route" .
 			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
-			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
-			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
-			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
-			" left join v_panel on (craggy_route.panel = v_panel.number)";
+			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
+			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
+			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
+			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
+			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)" .
+			" left join v_panel on (craggy_route.panel_id = v_panel.name)";
 
 	$columns = array ("craggy_route.id as id",
-			"craggy_panel.number as panel",
+			"craggy_panel.name as panel",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.order as grade_num",
+			"craggy_grade.sequence as grade_num",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
-			"success",
+			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",
-			"difficulty as diff",
+			"craggy_difficulty.description as diff",
 			"craggy_climb.notes as notes");
 
-	$where   = array ("success <> 4", "craggy_grade.order < 400");
+	$where   = array ("success_id <> 4", "craggy_grade.sequence < 400");
 
 	$list = db_select($table, $columns, $where);
 
@@ -202,26 +206,28 @@ function work_seldom_range ($m_start, $m_finish)
 
 	$table = "craggy_route" .
 			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
-			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
-			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
-			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
-			" left join v_panel on (craggy_route.panel = v_panel.number)";
+			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
+			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
+			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
+			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
+			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)" .
+			" left join v_panel on (craggy_route.panel_id = v_panel.name)";
 
 	$columns = array ("craggy_route.id as id",
-			"craggy_panel.number as panel",
+			"craggy_panel.name as panel",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.order as grade_num",
+			"craggy_grade.sequence as grade_num",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
-			"success",
+			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",
-			"difficulty as diff",
+			"craggy_difficulty.description as diff",
 			"craggy_climb.notes as notes");
 
-	$where   = array ("craggy_grade.order < 600", "date_climbed < '$when_start'");
+	$where   = array ("craggy_grade.sequence < 600", "date_climbed < '$when_start'");
 
 	if (isset ($m_finish)) {
 		$when_finish = db_date ("$m_finish months ago");

@@ -141,3 +141,19 @@ to one of:
 	/user/work.php?id=1
 	/work.php?id=1
 
+combine panel attributes
+
+fix multiple tablesorter tables on checklist and seldom
+
+fix sort order on boards
+
+check sort order on all pages
+
+add debug logging option to db.php
+
+add a left join clause to db_select()
+array of
+	table_name
+	constraint1
+	constraint2...
+

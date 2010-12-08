@@ -152,3 +152,5 @@ to one of:
 	/user/work.php?id=1
 	/work.php?id=1
 
+sort out git prompt on craggy.russon.org
+

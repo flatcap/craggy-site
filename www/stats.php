@@ -7,7 +7,7 @@ function stats_age()
 {
 	$output = "";
 
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array("id", "date_set");
 
 	$list = db_select($table, $columns);
@@ -60,7 +60,7 @@ function stats_colour()
 {
 	$output = "";
 
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array("id", "colour");
 	$order   = "colour";
 
@@ -233,7 +233,7 @@ function stats_grade()
 {
 	$output = "";
 
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("id", "grade", "grade_num", "climb_type");
 	$where   = NULL;
 	$order   = "grade_num";
@@ -261,7 +261,7 @@ function stats_setters()
 {
 	$output = "";
 
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array("id", "setter");
 	$where   = NULL;
 	$order   = "setter";

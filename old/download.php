@@ -45,7 +45,7 @@ function download_checklist()
     header('Content-type: text/plain');
     header('Content-Disposition: attachment; filename="checklist.txt"');
 
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "climb_type", "colour", "grade", "grade_num", "notes", "date_set");
     $where   = NULL;
     $order   = "grade_num,panel,colour";
@@ -119,7 +119,7 @@ function download_csv()
     header('Content-type: text/csv');
     header('Content-Disposition: attachment; filename="routes.csv"');
 
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "climb_type", "colour", "grade", "notes", "setter", "date_set");
     $where   = NULL;
     $order   = "panel,grade_num,colour";

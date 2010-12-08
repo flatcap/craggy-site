@@ -1,6 +1,6 @@
 function list_6a($html = FALSE)
 {
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "difficulty", "height");
     $where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'Lead'");
     $order   = "panel, grade_num, colour";

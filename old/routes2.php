@@ -61,7 +61,7 @@ function mark_setter ($row, &$old_value)
 
 function rich_6a($html = FALSE)
 {
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "difficulty", "height");
     $where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'Lead'");
 
@@ -114,7 +114,7 @@ function list_main ($html, $type)
 {
     $last_update = date ("j M Y", strtotime (db_get_last_update()));
 
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
     $where   = NULL;
 

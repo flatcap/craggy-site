@@ -7,7 +7,7 @@ include "utils.php";
 
 function colour_main()
 {
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("id", "colour");
 	$order   = "colour";
 

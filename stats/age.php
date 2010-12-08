@@ -7,7 +7,7 @@ include "utils.php";
 
 function age_main()
 {
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "grade_num", "climb_type", "date_set", "date_climbed", "success", "d", "o");
 	$where   = NULL;
 	$order   = NULL; //"date_set"
@@ -112,7 +112,7 @@ function age_main()
 echo (age_main() . "\n");
 
 /*
-v_routes
+v_route
 id: 1
 panel: 1
 colour: Yellow

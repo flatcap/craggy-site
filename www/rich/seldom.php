@@ -14,7 +14,7 @@ function seldom_range ($m_start, $m_finish, $options)
 	$climber_id = 1;
 
 	$table   = "craggy_route" .
-			" left join craggy_climbs on ((craggy_climbs.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
+			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
 			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
 			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
 			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
@@ -32,7 +32,7 @@ function seldom_range ($m_start, $m_finish, $options)
 			"nice as n",
 			"onsight as o",
 			"difficulty as diff",
-			"craggy_climbs.notes as notes");
+			"craggy_climb.notes as notes");
 
 	$where   = array ("craggy_grade.order < 600");
 	$order = "panel, grade_num, colour";

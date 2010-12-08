@@ -1,6 +1,6 @@
 function list_6a()
 {
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "difficulty", "height");
     $where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'Lead'");
     $order   = "panel, grade_num, colour";
@@ -10,7 +10,7 @@ function list_6a()
 
 function list_age()
 {
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
     $where   = NULL;
     $order   = "date_set, panel, grade_num, colour";
@@ -20,7 +20,7 @@ function list_age()
 
 function list_grade()
 {
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
     $where   = NULL;
     $order   = "grade_num, panel, colour";
@@ -30,7 +30,7 @@ function list_grade()
 
 function list_panel()
 {
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
     $where   = NULL;
     $order   = "panel, grade_num, colour";
@@ -40,7 +40,7 @@ function list_panel()
 
 function list_setter()
 {
-    $table   = "v_routes";
+    $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
     $where   = NULL;
     $order   = "setter, panel, grade, colour";

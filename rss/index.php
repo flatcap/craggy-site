@@ -5,7 +5,7 @@ include "utils.php";
 
 function rss_get_routes()
 {
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("panel", "colour", "grade", "date_set");
 	$where   = NULL;
 	$order   = "date_set desc";

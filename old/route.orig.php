@@ -196,7 +196,7 @@ function route_search()
 
     $where = implode (" and ", $w);
 
-    $list = db_select ("v_routes", "id,panel,colour,grade,notes,setter,date_set,date_end", $where);
+    $list = db_select ("v_route", "id,panel,colour,grade,notes,setter,date_set,date_end", $where);
 
     return $list;
 }

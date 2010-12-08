@@ -5,7 +5,7 @@ include "utils.php";
 
 function routes_main($options)
 {
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
 	$order   = "panel, grade_num, colour";
 

@@ -27,7 +27,7 @@ function get_date ($date)
 
 function boards_main ($options)
 {
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "setter", "date_set");
 	$where   = NULL;
 	$order   = "panel,grade_num,colour";

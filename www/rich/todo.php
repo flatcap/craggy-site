@@ -12,12 +12,12 @@ function todo_main($options)
 	$climber_id = 1;
 
 	$table   = "craggy_route" .
-			" left join craggy_climbs on ((craggy_climbs.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
+			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
 			" left join craggy_colour on (craggy_route.colour = craggy_colour.id)" .
 			" left join craggy_panel on (craggy_route.panel = craggy_panel.id)" .
 			" left join craggy_grade on (craggy_route.grade = craggy_grade.id)" .
 			" left join v_panel on (craggy_route.panel = v_panel.number)" .
-			" left join craggy_success on (craggy_climbs.success = craggy_success.id)";
+			" left join craggy_success on (craggy_climb.success = craggy_success.id)";
 
 	$columns = array ("craggy_route.id as id",
 			"craggy_panel.number as panel",
@@ -31,7 +31,7 @@ function todo_main($options)
 			"nice as n",
 			"onsight as o",
 			"difficulty as diff",
-			"craggy_climbs.notes as notes");
+			"craggy_climb.notes as notes");
 
 	$where   = array ("((success < 3) OR (success is NULL))", "craggy_grade.order < 600");
 	$order = "panel, grade_num, colour";

@@ -7,7 +7,7 @@ include "utils.php";
 
 function coverage_get_data()
 {
-	$table   = "craggy_climbs";
+	$table   = "craggy_climb";
 	$columns = array ("id", "route_id", "success", "onsight");
 	$where   = "climber_id = 1";
 	$order   = "route_id";

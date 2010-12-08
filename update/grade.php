@@ -7,7 +7,7 @@ include "utils.php";
 
 function grade_main()
 {
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("id", "grade", "climb_type");
 	$order   = "grade_num";
 

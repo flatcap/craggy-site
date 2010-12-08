@@ -1,9 +1,9 @@
 drop view if exists v_panel;
-drop view if exists v_routes;
+drop view if exists v_route;
 
 rename table climb_type to craggy_climb_type;
 rename table climber to craggy_climber;
-rename table climbs to craggy_climbs;
+rename table climbs to craggy_climb;
 rename table colour to craggy_colour;
 rename table data to craggy_data;
 rename table difficulty to craggy_difficulty;
@@ -20,7 +20,7 @@ create view v_panel as
 			from craggy_panel
 				left join craggy_climb_type on (craggy_panel.type = craggy_climb_type.id);
 
-create view v_routes as
+create view v_route as
 	select
 		craggy_route.id as id,
 		craggy_panel.number as panel,

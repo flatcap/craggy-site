@@ -7,7 +7,7 @@ include "utils.php";
 
 function age_main()
 {
-	$table   = "v_routes";
+	$table   = "v_route";
 	$columns = array ("id", "date_set");
 	$order   = "date_set";
 

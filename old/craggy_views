@@ -1,4 +1,4 @@
-create view v_routes AS
+create view v_route AS
 
 	select	route.id		AS id,
 		panel.number		AS panel,
@@ -45,12 +45,12 @@ All
 Todo
 	panel, colour, grade, type, success, difficulty, climb_notes
 
-	select panel,colour,grade from v_routes where success <> "Clean" and grade_num < 600;
+	select panel,colour,grade from v_route where success <> "Clean" and grade_num < 600;
 
 Downclimb
 	panel, colour, grade, type, difficulty, climb_notes, downclimb
 
-	select panel,colour,grade from v_routes where downclimb <> 1 and grade_num < 400;
+	select panel,colour,grade from v_route where downclimb <> 1 and grade_num < 400;
 
 Seldom
 	panel, colour, grade, date_climbed, success, downclimb, difficulty, climb_notes
@@ -58,5 +58,5 @@ Seldom
 6a
 	panel, colour, grade, difficulty, height
 
-	select panel,colour,grade,difficulty,height from v_routes where grade_num >= 400 and grade_num < 500 and climb_type <> "Lead";
+	select panel,colour,grade,difficulty,height from v_route where grade_num >= 400 and grade_num < 500 and climb_type <> "Lead";
 

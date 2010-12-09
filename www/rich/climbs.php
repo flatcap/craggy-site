@@ -34,6 +34,7 @@ function climbs_main($options)
 
 	$columns = array ("craggy_route.id as id",
 			"craggy_panel.name as panel",
+			"craggy_panel.sequence as panel_num",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
 			"craggy_grade.sequence as grade_num",
@@ -46,7 +47,7 @@ function climbs_main($options)
 			"craggy_difficulty.description as diff",
 			"craggy_climb.notes as notes");
 	$where   = NULL;
-	$order   = "panel, grade_num, colour";
+	$order   = "panel_num, grade_num, colour";
 
 	$list = db_select($table, $columns, $where, $order);
 	$count = count($list);

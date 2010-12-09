@@ -9,7 +9,7 @@ function six_main ($options)
 	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "height");
 	$where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'lead'");
-	$order   = "panel, grade_num, colour";
+	$order   = "panel_num, grade_num, colour";
 
 	$list = db_select($table, $columns, $where, $order);
 

@@ -318,11 +318,11 @@ function stats_style()
 	}
 
 	$output .= "<h2>Stats - Styles</h2>";
-	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
+	$output .= "<table id='table_6a' class='tablesorter'>";
 	$output .= "<thead>";
 	$output .= "<tr>";
-	$output .= "<th>Style</th>";
-	$output .= "<th>Count</th>";
+	$output .= "<th>Style&nbsp;&nbsp;&nbsp;&nbsp;</th>";
+	$output .= "<th>Count&nbsp;&nbsp;&nbsp;&nbsp;</th>";
 	$output .= "</tr>";
 	$output .= "</thead>";
 	$output .= "<tbody>";

@@ -159,3 +159,10 @@ array of
 
 table,thead,tbody for all
 
+find out by what criteria I'm sorting the database tables and make sure they're indexed
+
+grade_num -> grade_seq
+panel_num -> panel_seq
+
+test everything with javascript disabled
+

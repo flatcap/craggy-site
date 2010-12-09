@@ -300,34 +300,39 @@ function stats_style()
 	$output = "";
 
 	$table   = "craggy_panel";
-	$columns = array("id", "arch", "arete", "chimney", "chockstone", "featured", "flake", "overhang", "roof", "slab", "wall");
+	$columns = array("id", "tags");
 	$where   = NULL;
+	$order   = NULL;
 
-	$style_list = array();
-	foreach ($columns as $type) {
-		$style_list[$type] = 0;
-	}
+	$list = db_select($table, $columns, $where, $order);
 
-	$list = db_select($table, $columns, $where);
-
+	$tag_list = array();
 	foreach ($list as $row) {
-		foreach ($columns as $type) {
-			$style_list[$type] += $row[$type];
+		$tags = explode (',', $row['tags']);
+		foreach ($tags as $t) {
+			if (array_key_exists ($t, $tag_list))
+				$tag_list[$t]++;
+			else
+				$tag_list[$t] = 1;
 		}
 	}
 
 	$output .= "<h2>Stats - Styles</h2>";
 	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
+	$output .= "<thead>";
 	$output .= "<tr>";
 	$output .= "<th>Style</th>";
 	$output .= "<th>Count</th>";
 	$output .= "</tr>";
+	$output .= "</thead>";
+	$output .= "<tbody>";
 
-	array_shift ($columns);		// Ignore the id column
-	foreach ($columns as $type) {
-		$output .= "<tr><td>" . ucfirst($type) . "</td><td>{$style_list[$type]}</td></tr>";
+	ksort ($tag_list);
+	foreach ($tag_list as $tag => $count) {
+		$output .= "<tr><td>" . ucfirst($tag) . "</td><td>{$count}</td></tr>";
 	}
 
+	$output .= "</tbody>";
 	$output .= "</table>";
 	return $output;
 }

@@ -157,3 +157,5 @@ array of
 	constraint1
 	constraint2...
 
+table,thead,tbody for all
+

@@ -1,12 +1,14 @@
 <?php
 
+set_include_path (".:../www");
+
 include "db.php";
 include "utils.php";
 
 function rss_get_routes()
 {
 	$table   = "v_route";
-	$columns = array ("panel", "colour", "grade", "date_set");
+	$columns = array ("id", "panel", "colour", "grade", "date_set");
 	$where   = NULL;
 	$order   = "date_set desc";
 

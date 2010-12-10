@@ -12,18 +12,20 @@ function html_header ($title, $reldir = "")
 	$output .= "<link rel='alternate' title='Craggy RSS' href='http://craggy.russon.org/rss.xml' type='application/rss+xml'>";
 	$output .= "<title>$title - Craggy Island</title>";
 
-	// Google Analytics
-	$output .= "<script type='text/javascript'>";
-	$output .= "  var _gaq = _gaq || [];";
-	$output .= "  _gaq.push(['_setAccount', 'UA-377438-2']);";
-	$output .= "  _gaq.push(['_trackPageview']);";
-	$output .= "  (function() {";
-	$output .= "    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;";
-	$output .= "    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';";
-	$output .= "    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);";
-	$output .= "  })();";
-	$output .= "";
-	$output .= "</script>";
+	if (!isset ($_SERVER) || ($_SERVER['SERVER_ADDR'] != "192.168.2.2")) {
+		// Google Analytics - not for home server
+		$output .= "<script type='text/javascript'>";
+		$output .= "  var _gaq = _gaq || [];";
+		$output .= "  _gaq.push(['_setAccount', 'UA-377438-2']);";
+		$output .= "  _gaq.push(['_trackPageview']);";
+		$output .= "  (function() {";
+		$output .= "    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;";
+		$output .= "    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';";
+		$output .= "    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);";
+		$output .= "  })();";
+		$output .= "";
+		$output .= "</script>";
+	}
 
 	// Table Sorter
 	$output .= "<link rel='stylesheet' href='{$reldir}style/tablesorter.css' type='text/css'>";

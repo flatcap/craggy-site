@@ -95,6 +95,7 @@ db compare
 	russon and flatcap and compare them
 
 make reldir in utils.php a bit smarter
+can I calculate it from $_SERVER?
 
 utils.php format_string{,2} aren't used
 
@@ -165,4 +166,6 @@ grade_num -> grade_seq
 panel_num -> panel_seq
 
 test everything with javascript disabled
+
+knobble password on admin dir (on localhost)
 

@@ -1,3 +1,5 @@
+# prefix all the table names with craggy_
+
 drop view if exists v_panel;
 drop view if exists v_route;
 

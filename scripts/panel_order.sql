@@ -1,3 +1,5 @@
+# add a sequence field to the panel for custom sorting
+
 alter table craggy_panel add column sequence int(11) after name;
 update craggy_panel set sequence = name;
 

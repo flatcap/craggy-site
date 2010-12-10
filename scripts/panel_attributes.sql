@@ -1,3 +1,5 @@
+# change the panel from a fixed list of attributes to a set of tags
+
 alter table craggy_panel add column tags text null after height;
 
 alter table craggy_panel drop column arch;

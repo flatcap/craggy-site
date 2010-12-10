@@ -1,3 +1,7 @@
+# massive db overhaul
+# standardise lots of names
+# make sure that compulsory fields are NOT NULL
+
 drop view v_panel;
 drop view v_route;
 

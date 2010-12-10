@@ -1,3 +1,5 @@
+# change difficulty from text to an enumeration
+
 drop table if exists difficulty;
 create table difficulty (
 	id int(11) not null auto_increment,

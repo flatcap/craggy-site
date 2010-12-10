@@ -1,3 +1,6 @@
+# turn success into an enumeration
+# also include downclimb as a success level
+
 drop table if exists success;
 create table success (
 	id int(11) not null auto_increment,

@@ -2,8 +2,8 @@ function list_6a($html = FALSE)
 {
     $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "difficulty", "height");
-    $where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'Lead'");
-    $order   = "panel, grade_num, colour";
+    $where   = array ("grade_seq >= 400", "grade_seq < 500", "climb_type <> 'Lead'");
+    $order   = "panel, grade_seq, colour";
 
     $list = db_select($table, $columns, $where, $order);
 

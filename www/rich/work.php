@@ -8,12 +8,12 @@ include "utils.php";
 function cmp_panel2($a, $b)
 {
 	$p1 = $a['panel'];
-	$g1 = $a['grade_num'];
+	$g1 = $a['grade_seq'];
 	$c1 = $a['colour'];
 	$x1 = $a['priority'];
 
 	$p2 = $b['panel'];
-	$g2 = $b['grade_num'];
+	$g2 = $b['grade_seq'];
 	$c2 = $b['colour'];
 	$x2 = $b['priority'];
 
@@ -33,11 +33,11 @@ function cmp_colour($a, $b)
 {
 	$c1 = $a['colour'];
 	$p1 = $a['panel'];
-	$g1 = $a['grade_num'];
+	$g1 = $a['grade_seq'];
 
 	$c2 = $b['colour'];
 	$p2 = $b['panel'];
-	$g2 = $b['grade_num'];
+	$g2 = $b['grade_seq'];
 
 	if ($c1 != $c2)
 		return ($c1 < $c2) ? -1 : 1;
@@ -52,12 +52,12 @@ function cmp_priority($a, $b)
 {
 	$x1 = $a['priority'];
 	$p1 = $a['panel'];
-	$g1 = $a['grade_num'];
+	$g1 = $a['grade_seq'];
 	$c1 = $a['colour'];
 
 	$x2 = $b['priority'];
 	$p2 = $b['panel'];
-	$g2 = $b['grade_num'];
+	$g2 = $b['grade_seq'];
 	$c2 = $b['colour'];
 
 	if ($x1 != $x2)
@@ -76,12 +76,12 @@ function cmp_score($a, $b)
 {
 	$s1 = $a['score'];
 	$p1 = $a['panel'];
-	$g1 = $a['grade_num'];
+	$g1 = $a['grade_seq'];
 	$c1 = $a['colour'];
 
 	$s2 = $b['score'];
 	$p2 = $b['panel'];
-	$g2 = $b['grade_num'];
+	$g2 = $b['grade_seq'];
 	$c2 = $b['colour'];
 
 	if ($s1 != $s2)
@@ -100,12 +100,12 @@ function cmp_type($a, $b)
 {
 	$t1 = $a['climb_type'];
 	$p1 = $a['panel'];
-	$g1 = $a['grade_num'];
+	$g1 = $a['grade_seq'];
 	$c1 = $a['colour'];
 
 	$t2 = $b['climb_type'];
 	$p2 = $b['panel'];
-	$g2 = $b['grade_num'];
+	$g2 = $b['grade_seq'];
 	$c2 = $b['colour'];
 
 	if ($t1 != $t2)
@@ -145,7 +145,7 @@ function work_todo()
 			"craggy_panel.name as panel",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.sequence as grade_num",
+			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
@@ -180,7 +180,7 @@ function work_downclimb()
 			"craggy_panel.name as panel",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.sequence as grade_num",
+			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
@@ -217,7 +217,7 @@ function work_seldom_range ($m_start, $m_finish)
 			"craggy_panel.name as panel",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.sequence as grade_num",
+			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",

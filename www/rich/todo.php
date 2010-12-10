@@ -22,10 +22,10 @@ function todo_main($options)
 
 	$columns = array ("craggy_route.id as id",
 			"craggy_panel.name as panel",
-			"craggy_panel.sequence as panel_num",
+			"craggy_panel.sequence as panel_seq",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.sequence as grade_num",
+			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
@@ -36,7 +36,7 @@ function todo_main($options)
 			"craggy_climb.notes as notes");
 
 	$where   = array ("((success_id < 3) OR (success_id is NULL))", "craggy_grade.sequence < 600");
-	$order = "panel_num, grade_num, colour";
+	$order = "panel_seq, grade_seq, colour";
 
 	$list = db_select($table, $columns, $where, $order);
 

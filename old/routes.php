@@ -56,8 +56,8 @@ function list_6a($html = FALSE)
 {
     $table   = "v_route";
     $columns = array ("panel", "colour", "grade", "difficulty", "height");
-    $where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'Lead'");
-    $order   = "panel, grade_num, colour";
+    $where   = array ("grade_seq >= 400", "grade_seq < 500", "climb_type <> 'Lead'");
+    $order   = "panel, grade_seq, colour";
 
     $list = db_select($table, $columns, $where, $order);
 
@@ -113,10 +113,10 @@ function list_main ($html, $type)
     $where   = NULL;
 
     switch ($type) {
-        case "age":    $order = "date_set, panel, grade_num, colour"; $mark = "mark_age";    break;
-        case "grade":  $order = "grade_num, panel, colour";           $mark = "mark_grade";  break;
+        case "age":    $order = "date_set, panel, grade_seq, colour"; $mark = "mark_age";    break;
+        case "grade":  $order = "grade_seq, panel, colour";           $mark = "mark_grade";  break;
         case "setter": $order = "setter, panel, grade, colour";       $mark = "mark_setter"; break;
-        default:       $order = "panel, grade_num, colour";           $mark = "mark_panel";  break;
+        default:       $order = "panel, grade_seq, colour";           $mark = "mark_panel";  break;
     }
 
     $list = db_select($table, $columns, $where, $order);

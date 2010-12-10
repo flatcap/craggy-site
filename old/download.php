@@ -20,12 +20,12 @@ function cmp_checklist($a, $b)
 {
     $b1 = grade_block ($a['grade']);
     $p1 = $a['panel'];
-    $g1 = $a['grade_num'];
+    $g1 = $a['grade_seq'];
     $c1 = $a['colour'];
 
     $b2 = grade_block ($b['grade']);
     $p2 = $b['panel'];
-    $g2 = $b['grade_num'];
+    $g2 = $b['grade_seq'];
     $c2 = $b['colour'];
 
     if ($b1 != $b2)
@@ -46,9 +46,9 @@ function download_checklist()
     header('Content-Disposition: attachment; filename="checklist.txt"');
 
     $table   = "v_route";
-    $columns = array ("panel", "climb_type", "colour", "grade", "grade_num", "notes", "date_set");
+    $columns = array ("panel", "climb_type", "colour", "grade", "grade_seq", "notes", "date_set");
     $where   = NULL;
-    $order   = "grade_num,panel,colour";
+    $order   = "grade_seq,panel,colour";
 
     $list = db_select($table, $columns, $where, $order);
 
@@ -122,7 +122,7 @@ function download_csv()
     $table   = "v_route";
     $columns = array ("panel", "climb_type", "colour", "grade", "notes", "setter", "date_set");
     $where   = NULL;
-    $order   = "panel,grade_num,colour";
+    $order   = "panel,grade_seq,colour";
 
     $list = db_select($table, $columns, $where, $order);
 

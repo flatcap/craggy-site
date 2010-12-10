@@ -8,7 +8,7 @@ include "utils.php";
 function age_main()
 {
 	$table   = "v_route";
-	$columns = array ("id", "panel", "colour", "grade", "grade_num", "climb_type", "date_set", "date_climbed", "success", "d", "o");
+	$columns = array ("id", "panel", "colour", "grade", "grade_seq", "climb_type", "date_set", "date_climbed", "success", "d", "o");
 	$where   = NULL;
 	$order   = NULL; //"date_set"
 
@@ -29,7 +29,7 @@ function age_main()
 
 	foreach ($list as $id => $route) {
 		$grade = $route['grade'];
-		$num   = $route['grade_num'];
+		$num   = $route['grade_seq'];
 		if (!array_key_exists ($num, $routes_by_grade))
 			$routes_by_grade[$num] = array();
 
@@ -117,7 +117,7 @@ id: 1
 panel: 1
 colour: Yellow
 grade: 5+
-grade_num: 350
+grade_seq: 350
 climb_type: Lead
 date_set: 2010-08-02
 date_climbed: 2010-09-08

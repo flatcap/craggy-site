@@ -110,7 +110,7 @@ function stats_grade_table ($grade_list, $whole_grades = FALSE)
 	$results = array();
 	foreach ($grade_list as $row) {
 		$grade = $row['grade'];
-		$gnum = intval ($row['grade_num'] / $divisor);
+		$gnum = intval ($row['grade_seq'] / $divisor);
 
 		if (!array_key_exists ($gnum, $results)) {
 			$results[$gnum] = array();
@@ -186,7 +186,7 @@ function stats_grade_mean ($grade_list)
 
 	foreach ($grade_list as $route) {
 
-		$g_num = $route['grade_num'];
+		$g_num = $route['grade_seq'];
 
 		$g_both += $g_num;
 		$c_both++;
@@ -234,9 +234,9 @@ function stats_grade()
 	$output = "";
 
 	$table   = "v_route";
-	$columns = array ("id", "grade", "grade_num", "climb_type");
+	$columns = array ("id", "grade", "grade_seq", "climb_type");
 	$where   = NULL;
-	$order   = "grade_num";
+	$order   = "grade_seq";
 
 	$grade_list = db_select($table, $columns, $where, $order);
 

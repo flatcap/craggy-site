@@ -2,12 +2,12 @@ function checklist_cmp($a, $b)
 {
     $b1 = checklist_grade_block ($a['grade']);
     $p1 = $a['panel'];
-    $g1 = $a['grade_num'];
+    $g1 = $a['grade_seq'];
     $c1 = $a['colour'];
 
     $b2 = checklist_grade_block ($b['grade']);
     $p2 = $b['panel'];
-    $g2 = $b['grade_num'];
+    $g2 = $b['grade_seq'];
     $c2 = $b['colour'];
 
     if ($b1 != $b2)

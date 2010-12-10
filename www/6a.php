@@ -8,8 +8,8 @@ function six_main ($options)
 	// "difficulty"
 	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "height");
-	$where   = array ("grade_num >= 400", "grade_num < 500", "climb_type <> 'lead'");
-	$order   = "panel_num, grade_num, colour";
+	$where   = array ("grade_seq >= 400", "grade_seq < 500", "climb_type <> 'lead'");
+	$order   = "panel_seq, grade_seq, colour";
 
 	$list = db_select($table, $columns, $where, $order);
 

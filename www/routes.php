@@ -7,7 +7,7 @@ function routes_main($options)
 {
 	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "climb_type", "notes", "setter", "date_set");
-	$order   = "panel_num, grade_num, colour";
+	$order   = "panel_seq, grade_seq, colour";
 
 	$list = db_select($table, $columns, NULL, $order);
 

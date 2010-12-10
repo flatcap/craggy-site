@@ -24,10 +24,10 @@ function seldom_range ($m_start, $m_finish, $options)
 
 	$columns = array ("craggy_route.id as id",
 			"craggy_panel.name as panel",
-			"craggy_panel.sequence as panel_num",
+			"craggy_panel.sequence as panel_seq",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
-			"craggy_grade.sequence as grade_num",
+			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
 			"v_panel.climb_type as climb_type",
@@ -38,7 +38,7 @@ function seldom_range ($m_start, $m_finish, $options)
 			"craggy_climb.notes as notes");
 
 	$where   = array ("craggy_grade.sequence < 600");
-	$order = "panel_num, grade_num, colour";
+	$order = "panel_seq, grade_seq, colour";
 
 	if (isset ($m_finish)) {
 		array_push ($where, "date_climbed < '$when_start'");

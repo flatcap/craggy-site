@@ -9,7 +9,7 @@ function grade_main()
 {
 	$table   = "v_route";
 	$columns = array ("id", "grade", "climb_type");
-	$order   = "grade_num";
+	$order   = "grade_seq";
 
 	$list = db_select($table, $columns, NULL, $order);
 

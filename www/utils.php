@@ -357,12 +357,12 @@ function cmp_age($a, $b)
 
 function cmp_checklist($a, $b)
 {
-	$b1 = grade_block ($a['grade_num']);
+	$b1 = grade_block ($a['grade_seq']);
 	$p1 = $a['panel'];
 	$g1 = $a['grade'];
 	$c1 = $a['colour'];
 
-	$b2 = grade_block ($b['grade_num']);
+	$b2 = grade_block ($b['grade_seq']);
 	$p2 = $b['panel'];
 	$g2 = $b['grade'];
 	$c2 = $b['colour'];
@@ -381,11 +381,11 @@ function cmp_checklist($a, $b)
 
 function cmp_grade($a, $b)
 {
-	$g1 = $a['grade_num'];
+	$g1 = $a['grade_seq'];
 	$p1 = $a['panel'];
 	$c1 = $a['colour'];
 
-	$g2 = $b['grade_num'];
+	$g2 = $b['grade_seq'];
 	$p2 = $b['panel'];
 	$c2 = $b['colour'];
 
@@ -401,11 +401,11 @@ function cmp_grade($a, $b)
 function cmp_panel($a, $b)
 {
 	$p1 = $a['panel'];
-	$g1 = $a['grade_num'];
+	$g1 = $a['grade_seq'];
 	$c1 = $a['colour'];
 
 	$p2 = $b['panel'];
-	$g2 = $b['grade_num'];
+	$g2 = $b['grade_seq'];
 	$c2 = $b['colour'];
 
 	if ($p1 != $p2)

@@ -43,13 +43,7 @@ bouldering meterage
 add/remove colour/setter/?
 actually remove? just mark inactive? (for historic routes)
 
-change panel "number" to "name"
-
 --------------------------------------------------------------------------------
-
-replace spaces with &nbsp in setter, date_set, date_climbed, climb_type
-
-list.php?sort=panel,grade,colour
 
 climb notes:
     Left arete allowed
@@ -105,26 +99,6 @@ or just in txt
 
 --------------------------------------------------------------------------------
 
-Sort routes by:
-	panel
-	colour
-	grade
-	setter
-	date/age
-
-Presets
-	Panel	= panel,grade,colour
-	Age	= date_set,panel,grade,colour
-	Grade	= grade,panel,colour
-	Colour	= colour,panel,grade
-
-Current		Click		New
-x,y,z		a		a,x,y,z
-x,y,z		x		x,y,z
-x,y,z		y		y,x,z
-
---------------------------------------------------------------------------------
-
 combine & sort by panel,grade,colour
 merge duplicates - keep highest priority
 tag the priorities like the 6a sheets - High = visible, Low = Faint
@@ -150,4 +124,147 @@ two pane dialog for climb/route add
 
 pane1 typing area
 pane2 matches ajax as you type
+
+crontab backup of russon.org/sql
+
+symlink conf.php from somewhere else?
+
+remove onsight, generate it
+
+nice -> star
+
+to update routes
+	correction	overwrite row
+	deletion	set date clear
+			set climbs as old
+	new		add route
+
+add/del route
+add/del climb
+
+addclimb
+	abbr -> colour id
+	panel -> route id, col id
+	routes -> route ids
+	decode success
+	decode comments
+	add to climbs
+
+google import
+colours lower case
+
+add/del climbs/routes need to work from command line, too
+
+start collecting climbs stats - crontab
+
+custom craggy 404 /redirect
+
+route/climb abbr decoder
+
+date on rss feed
+table for rssdata = create_rss.php
+
+fewest_climbs.php
+a list of the routes I've climbed the least
+
+data for climbing rate
+climbs/week/month/year
+total ascent
+mean grade
+
+rd,blu,gn, description for all
+rd desc, blu, gn  description for red only
+
+recalculate scores/stats at 4am
+
+add/remove
+	colour
+	setter
+	grade
+	panel
+	etc
+
+rss of new climbs + stats
+
+how do we determine the "best" climb?
+	highest success value?
+
+list all climbs (best available)
+	put a "+" if multiple climbs exist
+	+ expands the table to show all climbs of that route
+
+46 rd(d) clean "desc" - date
+53 all(d) clean
+23 rd,pk,wh(d) clean
+panel number
+colours comma/whitespace separated
+colour suffix
+	(d)	down
+	(f)	fail
+	(s)	success
+	(c)	clean (default)
+	(n)	nice
+	ability to combine multiple letters?
+	only need to combine success + nice
+"text"	description
+date
+
+move schema into craggy git
+
+make reldir in utils.php a bit smarter
+can I calculate it from $_SERVER?
+
+utils.php format_string{,2} aren't used
+
+remove mark or make it smarter
+
+how do I mass delete?
+	x=1 or x=2 or x=3
+	x in [1,2,3]
+
+calculate how many climbs will be deleted
+
+keep an undo buffer
+
+for new routes, queue the changes
+	delete routes grid  [tick] remove from list button
+	add routes grid - editable [tick] remove from list
+	commit changes button -> update db; create rss!
+	backup data first?
+
+cascade delete on routes?
+
+eliminate the views?
+make them more useful?
+
+make all db queries go through one function
+then log everything
+then time everything
+
+use mod_rewrite to change:
+	/rich/work.php
+to one of:
+	/user/1/work.php
+	/user/work.php?id=1
+	/work.php?id=1
+
+fix multiple tablesorter tables on checklist and seldom
+
+check sort order on all pages
+
+add debug logging option to db.php
+
+add a left join clause to db_select()
+array of
+	table_name
+	constraint1
+	constraint2...
+
+table,thead,tbody for all
+
+find out by what criteria I'm sorting the database tables and make sure they're indexed
+
+test everything with javascript disabled
+
+knobble password on admin dir (on localhost)
 

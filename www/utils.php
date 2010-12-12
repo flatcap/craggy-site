@@ -75,11 +75,11 @@ function html_menu($reldir = "")
 
 	$output .= "  <h1>Stats</h1>";
 	$output .= "  <ul>";
-	$output .= "    <li><a href='{$reldir}stats.php?type=grades'>Grades</a></li>";
-	$output .= "    <li><a href='{$reldir}stats.php?type=age'>Age</a></li>";
-	$output .= "    <li><a href='{$reldir}stats.php?type=style'>Style</a></li>";
-	$output .= "    <li><a href='{$reldir}stats.php?type=setters'>Setters</a></li>";
-	$output .= "    <li><a href='{$reldir}stats.php?type=colour'>Colour</a></li>";
+	$output .= "    <li><a href='{$reldir}grades.php'>Grades</a></li>";
+	$output .= "    <li><a href='{$reldir}age.php'>Age</a></li>";
+	$output .= "    <li><a href='{$reldir}style.php'>Style</a></li>";
+	$output .= "    <li><a href='{$reldir}setters.php'>Setters</a></li>";
+	$output .= "    <li><a href='{$reldir}colour.php'>Colour</a></li>";
 	$output .= "  </ul>";
 
 	if ($rich) {

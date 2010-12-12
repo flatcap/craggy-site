@@ -28,7 +28,7 @@ function climbs_main($options)
 			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
 			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
 			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
-			" left join v_panel on (craggy_route.panel_id = v_panel.name)" .
+			" left join craggy_climb_type on (craggy_panel.climb_type_id = craggy_climb_type.id)" .
 			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
 			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)";
 
@@ -40,12 +40,13 @@ function climbs_main($options)
 			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
-			"v_panel.climb_type as climb_type",
+			"climb_type",
 			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",
 			"craggy_difficulty.description as diff",
 			"craggy_climb.notes as notes");
+
 	$where   = NULL;
 	$order   = "panel_seq, grade_seq, colour";
 

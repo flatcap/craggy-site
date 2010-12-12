@@ -132,23 +132,24 @@ function work_todo()
 {
 	$climber_id = 1;
 
-	$table = "craggy_route" .
+	$table   = "craggy_route" .
 			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
 			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
 			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
 			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
+			" left join craggy_climb_type on (craggy_panel.climb_type_id = craggy_climb_type.id)" .
 			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
-			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)" .
-			" left join v_panel on (craggy_route.panel_id = v_panel.name)";
+			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)";
 
 	$columns = array ("craggy_route.id as id",
 			"craggy_panel.name as panel",
+			"craggy_panel.sequence as panel_seq",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
 			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
-			"v_panel.climb_type as climb_type",
+			"climb_type",
 			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",
@@ -167,23 +168,24 @@ function work_downclimb()
 {
 	$climber_id = 1;
 
-	$table = "craggy_route" .
+	$table   = "craggy_route" .
 			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
 			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
 			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
 			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
+			" left join craggy_climb_type on (craggy_panel.climb_type_id = craggy_climb_type.id)" .
 			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
-			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)" .
-			" left join v_panel on (craggy_route.panel_id = v_panel.name)";
+			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)";
 
 	$columns = array ("craggy_route.id as id",
 			"craggy_panel.name as panel",
+			"craggy_panel.sequence as panel_seq",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
 			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
-			"v_panel.climb_type as climb_type",
+			"climb_type",
 			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",
@@ -204,23 +206,24 @@ function work_seldom_range ($m_start, $m_finish)
 
 	$climber_id = 1;
 
-	$table = "craggy_route" .
+	$table   = "craggy_route" .
 			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
 			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
 			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
 			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
+			" left join craggy_climb_type on (craggy_panel.climb_type_id = craggy_climb_type.id)" .
 			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
-			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)" .
-			" left join v_panel on (craggy_route.panel_id = v_panel.name)";
+			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)";
 
 	$columns = array ("craggy_route.id as id",
 			"craggy_panel.name as panel",
+			"craggy_panel.sequence as panel_seq",
 			"craggy_colour.colour as colour",
 			"craggy_grade.grade as grade",
 			"craggy_grade.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
-			"v_panel.climb_type as climb_type",
+			"climb_type",
 			"craggy_success.outcome as success",
 			"nice as n",
 			"onsight as o",

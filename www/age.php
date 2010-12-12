@@ -32,7 +32,7 @@ function stats_age()
 	}
 
 	$output .= "<h2>Stats - Age</h2>";
-	$output .= "<img src='img/age.png'>";
+	$output .= "<img alt='graph of age vs route count' src='img/age.png'>";
 	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
 	$output .= "<tr>";
 	$output .= "<th>Age</th>";

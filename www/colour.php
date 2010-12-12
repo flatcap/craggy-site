@@ -23,7 +23,7 @@ function stats_colour()
 	}
 
 	$output .= "<h2>Stats - Colour</h2>";
-	$output .= "<img src='img/colour.png'>";
+	$output .= "<img alt='graph of colour vs frequency' src='img/colour.png'>";
 	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
 	$output .= "<tr>";
 	$output .= "<th>Colour</th>";

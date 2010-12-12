@@ -67,9 +67,9 @@ function checklist_main ($options)
 
 			$output .= "<div class='download'>";
 			$output .= "<h1>Route Data</h1>";
-			$output .= "<a href='?format=text'><img src='img/txt.png'></a>";
+			$output .= "<a href='?format=text'><img alt='checklist as a formatted text document' src='img/txt.png'></a>";
 			$output .= "&nbsp;&nbsp;";
-			$output .= "<a href='?format=csv'><img src='img/ss.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='checklist as a csv document' src='img/ss.png'></a>";
 			$output .= "</div>";
 
 			$output .= "<div class='header'>Checklist (Routes in grade order) <span>(Last updated: $last_update)</span></div>";

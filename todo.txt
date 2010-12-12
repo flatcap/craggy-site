@@ -217,6 +217,7 @@ can I calculate it from $_SERVER?
 utils.php format_string{,2} aren't used
 
 remove mark or make it smarter
+remove css for mark
 
 how do I mass delete?
 	x=1 or x=2 or x=3
@@ -267,4 +268,9 @@ find out by what criteria I'm sorting the database tables and make sure they're 
 test everything with javascript disabled
 
 knobble password on admin dir (on localhost)
+
+validate all html/css/js
+
+fix dark style (for tables)
+or drop it completely
 

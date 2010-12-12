@@ -1,5 +1,3 @@
-Craggy
-
 crontab backup of russon.org/sql
 
 split stats.php into several named php files
@@ -115,25 +113,14 @@ for new routes, queue the changes
 	commit changes button -> update db; create rss!
 	backup data first?
 
-test NULL foreign keys - OK
-
 cascade delete on routes?
-test cascade on delete - OK
-
-mysql docs	pre.programlisting	- grey region
-		code			- dark highlight
-		strong.userinput	- darker highlight
 
 eliminate the views?
 make them more useful?
 
-disable google analytics on localhost
-
 make all db queries go through one function
 then log everything
 then time everything
-
-rename column order to sequence
 
 use mod_rewrite to change:
 	/rich/work.php
@@ -142,11 +129,7 @@ to one of:
 	/user/work.php?id=1
 	/work.php?id=1
 
-combine panel attributes
-
 fix multiple tablesorter tables on checklist and seldom
-
-fix sort order on boards
 
 check sort order on all pages
 
@@ -161,9 +144,6 @@ array of
 table,thead,tbody for all
 
 find out by what criteria I'm sorting the database tables and make sure they're indexed
-
-grade_num -> grade_seq
-panel_num -> panel_seq
 
 test everything with javascript disabled
 

@@ -96,6 +96,7 @@ sort out titles and headings on all the html pages
 add get_errors to all?
 or just in php
 or just in txt
+_log_ but don't display errors, how?
 
 --------------------------------------------------------------------------------
 
@@ -126,6 +127,7 @@ pane1 typing area
 pane2 matches ajax as you type
 
 crontab backup of russon.org/sql
+use rdiff-backup
 
 symlink conf.php from somewhere else?
 
@@ -166,6 +168,7 @@ table for rssdata = create_rss.php
 
 fewest_climbs.php
 a list of the routes I've climbed the least
+low score in work.php - id = 'F'
 
 data for climbing rate
 climbs/week/month/year
@@ -248,6 +251,9 @@ to one of:
 	/user/1/work.php
 	/user/work.php?id=1
 	/work.php?id=1
+or
+	user/1/work.php calls /work.php?user=1
+	user/rich/work.php calls /work.php?user=rich
 
 fix multiple tablesorter tables on checklist and seldom
 
@@ -266,6 +272,7 @@ table,thead,tbody for all
 find out by what criteria I'm sorting the database tables and make sure they're indexed
 
 test everything with javascript disabled
+especially default sort order
 
 knobble password on admin dir (on localhost)
 
@@ -274,3 +281,15 @@ validate all html/css/js
 fix dark style (for tables)
 or drop it completely
 
+can I set_include a dir from a non-web-accessible location?
+/home/craggy/www/index.php	include "../libs"
+/home/craggy/libs/db.php
+
+move rss to examples dir?
+
+mysqldump -> schema.sql script
+views how?
+
+local bin dir
+
+bash_history for craggy and work dir

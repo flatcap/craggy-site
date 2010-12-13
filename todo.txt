@@ -318,4 +318,5 @@ within div.content search for all table.tablesorter get their id and initialise 
 use table metadata to init tablesorter
 <table class="tablesorter {sortlist: [[0,0],[4,0]]}" cellspacing="1">
 
+singularise filenames
 

@@ -1,6 +1,6 @@
 <?php
 
-set_include_path (".:../../www");
+set_include_path ("../../libs");
 
 include "db.php";
 include "utils.php";
@@ -32,18 +32,18 @@ foreach ($parts as $key => $p) {
 }
 
 if (!is_numeric ($panel)) {
-	printf ("Not a panel number: '%s'", $panel);
+	printf ("Not a panel name: '%s'", $panel);
 	return;
 }
 
-$g_routes  = db_select("route");
-$g_colours = db_select("colour");
-$g_panels  = db_select("panel");
-$g_grades  = db_select("grade");
+$g_routes  = db_select("craggy_route");
+$g_colours = db_select("craggy_colour");
+$g_panels  = db_select("craggy_panel");
+$g_grades  = db_select("craggy_grade");
 
 $panel_id = NULL;
 foreach ($g_panels as $id => $p) {
-	if ($p['number'] == $panel) {
+	if ($p['name'] == $panel) {
 		$panel_id = $p['id'];
 		break;
 	}
@@ -56,11 +56,11 @@ if ($panel_id === NULL) {
 
 $matches = array();
 foreach ($g_routes as $id => $r) {
-	if ($r['panel'] == $panel_id) {
-		$col_id   = $r['colour'];
-		$grade_id = $r['grade'];
-		$col = $g_colours[$r['colour']]['colour'];
-		$grade = $g_grades[$r['grade']]['grade'];
+	if ($r['panel_id'] == $panel_id) {
+		$col_id   = $r['colour_id'];
+		$grade_id = $r['grade_id'];
+		$col = $g_colours[$col_id]['colour'];
+		$grade = $g_grades[$grade_id]['grade'];
 		$r['grade'] = $grade;
 		$matches[$col] = $r;
 	}
@@ -74,7 +74,7 @@ if ($num_routes == 0) {
 
 $list = array();
 foreach ($matches as $m) {
-	$list[] = $g_colours[$m['colour']]['colour'] . " " . $m['grade'];
+	$list[] = $g_colours[$m['colour_id']]['colour'] . " " . $m['grade'];
 }
 
 function colours_process ($colours)

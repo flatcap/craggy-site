@@ -1,6 +1,6 @@
 <?php
 
-set_include_path (".:../../www");
+set_include_path ("../../libs");
 
 include "db.php";
 #include "utils.php";
@@ -21,8 +21,8 @@ include "db.php";
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$table   = "climbs";
-$columns = array ("id", "route_id", "date_climbed", "success", "nice", "onsight", "difficulty", "notes");
+$table   = "craggy_climb";
+$columns = array ("id", "route_id", "date_climbed", "nice", "onsight", "difficulty_id", "notes");
 $where   = array ("climber_id = 1"); 
 $order   = NULL;
 

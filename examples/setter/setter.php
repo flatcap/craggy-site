@@ -1,6 +1,6 @@
 <?php
 
-set_include_path (".:../../www");
+set_include_path ("../../libs");
 
 include "db.php";
 
@@ -14,7 +14,7 @@ $q=trim($_GET["q"]);
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$table   = "setter";
+$table   = "craggy_setter";
 $columns = array ("id", "initials", "name");
 $where   = array ("initials like '{$q}%' or name like '{$q}%'"); 
 $order   = NULL;

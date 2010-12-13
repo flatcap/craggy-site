@@ -7,7 +7,7 @@ logs/
 .*.swp
 
 # Local config file
-www/conf.php
+libs/conf.php
 
 # Generated files
 www/img/age.png

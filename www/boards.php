@@ -1,5 +1,7 @@
 <?php
 
+set_include_path ("../libs");
+
 include "db.php";
 include "utils.php";
 include "mark.php";

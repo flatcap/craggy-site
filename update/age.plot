@@ -9,7 +9,7 @@ set ylabel "Number of Climbs"
 set xtics nomirror
 set ytics nomirror
 set border 3
-#set yrange [0:70]
+set yrange [0:80]
 #set clip one
 
 set style data lines
@@ -20,5 +20,5 @@ set style line 3 lt 1 lw 1 lc rgb "#dddddd"
 
 set grid ytics xtics ls 3
 
-plot	"age.dat" using 2:xtic(1) ls 1 notitle smooth cspline
+plot	"age.dat" using 2:xtic(1) ls 1 notitle
 

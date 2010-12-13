@@ -308,3 +308,5 @@ fix_justification - heuristic that looks for numbers
 
 work out the sql to generate the stats/colour table directly
 
+turn off analytics for home (on russon.org)
+

@@ -296,8 +296,6 @@ validate html, css
 link the styles table to a route search by that tag
 ie  styles.php/arch links to routes.php?tags=arch
 
-fix the negative age graphs
-
 summary tag on tables
 
 fix_justification - heuristic that looks for numbers

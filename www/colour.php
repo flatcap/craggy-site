@@ -17,30 +17,18 @@ function stats_colour()
 	foreach ($list as $row) {
 		$c = $row['colour'];
 		if (array_key_exists ($c, $totals))
-			$totals[$c]++;
+			$totals[$c]['count']++;
 		else
-			$totals[$c] = 1;
+			$totals[$c] = array ('colour' => $c, 'count' => 1);
 	}
 
 	$output .= "<h2>Stats - Colour</h2>";
 	$output .= "<img alt='graph of colour vs frequency' src='img/colour.png'>";
-	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
-	$output .= "<tr>";
-	$output .= "<th>Colour</th>";
-	$output .= "<th>Count</th>";
-	$output .= "<th>Total</th>";
-	$output .= "</tr>";
 
-	$total = 0;
-	foreach ($totals as $colour => $count) {
-		$total += $count;
-		$output .= "<tr>";
-		$output .= "<td>$colour</td>";
-		$output .= "<td>$count</td>";
-		$output .= "<td>$total</td>";
-		$output .= "</tr>";
-	}
-	$output .= "</table>";
+	$columns = array ('colour', 'count');
+	$widths = column_widths ($totals, $columns, TRUE);
+	$widths['colour'] *= -1;
+	$output .= list_render_html ($totals, $columns, $widths, "ts_colour");
 
 	return $output;
 }
@@ -61,7 +49,11 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$header  = html_header ("Colour");
+	$tablesorter = array (
+		"ts_colour" => "[[1,1],[0,0]]",
+	);
+
+	$header  = html_header ("Colour", "", $tablesorter);
 
 	return $header . $output;
 }

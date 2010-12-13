@@ -91,7 +91,11 @@ function coverage_main ($options)
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));
 
-			$output .= html_header ("Coverage", "../");
+			$tablesorter = array (
+				"ts_coverage" => "[[1,1]]",
+			);
+
+			$output .= html_header ("Coverage", "../", $tablesorter);
 			$output .= "<body>";
 
 			$output .= "<div class='download'>";
@@ -105,7 +109,7 @@ function coverage_main ($options)
 			$output .= html_menu("../");
 			$output .= "<div class='content'>\n";
 			$output .= "<h2>Coverage <span>($count to go)</span></h2>\n";
-			$output .= list_render_html ($list, $columns, $widths);
+			$output .= list_render_html ($list, $columns, $widths, "ts_coverage");
 			$output .= "</div>";
 			$output .= get_errors();
 			$output .= "</body>";

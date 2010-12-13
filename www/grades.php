@@ -20,42 +20,23 @@ function stats_grade_table ($grade_list, $whole_grades = FALSE)
 		if (!array_key_exists ($gnum, $results)) {
 			$results[$gnum] = array();
 			$results[$gnum]['grade'] = $grade;
-			$results[$gnum]['T'] = 0;
-			$results[$gnum]['L'] = 0;
+			$results[$gnum]['count'] = 0;
+			$results[$gnum]['top_rope'] = 0;
+			$results[$gnum]['lead'] = 0;
 		}
 
 		if ($row['climb_type'] == "Lead")
-			$results[$gnum]['L']++;
+			$results[$gnum]['lead']++;
 		else
-			$results[$gnum]['T']++;
+			$results[$gnum]['top_rope']++;
+		$results[$gnum]['count']++;
 	}
 
-	$output  = "<table border='1' cellpadding='3' cellspacing='0'>";
-	$output .= "<tr>";
-	$output .= "<th>Grade</th>";
-	$output .= "<th>Count</th>";
-	$output .= "<th>Top Rope</th>";
-	$output .= "<th>Lead</th>";
-	$output .= "<th>Total</th>";
-	$output .= "</tr>";
+	$columns = array ('grade', 'count', 'top_rope', 'lead');
+	$widths = column_widths ($results, $columns, TRUE);
+	fix_justification ($widths);
 
-	$total = 0;
-	foreach ($results as $gnum => $info) {
-
-		$t = $info['T'];
-		$l = $info['L'];
-		$g = $info['grade'];
-		$both = $t + $l;
-		$total += $both;
-		$output .= "<tr>";
-		$output .= "<td>{$g}</td>";
-		$output .= "<td>{$both}</td>";
-		$output .= "<td>{$t}</td>";
-		$output .= "<td>{$l}</td>";
-		$output .= "<td>{$total}</td>";
-		$output .= "</tr>";
-	}
-	$output .= "</table>";
+	$output .= list_render_html ($results, $columns, $widths, "ts_grades");
 	return $output;
 }
 
@@ -149,7 +130,11 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$header  = html_header ("Grades");
+	$tablesorter = array (
+		"ts_grades" => "[[0,0]]",
+	);
+
+	$header  = html_header ("Grades", "", $tablesorter);
 
 	return $header . $output;
 }

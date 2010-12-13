@@ -14,8 +14,9 @@ function stats_age()
 
 	$totals = array();
 	for ($i = -1; $i < 8; $i++) {
-		$totals[$i] = 0;
+		$totals[$i] = array ('age' => $i, 'count' => 0);
 	}
+	$totals[-1]['age'] = "N/A";
 
 	$today = strtotime ("today");
 	foreach ($list as $row) {
@@ -28,31 +29,16 @@ function stats_age()
 		if ($age > 7)
 			$age = 7;
 
-		$totals[$age]++;
+		$totals[$age]['count']++;
 	}
 
 	$output .= "<h2>Stats - Age</h2>";
 	$output .= "<img alt='graph of age vs route count' src='img/age.png'>";
-	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
-	$output .= "<tr>";
-	$output .= "<th>Age</th>";
-	$output .= "<th>Count</th>";
-	$output .= "<th>Total</th>";
-	$output .= "</tr>";
 
-	$total = 0;
-	foreach ($totals as $age => $count) {
-		if ($age < 0)
-			$age = "N/A";
-		$total += $count;
-		$output .= "<tr>";
-		$output .= "<td>$age</td>";
-		$output .= "<td>$count</td>";
-		$output .= "<td>$total</td>";
-		$output .= "</tr>";
-	}
-	$output .= "</table>";
+	$columns = array ("age", "count");
+	$widths = column_widths ($totals, $columns, TRUE);
 
+	$output .= list_render_html ($totals, $columns, $widths, "ts_age");
 	return $output;
 }
 
@@ -72,7 +58,11 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$header  = html_header ("Age");
+	$tablesorter = array (
+		"ts_age" => "[[0,0]]",
+	);
+
+	$header  = html_header ("Age", "", $tablesorter);
 
 	return $header . $output;
 }

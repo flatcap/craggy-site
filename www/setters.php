@@ -17,26 +17,22 @@ function stats_setters()
 	$setters = array();
 	foreach ($list as $s) {
 		$name = $s['setter'];
-		if (empty ($name))
+		if (empty ($name)) {
 			$name = "N/A";
-		if (array_key_exists ($name, $setters))
-			$setters[$name]++;
-		else
-			$setters[$name] = 1;
+		}
+		if (array_key_exists ($name, $setters)) {
+			$setters[$name]['count']++;
+		} else {
+			$setters[$name] = array ('setter' => $name, 'count' => 1);
+		}
 	}
 
 	$output .= "<h2>Stats - Setters</h2>";
-	$output .= "<table border='1' cellpadding='3' cellspacing='0'>";
-	$output .= "<tr>";
-	$output .= "<th>Setter</th>";
-	$output .= "<th>Count</th>";
-	$output .= "</tr>";
+	$columns = array ('setter', 'count');
+	$widths = column_widths ($setters, $columns, TRUE);
+	fix_justification ($widths);
 
-	foreach ($setters as $name => $count) {
-		$output .= "<tr><td>$name</td><td>$count</td></tr>";
-	}
-
-	$output .= "</table>";
+	$output .= list_render_html ($setters, $columns, $widths, "ts_setter");
 
 	return $output;
 }
@@ -57,7 +53,11 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$header  = html_header ("Setter");
+	$tablesorter = array (
+		"ts_setter" => "[[1,1],[0,0]]",
+	);
+
+	$header  = html_header ("Setter", "", $tablesorter);
 
 	return $header . $output;
 }

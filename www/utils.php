@@ -1,6 +1,6 @@
 <?php
 
-function html_header ($title, $reldir = "")
+function html_header ($title, $reldir = "", $sort_tables = NULL)
 {
 	$output = '';
 
@@ -28,17 +28,21 @@ function html_header ($title, $reldir = "")
 		$output .= "</script>";
 	}
 
-	// Table Sorter
-	$output .= "<link rel='stylesheet' href='{$reldir}style/tablesorter.css' type='text/css'>";
-	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.js'></script> ";
-	$output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script> ";
-	$output .= "<script type='text/javascript'>";
-	$output .= "$(document).ready(function() ";
-	$output .= "{ ";
-	$output .= "	$('#table_6a').tablesorter( {sortList: [[0,0], [2,0], [1,0]]} ); ";
-	$output .= "	} ";
-	$output .= "); ";
-	$output .= "</script>";
+	if ($sort_tables !== NULL) {
+		// Table Sorter
+		$output .= "<link rel='stylesheet' href='{$reldir}style/tablesorter.css' type='text/css'>";
+		$output .= "<script type='text/javascript' src='{$reldir}style/jquery.js'></script> ";
+		$output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script> ";
+		$output .= "<script type='text/javascript'>";
+		$output .= "$(document).ready(function() ";
+		$output .= "{ ";
+		foreach ($sort_tables as $id => $sortlist) {
+			$output .= "	$('#{$id}').tablesorter( {sortList: {$sortlist}} ); ";
+		}
+		$output .= "	} ";
+		$output .= "); ";
+		$output .= "</script>";
+	}
 
 	$output .= "</head>";
 
@@ -528,7 +532,7 @@ function text_table_header (&$columns, &$widths)
 	return $output;
 }
 
-function html_table_header ($columns, $sort = NULL)
+function html_table_header ($columns)
 {
 	$output = "<thead><tr>";
 
@@ -748,29 +752,21 @@ function get_stats()
 }
 
 
-function list_render_html (&$list, &$columns, &$widths, $mark = NULL)
+function list_render_html (&$list, &$columns, &$widths, $table_id = "")
 {
 	$output = "";
 
-	$output .= "<table id='table_6a' class='tablesorter'>";
+	if (!empty ($table_id))
+		$table_id = " id='{$table_id}' class='tablesorter'";
+
+	$output .= "<table{$table_id}>";
 	$output .= html_table_header ($columns);
 	$output .= "<tbody>";
-
-	$old_mark = NULL;
-	$toggle = 1;
 
 	// foreach row of list
 	foreach ($list as $row) {
 
-		if ($mark && $mark ($row, $old_mark)) {
-			$toggle = 1 - $toggle;
-		}
-
-		// consider marking rows
-		if ($toggle)
-			$output .= "<tr>";
-		else
-			$output .= "<tr class='mark'>";
+		$output .= "<tr>";
 
 		// foreach col of columns
 		foreach ($columns as $col) {

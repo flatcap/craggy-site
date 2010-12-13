@@ -18,30 +18,22 @@ function stats_style()
 	foreach ($list as $row) {
 		$tags = explode (',', $row['tags']);
 		foreach ($tags as $t) {
-			if (array_key_exists ($t, $tag_list))
-				$tag_list[$t]++;
-			else
-				$tag_list[$t] = 1;
+			if (array_key_exists ($t, $tag_list)) {
+				$tag_list[$t]['count']++;
+			} else {
+				$tag_list[$t] = array ('style' => $t, 'count' => 1);
+			}
 		}
 	}
 
-	$output .= "<h2>Stats - Styles</h2>";
-	$output .= "<table id='table_6a' class='tablesorter'>";
-	$output .= "<thead>";
-	$output .= "<tr>";
-	$output .= "<th>Style&nbsp;&nbsp;&nbsp;&nbsp;</th>";
-	$output .= "<th>Count&nbsp;&nbsp;&nbsp;&nbsp;</th>";
-	$output .= "</tr>";
-	$output .= "</thead>";
-	$output .= "<tbody>";
-
 	ksort ($tag_list);
-	foreach ($tag_list as $tag => $count) {
-		$output .= "<tr><td>" . ucfirst($tag) . "</td><td>{$count}</td></tr>";
-	}
 
-	$output .= "</tbody>";
-	$output .= "</table>";
+	$columns = array ("style", "count");
+	$widths = column_widths ($tag_list, $columns, TRUE);
+	$widths['style'] *= -1;
+
+	$output .= "<h2>Stats - Styles</h2>";
+	$output .= list_render_html ($tag_list, $columns, $widths, "ts_styles");
 	return $output;
 }
 
@@ -61,7 +53,11 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$header  = html_header ("Style");
+	$tablesorter = array (
+		"ts_styles" => "[[0,0]]",
+	);
+
+	$header  = html_header ("Style", "", $tablesorter);
 
 	return $header . $output;
 }

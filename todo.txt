@@ -311,4 +311,11 @@ work out the sql to generate the stats/colour table directly
 turn off analytics for home (on russon.org)
 
 disable certain table sort columns
+$output .= "	$('#{$id}').tablesorter( {sortList: {$sortlist}, headers: { 4: { sorter: false } } } ); ";
+
+within div.content search for all table.tablesorter get their id and initialise tablesorter
+
+use table metadata to init tablesorter
+<table class="tablesorter {sortlist: [[0,0],[4,0]]}" cellspacing="1">
+
 

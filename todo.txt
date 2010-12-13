@@ -293,3 +293,18 @@ views how?
 local bin dir
 
 bash_history for craggy and work dir
+
+add a validation box (below "Route Data")
+validate html, css
+
+link the styles table to a route search by that tag
+ie  styles.php/arch links to routes.php?tags=arch
+
+fix the negative age graphs
+
+summary tag on tables
+
+fix_justification - heuristic that looks for numbers
+
+work out the sql to generate the stats/colour table directly
+

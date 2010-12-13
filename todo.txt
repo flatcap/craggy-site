@@ -281,10 +281,6 @@ validate all html/css/js
 fix dark style (for tables)
 or drop it completely
 
-can I set_include a dir from a non-web-accessible location?
-/home/craggy/www/index.php	include "../libs"
-/home/craggy/libs/db.php
-
 move rss to examples dir?
 
 mysqldump -> schema.sql script

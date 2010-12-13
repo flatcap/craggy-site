@@ -6,7 +6,8 @@ set output "colour.svg"
 set title "Craggy Colours" font ",16"
 unset xlabel
 unset ylabel
-set xtics nomirror rotate by 90
+set xtics nomirror rotate by -45
+set xtics out offset -1.5,0
 set ytics nomirror
 set border 3
 

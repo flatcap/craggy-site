@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Checklist - Craggy Island</title>
+		<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+	</head>
+	<body>
+		<div class="content">
+			<h4>Grade 3 <span>(15)</span></h4>
+			<table border=1 cellspacing=0 id="ts_3" class="tablesorter">
+				<thead>
+					<tr> <th>Panel</th> <th>Colour</th> <th>Grade</th> <th>Key</th> </tr>
+				</thead>
+				<tbody>
+					<tr> <td>69</td> <td>Yellow</td> <td>3+</td> <td>&nbsp;</td> </tr>
+					<tr> <td>70</td> <td>Green</td> <td>3</td> <td>&nbsp;</td> </tr>
+					<tr> <td>70</td> <td>Beige</td> <td>3+</td> <td>&nbsp;</td> </tr>
+				</tbody>
+			</table>
+			<br>
+			<h4>Grade 4 <span>(53)</span></h4>
+			<table border=1 cellspacing=0 id="ts_4" class="tablesorter">
+				<thead>
+					<tr> <th>Panel</th> <th>Colour</th> <th>Grade</th> <th>Key</th> </tr>
+				</thead>
+				<tbody>
+					<tr> <td>3</td> <td>Blue</td> <td>4</td> <td>&nbsp;</td> </tr>
+					<tr> <td>4</td> <td>Purple</td> <td>4+</td> <td>&nbsp;</td> </tr>
+					<tr> <td>5</td> <td>Pink/Black</td> <td>4</td> <td>N</td> </tr>
+				</tbody>
+			</table>
+			<br>
+			<h4>Grade 5 <span>(79)</span></h4>
+			<table border=1 cellspacing=0 id="ts_5" class="tablesorter">
+				<thead>
+					<tr> <th>Panel</th> <th>Colour</th> <th>Grade</th> <th>Key</th> </tr>
+				</thead>
+				<tbody>
+					<tr> <td>1</td> <td>Yellow</td> <td>5+</td> <td>L</td> </tr>
+					<tr> <td>2</td> <td>Orange</td> <td>5+</td> <td>L</td> </tr>
+					<tr> <td>3</td> <td>Red</td> <td>5+</td> <td>&nbsp;</td> </tr>
+				</tbody>
+			</table>
+			<br>
+			<h4>Grade 6a <span>(70)</span></h4>
+			<table border=1 cellspacing=0 id="ts_6" class="tablesorter">
+				<thead>
+					<tr> <th>Panel</th> <th>Colour</th> <th>Grade</th> <th>Key</th> </tr>
+				</thead>
+				<tbody>
+					<tr> <td>2</td> <td>Green</td> <td>6a</td> <td>L</td> </tr>
+					<tr> <td>3</td> <td>White</td> <td>6a+</td> <td>&nbsp;</td> </tr>
+					<tr> <td>4</td> <td>Yellow</td> <td>6a</td> <td>&nbsp;</td> </tr>
+				</tbody>
+			</table>
+			<br>
+			<h4>Grade 6b <span>(31)</span></h4>
+			<table border=1 cellspacing=0 id="ts_7" class="tablesorter">
+				<thead>
+					<tr> <th>Panel</th> <th>Colour</th> <th>Grade</th> <th>Key</th> </tr>
+				</thead>
+				<tbody>
+					<tr> <td>1</td> <td>Red</td> <td>6b+</td> <td>L</td> </tr>
+					<tr> <td>2</td> <td>Grey</td> <td>6b</td> <td>L</td> </tr>
+					<tr> <td>4</td> <td>Green</td> <td>6b+</td> <td>&nbsp;</td> </tr>
+				</tbody>
+			</table>
+			<br>
+			<h4>Grade 6c... <span>(24)</span></h4>
+			<table border=1 cellspacing=0 id="ts_8" class="tablesorter">
+				<thead>
+					<tr> <th>Panel</th> <th>Colour</th> <th>Grade</th> <th>Key</th> </tr>
+				</thead>
+				<tbody>
+					<tr> <td>6</td> <td>Purple</td> <td>6c+</td> <td>N! </td> </tr>
+					<tr> <td>8</td> <td>Yellow</td> <td>7c</td> <td>L</td> </tr>
+					<tr> <td>9</td> <td>Beige</td> <td>6c+</td> <td>L</td> </tr>
+				</tbody>
+			</table>
+		</div>
+
+	<script type='text/javascript'>
+		var tables = document.getElementsByClassName ('tablesorter');
+		var list = "";
+		for (i = 0; i < tables.length; i++) {
+			list = list + "\t" + tables[i].id + "\n";
+			tables[i].setAttribute ('id', "wibble_" + i);
+		}
+		alert ("There are " + tables.length + " tables.\n" + list);
+	</script>
+
+	</body>
+</html>

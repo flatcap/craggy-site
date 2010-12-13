@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("UTC");
+
 if (!isset ($_GET))
 	return;
 if (!array_key_exists ('q', $_GET))

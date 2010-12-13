@@ -310,3 +310,5 @@ work out the sql to generate the stats/colour table directly
 
 turn off analytics for home (on russon.org)
 
+disable certain table sort columns
+

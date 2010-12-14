@@ -317,4 +317,7 @@ singularise filenames
 create an ip-address checker
 is this a rich or not?
 
+change the css to avoid the 4 * &nbsp; in the table headers
+
+flatten rich/* into main dir
 

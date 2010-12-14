@@ -13,19 +13,9 @@ function html_header ($title, $reldir = "")
 	$output .= "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 	$output .= "<title>$title - Craggy Island</title>";
 
+	// Google Analytics - not for home server
 	if (!isset ($_SERVER) || ($_SERVER['SERVER_ADDR'] != "192.168.2.2")) {
-		// Google Analytics - not for home server
-		$output .= "<script type='text/javascript'>";
-		$output .= "  var _gaq = _gaq || [];";
-		$output .= "  _gaq.push(['_setAccount', 'UA-377438-2']);";
-		$output .= "  _gaq.push(['_trackPageview']);";
-		$output .= "  (function() {";
-		$output .= "    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;";
-		$output .= "    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';";
-		$output .= "    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);";
-		$output .= "  })();";
-		$output .= "";
-		$output .= "</script>";
+		$output .= "<script type='text/javascript' src='{$reldir}style/analytics.js'></script>";
 	}
 
 	// Table Sorter
@@ -33,18 +23,7 @@ function html_header ($title, $reldir = "")
 	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.js'></script>";
 	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.metadata.js'></script>";
 	$output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script>";
-	$output .= "<script type='text/javascript'>";
-	$output .= "$(document).ready(function()";
-	$output .= "{";
-	$output .= "	var tables = document.getElementsByClassName ('tablesorter');";
-	$output .= "	for (i = 0; i < tables.length; i++) {";
-	$output .= "		var id = 'ts_' + i;";
-	$output .= "		tables[i].setAttribute ('id', id);";
-	$output .= "		$('#' + id).tablesorter();";
-	$output .= "	}";
-	$output .= "}";
-	$output .= ");";
-	$output .= "</script>";
+	$output .= "<script type='text/javascript' src='{$reldir}style/initialise.js'></script>";
 
 	$output .= "</head>";
 

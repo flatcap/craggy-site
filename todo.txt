@@ -272,8 +272,6 @@ validate all html/css/js
 fix dark style (for tables)
 or drop it completely
 
-move rss to examples dir?
-
 mysqldump -> schema.sql script
 views how?
 

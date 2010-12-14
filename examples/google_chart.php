@@ -77,7 +77,7 @@ function chart_main()
 
 $url = chart_main();
 
-$output  = "<body style='background:black'>";
+$output  = "<body>";
 $output .= "<div style='margin:50px'><img src='$url'></div>";
 
 echo $output;

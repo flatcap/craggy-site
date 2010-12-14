@@ -84,7 +84,7 @@ function climbs_main($options)
 			$output .= "<div class='header'>Climbs <span>(Last updated: $last_update)</span></div>\n";
 			$output .= html_menu("../");
 			$output .= "<div class='content'>";
-			$output .= "<h2>Climbs ({$count})</h2>";
+			$output .= "<h2>Climbs <span>({$count})</span></h2>";
 			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
 			$output .= "</div>";
 			$output .= get_errors();

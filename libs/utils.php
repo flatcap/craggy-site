@@ -119,19 +119,6 @@ function get_url_variable($name)
 	return $result;
 }
 
-function get_url_boolean($name)
-{
-	$result = FALSE;
-
-	if (isset($_GET)) {
-		if (array_key_exists($name, $_GET)) {
-			$result = TRUE;
-		}
-	}
-
-	return $result;
-}
-
 
 function parse_single_colour ($string)
 {
@@ -362,30 +349,6 @@ function cmp_age($a, $b)
 	return ($c1 < $c2) ? -1 : 1;
 }
 
-function cmp_checklist($a, $b)
-{
-	$b1 = grade_block ($a['grade_seq']);
-	$p1 = $a['panel'];
-	$g1 = $a['grade'];
-	$c1 = $a['colour'];
-
-	$b2 = grade_block ($b['grade_seq']);
-	$p2 = $b['panel'];
-	$g2 = $b['grade'];
-	$c2 = $b['colour'];
-
-	if ($b1 != $b2)
-		return ($b1 < $b2) ? -1 : 1;
-
-	if ($p1 != $p2)
-		return ($p1 < $p2) ? -1 : 1;
-
-	if ($g1 != $g2)
-		return ($g1 < $g2) ? -1 : 1;
-
-	return ($c1 < $c2) ? -1 : 1;
-}
-
 function cmp_grade($a, $b)
 {
 	$g1 = $a['grade_seq'];
@@ -447,54 +410,6 @@ function column_widths ($data, $columns, $header = FALSE, $widths = NULL)
 	}
 
 	return $widths;
-}
-
-function format_string ($widths, $html = FALSE)
-{
-	$format   = "";
-	$wstrings = array();
-
-	foreach ($widths as $name => $width) {
-		if ($html) {
-			if ($width > 0) {
-				$format .= '<td class="right">%s</td>';
-			} else {
-				$format .= '<td>%s</td>';
-			}
-		} else {
-			array_push ($wstrings, "%{$width}s");
-		}
-	}
-
-	if ($html)
-		$format = "<tr>$format</tr>";
-	else
-		$format = implode ($wstrings, " ") . "\n";
-
-	return $format;
-}
-
-function format_string2 ($widths, $html = FALSE)
-{
-	$format   = "";
-	$wstrings = array();
-
-	foreach ($widths as $name => $width) {
-		if ($html) {
-			if ($width > 0) {
-				$format .= '<td class="right">%s</td>';
-			} else {
-				$format .= '<td>%s</td>';
-			}
-		} else {
-			array_push ($wstrings, "%{$width}s");
-		}
-	}
-
-	if (!$html)
-		$format = implode ($wstrings, " ");
-
-	return $format;
 }
 
 function fix_justification (&$widths)

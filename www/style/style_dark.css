@@ -109,11 +109,6 @@ th, td {
   padding: 0 0.5em 0 0.5em;
 }
 
-tr.mark {
-  color: inherit;
-  background: #222;
-}
-
 td.right {
   text-align: right;
 }

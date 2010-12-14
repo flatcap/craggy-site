@@ -35,7 +35,7 @@ function stats_age()
 	}
 
 	$output .= "<h2>Stats - Age</h2>";
-	$output .= "<img alt='graph of age vs route count' src='img/age.png'>";
+	$output .= "<img alt='graph of age vs route count' width='800' height='400' src='img/age.png'>";
 
 	$columns = array ("age", "count");
 	$widths = column_widths ($totals, $columns, TRUE);

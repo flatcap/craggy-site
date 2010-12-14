@@ -75,7 +75,7 @@
 
     $logohtml = "";
     if ($logoimageurl != "") {
-        $logohtml = "<img src='" . $logoimageurl . "' alt=''/>";
+        $logohtml = "<img src='" . $logoimageurl . "' alt='logo'/>";
 
         if ($logolink != "") {
             $logohtml = "<a href='" . $logolink . "'>" . $logohtml . "</a>";

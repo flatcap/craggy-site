@@ -36,11 +36,11 @@ function routes_main($options)
 
 			$output .= "<div class='download'>";
 			$output .= "<h1>Route Data</h1>";
-			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' src='img/pdf.png'></a>";
+			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' width='24' height='24' src='img/pdf.png'></a>";
 			$output .= "&nbsp;&nbsp;";
-			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' src='img/txt.png'></a>";
+			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' width='24' height='24' src='img/txt.png'></a>";
 			$output .= "&nbsp;&nbsp;";
-			$output .= "<a href='?format=csv'><img alt='route data as a csv document' src='img/ss.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='24' height='24' src='img/ss.png'></a>";
 			$output .= "</div>";
 
 			$output .= "<div class='header'>All Routes <span>(Last updated: $last_update)</span></div>\n";

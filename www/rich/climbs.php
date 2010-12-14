@@ -76,9 +76,9 @@ function climbs_main($options)
 
 			$output .= "<div class='download'>";
 			$output .= "<h1>Route Data</h1>";
-			$output .= "<a href='?format=text'><img src='../img/txt.png'></a>";
+			$output .= "<a href='?format=text'><img alt='climb list as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
 			$output .= "&nbsp;&nbsp;";
-			$output .= "<a href='?format=csv'><img src='../img/ss.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='climb list as a csv document' width='24' height='24' src='../img/ss.png'></a>";
 			$output .= "</div>";
 
 			$output .= "<div class='header'>Climbs <span>(Last updated: $last_update)</span></div>\n";

@@ -25,7 +25,7 @@ function stats_colour()
 	}
 
 	$output .= "<h2>Stats - Colour</h2>";
-	$output .= "<img alt='graph of colour vs frequency' src='img/colour.png'>";
+	$output .= "<img alt='graph of colour vs frequency' width='800' height='400' src='img/colour.png'>";
 
 	$columns = array ('colour', 'count');
 	$widths = column_widths ($totals, $columns, TRUE);

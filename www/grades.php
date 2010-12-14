@@ -108,7 +108,7 @@ function stats_grade()
 	$output .= stats_grade_mean ($grade_list);
 	$output .= "<br>";
 	$output .= "<div class='graph'>";
-	$output .= "<img alt='graph of grade vs frequency' src='img/grade.png'>";
+	$output .= "<img alt='graph of grade vs frequency' width='800' height='400' src='img/grade.png'>";
 	$output .= "</div>";
 	$output .= "<br>";
 	$output .= stats_grade_table ($grade_list, FALSE);

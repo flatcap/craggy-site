@@ -40,7 +40,7 @@ function stats_age()
 	$columns = array ("age", "count");
 	$widths = column_widths ($totals, $columns, TRUE);
 
-	$output .= list_render_html ($totals, $columns, $widths, "ts_age");
+	$output .= list_render_html ($totals, $columns, $widths, "{sortlist: [[0,0]]}");
 	return $output;
 }
 
@@ -60,11 +60,7 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$tablesorter = array (
-		"ts_age" => "[[0,0]]",
-	);
-
-	$header  = html_header ("Age", "", $tablesorter);
+	$header  = html_header ("Age");
 
 	return $header . $output;
 }

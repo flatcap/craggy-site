@@ -35,7 +35,7 @@ function stats_style()
 	$widths['style'] *= -1;
 
 	$output .= "<h2>Stats - Styles</h2>";
-	$output .= list_render_html ($tag_list, $columns, $widths, "ts_styles");
+	$output .= list_render_html ($tag_list, $columns, $widths, "{sortlist: [[0,0]]}");
 	return $output;
 }
 
@@ -55,11 +55,7 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$tablesorter = array (
-		"ts_styles" => "[[0,0]]",
-	);
-
-	$header  = html_header ("Style", "", $tablesorter);
+	$header  = html_header ("Style");
 
 	return $header . $output;
 }

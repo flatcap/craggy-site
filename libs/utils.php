@@ -1,6 +1,6 @@
 <?php
 
-function html_header ($title, $reldir = "", $sort_tables = NULL)
+function html_header ($title, $reldir = "")
 {
 	$output = '';
 
@@ -28,21 +28,23 @@ function html_header ($title, $reldir = "", $sort_tables = NULL)
 		$output .= "</script>";
 	}
 
-	if ($sort_tables !== NULL) {
-		// Table Sorter
-		$output .= "<link rel='stylesheet' href='{$reldir}style/tablesorter.css' type='text/css'>";
-		$output .= "<script type='text/javascript' src='{$reldir}style/jquery.js'></script> ";
-		$output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script> ";
-		$output .= "<script type='text/javascript'>";
-		$output .= "$(document).ready(function() ";
-		$output .= "{ ";
-		foreach ($sort_tables as $id => $sortlist) {
-			$output .= "	$('#{$id}').tablesorter( {sortList: {$sortlist}} ); ";
-		}
-		$output .= "	} ";
-		$output .= "); ";
-		$output .= "</script>";
-	}
+	// Table Sorter
+	$output .= "<link rel='stylesheet' href='{$reldir}style/tablesorter.css' type='text/css'>";
+	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.js'></script>";
+	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.metadata.js'></script>";
+	$output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script>";
+	$output .= "<script type='text/javascript'>";
+	$output .= "$(document).ready(function()";
+	$output .= "{";
+	$output .= "	var tables = document.getElementsByClassName ('tablesorter');";
+	$output .= "	for (i = 0; i < tables.length; i++) {";
+	$output .= "		var id = 'ts_' + i;";
+	$output .= "		tables[i].setAttribute ('id', id);";
+	$output .= "		$('#' + id).tablesorter();";
+	$output .= "	}";
+	$output .= "}";
+	$output .= ");";
+	$output .= "</script>";
 
 	$output .= "</head>";
 
@@ -752,14 +754,14 @@ function get_stats()
 }
 
 
-function list_render_html (&$list, &$columns, &$widths, $table_id = "")
+function list_render_html (&$list, &$columns, &$widths, $ts_metadata = NULL)
 {
 	$output = "";
 
-	if (!empty ($table_id))
-		$table_id = " id='{$table_id}' class='tablesorter'";
+	if ($ts_metadata)
+		$ts_metadata = " class='tablesorter {$ts_metadata}'";
 
-	$output .= "<table{$table_id}>";
+	$output .= "<table{$ts_metadata}>";
 	$output .= html_table_header ($columns);
 	$output .= "<tbody>";
 

@@ -38,7 +38,7 @@ function stats_grade_table ($grade_list, $whole_grades = FALSE)
 	$widths = column_widths ($results, $columns, TRUE);
 	fix_justification ($widths);
 
-	$output .= list_render_html ($results, $columns, $widths, "ts_grades");
+	$output .= list_render_html ($results, $columns, $widths, "{sortlist: [[0,0]]}");
 	return $output;
 }
 
@@ -132,11 +132,7 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$tablesorter = array (
-		"ts_grades" => "[[0,0]]",
-	);
-
-	$header  = html_header ("Grades", "", $tablesorter);
+	$header  = html_header ("Grades");
 
 	return $header . $output;
 }

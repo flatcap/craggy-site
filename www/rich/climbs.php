@@ -71,11 +71,7 @@ function climbs_main($options)
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));
 
-			$tablesorter = array (
-				"ts_climbs" => "[[0,0], [2,0], [1,0]]",
-			);
-
-			$output .= html_header ("Climbs", "../", $tablesorter);
+			$output .= html_header ("Climbs", "../");
 			$output .= "<body>";
 
 			$output .= "<div class='download'>";
@@ -89,7 +85,7 @@ function climbs_main($options)
 			$output .= html_menu("../");
 			$output .= "<div class='content'>";
 			$output .= "<h2>Climbs ({$count})</h2>";
-			$output .= list_render_html ($list, $columns, $widths, "ts_climbs");
+			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
 			$output .= "</div>";
 			$output .= get_errors();
 			$output .= "</body>";

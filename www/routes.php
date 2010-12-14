@@ -31,11 +31,7 @@ function routes_main($options)
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));
 
-			$tablesorter = array (
-				"ts_routes" => "[[0,0], [2,0], [1,0]]",
-			);
-
-			$output .= html_header ("Routes", "", $tablesorter);
+			$output .= html_header ("Routes");
 			$output .= "<body>";
 
 			$output .= "<div class='download'>";
@@ -50,7 +46,7 @@ function routes_main($options)
 			$output .= "<div class='header'>All Routes <span>(Last updated: $last_update)</span></div>\n";
 			$output .= html_menu();
 			$output .= "<div class='content'>\n";
-			$output .= list_render_html ($list, $columns, $widths, "ts_routes");
+			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
 			$output .= "</div>";
 			$output .= get_errors();
 			$output .= "</body>";

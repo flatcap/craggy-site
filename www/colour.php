@@ -30,7 +30,7 @@ function stats_colour()
 	$columns = array ('colour', 'count');
 	$widths = column_widths ($totals, $columns, TRUE);
 	$widths['colour'] *= -1;
-	$output .= list_render_html ($totals, $columns, $widths, "ts_colour");
+	$output .= list_render_html ($totals, $columns, $widths, "{sortlist: [[1,1],[0,0]]}");
 
 	return $output;
 }
@@ -51,11 +51,7 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$tablesorter = array (
-		"ts_colour" => "[[1,1],[0,0]]",
-	);
-
-	$header  = html_header ("Colour", "", $tablesorter);
+	$header  = html_header ("Colour");
 
 	return $header . $output;
 }

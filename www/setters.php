@@ -34,7 +34,7 @@ function stats_setters()
 	$widths = column_widths ($setters, $columns, TRUE);
 	fix_justification ($widths);
 
-	$output .= list_render_html ($setters, $columns, $widths, "ts_setter");
+	$output .= list_render_html ($setters, $columns, $widths, "{sortlist: [[1,1],[0,0]]}");
 
 	return $output;
 }
@@ -55,11 +55,7 @@ function stats_main()
 	$output .= "</body>";
 	$output .= "</html>";
 
-	$tablesorter = array (
-		"ts_setter" => "[[1,1],[0,0]]",
-	);
-
-	$header  = html_header ("Setter", "", $tablesorter);
+	$header  = html_header ("Setter");
 
 	return $header . $output;
 }

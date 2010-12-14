@@ -336,11 +336,7 @@ function work_main ($options)
 		case "html":
 			$last_update = date ("j M Y", strtotime (db_get_last_update()));
 
-			$tablesorter = array (
-				"ts_work" => "[[0,0], [2,0], [1,0]]",
-			);
-
-			$output .= html_header ("Work", "../", $tablesorter);
+			$output .= html_header ("Work", "../");
 			$output .= "<body>";
 
 			$output .= "<div class='download'>";
@@ -354,7 +350,7 @@ function work_main ($options)
 			$output .= html_menu("../");
 			$output .= "<div class='content'>\n";
 			$output .= "<h2>Work <span>($count climbs)</span><span> (Score = $score)</span></h2>\n";
-			$output .= list_render_html ($all, $columns, $widths, "ts_work");
+			$output .= list_render_html ($all, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
 			$output .= "</div>";
 			$output .= get_errors();
 			$output .= "</body>";

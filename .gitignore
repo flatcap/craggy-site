@@ -5,6 +5,7 @@ logs/
 # Local dot files
 /.*
 .*.swp
+tags
 
 # Local config file
 libs/conf.php

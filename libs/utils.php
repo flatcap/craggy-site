@@ -80,6 +80,13 @@ function html_menu($reldir = "")
 		$output .= "  </ul>";
 	}
 
+	if ($rich) {
+		$output .= "  <h1>Admin</h1>";
+		$output .= "  <ul>";
+		$output .= "    <li><a href='{$reldir}admin/setter.php'>Setter</a></li>";
+		$output .= "  </ul>";
+	}
+
 	$output .= "</div>\n";
 
 	return $output;

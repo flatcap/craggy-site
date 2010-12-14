@@ -1,0 +1,14 @@
+$output .= "	$('#{$id}').tablesorter( {sortList: {$sortlist}, headers: { 4: { sorter: false } } } ); ";
+
+routes.php	4,6,8
+climbs.php	4,9
+downclimb.php	5
+seldom.php	5,6
+todo.php	5
+work.php	4:broken
+
+
+{
+	sortlist: { [[0,0]] },
+	headers: { 4: { sorter: false } }
+}

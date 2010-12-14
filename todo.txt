@@ -306,3 +306,20 @@ change the css to avoid the 4 * &nbsp; in the table headers
 
 flatten rich/* into main dir
 
+global variables
+	g_colour
+	g_grade
+	g_success
+	g_difficulty
+utils functions (if global var not set, query db)
+	utils_get_colour
+	etc
+
+split db names into first_name, last_name
+setter, climber
+
+admin/rich-ness dependent on cookie session
+
+integrate admin utils into normal pages
+i.e. if 'rich', add "new route" button
+

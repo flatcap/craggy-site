@@ -153,3 +153,6 @@ div.download h1 {
 }
 */
 
+tr:hover {
+  background: #ddddff;
+}

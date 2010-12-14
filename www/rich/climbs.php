@@ -4,7 +4,6 @@ set_include_path ("../../libs");
 
 include "db.php";
 include "utils.php";
-include "mark.php";
 
 function process_binary(&$list, $field, $value)
 {

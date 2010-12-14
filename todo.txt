@@ -255,8 +255,6 @@ or
 	user/1/work.php calls /work.php?user=1
 	user/rich/work.php calls /work.php?user=rich
 
-fix multiple tablesorter tables on checklist and seldom
-
 check sort order on all pages
 
 add debug logging option to db.php
@@ -266,8 +264,6 @@ array of
 	table_name
 	constraint1
 	constraint2...
-
-table,thead,tbody for all
 
 find out by what criteria I'm sorting the database tables and make sure they're indexed
 
@@ -292,6 +288,7 @@ bash_history for craggy and work dir
 
 add a validation box (below "Route Data")
 validate html, css
+only for rich user
 
 link the styles table to a route search by that tag
 ie  styles.php/arch links to routes.php?tags=arch
@@ -306,11 +303,6 @@ turn off analytics for home (on russon.org)
 
 disable certain table sort columns
 $output .= "	$('#{$id}').tablesorter( {sortList: {$sortlist}, headers: { 4: { sorter: false } } } ); ";
-
-within div.content search for all table.tablesorter get their id and initialise tablesorter
-
-use table metadata to init tablesorter
-<table class="tablesorter {sortlist: [[0,0],[4,0]]}" cellspacing="1">
 
 singularise filenames
 

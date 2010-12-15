@@ -156,3 +156,12 @@ div.download h1 {
 tr:hover {
   background: #ddddff;
 }
+
+input.enabled {
+	border: 2px outset ButtonFace;
+}
+
+input.disabled {
+	color: #cccccc;
+	border: 2px outset ButtonFace;
+}

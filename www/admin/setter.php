@@ -167,12 +167,14 @@ function setter_main()
 	$output .= "<h2>Setters</h2>";
 	$output .= setter_table();
 
+	$output .= "<div class='buttons'>";
 	$output .= "<br>";
-	$output .= "<input type='submit' type='button' value='Add'>";
+	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	$output .= "&nbsp;";
-	$output .= "<input type='submit' type='button' value='Edit'>";
+	$output .= "<input type='submit' type='button' id='button_edit' value='Edit'>";
 	$output .= "&nbsp;";
-	$output .= "<input type='submit' type='button' value='Delete'>";
+	$output .= "<input type='submit' type='button' id='button_delete' value='Delete'>";
+	$output .= "</div>";
 	$output .= "</div>";
 
 	$output .= "<th><input type='checkbox' id='spurious1'></th>";

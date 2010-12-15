@@ -323,3 +323,13 @@ admin/rich-ness dependent on cookie session
 integrate admin utils into normal pages
 i.e. if 'rich', add "new route" button
 
+rss should date back to first climbs set
+include features only routes
+as routes deleted, rss updated?
+old rss deleted?
+select date_set,count(date_set) from craggy_route group by date_set order by date_set;
+34 rss entries
+
+make the cursor look right when hovering over
+table rows that are clickable and buttons that are disabled
+

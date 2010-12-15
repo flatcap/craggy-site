@@ -333,3 +333,7 @@ select date_set,count(date_set) from craggy_route group by date_set order by dat
 make the cursor look right when hovering over
 table rows that are clickable and buttons that are disabled
 
+css menus?
+
+use js to highlight current link in menubar
+

@@ -337,3 +337,5 @@ css menus?
 
 use js to highlight current link in menubar
 
+FORBID any caching on local host
+

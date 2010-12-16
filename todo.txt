@@ -339,3 +339,6 @@ use js to highlight current link in menubar
 
 FORBID any caching on local host
 
+database_copy.sh
+copy russon.org/craggy to flatcap.org
+

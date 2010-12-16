@@ -32,6 +32,10 @@ function initialise_buttons()
 	button_edit = document.getElementById ('button_edit');
 	button_delete = document.getElementById ('button_delete');
 
+	button_add.onclick = click_add;
+	button_edit.onclick = click_edit;
+	button_delete.onclick = click_delete;
+
 	buttons_update();
 }
 
@@ -44,12 +48,12 @@ function initialise_ticks()
 	list_ticks = body[0].getElementsByTagName ('input');
 
 	for (i = 0; i < list_ticks.length; i++) {
-		list_ticks[i].checked = true;
+		list_ticks[i].checked = false;
 		list_ticks[i].onclick = check_click;
 	}
 
 	var master = document.getElementById ('tick_master');
-	master.checked = true;
+	master.checked = false;
 	master.onclick = tick_master_click;
 }
 
@@ -64,6 +68,58 @@ function initialise_rows()
 		trs[i].onclick = row_clicked;
 	}
 
+}
+
+
+function click_add()
+{
+	alert ('add');
+}
+
+function click_edit()
+{
+	alert ('edit');
+}
+
+function click_delete()
+{
+	var ids = new Array();
+	for (i = 0; i < list_ticks.length; i++) {
+		if (list_ticks[i].checked) {
+			ids.push (list_ticks[i].id.substring(3));
+		}
+	}
+
+	var str = ids.join(',');
+	if (window.XMLHttpRequest) {
+		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+	} else {
+		xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+	}
+	xmlhttp.onreadystatechange = delete_callback;
+	xmlhttp.open ("GET", "work.php?delete=" + str, true);
+	xmlhttp.send();
+}
+
+
+function delete_callback()
+{
+	if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
+		var response = xmlhttp.responseText;
+		if (response.length == 0)
+			return;
+
+		alert (response);
+		return;
+		var bra = response.indexOf ('(');
+		var ket = response.indexOf (')', bra);
+
+		if ((bra == -1) || (ket == -1)) {
+			date_match.innerHTML = response;
+		} else {
+			date_match.innerHTML = response.substring (bra+1, ket);
+		}
+	}
 }
 
 
@@ -114,3 +170,5 @@ function buttons_update()
 	button_set_state (button_edit, set);
 	button_set_state (button_delete, set);
 }
+
+

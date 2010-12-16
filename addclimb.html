@@ -31,7 +31,7 @@
 			xmlhttp.onreadystatechange=function()
 			{
 				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-					form.results.innerHTML = form.results.innerHTML + xmlhttp.responseText + "\n";
+					form.results.innerHTML += xmlhttp.responseText + "\n";
 					form.txt1.value = "";
 					form.txt1.focus();
 				}

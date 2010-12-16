@@ -38,17 +38,17 @@ function setter_callback()
 
 
 	x = xmlhttp.responseXML.documentElement.getElementsByTagName("setter");
-	txt = txt + "<tbody>";
+	txt += "<tbody>";
 	for (i = 0; i < x.length; i++) {
 
-		txt = txt + "<tr>";
-		txt = txt + setter_get_node (x[i], "id");
-		txt = txt + setter_get_node (x[i], "initials");
-		txt = txt + setter_get_node (x[i], "name");
-		txt = txt + "</tr>";
+		txt += "<tr>";
+		txt += setter_get_node (x[i], "id");
+		txt += setter_get_node (x[i], "initials");
+		txt += setter_get_node (x[i], "name");
+		txt += "</tr>";
 	}
-	txt = txt + "</tbody>";
-	txt = txt + "</table>";
+	txt += "</tbody>";
+	txt += "</table>";
 
 	setter_matches.innerHTML = txt;
 }

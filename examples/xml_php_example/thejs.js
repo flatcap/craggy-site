@@ -14,7 +14,7 @@ $(document).ready(function() {
 					var firstname = $(this).find("firstname").text();
 					var surname = $(this).find("surname").text();
 					
-					data = data + title + " " + firstname + " " + surname + "<br>";
+					data += title + " " + firstname + " " + surname + "<br>";
 				
 				});
 				

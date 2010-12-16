@@ -83,7 +83,7 @@
 		var tables = document.getElementsByClassName ('tablesorter');
 		var list = "";
 		for (i = 0; i < tables.length; i++) {
-			list = list + "\t" + tables[i].id + "\n";
+			list += "\t" + tables[i].id + "\n";
 			tables[i].setAttribute ('id', "wibble_" + i);
 		}
 		alert ("There are " + tables.length + " tables.\n" + list);

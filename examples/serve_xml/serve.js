@@ -40,18 +40,18 @@ function route_callback()
 	x = xmlhttp.responseXML.documentElement.getElementsByTagName("climb");
 	for (i = 0; i < x.length; i++) {
 
-		txt = txt + "<tr>";
-		txt = txt + route_get_node (x[i], "id");
-		txt = txt + route_get_node (x[i], "route_id");
-		txt = txt + route_get_node (x[i], "date_climbed");
-		txt = txt + route_get_node (x[i], "success");
-		txt = txt + route_get_node (x[i], "nice");
-		txt = txt + route_get_node (x[i], "onsight");
-		txt = txt + route_get_node (x[i], "difficulty");
-		txt = txt + route_get_node (x[i], "notes");
-		txt = txt + "</tr>";
+		txt += "<tr>";
+		txt += route_get_node (x[i], "id");
+		txt += route_get_node (x[i], "route_id");
+		txt += route_get_node (x[i], "date_climbed");
+		txt += route_get_node (x[i], "success");
+		txt += route_get_node (x[i], "nice");
+		txt += route_get_node (x[i], "onsight");
+		txt += route_get_node (x[i], "difficulty");
+		txt += route_get_node (x[i], "notes");
+		txt += "</tr>";
 	}
-	txt = txt + "</table>";
+	txt += "</table>";
 
 	route_matches.innerHTML = txt;
 }

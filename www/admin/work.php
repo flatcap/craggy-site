@@ -7,6 +7,8 @@ set_include_path ("../../libs");
 include "db.php";
 include "utils.php";
 
+//$fh = NULL;
+
 function xml_error()
 {
 	// render error info in xml
@@ -81,13 +83,31 @@ function db_select2 ($table, $columns = NULL, $where = NULL, $order = NULL, $gro
 	return $list;
 }
 
+function db_delete($table, $join_tables, $where)
+{
+	//global $fh;
+
+	if (empty ($where))
+		return FALSE;
+
+	$db = db_get_database();
+
+	$query = "delete $table from $join_tables where $where";
+	//fwrite ($fh, "$query\n");
+
+	$result = mysql_query($query);
+
+	return mysql_affected_rows();
+}
+
 
 function setter_delete_query ($data)
 {
 	$id_list = explode (',', $data);
 
-	$route_count = 0;
-	$climb_count = 0;
+	$route_count  = 0;
+	$climb_count  = 0;
+	$setter_count = 0;
 
 	// How many routes will be deleted?
 	$table  = "craggy_route";
@@ -107,12 +127,55 @@ function setter_delete_query ($data)
 		$climb_count += db_count ($table, $column, $where2);
 	}
 
+	// How many setters will be deleted?
+	$setter_count = count ($id_list);
+
 	// <setter_delete>
 	//     <setter>4</setter>
 	//     <route>75</route>
 	//     <climb>1900</climb>
 	// </setter_delete>
-	return sprintf ("Delete:\n\t%d setters,\n\t%d routes,\n\t%d climbs?", count ($id_list), $route_count, $climb_count);
+	return sprintf ("Delete:\n\t%d setters,\n\t%d routes,\n\t%d climbs?", $setter_count, $route_count, $climb_count);
+}
+
+function setter_delete ($data)
+{
+	$id_list = explode (',', $data);
+
+	$climb_count  = 0;
+	$route_count  = 0;
+	$setter_count = 0;
+
+	// How many climbs will be deleted?
+	$table      = "craggy_climb";
+	$join_table = "craggy_setter, craggy_route, craggy_climb left join craggy_climber on (craggy_climb.climber_id = craggy_climber.id)";
+	foreach ($id_list as $id) {
+		$where = "(craggy_route.setter_id = craggy_setter.id) and (craggy_climb.route_id = craggy_route.id) and (craggy_setter.id = $id)";
+		$climb_count += db_delete ($table, $join_table, $where);
+	}
+
+	// How many routes will be deleted?
+	$table = "";
+	$join_table = "craggy_route";
+	foreach ($id_list as $id) {
+		$where = "setter_id = $id";
+		$route_count += db_delete ($table, $join_table, $where);
+	}
+
+	// How many setters will be deleted?
+	$table = "";
+	$join_table = "craggy_setter";
+	foreach ($id_list as $id) {
+		$where = "id = $id";
+		$setter_count += db_delete ($table, $join_table, $where);
+	}
+
+	// <setter_delete>
+	//     <setter>4</setter>
+	//     <route>75</route>
+	//     <climb>1900</climb>
+	// </setter_delete>
+	return sprintf ("DELETED:\n\t%d setters,\n\t%d routes,\n\t%d climbs.", $setter_count, $route_count, $climb_count);
 }
 
 function setter_list()
@@ -141,28 +204,49 @@ function setter_list()
 	return list_render_xml ("setter", $list, $columns);
 }
 
+function setter_main()
+{
+	global $_GET;
+	//global $fh;
 
-// action: delete, list, update
-if (!isset ($_GET)) {
-	echo "NO GET";
-	return;
+	if (!isset ($_GET)) {
+		echo "NO GET";
+		return;
+	}
+
+	if (!array_key_exists ('action', $_GET)) {
+		echo "NO ACTION";
+		return;
+	}
+	$action = $_GET['action'];
+
+	if (array_key_exists ('data', $_GET)) {
+		$data = $_GET['data'];
+	} else {
+		$data = "";
+	}
+
+	//$fh = fopen ("/tmp/db_log", "a");
+	//fwrite ($fh, "action=$action,data=$data\n");
+
+	// action: delete, list, update
+	switch ($action) {
+		case 'list':
+			header('Content-Type: application/xml; charset=ISO-8859-1');
+			$response = setter_list();
+			break;
+		case 'delete_query':
+			$response = setter_delete_query($data);
+			break;
+		case 'delete':
+			$response = setter_delete($data);
+			break;
+	}
+
+	//fclose ($fh);
+
+	return $response;
 }
 
-if (!array_key_exists ('action', $_GET)) {
-	echo "NO ACTION";
-	return;
-}
 
-if (array_key_exists ('data', $_GET)) {
-	$data = $_GET['data'];
-}
-
-$action = $_GET['action'];
-if ($action == 'list') {
-	header('Content-Type: application/xml; charset=ISO-8859-1');
-	$response = setter_list();
-} else if ($action = "delete_query") {
-	$response = setter_delete_query($data);
-}
-
-echo $response;
+echo setter_main();

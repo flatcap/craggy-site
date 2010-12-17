@@ -37,6 +37,10 @@ var button_list;
 
 var list_ticks;
 
+var xmlhttp_delq;
+var xmlhttp_del;
+var xmlhttp_list;
+
 //initialise_ticks();
 //initialise_rows();
 initialise_buttons();
@@ -109,25 +113,25 @@ function click_delete()
 
 	var str = ids.join(',');
 	if (window.XMLHttpRequest) {
-		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp_delq = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		xmlhttp_delq = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp.onreadystatechange = callback_delete_query;
-	xmlhttp.open ("GET", "work.php?action=delete_query&data=" + str, true);
-	xmlhttp.send();
+	xmlhttp_delq.onreadystatechange = callback_delete_query;
+	xmlhttp_delq.open ("GET", "work.php?action=delete_query&data=" + str, true);
+	xmlhttp_delq.send();
 }
 
 function click_list()
 {
 	if (window.XMLHttpRequest) {
-		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp_list = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		xmlhttp_list = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp.onreadystatechange = callback_list;
-	xmlhttp.open ("GET", "work.php?action=list");
-	xmlhttp.send();
+	xmlhttp_list.onreadystatechange = callback_list;
+	xmlhttp_list.open ("GET", "work.php?action=list");
+	xmlhttp_list.send();
 }
 
 
@@ -144,28 +148,51 @@ function route_get_node (node, name)
 
 function callback_delete_query()
 {
-	if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
-		var response = xmlhttp.responseText;
-		if (response.length == 0)
-			return;
-
-		if (!confirm (response))
-			return;
+	if ((xmlhttp_delq.readyState != 4) || (xmlhttp_delq.status != 200))
 		return;
-		var bra = response.indexOf ('(');
-		var ket = response.indexOf (')', bra);
 
-		if ((bra == -1) || (ket == -1)) {
-			date_match.innerHTML = response;
-		} else {
-			date_match.innerHTML = response.substring (bra+1, ket);
+	var response = xmlhttp_delq.responseText;
+	if (response.length == 0)
+		return;
+
+	if (!confirm (response))
+		return;
+
+	var ids = new Array();
+	for (i = 0; i < list_ticks.length; i++) {
+		if (list_ticks[i].checked) {
+			ids.push (list_ticks[i].id.substring(3));
 		}
 	}
+
+	var str = ids.join(',');
+
+	if (window.XMLHttpRequest) {
+		xmlhttp_del = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+	} else {
+		xmlhttp_del = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+	}
+	xmlhttp_del.onreadystatechange = callback_delete;
+	xmlhttp_del.open ("GET", "work.php?action=delete&data=" + str, true);
+	xmlhttp_del.send();
+}
+
+function callback_delete()
+{
+	if ((xmlhttp_del.readyState != 4) || (xmlhttp_del.status != 200))
+		return;
+
+	var response = xmlhttp_del.responseText;
+	if (response.length == 0)
+		return;
+
+	alert (response);
+	click_list();
 }
 
 function callback_list()
 {
-	if ((xmlhttp.readyState != 4) || (xmlhttp.status != 200))
+	if ((xmlhttp_list.readyState != 4) || (xmlhttp_list.status != 200))
 		return;
 
 	var txt = "<table cellspacing=0 border=1>" +
@@ -180,7 +207,7 @@ function callback_list()
 		"<tbody>";
 
 
-	x = xmlhttp.responseXML.documentElement.getElementsByTagName("setter");
+	x = xmlhttp_list.responseXML.documentElement.getElementsByTagName("setter");
 	for (i = 0; i < x.length; i++) {
 
 		id    = route_get_node (x[i], "id");
@@ -201,7 +228,7 @@ function callback_list()
 	var table = document.getElementById ('setter_table');
 	table.innerHTML = txt;
 
-	button_set_state (button_list, false);
+	//button_set_state (button_list, false);
 	initialise_ticks();
 	initialise_rows();
 }

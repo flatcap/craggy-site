@@ -169,8 +169,8 @@ function setter_main()
 	$output .= "<div id='setter_table'>\n";
 	$output .= "</div>\n";
 
-	$output .= "<div class='buttons'>";
 	$output .= "<br>";
+	$output .= "<div class='buttons'>";
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	$output .= "&nbsp;";
 	$output .= "<input type='submit' type='button' id='button_edit' value='Edit'>";

@@ -343,6 +343,9 @@ utils functions (if global var not set, query db)
 split db names into first_name, last_name
 setter, climber
 
+allow null setter => unknown
+change empty setter => Features
+
 admin/rich-ness dependent on cookie session
 
 integrate admin utils into normal pages

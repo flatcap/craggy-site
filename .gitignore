@@ -2,15 +2,14 @@
 bin/
 logs/
 
-# Local dot files
+# Local files
 /.*
-.*.swp
-tags
-
-# Local config file
 libs/conf.php
 
-# Generated files
+# Generated files / Junk
+schema.png
+tags
 www/img/age.png
 www/img/colour.png
 www/img/grade.png
+.*.swp

@@ -38,8 +38,14 @@ for ((i = 0; i < 200; i++)); do
 	COLOUR=$((RANDOM%21+1))
 	GRADE=$((RANDOM%21+1))
 	SETTER=$((RANDOM%10+1))
-	DAYS_AGO=$((RANDOM%200))
-	DATE=$(date -d "$DAYS_AGO days ago" "+%Y-%m-%d")
+
+	YEAR=2010
+	MONTH=$((RANDOM%11+1))
+	DAY=$((RANDOM%28+1))
+	DATE="$YEAR-$MONTH-$DAY"
+
+	#DAYS_AGO=$((RANDOM%200))
+	#DATE=$(date -d "$DAYS_AGO days ago" "+%Y-%m-%d")
 
 	echo -e "\t($PANEL, $COLOUR, $GRADE, $SETTER, '$DATE'),"
 done | sed '$s/,$/;\n/'
@@ -54,8 +60,14 @@ for ((i = 0; i < 5000; i++)); do
 	CLIMBER=$((RANDOM%100+1))
 	ROUTE=$((RANDOM%200+1))
 	SUCCESS=$((RANDOM%4+1))
-	DAYS_AGO=$((RANDOM%200))
-	DATE=$(date -d "$DAYS_AGO days ago" "+%Y-%m-%d")
+
+	YEAR=2010
+	MONTH=$((RANDOM%11+1))
+	DAY=$((RANDOM%28+1))
+	DATE="$YEAR-$MONTH-$DAY"
+
+	#DAYS_AGO=$((RANDOM%200))
+	#DATE=$(date -d "$DAYS_AGO days ago" "+%Y-%m-%d")
 
 	echo -e "\t($CLIMBER, $ROUTE, $SUCCESS, '$DATE'),"
 done | sed '$s/,$/;\n/'

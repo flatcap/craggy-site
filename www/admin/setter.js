@@ -200,6 +200,7 @@ function callback_list()
 		"<tr>" +
 		"<th><input type='checkbox' id='tick_master'></th>" +
 		"<th>ID</th>" +
+		"<th>Initials</th>" +
 		"<th>First Name</th>" +
 		"<th>Surname</th>" +
 		"<th>Count</th>" +
@@ -212,6 +213,7 @@ function callback_list()
 	for (i = 0; i < x.length; i++) {
 
 		id         = route_get_node (x[i], "id");
+		initials   = route_get_node (x[i], "initials");
 		first_name = route_get_node (x[i], "first_name");
 		surname    = route_get_node (x[i], "surname");
 		count      = route_get_node (x[i], "count");
@@ -219,6 +221,7 @@ function callback_list()
 		txt += "<tr>";
 		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";
 		txt += "<td>" + id + "</td>";
+		txt += "<td>" + initials + "</td>";
 		txt += "<td>" + first_name + "</td>";
 		txt += "<td>" + surname + "</td>";
 		txt += "<td>" + count + "</td>";

@@ -14,15 +14,15 @@ echo
 
 # 10 random girl setters
 echo "insert into craggy_setter (initials, first_name, surname) values "
-paste	<(sort --random-sort girls.txt)											\
-	<(sort --random-sort surnames.txt) | head -n 10 |								\
+paste	<(sort --random-sort $GIRLS)											\
+	<(sort --random-sort $SURNAMES) | head -n 10 |								\
 	awk '{ printf "\t(\"%s%s\", \"%s\", \"%s\"),\n", tolower(substr($1,1,1)), tolower(substr($2,1,1)), $1, $2 }' |	\
 	sed '$s/,$/;\n/'
 
 # 100 random boy climbers
 echo "insert into craggy_climber (first_name, surname) values"
-paste	<(sort --random-sort boys.txt)											\
-	<(sort --random-sort surnames.txt) | head -n 100 |								\
+paste	<(sort --random-sort $BOYS)											\
+	<(sort --random-sort $SURNAMES) | head -n 100 |								\
 	awk '{ printf "\t(\"%s\", \"%s\"),\n", $1, $2 }' |								\
 	sed '$s/,$/;\n/'
 

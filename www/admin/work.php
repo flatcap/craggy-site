@@ -143,6 +143,7 @@ function setter_list()
 			" left join craggy_route on (setter_id=craggy_setter.id)";
 
 	$columns = array ("craggy_setter.id as id",
+			"craggy_setter.initials as initials",
 			"craggy_setter.first_name as first_name",
 			"craggy_setter.surname as surname",
 			"count(craggy_route.id) as count");
@@ -153,7 +154,7 @@ function setter_list()
 
 	$list = db_select ($table, $columns, $where, $order, $group);
 
-	$columns = array ('id', 'first_name', 'surname', 'count');
+	$columns = array ('id', 'initials', 'first_name', 'surname', 'count');
 
 	return list_render_xml ("setter", $list, $columns);
 }

@@ -93,7 +93,7 @@ function setter_delete_query ($data)
 	$table  = "craggy_route";
 	$column = "id";
 	foreach ($id_list as $id) {
-		$where = "id = $id";
+		$where = "setter_id = $id";
 		$route_count += db_count ($table, $column, $where);
 	}
 
@@ -108,10 +108,11 @@ function setter_delete_query ($data)
 	}
 
 	// <setter_delete>
-	//     <route>21</route>
-	//     <climb>408</climb>
+	//     <setter>4</setter>
+	//     <route>75</route>
+	//     <climb>1900</climb>
 	// </setter_delete>
-	return sprintf ("%d routes will be deleted\n%d climbs will be deleted", $route_count, $climb_count);
+	return sprintf ("Delete:\n\t%d setters,\n\t%d routes,\n\t%d climbs?", count ($id_list), $route_count, $climb_count);
 }
 
 function setter_list()

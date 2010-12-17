@@ -12,7 +12,7 @@ function db_get_database()
 	return $db;
 }
 
-function db_select($table, $columns = NULL, $where = NULL, $order = NULL)
+function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $group = NULL)
 {
 	if (isset($columns)) {
 		if (is_array($columns))
@@ -35,6 +35,10 @@ function db_select($table, $columns = NULL, $where = NULL, $order = NULL)
 		else
 			$w = $where;
 		$query .= " where " . $w;
+	}
+
+	if (isset ($group)) {
+		$query .= " group by " . $group;
 	}
 
 	if (isset ($order)) {

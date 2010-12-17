@@ -9,7 +9,7 @@ function get_setter ($setters)
 {
 	$inits = array();
 	foreach ($setters as $name => $null) {
-		if (empty ($name))
+		if (empty ($name) || ($name == "Features"))
 			continue;
 		$tok = strtok ($name, " ");
 		$i = $tok[0];

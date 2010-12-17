@@ -36,53 +36,6 @@ function list_render_xml ($object_name, &$list, &$columns)
 	return $output;
 }
 
-function db_select2 ($table, $columns = NULL, $where = NULL, $order = NULL, $group = NULL)
-{
-	if (isset($columns)) {
-		if (is_array($columns))
-			$cols = implode ($columns, ",");
-		else
-			$cols = $columns;
-
-		$key = $columns[0];
-		$key = "id";
-	} else {
-		$cols = "*";
-		$key = "id";
-	}
-
-	$query = "select {$cols} from {$table}";
-
-	if (isset ($where)) {
-		if (is_array ($where))
-			$w = implode ($where, " and ");
-		else
-			$w = $where;
-		$query .= " where " . $w;
-	}
-
-	if (isset ($group)) {
-		$query .= " group by " . $group;
-	}
-
-	if (isset ($order)) {
-		$query .= " order by " . $order;
-	}
-
-	$db = db_get_database();
-
-	//echo "$query;<br>";
-	$result = mysql_query($query);
-
-	$list = array();
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		$list[$row[$key]] = $row;
-	}
-
-	mysql_free_result($result);
-	return $list;
-}
-
 function db_delete($table, $join_tables, $where)
 {
 	//global $fh;
@@ -190,16 +143,17 @@ function setter_list()
 			" left join craggy_route on (setter_id=craggy_setter.id)";
 
 	$columns = array ("craggy_setter.id as id",
-			"craggy_setter.name as name",
+			"craggy_setter.first_name as first_name",
+			"craggy_setter.surname as surname",
 			"count(craggy_route.id) as count");
 
 	$where   = NULL;
 	$order   = "id";
 	$group   = "id";
 
-	$list = db_select2 ($table, $columns, $where, $order, $group);
+	$list = db_select ($table, $columns, $where, $order, $group);
 
-	$columns = array ('id', 'name', 'count');
+	$columns = array ('id', 'first_name', 'surname', 'count');
 
 	return list_render_xml ("setter", $list, $columns);
 }

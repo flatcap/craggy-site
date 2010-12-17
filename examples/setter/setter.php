@@ -14,9 +14,9 @@ $q=trim($_GET["q"]);
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$table   = "craggy_setter";
-$columns = array ("id", "initials", "name");
-$where   = array ("initials like '{$q}%' or name like '{$q}%'"); 
+$table   = 'craggy_setter';
+$columns = array ('id', 'initials', 'first_name', 'surname');
+$where   = array ("initials like '%{$q}%' or first_name like '%{$q}%' or surname like '%{$q}%'"); 
 $order   = NULL;
 
 $setter_list = db_select($table, $columns, $where, $order);

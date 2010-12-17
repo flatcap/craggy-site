@@ -32,7 +32,8 @@ function setter_callback()
 		"<tr>" +
 		"<th>ID</th>" +
 		"<th>Initials</th>" +
-		"<th>Name</th>" +
+		"<th>First Name</th>" +
+		"<th>Surname</th>" +
 		"</tr>" +
 		"</thead>";
 
@@ -44,7 +45,8 @@ function setter_callback()
 		txt += "<tr>";
 		txt += setter_get_node (x[i], "id");
 		txt += setter_get_node (x[i], "initials");
-		txt += setter_get_node (x[i], "name");
+		txt += setter_get_node (x[i], "first_name");
+		txt += setter_get_node (x[i], "surname");
 		txt += "</tr>";
 	}
 	txt += "</tbody>";

@@ -296,11 +296,36 @@ turn off analytics for home (on russon.org)
 
 disable certain table sort columns
 $output .= "	$('#{$id}').tablesorter( {sortList: {$sortlist}, headers: { 4: { sorter: false } } } ); ";
+	$output .= "	$('#{$id}').tablesorter( {sortList: {$sortlist}, headers: { 4: { sorter: false } } } ); ";
+
+	routes.php	4,6,8
+	climbs.php	4,9
+	downclimb.php	5
+	seldom.php	5,6
+	todo.php	5
+	work.php	4:broken
+	{
+		sortlist: { [[0,0]] },
+		headers: { 4: { sorter: false } }
+	}
 
 singularise filenames
 
 create an ip-address checker
 is this a rich or not?
+	rich_ip check:
+
+	192.168.2.0/24
+	127.0.0.0/8
+
+	82.8.178.149	home.russon.org
+	78.129.239.63	craggy.russon.org
+	95.177.35.86	unknown.griffin.com
+
+	control showing of:
+		rich menu
+		google analytics
+		validation box
 
 change the css to avoid the 4 * &nbsp; in the table headers
 

@@ -148,9 +148,9 @@ function setter_delete ($data)
 
 	// How many climbs will be deleted?
 	$table      = "craggy_climb";
-	$join_table = "craggy_setter, craggy_route, craggy_climb left join craggy_climber on (craggy_climb.climber_id = craggy_climber.id)";
+	$join_table = "craggy_climb, craggy_route, craggy_setter";
 	foreach ($id_list as $id) {
-		$where = "(craggy_route.setter_id = craggy_setter.id) and (craggy_climb.route_id = craggy_route.id) and (craggy_setter.id = $id)";
+		$where = "(craggy_climb.route_id = craggy_route.id) and (craggy_route.setter_id = craggy_setter.id) and (craggy_setter.id = $id)";
 		$climb_count += db_delete ($table, $join_table, $where);
 	}
 

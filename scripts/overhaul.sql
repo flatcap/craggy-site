@@ -1,11 +1,11 @@
 # massive db overhaul
 # standardise lots of names
-# make sure that compulsory fields are NOT NULL
+# make sure that compulsory fields are not null
 
 drop view v_panel;
 drop view v_route;
 
-update craggy_climb set difficulty = NULL where difficulty=1;
+update craggy_climb set difficulty = null where difficulty=1;
 delete from craggy_difficulty where id=1;
 
 alter table craggy_route drop foreign key craggy_route_ibfk_1;

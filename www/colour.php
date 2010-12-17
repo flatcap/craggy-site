@@ -9,28 +9,21 @@ function stats_colour()
 {
 	$output = "";
 
-	$table   = "v_route";
-	$columns = array("id", "colour");
-	$order   = "colour";
+	$table   = "craggy_colour, craggy_route";
+	$columns = array ("craggy_colour.id as id", "colour", "count(craggy_route.id) as count");
+	$where   = "craggy_route.colour_id = craggy_colour.id";
+	$order   = "count desc";
+	$group   = "colour";
 
-	$list = db_select($table, $columns, NULL, $order);
-
-	$totals = array();
-	foreach ($list as $row) {
-		$c = $row['colour'];
-		if (array_key_exists ($c, $totals))
-			$totals[$c]['count']++;
-		else
-			$totals[$c] = array ('colour' => $c, 'count' => 1);
-	}
+	$list = db_select($table, $columns, $where, $order, $group);
 
 	$output .= "<h2>Stats - Colour</h2>";
 	$output .= "<img alt='graph of colour vs frequency' width='800' height='400' src='img/colour.png'>";
 
 	$columns = array ('colour', 'count');
-	$widths = column_widths ($totals, $columns, TRUE);
+	$widths = column_widths ($list, $columns, TRUE);
 	$widths['colour'] *= -1;
-	$output .= list_render_html ($totals, $columns, $widths, "{sortlist: [[1,1],[0,0]]}");
+	$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[1,1],[0,0]]}");
 
 	return $output;
 }

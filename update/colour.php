@@ -7,25 +7,17 @@ include "utils.php";
 
 function colour_main()
 {
-	$table   = "v_route";
-	$columns = array ("id", "colour");
-	$order   = "colour";
+	$table   = "craggy_colour, craggy_route";
+	$columns = array ("craggy_colour.id as id", "colour", "count(craggy_route.id) as count");
+	$where   = "craggy_route.colour_id = craggy_colour.id";
+	$order   = "count desc";
+	$group   = "colour";
 
-	$list = db_select($table, $columns, NULL, $order);
+	$list = db_select($table, $columns, $where, $order, $group);
 
-	$totals = array();
-	foreach ($list as $row) {
-		$c = $row['colour'];
-		if (array_key_exists ($c, $totals))
-			$totals[$c]++;
-		else
-			$totals[$c] = 1;
-	}
-
-	arsort ($totals);
 	$output = "";
-	foreach ($totals as $colour => $count) {
-		$output .= sprintf ("%s\t%d\n", $colour, $count);
+	foreach ($list as $colour) {
+		$output .= sprintf ("%s\t%d\n", $colour['colour'], $colour['count']);
 	}
 
 	return $output;

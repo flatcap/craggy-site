@@ -5,6 +5,7 @@ logs/
 # Local files
 /.*
 libs/conf.php
+www/admin/.htaccess
 
 # Generated files / Junk
 schema.png

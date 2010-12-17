@@ -340,9 +340,6 @@ utils functions (if global var not set, query db)
 	utils_get_colour
 	etc
 
-split db names into first_name, last_name
-setter, climber
-
 allow null setter => unknown
 change empty setter => Features
 
@@ -371,9 +368,6 @@ database_copy.sh
 copy russon.org/craggy to flatcap.org
 database_pull.sh
 database_push.sh
-
-change random_setters.sh to do one BIG insert rather than 5000 individual inserts
-time before and after
 
 date_set / date_climbed NULL? if unknown
 

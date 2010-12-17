@@ -231,6 +231,7 @@ function callback_list()
 	//button_set_state (button_list, false);
 	initialise_ticks();
 	initialise_rows();
+	buttons_update();
 }
 
 
@@ -280,6 +281,7 @@ function buttons_update()
 	button_set_state (button_add, true);
 	button_set_state (button_edit, set);
 	button_set_state (button_delete, set);
+	button_set_state (button_list, true);
 }
 
 

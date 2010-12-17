@@ -1,4 +1,4 @@
-30/11/2010
+30/11/2010 (JoeC)
 80 bg(d), gn(d), pr
 81 all(d)
 82 gy(d), pw(d), gn
@@ -14,16 +14,25 @@
 84 gn hard
 85 blue treacherous
 
-10/12/2010
+10/12/2010 (Nina)
 80 bg(d), gn(d), pr
 81 all(d)
 82 gy(d), pw(d), gn
 83 pur(d), ti, blu
 61 gn(d), or(d), pu
 
-14/12/2010
+14/12/2010 (JoeC)
 19 wh(d) "feet on ft", bg(1f), pu(f)
 20 ye, blu
 62 rd(d) gy(tr,2f)
 63 pu/wh(d), bg(1f)
+
+15/12/2010 (Ian)
+80 bg(d),gn(d),pu(d)
+82 pw(d)
+83 pu(d),blu,ti
+84 rd,ye
+53 brn,red,blu(f)
+54 or,gn(s)
+37 blu(d),ye,rd(2f)
 

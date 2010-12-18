@@ -36,6 +36,7 @@ var button_delete;
 var button_list;
 
 var list_ticks;
+var setter_data;
 
 var xmlhttp_delq;
 var xmlhttp_del;
@@ -99,7 +100,43 @@ function click_add()
 
 function click_edit()
 {
-	alert ('edit');
+	var work = document.getElementById ("work_area");
+	var txt = "";
+
+	txt += "<table border=0 cellspacing=0 cellpadding=0>";
+	txt += "<thead>";
+	txt += "<tr>";
+	txt += "<th>ID</th>";
+	txt += "<th>Initials</th>";
+	txt += "<th>First Name</th>";
+	txt += "<th>Surname</th>";
+	txt += "</tr>";
+	txt += "</thead>";
+	txt += "<tbody>";
+
+	for (var i = 0; i < list_ticks.length; i++) {
+		if (!list_ticks[i].checked)
+			continue;
+		id = list_ticks[i].id.substring(3);
+		txt += "<tr>";
+		txt += "<td>" + id + "</td>";
+		txt += "<td><input type='text' size='4' value='"  + setter_data[id]['initials']   + "'></td>";
+		txt += "<td><input type='text' size='20' value='" + setter_data[id]['first_name'] + "'></td>";
+		txt += "<td><input type='text' size='20' value='" + setter_data[id]['surname']    + "'></td>";
+		txt += "</tr>";
+	}
+	txt += "</tbody>";
+	txt += "</table>";
+
+	txt += "<div class='buttons'>";
+	txt += "<br>";
+	txt += "<input type='submit' type='button' id='button_save' value='Save'>";
+	txt += "&nbsp;";
+	txt += "<input type='submit' type='button' id='button_cancel' value='Cancel'>";
+
+	work.innerHTML = txt;
+
+	// Disable edit, delete, list
 }
 
 function click_delete()
@@ -132,6 +169,15 @@ function click_list()
 	xmlhttp_list.onreadystatechange = callback_list;
 	xmlhttp_list.open ("GET", "work.php?action=list");
 	xmlhttp_list.send();
+}
+
+
+function click_cancel()
+{
+}
+
+function click_save()
+{
 }
 
 
@@ -210,13 +256,23 @@ function callback_list()
 
 
 	x = xmlhttp_list.responseXML.documentElement.getElementsByTagName("setter");
+	setter_data = new Array();
 	for (i = 0; i < x.length; i++) {
-
-		id         = route_get_node (x[i], "id");
-		initials   = route_get_node (x[i], "initials");
-		first_name = route_get_node (x[i], "first_name");
-		surname    = route_get_node (x[i], "surname");
-		count      = route_get_node (x[i], "count");
+		var setter = new Array();
+		var id = route_get_node (x[i], "id");
+		setter['id']         = id;
+		setter['initials']   = route_get_node (x[i], "initials");
+		setter['first_name'] = route_get_node (x[i], "first_name");
+		setter['surname']    = route_get_node (x[i], "surname");
+		setter['count']      = route_get_node (x[i], "count");
+		setter_data[id] = setter;
+	}
+	for (s in setter_data) {
+		id         = setter_data[s]['id'];
+		initials   = setter_data[s]['initials'];
+		first_name = setter_data[s]['first_name'];
+		surname    = setter_data[s]['surname'];
+		count      = setter_data[s]['count'];
 
 		txt += "<tr>";
 		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";

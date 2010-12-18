@@ -32,6 +32,9 @@ function setter_main()
 	$output .= "&nbsp;";
 	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
 	$output .= "</div>";
+	$output .= "<br>";
+	$output .= "<div id='work_area'>";
+	$output .= "</div";
 	$output .= "</div>";
 
 	$output .= "<script type='text/javascript' src='setter.js'></script>";

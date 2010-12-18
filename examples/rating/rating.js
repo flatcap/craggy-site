@@ -3,25 +3,36 @@ var holder;	// Is the holding pattern for clicked state
 var preSet;	// value once a selection has been made
 var rated;
 
-// Rollover for image Stars
-function rating (num)
+function initialise (div, names)
 {
-	sMax = 0;	// Is the maximum number of stars
-	for (n = 0; n < num.parentNode.childNodes.length; n++) {
-		if (num.parentNode.childNodes[n].nodeName == "A") {
-			sMax++;
-		}
-	}
+	var div = document.getElementById (div);
+	sMax = names.length;
 
+	for (var i = 0; i < sMax; i++) {
+		var link = document.createElement('a');
+		link.setAttribute ('title', names[i]);
+		link.setAttribute ('id', '_' + i);
+		link.onclick     = rateIt;
+		link.onmouseover = rating;
+		link.onmouseout  = off;
+		div.appendChild (link); 
+	}
+}
+
+// Rollover for image Stars
+function rating ()
+{
 	if (rated)
 		return;
 
-	s = num.id.replace ("_", ''); // Get the selected star
+	s = this.id.replace ("_", ''); // Get the selected star
 	a = 0;
-	for (i = 1; i <= sMax; i++) {
+	for (i = 0; i < sMax; i++) {
 		if (i <= s) {
-			document.getElementById ("_" + i).className = "on" + s;
-			document.getElementById ("rateStatus").innerHTML = num.title;
+			id = "_" + i;
+			on = "on" + s;
+			document.getElementById (id).className = on;
+			document.getElementById ("rateStatus").innerHTML = this.title;
 			holder = a + 1;
 			a++;
 		} else {
@@ -31,7 +42,7 @@ function rating (num)
 }
 
 // For when you roll out of the the whole thing
-function off (me)
+function off ()
 {
 	if (rated)
 		return;
@@ -40,24 +51,24 @@ function off (me)
 		rating (preSet);
 		document.getElementById ("rateStatus").innerHTML = document.getElementById ("ratingSaved").innerHTML;
 	} else {
-		for (i = 1; i <= sMax; i++) {
+		for (i = 0; i < sMax; i++) {
 			document.getElementById ("_" + i).className = "";
-			document.getElementById ("rateStatus").innerHTML = me.parentNode.title;
+			document.getElementById ("rateStatus").innerHTML = this.parentNode.title;
 		}
 	}
 }
 
 // When you actually rate something
-function rateIt (me)
+function rateIt ()
 {
 	if (rated)
 		return;
 
-	document.getElementById ("rateStatus").innerHTML = document.getElementById ("ratingSaved").innerHTML + " :: " + me.title;
-	preSet = me;
+	document.getElementById ("rateStatus").innerHTML = document.getElementById ("ratingSaved").innerHTML + " :: " + this.title;
+	preSet = this;
 	rated = 1;
-	sendRate (me);
-	rating (me);
+	sendRate (this);
+	rating (this);
 }
 
 // Send the rating information somewhere using Ajax or something like that.

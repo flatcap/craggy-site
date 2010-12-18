@@ -20,7 +20,7 @@ function rating (num)
 	a = 0;
 	for (i = 1; i <= sMax; i++) {
 		if (i <= s) {
-			document.getElementById ("_" + i).className = "on";
+			document.getElementById ("_" + i).className = "on" + s;
 			document.getElementById ("rateStatus").innerHTML = num.title;
 			holder = a + 1;
 			a++;

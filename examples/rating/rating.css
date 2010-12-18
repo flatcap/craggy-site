@@ -1,0 +1,8 @@
+#rateStatus{float:left; clear:both; width:100%; height:20px;}
+#rateMe{float:left; clear:both; width:100%; height:auto; padding:0px; margin:0px;}
+#rateMe li{float:left;list-style:none;}
+#rateMe li a:hover,
+#rateMe .on{background:url(star_red.png) no-repeat;}
+#rateMe a{float:left;background:url(star_white.png) no-repeat;width:17px; height:25px;}
+#ratingSaved{display:none;}
+.saved{color:red; }

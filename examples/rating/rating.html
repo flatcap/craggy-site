@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="rating.css" type="text/css">
+	<script type="text/javascript" src="rating.js"></script>
+</head>
+<body>
+	<h1>Rating Demo</h1>
+	<span id="rateStatus">Rate Me...</span>
+	<span id="ratingSaved">Rating Saved!</span> 
+	<div id="rateMe" title="Rate Me...">
+		<a onclick="rateIt(this)" id="_1" title="Easy"       onmouseover="rating(this)" onmouseout="off(this)"></a>
+		<a onclick="rateIt(this)" id="_2" title="Quite Easy" onmouseover="rating(this)" onmouseout="off(this)"></a>
+		<a onclick="rateIt(this)" id="_3" title="Medium"     onmouseover="rating(this)" onmouseout="off(this)"></a>
+		<a onclick="rateIt(this)" id="_4" title="Quite Hard" onmouseover="rating(this)" onmouseout="off(this)"></a>
+		<a onclick="rateIt(this)" id="_5" title="Hard"       onmouseover="rating(this)" onmouseout="off(this)"></a>
+	</div>
+</body>
+</html>

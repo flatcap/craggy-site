@@ -267,8 +267,6 @@ especially default sort order
 
 knobble password on admin dir (on localhost)
 
-validate all html/css/js
-
 fix dark style (for tables)
 or drop it completely
 
@@ -280,8 +278,9 @@ local bin dir
 bash_history for craggy and work dir
 
 add a validation box (below "Route Data")
-validate html, css
+validate all html/css/js
 only for rich user
+http://validator.w3.org/unicorn/check?ucn_uri=craggy.russon.org/routes.php
 
 link the styles table to a route search by that tag
 ie  styles.php/arch links to routes.php?tags=arch
@@ -289,8 +288,6 @@ ie  styles.php/arch links to routes.php?tags=arch
 summary tag on tables
 
 fix_justification - heuristic that looks for numbers
-
-work out the sql to generate the stats/colour table directly
 
 turn off analytics for home (on russon.org)
 
@@ -370,4 +367,6 @@ database_pull.sh
 database_push.sh
 
 date_set / date_climbed NULL? if unknown
+
+use css, not &nbsp; to separate buttons!
 

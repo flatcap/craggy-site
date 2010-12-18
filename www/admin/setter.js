@@ -34,6 +34,8 @@ var button_add;
 var button_edit;
 var button_delete;
 var button_list;
+var button_save;
+var button_cancel;
 
 var list_ticks;
 var setter_data;
@@ -135,6 +137,12 @@ function click_edit()
 	txt += "<input type='submit' type='button' id='button_cancel' value='Cancel'>";
 
 	work.innerHTML = txt;
+
+	button_save   = document.getElementById ('button_save');
+	button_cancel = document.getElementById ('button_cancel');
+
+	button_save.onclick   = callback_save;
+	button_cancel.onclick = callback_cancel;
 
 	// Disable edit, delete, list
 }
@@ -294,6 +302,17 @@ function callback_list()
 	initialise_ticks();
 	initialise_rows();
 	buttons_update();
+}
+
+
+function callback_save()
+{
+	alert ('save');
+}
+
+function callback_cancel()
+{
+	alert ('cancel');
 }
 
 

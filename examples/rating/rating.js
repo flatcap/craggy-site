@@ -49,11 +49,11 @@ function rating_status (text)
 
 function rating_refresh (item)
 {
+	rating_status (item.title);
 	s = item.id.replace ("_", '');
 	for (i = 0; i < star_count; i++) {
 		if (i <= s) {
 			document.getElementById ("_" + i).className = "on" + s;
-			rating_status (item.title);
 		} else {
 			document.getElementById ("_" + i).className = "";
 		}
@@ -69,7 +69,7 @@ function rating_click()
 	} else {
 		rating_status (this.title + " - Saved");
 		rated = 1;
-		//alert ("Your rating was: " + sel.title);
+		//alert ("Your rating was: " + this.title);
 	}
 }
 

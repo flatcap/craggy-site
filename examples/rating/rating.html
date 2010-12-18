@@ -7,11 +7,22 @@
 <body>
 	<h1>Rating Demo</h1>
 
-	<div id="rateMe" title="Difficulty:"></div>
-	<span id="status">Difficulty:</span>
+	<span id="status_d"></span>
+	<div id="wibble"></div>
+
+	<span id="status_s"></span>
+	<div id="hatstand"></div>
+
 	<script type="text/javascript">
-		var names = ["Very Easy", "Easy", "Medium", "Hard", "Very Hard" ];
-		rating_initialise("rateMe", names, "Difficulty", 'status');
+		var diff_id   = [ '0', '1', '2', '3', '4'];
+		var diff_text = [ "Very Easy", "Easy", "Medium", "Hard", "Very Hard" ];
+		var diff_css  = [ "on0", "on1", "on2", "on3", "on4" ];
+		rating_initialise("wibble", 'status_d', "Difficulty", diff_id, diff_text, diff_css);
+
+		var climb_id   = [ 'F', 'S', 'C', 'D'];
+		var climb_text = [ "Failed", "Success", "Clean", "Downclimb" ];
+		var climb_css  = [ "on0", "on0", "on0", "on0", "on0" ];
+		rating_initialise("hatstand", 'status_s', "Success", climb_id, climb_text, climb_css);
 	</script>
 </body>
 </html>

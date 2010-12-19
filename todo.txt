@@ -338,7 +338,8 @@ utils functions (if global var not set, query db)
 	etc
 
 allow null setter => unknown
-change empty setter => Features
+change empty setter => Features or Unknown?
+alter table craggy_route change column setter_id setter_id int(11) null;
 
 admin/rich-ness dependent on cookie session
 
@@ -370,6 +371,4 @@ database_push.sh
 date_set / date_climbed NULL? if unknown
 
 use css, not &nbsp; to separate buttons!
-
-rating doesn't display the default text on mouseout
 

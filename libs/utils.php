@@ -36,8 +36,9 @@ function html_menu($reldir = "")
 
 	if (isset ($_SERVER)) {
 		if (array_key_exists ("PHP_SELF", $_SERVER))
-			$rich = strstr ($_SERVER["PHP_SELF"], "rich");
-		if (array_key_exists ("REMOTE_ADDR", $_SERVER))
+			$rich = strstr ($_SERVER["PHP_SELF"], "/rich/") ||
+				strstr ($_SERVER["PHP_SELF"], "/admin/");
+		if (!$rich && array_key_exists ("REMOTE_ADDR", $_SERVER))
 			$rich = (($_SERVER['REMOTE_ADDR'] == "127.0.0.1") ||
 				 ($_SERVER['REMOTE_ADDR'] == "192.168.2.2") ||
 				 ($_SERVER['REMOTE_ADDR'] == "192.168.2.3") ||

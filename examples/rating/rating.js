@@ -12,6 +12,7 @@ function rating_initialise (div, status, desc, ids, texts, css)
 	var index = all_id.length;
 	div.className = "rating"
 	div.id = index;
+	div.title = desc;
 
 	all_id.push     (ids);
 	all_text.push   (texts);
@@ -72,11 +73,11 @@ function rating_mouseout()
 	var div = get_div (this);
 	var star_count = all_id[index].length;
 
+	rating_status (index, this.parentNode.title);
 	var children = div.childNodes;
 	var c = get_star (index, this);
 	for (var i = 0; i < children.length; i++) {
 		children[i].className = "";
-		rating_status (index, this.parentNode.title);
 	}
 }
 

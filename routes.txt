@@ -21,7 +21,8 @@ mc 16/12/2010
 18 Purple/White 4+, Green 5+
 
 mh 17/12/2010
-39 Purple 4+, Yellow 6a, Red/White 6b
-40 White 4, Orange 6a+ (arete for hands), Grey 6b
-41 Blue 5, Green 5+, Brown 6a
+39 Purple 4+, Blue 6a, Yellow 6b
+40 White 4, Orange 6a+ (arete for hands), Red/White 6b
+41 Blue 4+, Yellow 5, Brown 6a
+
 

@@ -9,7 +9,7 @@ set ylabel "Number of Climbs"
 set xtics nomirror
 set ytics nomirror
 set border 3
-set yrange [0:80]
+set yrange [0:100]
 #set clip one
 
 set style data lines

@@ -371,3 +371,5 @@ date_set / date_climbed NULL? if unknown
 
 use css, not &nbsp; to separate buttons!
 
+rating doesn't display the default text on mouseout
+

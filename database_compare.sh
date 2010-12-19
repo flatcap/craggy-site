@@ -3,9 +3,11 @@
 #OPTS="--no-data"
 OPTS=""
 
-mysqldump $OPTS -h127.0.0.1 -P3307 -ubackup -pphokio10 craggy | sed -e '/^-- Server version/d' \
-								    -e 's/^-- Host: 127.0.0.1/-- Host: russon.org/' \
-							> craggy_russon.sql
+if [ ! -f craggy_russon.sql ]; then
+	mysqldump $OPTS -h127.0.0.1 -P3307 -ubackup -pphokio10 craggy | sed -e '/^-- Server version/d' \
+									    -e 's/^-- Host: 127.0.0.1/-- Host: russon.org/' \
+								> craggy_russon.sql
+fi
 
 mysqldump $OPTS -h127.0.0.1 -P3306 -ucraggy            craggy | sed -e '/^-- Server version/d' \
 								    -e 's/^-- Host: 127.0.0.1/-- Host: flatcap.org/' \

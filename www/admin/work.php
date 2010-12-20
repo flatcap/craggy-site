@@ -56,78 +56,64 @@ function db_delete($table, $join_tables, $where)
 
 function setter_delete_query ($data)
 {
+	// VALIDATE USER DATA
+	// $data
 	$id_list = explode (',', $data);
-
-	$route_count  = 0;
-	$climb_count  = 0;
-	$setter_count = 0;
-
-	// How many routes will be deleted?
-	$table  = "craggy_route";
-	$column = "id";
-	foreach ($id_list as $id) {
-		$where = "setter_id = $id";
-		$route_count += db_count ($table, $column, $where);
-	}
-
-	// How many climbs will be deleted?
-	$table  = "craggy_setter, craggy_route, craggy_climb";
-	$column = "craggy_setter.id";
-	$where  = "craggy_route.setter_id = craggy_setter.id and " .
-		  "craggy_climb.route_id = craggy_route.id and ";
-	foreach ($id_list as $id) {
-		$where2 = $where . "craggy_setter.id = $id";
-		$climb_count += db_count ($table, $column, $where2);
-	}
 
 	// How many setters will be deleted?
 	$setter_count = count ($id_list);
 
-	// <setter_delete>
+	// How many routes will be deleted?
+	$table  = "craggy_route";
+	$column = "setter_id";
+	$where  = "setter_id in ($data)";
+	$route_count = db_count ($table, $column, $where);
+
+	// How many climbs will be deleted?
+	$table  = "craggy_setter, craggy_route, craggy_climb";
+	$column = "craggy_setter.id";
+	$where  = "(craggy_route.setter_id = craggy_setter.id) and " .
+		  "(craggy_climb.route_id = craggy_route.id) and " .
+		  "(craggy_setter.id in ($data))";
+	$climb_count = db_count ($table, $column, $where);
+
+	// <result type='setter' action='delete_query'>
 	//     <setter>4</setter>
 	//     <route>75</route>
 	//     <climb>1900</climb>
-	// </setter_delete>
+	// </result>
 	return sprintf ("Delete:\n\t%d setters,\n\t%d routes,\n\t%d climbs?", $setter_count, $route_count, $climb_count);
 }
 
 function setter_delete ($data)
 {
+	// VALIDATE USER DATA
+	// $data
 	$id_list = explode (',', $data);
-
-	$climb_count  = 0;
-	$route_count  = 0;
-	$setter_count = 0;
 
 	// How many climbs will be deleted?
 	$table      = "craggy_climb";
 	$join_table = "craggy_climb, craggy_route, craggy_setter";
-	foreach ($id_list as $id) {
-		$where = "(craggy_climb.route_id = craggy_route.id) and (craggy_route.setter_id = craggy_setter.id) and (craggy_setter.id = $id)";
-		$climb_count += db_delete ($table, $join_table, $where);
-	}
+	$where = "(craggy_climb.route_id = craggy_route.id) and (craggy_route.setter_id = craggy_setter.id) and (craggy_setter.id in ($data))";
+	$climb_count = db_delete ($table, $join_table, $where);
 
 	// How many routes will be deleted?
 	$table = "";
 	$join_table = "craggy_route";
-	foreach ($id_list as $id) {
-		$where = "setter_id = $id";
-		$route_count += db_delete ($table, $join_table, $where);
-	}
+	$where = "setter_id in ($data)";
+	$route_count = db_delete ($table, $join_table, $where);
 
 	// How many setters will be deleted?
 	$table = "";
 	$join_table = "craggy_setter";
-	foreach ($id_list as $id) {
-		$where = "id = $id";
-		$setter_count += db_delete ($table, $join_table, $where);
-	}
+	$where = "id in ($data)";
+	$setter_count = db_delete ($table, $join_table, $where);
 
-	// <setter_delete>
+	// <result type='setter' action='delete_query'>
 	//     <setter>4</setter>
 	//     <route>75</route>
 	//     <climb>1900</climb>
-	// </setter_delete>
+	// </result>
 	return sprintf ("DELETED:\n\t%d setters,\n\t%d routes,\n\t%d climbs.", $setter_count, $route_count, $climb_count);
 }
 

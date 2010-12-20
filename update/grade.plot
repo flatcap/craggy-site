@@ -14,14 +14,17 @@ set border 3
 set style data lines
 set yrange [0:55]
 
-set style line 1 lt 1 lw 3 lc rgb "#6688ff"
+set style line 1 lt 1 lw 2 lc rgb "#6688ff"
 set style line 2 lt 1 lw 2 lc rgb "#ff4444"
 set style line 3 lt 1 lw 1 lc rgb "#dddddd"
+set style line 4 lt 1 lw 2 lc rgb "#44ff44"
 
 set grid ytics mytics xtics ls 3
 
 plot	"grade.dat" using 2:xtic(1) ls 1 title "Climbs", \
 	"grade.dat" using 4:xtic(1) ls 2 title "Leads"
+
+	#"grade.dat" using 5:xtic(1) ls 4 title "Boulders"
 
 #set style data histogram
 #set boxwidth 0.75

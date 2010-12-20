@@ -375,3 +375,5 @@ use css, not &nbsp; to separate buttons!
 
 don't display "First Name, Surname", just display "Name"
 
+drop competition references?
+

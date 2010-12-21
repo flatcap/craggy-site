@@ -1,0 +1,37 @@
+Default route notes
+        ===========
+
+Features	hands, feet
+Holds		hands, feet
+Volumes		hands, feet
+Aretes		hands, pinches
+
+Define:
+	Palming
+	Smearing
+	Bridging
+	Sit start
+	Match finish
+	Chimney
+	Features only routes
+
+Clean, Success, Fail - Sitting on route vs resting whilst climbing
+
+List defaults
+List exceptions
+
+Traverse
+Climb
+Bouldering
+
+Difficulty of grades
+French sport grade
+Boulder grades - why?
+
+Dynos, Reach, Spread of grades
+
+Get boulder grade list
+graph it, overlay with top ropes and leads
+
+list traverse length and grades on website
+

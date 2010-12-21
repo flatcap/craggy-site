@@ -48,3 +48,24 @@ M	6a -> 6b+
 H	6c -> 7a+
 VH	7b+
 
+
+table: craggy_boulder
+	id
+	sequence
+	colour_id
+	grade_id
+	setter_id
+	notes
+	room_id
+	date_set
+	date_end
+
+table: craggy_room
+	id
+	name
+	description
+
+rock_room
+comp_room
+guildford
+

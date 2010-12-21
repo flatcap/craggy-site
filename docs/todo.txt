@@ -366,7 +366,6 @@ FORBID any caching on local host
 
 database_copy.sh
 copy russon.org/craggy to flatcap.org
-database_pull.sh
 database_push.sh
 
 date_set / date_climbed NULL? if unknown
@@ -375,5 +374,5 @@ use css, not &nbsp; to separate buttons!
 
 don't display "First Name, Surname", just display "Name"
 
-drop competition references?
+graph sutton grades
 

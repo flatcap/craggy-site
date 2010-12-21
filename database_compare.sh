@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#OPTS="--no-data"
-OPTS="--skip-extended-insert --add-drop-database --compact --database craggy --skip-dump-date --single-transaction"
+#OPTS="--compact --no-data"
+OPTS="--skip-extended-insert --add-drop-database --database craggy --skip-dump-date --single-transaction"
 
 
 if [ ! -f craggy_russon.sql ]; then
@@ -15,5 +15,5 @@ mysqldump $OPTS -h127.0.0.1 -P3306 -ucraggy            | sed -e '/^-- Server ver
 							> craggy_flatcap.sql
 
 
-dwdiff -c -C 5 --color=red,yellow craggy_russon.sql craggy_flatcap.sql | less -E
+dwdiff -c -C 3 --color=red,yellow craggy_russon.sql craggy_flatcap.sql | less -E
 

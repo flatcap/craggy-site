@@ -7,38 +7,41 @@ include "utils.php";
 
 function age_main()
 {
+	$output = "";
+
 	$table   = "v_route";
-	$columns = array ("id", "date_set");
-	$order   = "date_set";
+	$columns = array("id", "date_set");
 
-	$list = db_select($table, $columns, NULL, $order);
+	$list = db_select($table, $columns);
 
-	process_date ($list, "date_set", TRUE);
-
-	$max_age = 7;
 	$totals = array();
-	for ($i = 0; $i < $max_age; $i++)
-		$totals["$i"] = 0;
+	for ($i = -1; $i < 8; $i++) {
+		$totals[$i] = array ('age' => $i, 'count' => 0);
+	}
+	$totals[-1]['age'] = "N/A";
 
+	$today = strtotime ("today");
 	foreach ($list as $row) {
-		if (empty ($row['months']))
-			continue;
-		$m = intval (round ($row['months']));
-		if ($m > 6)
-			$m = 7;
-		if (array_key_exists ($m, $totals))
-			$totals[$m]++;
+		$date = $row['date_set'];
+		if (empty ($date) || ($date == "0000-00-00"))
+			$age = -1;
 		else
-			$totals[$m] = 1;
+			$age = floor (($today - strtotime ($row['date_set'])) / 2635200);
+
+		if ($age > 7)
+			$age = 7;
+
+		$totals[$age]['count']++;
 	}
 
-	$output = "";
-	foreach ($totals as $months => $count) {
-		$output .= sprintf ("%d\t%d\n", $months, $count);
+	array_shift ($totals);
+	foreach  ($totals as $age => $count) {
+		$output .= "$age\t{$count['count']}\n";
 	}
 
 	return $output;
 }
+
 
 echo age_main();
 

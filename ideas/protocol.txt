@@ -1,0 +1,4 @@
+       ·   --protocol={TCP|SOCKET|PIPE|MEMORY}
+
+           The connection protocol to use for connecting to the server. It is useful when the other connection parameters normally would cause a protocol to be used
+           other than the one you want. For details on the permissible values, see Section 4.2.2, “Connecting to the MySQL Server”.

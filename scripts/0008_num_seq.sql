@@ -1,4 +1,4 @@
-# channge (grade|panel)_num to (grade|panel)_seq
+# change (grade|panel)_num to (grade|panel)_seq
 
 drop view v_route;
 create view v_route as

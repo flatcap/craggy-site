@@ -232,8 +232,6 @@ for new routes, queue the changes
 	commit changes button -> update db; create rss!
 	backup data first?
 
-cascade delete on routes?
-
 eliminate the views?
 make them more useful?
 
@@ -289,6 +287,8 @@ ie  styles.php/arch links to routes.php?tags=arch
 summary tag on tables
 
 fix_justification - heuristic that looks for numbers
+exceptions - height(m)
+move to render?  what about exceptions
 
 turn off analytics for home (on russon.org)
 
@@ -359,6 +359,7 @@ cursor: pointer;
 table rows that are clickable and buttons that are disabled
 
 css menus?
+how do they interact with search engines
 
 use js to highlight current link in menubar
 

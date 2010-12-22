@@ -1,4 +1,4 @@
-# Tidy up the setter table
+# tidy up the setter table
 
 set foreign_key_checks = 0;
 

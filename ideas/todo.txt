@@ -377,3 +377,5 @@ don't display "First Name, Surname", just display "Name"
 
 graph sutton grades
 
+add check tables to cron
+

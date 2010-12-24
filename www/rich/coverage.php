@@ -9,12 +9,12 @@ function coverage_get_data()
 {
 	$table   = "craggy_climb";
 	$columns = array ("id", "route_id", "success_id as success", "onsight");
-	$where   = "climber_id = 1";
+	$where   = array ("climber_id = 1", "active = true");
 	$order   = "route_id";
 
 	$climbs = db_select($table, $columns, $where, $order);
 
-	$num_routes  = db_count ('craggy_route', 'id', NULL);
+	$num_routes  = db_count ('craggy_route', 'id', 'date_end is null');
 	$num_tried   = 0;
 	$num_clean   = 0;
 	$num_onsight = 0;

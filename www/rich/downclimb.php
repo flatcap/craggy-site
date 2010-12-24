@@ -33,7 +33,7 @@ function downclimb_main ($options)
 			"craggy_difficulty.description as difficulty",
 			"craggy_climb.notes as notes");
 
-	$where   = array ("success_id <> 4", "craggy_grade.sequence < 400");
+	$where   = array ("success_id <> 4", "craggy_grade.sequence < 400", "craggy_climb.active = true");
 	$order = "panel_seq, grade_seq, colour";
 
 	$list = db_select($table, $columns, $where, $order);

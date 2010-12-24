@@ -379,3 +379,5 @@ graph sutton grades
 
 add check tables to cron
 
+last modified date on all pages (in footer)
+

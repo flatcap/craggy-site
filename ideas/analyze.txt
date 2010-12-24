@@ -1,0 +1,4 @@
+Use mysqlcheck -Aa -uroot -p to run analyze table for all databases and tables
+(including InnoDB) on a running server. Available in MySQL 3.23.38 and later.
+
+Note that ANALYZE TABLE requires SELECT and INSERT privileges, only (LOCK TABLES is not needed).

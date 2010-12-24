@@ -1,0 +1,31 @@
+test> select * from route,climb where climb.route_id = route.id;
++----+--------+----+----------+---------+
+| id | colour | id | route_id | success |
++----+--------+----+----------+---------+
+|  3 | blue   |  1 |        3 | failed  |
+|  4 | beige  |  2 |        4 | success |
+|  4 | beige  |  3 |        4 | clean   |
+|  5 | tiger  |  4 |        5 | clean   |
++----+--------+----+----------+---------+
+test> select * from route left join climb on (climb.route_id = route.id);
++----+--------+------+----------+---------+
+| id | colour | id   | route_id | success |
++----+--------+------+----------+---------+
+|  1 | red    | NULL |     NULL | NULL    |
+|  2 | green  | NULL |     NULL | NULL    |
+|  3 | blue   |    1 |        3 | failed  |
+|  4 | beige  |    2 |        4 | success |
+|  4 | beige  |    3 |        4 | clean   |
+|  5 | tiger  |    4 |        5 | clean   |
++----+--------+------+----------+---------+
+
+craggy> select success_id,count(*) from craggy_route left join craggy_climb on (craggy_climb.route_id = craggy_route.id) where date_end is null group by success_id;
++------------+----------+
+| success_id | count(*) |
++------------+----------+
+|       NULL |      115 |
+|          1 |        6 |
+|          2 |       16 |
+|          3 |       44 |
+|          4 |       91 |
++------------+----------+

@@ -1,4 +1,4 @@
-for i in $(mysql -sN <<< "show tables"); do
+for i in $(mysql -sN -e "show tables"); do
 	mysql -s -e "check table $i extended;"
 done
 

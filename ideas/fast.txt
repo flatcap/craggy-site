@@ -1,0 +1,14 @@
+some examples of queries that are very fast:
+
+select count(*) from tbl_name;
+
+select min(key_part1),max(key_part1) from tbl_name;
+
+select max(key_part2) from tbl_name
+  where key_part1=constant;
+
+select ... from tbl_name
+  order by key_part1,key_part2,... limit 10;
+
+select ... from tbl_name
+  order by key_part1 desc, key_part2 desc, ... limit 10;

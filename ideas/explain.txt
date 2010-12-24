@@ -1,0 +1,4 @@
+With the help of EXPLAIN, you can see where you should add indexes to tables to
+get a faster SELECT that uses indexes to find rows. You can also use EXPLAIN to
+check whether the optimizer joins the tables in an optimal order.
+

@@ -1,0 +1,11 @@
+If you need to "hard" sort a table, i.e. you want the table to be sorted in
+some predefined order, so that your query doesn't have to do it, use the
+following syntax:
+
+alter table `yourtablename` order by `yourfieldname` desc;
+
+In this case, when you execute:
+
+select * from `yourtablename` limit 1;
+
+you get the record for which yourfieldname is the largest.

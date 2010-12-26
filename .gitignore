@@ -6,6 +6,7 @@ logs/
 /.*
 libs/conf.php
 www/admin/.htaccess
+/indices
 
 # Generated files / Junk
 schema.png

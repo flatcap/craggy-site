@@ -131,7 +131,7 @@ function buffer_main()
 {
 	global $_GET;
 
-	//$output = "<?xml version='1.0' encoding='UTF-8' standalone='yes'? >\n";  don't forget to delete the space after ?
+	$output = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?" . ">\n";
 
 	if (isset ($_GET) && array_key_exists ('action', $_GET))
 		$action = $_GET["action"];
@@ -140,20 +140,20 @@ function buffer_main()
 
 	switch ($action) {
 		case 'read':
-			$output = buffer_read();
+			$output .= buffer_read();
 			break;
 		case 'clear':
 			buffer_cache_clear();
-			$output = "<data notes='cache cleared'></data>";
+			$output .= "<data notes='cache cleared'></data>";
 			break;
 		case 'keep':
 			buffer_cache_keep();
 			$expiry = buffer_cache_expiry();
 			$notes = "cache kept";
-			$output = "<data cache_expiry='$expiry' notes='$notes'></data>\n";
+			$output .= "<data cache_expiry='$expiry' notes='$notes'></data>\n";
 			break;
 		default:
-			$output = "<data notes='unknown action'></data>\n";
+			$output .= "<data notes='unknown action'></data>\n";
 			break;
 	}
 

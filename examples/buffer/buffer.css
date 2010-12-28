@@ -1,0 +1,14 @@
+body {
+	background: black;
+	color: white;
+}
+
+div {
+	padding: 5px;
+}
+
+input {
+	margin: 5px;
+	border: 1px solid white;
+}
+

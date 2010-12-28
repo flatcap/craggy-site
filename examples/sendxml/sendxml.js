@@ -1,6 +1,7 @@
 var xmlhttp;
 
-function loadxmldoc() {
+function loadxmldoc()
+{
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
@@ -24,7 +25,8 @@ function loadxmldoc() {
 	xmlhttp.send (xmlbody);
 }
 
-function buildxmlresults() {
+function buildxmlresults()
+{
 	if ((xmlhttp.readyState != 4) || (xmlhttp.status != 200))
 		return;
 

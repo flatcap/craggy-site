@@ -30,11 +30,12 @@
 			}
 			xmlhttp.onreadystatechange=function()
 			{
-				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-					form.results.innerHTML += xmlhttp.responseText + "\n";
-					form.txt1.value = "";
-					form.txt1.focus();
-				}
+				if ((xmlhttp.readyState != 4) || (xmlhttp.status != 200))
+					return;
+
+				form.results.innerHTML += xmlhttp.responseText + "\n";
+				form.txt1.value = "";
+				form.txt1.focus();
 			}
 			xmlhttp.open("GET","getclimbs.php?r="+form.txt1.value,true);
 			xmlhttp.send();
@@ -55,9 +56,9 @@
 			}
 			xmlhttp.onreadystatechange=function()
 			{
-				if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-					document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-				}
+				if ((xmlhttp.readyState != 4) || (xmlhttp.status != 200))
+					return;
+				document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
 			}
 			xmlhttp.open("GET","getclimbs.php?q="+str,true);
 			xmlhttp.send();

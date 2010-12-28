@@ -12,18 +12,19 @@ function route_initialise (entry_id, matches_id)
 
 function route_callback()
 {
-	if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
-		var response = xmlhttp.responseText;
+	if ((xmlhttp.readyState != 4) || (xmlhttp.status != 200))
+		return;
 
-		split = response.indexOf (" - ");
-		if (split >= 0) {
-			start = response.substring (0, split);
-			end   = response.substring (split+3);
-			route_entry.value = start;
-			route_matches.innerHTML = end;
-		} else {
-			route_matches.innerHTML = response;
-		}
+	var response = xmlhttp.responseText;
+
+	split = response.indexOf (" - ");
+	if (split >= 0) {
+		start = response.substring (0, split);
+		end   = response.substring (split+3);
+		route_entry.value = start;
+		route_matches.innerHTML = end;
+	} else {
+		route_matches.innerHTML = response;
 	}
 }
 

@@ -25,19 +25,20 @@ function date_onfocus()
 
 function date_callback()
 {
-	if ((xmlhttp.readyState == 4) && (xmlhttp.status == 200)) {
-		var response = xmlhttp.responseText;
-		if (response.length == 0)
-			return;
+	if ((xmlhttp.readyState != 4) || (xmlhttp.status != 200))
+		return;
 
-		var bra = response.indexOf ('(');
-		var ket = response.indexOf (')', bra);
+	var response = xmlhttp.responseText;
+	if (response.length == 0)
+		return;
 
-		if ((bra == -1) || (ket == -1)) {
-			date_match.innerHTML = response;
-		} else {
-			date_match.innerHTML = response.substring (bra+1, ket);
-		}
+	var bra = response.indexOf ('(');
+	var ket = response.indexOf (')', bra);
+
+	if ((bra == -1) || (ket == -1)) {
+		date_match.innerHTML = response;
+	} else {
+		date_match.innerHTML = response.substring (bra+1, ket);
 	}
 }
 

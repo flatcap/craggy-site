@@ -43,7 +43,7 @@ function buffer_cache_put ($list)
 	buffer_cache_clear();
 	buffer_cache_keep();
 
-	$data   = serialize ($list);
+	$data = serialize ($list);
 	apc_store ('6a_list',   $data);
 }
 

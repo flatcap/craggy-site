@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# -f = force
+[ "x$1" = "x-f" ] && rm -f craggy_russon.sql
+
 #OPTS="--compact --no-data"
 OPTS="--skip-extended-insert --add-drop-database --database craggy --skip-dump-date --single-transaction"
 

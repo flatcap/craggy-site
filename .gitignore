@@ -9,9 +9,12 @@ www/admin/.htaccess
 /indices
 
 # Generated files / Junk
-schema.png
-tags
-www/img/age.png
-www/img/colour.png
-www/img/grade.png
+/craggy_flatcap.sql
+/craggy_russon_compact.sql
+/craggy_russon.sql
+/schema.png
 .*.swp
+tags
+/www/img/age.png
+/www/img/colour.png
+/www/img/grade.png

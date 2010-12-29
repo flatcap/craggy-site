@@ -29,14 +29,14 @@ paste	<(sort --random-sort $BOYS)											\
 # 200 routes
 #  21 colours
 #  86 panels
-#  21 grades
+#  20 grades
 #  10 setters
 # 200 max days old
 echo "insert into craggy_route (panel_id, colour_id, grade_id, setter_id, date_set) values"
 for ((i = 0; i < 200; i++)); do
 	PANEL=$((RANDOM%86+1))
 	COLOUR=$((RANDOM%21+1))
-	GRADE=$((RANDOM%21+1))
+	GRADE=$((RANDOM%20+1))
 	SETTER=$((RANDOM%10+1))
 
 	YEAR=2010

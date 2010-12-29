@@ -348,10 +348,6 @@ utils functions (if global var not set, query db)
 	utils_get_colour
 	etc
 
-allow null setter => unknown
-change empty setter => Features or Unknown?
-alter table craggy_route change column setter_id setter_id int(11) null;
-
 admin/rich-ness dependent on cookie session
 
 integrate admin utils into normal pages
@@ -379,8 +375,6 @@ database_copy.sh
 copy russon.org/craggy to flatcap.org
 database_push.sh
 
-date_set / date_climbed NULL? if unknown
-
 use css, not &nbsp; to separate buttons!
 
 don't display "First Name, Surname", just display "Name"
@@ -393,6 +387,12 @@ last modified date on all pages (in footer)
 
 add "generated in x seconds" to every page - rich only
 total time, or db time, or both?
+
+date_set / date_climbed NULL? if unknown
+
+allow null setter => unknown
+change empty setter => Features or Unknown?
+alter table craggy_route change column setter_id setter_id int(11) null;
 
 on db deletion
 route
@@ -413,8 +413,6 @@ if notes is a separate tables, how do I insert?
 climb_type -> climbtype?
 
 search sql, any "order by" => *index*
-
-craggy_route: move notes after setter_id
 
 russon.org as replications server - replicate hourly to craggy_russon table!
 pull replications, cron/replication server

@@ -1,0 +1,35 @@
+craggy_climb isn't normalised
+
+	climb	id
+		climber_id
+		route_id
+		date_climbed
+		success_id
+
+However - these refer to the route
+	nice
+	onsight
+	difficulty_id
+
+put them in a new table: (called what?)
+	id
+	climber_id
+	route_id
+	nice
+	onsight
+	difficulty_id
+
+What about notes:
+	Are they _climb_ notes? - what I thought about the climb?
+	Are they _route_ notes? - what I thought about the route?
+
+Why not both?  Confusing
+
+craggy_{setter,climber} are both people - coalesce
+
+craggy_person
+	id
+	first_name
+	surname
+	nickname	- for setters: if nickname, else generate initials
+

@@ -1,7 +1,0 @@
-craggy> show create database craggy \G
-*************************** 1. row ***************************
-Database: craggy
-Create Database: CREATE DATABASE `craggy` /*!40100 DEFAULT CHARACTER SET latin1 */
-
-alter database craggy character set utf8;
-

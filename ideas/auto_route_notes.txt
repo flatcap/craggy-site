@@ -1,0 +1,39 @@
+Auto generate route notes
+
+use the tags on the panel to auto-generate route notes
+
+Add tags for volumes as/when necessary
+
+Example:
+	Route 37 Red
+	Panel 37 tags: wall, arete, volume
+	=> notes:
+		No hands on aretes
+		Hands allowed on volumes
+		Feet allowed on volumes
+	
+	Route 40 Orange
+	Panel 40 tags: slab, arete
+	=> notes:
+		No hands on arete [tick] -> uncheck this default
+
+	Route 51 Red
+	Panel 51 tags: wall
+	=> notes:
+		<none>
+	
+
+Each route note needs to link to its opposite
+	No hands on arete <--> Hands allowed on arete
+
+Need links from tags to notes
+
+	Tag	Default		Opposite
+	arete	No hands	Hands allowed
+	volume	Hands allowed	No hands
+	volume	Feet allowed	No feet
+	etc
+
+add discs to list of features
+
+

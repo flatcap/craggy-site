@@ -1,0 +1,9 @@
+grades
+	need reorder button
+	work in place - in list area?
+		no hide list completely
+	each row has ^ V buttons, or refresh button?
+	do I display grade num?
+			yes is maps to a *linear*scale*
+	save button to commit
+

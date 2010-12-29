@@ -13,6 +13,7 @@ notes in "", or ''
 after decoding, any ambiguities need to be left for the climber to add info
 eg, 66 bl (Blue or Black)
 too difficult to resolve, did they mean 65 Blue or 67 Black
+on climb matcher add fuzzy tickbox which brackets panel selection +/-1
 
 after extra editing, hit search again to fill in details
 
@@ -23,7 +24,7 @@ colours need abbr list
 
 climb list: climb id, date, notes
 current flag? (indexed)
-altering routes can invalidate the climbs
+altering routes *CAN* invalidate the climbs	=> option -> rss update
 tickboxes for clean (enough), downclimb, no feet, etc
 
 tickbox fuzzy grade +/- 2 options, panel +/- 2 nums
@@ -97,6 +98,7 @@ add get_errors to all?
 or just in php
 or just in txt
 _log_ but don't display errors, how?
+add as a footer, _rich_ only
 
 --------------------------------------------------------------------------------
 
@@ -195,6 +197,9 @@ how do we determine the "best" climb?
 list all climbs (best available)
 	put a "+" if multiple climbs exist
 	+ expands the table to show all climbs of that route
+best => best (highest numbered) success value
+	latest date
+	notes (singular)
 
 46 rd(d) clean "desc" - date
 53 all(d) clean
@@ -211,6 +216,7 @@ colour suffix
 	only need to combine success + nice
 "text"	description
 date
+what about (1f) - 1 fall -> success; (2f) - 2 falls, (2r) - 2 rests
 
 move schema into craggy git
 
@@ -313,7 +319,7 @@ create an ip-address checker
 is this a rich or not?
 	rich_ip check:
 
-	192.168.2.0/24
+	192.168.2.0/24		- put this all in a conf file?
 	127.0.0.0/8
 
 	82.8.178.149	home.russon.org
@@ -329,7 +335,7 @@ change the css to avoid the 4 * &nbsp; in the table headers
 
 flatten rich/* into main dir
 
-global variables
+global variables - make into OBJECTS (colour->id, colour->abbr)
 	g_colour
 	g_grade
 	g_success
@@ -383,4 +389,76 @@ last modified date on all pages (in footer)
 
 add "generated in x seconds" to every page - rich only
 total time, or db time, or both?
+
+on db deletion
+route
+	grade_id = NULL		=> unknown grade
+	setter_id = NULL	=> unknown setter
+	panel_id		NOT NULL
+	colour_id		NOT NULL
+	notes = NULL		=> default rules apply
+	climb_type_id		NOT NULL
+climb
+	climber_id		NOT NULL
+	route_id		NOT_NULL
+	success_id		NOT_NULL
+	difficulty_id = NULL	=> not specified
+
+if notes is a separate tables, how do I insert?
+
+climb_type -> climbtype?
+
+search sql, any "order by" => *index*
+
+craggy_route: move notes after setter_id
+
+russon.org as replications server - replicate hourly to craggy_russon table!
+pull replications, cron/replication server
+
+trigger for last updated on route table?
+on insert/update adopt most recent date?
+
+272 routes, 78 have notes (29%), 194 don't (21 distinct)
+203 climbs, 56 have notes (28%), 147 don't (41 distinct)
+
+export climbs as csv for logged-in climbers
+calculate *their* stats - mean grade / climb type
+
+suggestions box
+
+setter/climber - enter names in one box
+	concat / split as necessary
+	use '_' to force a join, van_de_Graaf (filter out '_')
+
+initials -> nickname?
+	default to initials
+	or optional
+
+rate climbs - add comments - suggest grade
+
+add footer to all pages
+	last updated
+	copyright
+	etc
+	validators - rich only?
+
+routes - start_date, end_date
+end_date = midday, start_date = 12:01pm
+validate climb against these dates?
+on route end - what do we do to climbs?
+	flag them?
+	old climb table?
+
+tags on climbs: reachy, crimpy, strenuous, etc
+
+* x 5 hover over them to select difficulty - colour-coded
+ratings display 5 outline stars, on hover colour them, then select one, others grey
+ratings, easy, medium, hard, green, amber, red, VERY easy, VERY hard star + *!* in easy/hard colour
+display difficulty as icon? - colour blind? E!,E,M,H,H! alt-text -> add to db table?
+
+climb notes and route notes are mostly empty - move into separate tables?
+
+search for existing *matching* notes and use same id. edit -> COW
+
+sql-logging, sync between home and live, stored procedures?, partitioning?
 

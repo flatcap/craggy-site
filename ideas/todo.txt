@@ -381,3 +381,6 @@ add check tables to cron
 
 last modified date on all pages (in footer)
 
+add "generated in x seconds" to every page - rich only
+total time, or db time, or both?
+

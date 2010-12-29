@@ -132,6 +132,10 @@ crontab backup of russon.org/sql
 use rdiff-backup
 
 symlink conf.php from somewhere else?
+../conf (excluded from git)
+admin.conf
+rich.conf
+craggy.conf
 
 remove onsight, generate it
 
@@ -462,4 +466,10 @@ climb notes and route notes are mostly empty - move into separate tables?
 search for existing *matching* notes and use same id. edit -> COW
 
 sql-logging, sync between home and live, stored procedures?, partitioning?
+
+need view(s) encompassing
+	craggy_route
+	craggy_rating
+	craggy_climber
+	craggy_climb
 

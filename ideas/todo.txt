@@ -429,6 +429,7 @@ suggestions box
 setter/climber - enter names in one box
 	concat / split as necessary
 	use '_' to force a join, van_de_Graaf (filter out '_')
+	or "van de Graaf"
 
 initials -> nickname?
 	default to initials

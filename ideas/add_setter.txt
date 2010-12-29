@@ -24,3 +24,7 @@ notifications
 	focus to cancel?
 	if applicable
 
+on delete option to
+	delete all routes?
+	delete all climbs?
+

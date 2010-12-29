@@ -1,0 +1,10 @@
+backup is plaintext! (check with wireshark)
+need to run it over ssh
+
+craggy@localhost - select only
+backup@% - replication slave
+root@localhost - all
+
+admin@localhost - update, insert, delete, select
+
+

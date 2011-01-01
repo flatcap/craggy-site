@@ -12,6 +12,7 @@ www/admin/.htaccess
 /craggy_flatcap.sql
 /craggy_russon_compact.sql
 /craggy_russon.sql
+/schema.mwb
 /schema.png
 .*.swp
 tags

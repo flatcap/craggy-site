@@ -1,0 +1,1 @@
+sed -e 's/`craggy`/`craggy2`/g' -e 's/craggy_//g' < craggy_russon_compact.sql | mysql

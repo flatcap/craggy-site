@@ -1,12 +1,13 @@
 # Local dirs
-bin/
-logs/
+/bin
+/indices
+/logs
+/torrent
 
 # Local files
 /.*
 libs/conf.php
 www/admin/.htaccess
-/indices
 
 # Generated files / Junk
 /craggy_flatcap.sql

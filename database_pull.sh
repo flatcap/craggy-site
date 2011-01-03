@@ -9,6 +9,7 @@ if [ ! -f craggy_russon_compact.sql ]; then
 	mysqldump $OPTS -h127.0.0.1 -P3307 -ubackup -pphokio10 |	\
 		sed -e '/^-- Server version/d'				\
 		    -e 's/^-- Host: 127.0.0.1/-- Host: russon.org/'	\
+		    -e '/DEFINER=/d'					\
 		> craggy_russon_compact.sql
 fi
 

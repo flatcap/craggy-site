@@ -1,3 +1,5 @@
+# drop shadow tables
+
 drop view if exists climb;
 drop view if exists climb_note;
 drop view if exists climb_type;

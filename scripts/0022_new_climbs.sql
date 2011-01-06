@@ -1,3 +1,5 @@
+# add new climbs
+
 insert into craggy_climb (climber_id,route_id,date_climbed,success_id,nice,onsight,difficulty_id,notes) values
 	(1,251,"2010-11-30",4,0,1,null,null),
 	(1,252,"2010-11-30",4,0,1,null,null),

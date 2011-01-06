@@ -1,3 +1,5 @@
+# create shadow tables
+
 create view climb      as select * from craggy_climb;
 create view climb_note as select * from craggy_climb_note;
 create view climb_type as select * from craggy_climb_type;

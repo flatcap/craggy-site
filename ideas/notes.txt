@@ -1,0 +1,1 @@
+moving climb notes to separate table means we don't keep old notes any more

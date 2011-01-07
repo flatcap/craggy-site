@@ -1,0 +1,2 @@
+rating contains best result for a given climb
+rather than a complex db lookup

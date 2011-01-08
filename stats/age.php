@@ -7,7 +7,9 @@ include 'utils.php';
 
 function age_main()
 {
-	$table   = "v_route";
+	include 'dbnames.php';
+
+	$table   = "$DB_V_ROUTE";
 	$columns = array ("id", "panel", "colour", "grade", "grade_seq", "climb_type", "date_set", "date_climbed", "success", "d", "o");
 	$where   = NULL;
 	$order   = NULL; //"date_set"
@@ -112,7 +114,6 @@ function age_main()
 echo (age_main() . "\n");
 
 /*
-v_route
 id: 1
 panel: 1
 colour: Yellow

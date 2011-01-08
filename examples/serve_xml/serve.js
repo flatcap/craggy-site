@@ -31,10 +31,6 @@ function route_callback()
 		"<th>Route ID</th>" +
 		"<th>Date Climbed</th>" +
 		"<th>Success</th>" +
-		"<th>Nice</th>" +
-		"<th>Onsight</th>" +
-		"<th>Difficulty</th>" +
-		"<th>Notes</th>" +
 		"</tr>";
 
 	x = xmlhttp.responseXML.documentElement.getElementsByTagName("climb");
@@ -44,11 +40,7 @@ function route_callback()
 		txt += route_get_node (x[i], "id");
 		txt += route_get_node (x[i], "route_id");
 		txt += route_get_node (x[i], "date_climbed");
-		txt += route_get_node (x[i], "success");
-		txt += route_get_node (x[i], "nice");
-		txt += route_get_node (x[i], "onsight");
-		txt += route_get_node (x[i], "difficulty");
-		txt += route_get_node (x[i], "notes");
+		txt += route_get_node (x[i], "success_id");
 		txt += "</tr>";
 	}
 	txt += "</table>";

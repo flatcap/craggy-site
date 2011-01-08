@@ -3,6 +3,7 @@
 set_include_path ('../../libs');
 
 include 'db.php';
+include 'dbnames.php';
 #include "utils.php";
 
 #if (!isset ($_GET))
@@ -21,9 +22,9 @@ include 'db.php';
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$table   = "craggy_climb";
-$columns = array ("id", "route_id", "date_climbed", "nice", "onsight", "difficulty_id", "notes");
-$where   = array ("climber_id = 1"); 
+$table   = "$DB_CLIMB";
+$columns = array ("id", "route_id", "date_climbed", "success_id");
+$where   = array ("climber_id = 1", "active = 1"); 
 $order   = NULL;
 
 $climb_list = db_select($table, $columns, $where, $order);

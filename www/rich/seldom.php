@@ -7,37 +7,39 @@ include 'utils.php';
 
 function seldom_range ($m_start, $m_finish, $options)
 {
+	include 'dbnames.php';
+
 	$output = "";
 
 	$when_start  = db_date ("$m_start months ago");
 
 	$climber_id = 1;
 
-	$table   = "craggy_route" .
-			" left join craggy_climb on ((craggy_climb.route_id = craggy_route.id) and (climber_id = {$climber_id}))" .
-			" left join craggy_colour on (craggy_route.colour_id = craggy_colour.id)" .
-			" left join craggy_panel on (craggy_route.panel_id = craggy_panel.id)" .
-			" left join craggy_grade on (craggy_route.grade_id = craggy_grade.id)" .
-			" left join craggy_climb_type on (craggy_panel.climb_type_id = craggy_climb_type.id)" .
-			" left join craggy_success on (craggy_climb.success_id = craggy_success.id)" .
-			" left join craggy_difficulty on (craggy_climb.difficulty_id = craggy_difficulty.id)";
+	$table   = "$DB_ROUTE" .
+			" left join $DB_CLIMB on (($DB_CLIMB.route_id = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
+			" left join $DB_COLOUR on ($DB_ROUTE.colour_id = $DB_COLOUR.id)" .
+			" left join $DB_PANEL on ($DB_ROUTE.panel_id = $DB_PANEL.id)" .
+			" left join $DB_GRADE on ($DB_ROUTE.grade_id = $DB_GRADE.id)" .
+			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id = $DB_CLIMB_TYPE.id)" .
+			" left join $DB_SUCCESS on ($DB_CLIMB.success_id = $DB_SUCCESS.id)" .
+			" left join $DB_DIFFICULTY on ($DB_CLIMB.difficulty_id = $DB_DIFFICULTY.id)";
 
-	$columns = array ("craggy_route.id as id",
-			"craggy_panel.name as panel",
-			"craggy_panel.sequence as panel_seq",
-			"craggy_colour.colour as colour",
-			"craggy_grade.grade as grade",
-			"craggy_grade.sequence as grade_seq",
+	$columns = array ("$DB_ROUTE.id as id",
+			"$DB_PANEL.name as panel",
+			"$DB_PANEL.sequence as panel_seq",
+			"$DB_COLOUR.colour as colour",
+			"$DB_GRADE.grade as grade",
+			"$DB_GRADE.sequence as grade_seq",
 			"climber_id",
 			"date_climbed",
 			"climb_type",
-			"craggy_success.outcome as success",
+			"$DB_SUCCESS.outcome as success",
 			"nice as n",
 			"onsight as o",
-			"craggy_difficulty.description as diff",
-			"craggy_climb.notes as notes");
+			"$DB_DIFFICULTY.description as diff",
+			"$DB_CLIMB.notes as notes");
 
-	$where   = array ("craggy_grade.sequence < 600");
+	$where   = array ("$DB_GRADE.sequence < 600");
 	$order = "panel_seq, grade_seq, colour";
 
 	if (isset ($m_finish)) {

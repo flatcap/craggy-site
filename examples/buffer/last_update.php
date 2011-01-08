@@ -3,11 +3,12 @@
 set_include_path ('../../libs');
 
 include 'db.php';
+include 'dbnames.php';
 
 date_default_timezone_set('UTC');
 
 $db = db_get_database();
-$query = "select value from craggy_data where name = 'last_update'";
+$query = "select value from $DB_DATA where name = 'last_update'";
 
 $time_start = microtime (true);
 $result = mysql_query($query);

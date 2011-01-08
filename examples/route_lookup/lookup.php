@@ -3,6 +3,7 @@
 set_include_path ('../../libs');
 
 include 'db.php';
+include 'dbnames.php';
 include 'utils.php';
 
 $g_routes  = NULL;
@@ -36,10 +37,10 @@ if (!is_numeric ($panel)) {
 	return;
 }
 
-$g_routes  = db_select("craggy_route");
-$g_colours = db_select("craggy_colour");
-$g_panels  = db_select("craggy_panel");
-$g_grades  = db_select("craggy_grade");
+$g_routes  = db_select("$DB_ROUTE");
+$g_colours = db_select("$DB_COLOUR");
+$g_panels  = db_select("$DB_PANEL");
+$g_grades  = db_select("$DB_GRADE");
 
 $panel_id = NULL;
 foreach ($g_panels as $id => $p) {

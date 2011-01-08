@@ -63,7 +63,9 @@ function buffer_cache_get()
 
 function buffer_db_get()
 {
-	$table   = "v_route";
+	include "dbnames.php";
+
+	$table   = "$DB_V_ROUTE";
 	$columns = array ("id", "panel", "colour", "grade");
 	$where   = array ("grade_seq >= 400", "grade_seq < 500", "climb_type <> 'lead'");
 	$where   = NULL;

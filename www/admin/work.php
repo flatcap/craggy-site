@@ -5,6 +5,7 @@ date_default_timezone_set('UTC');
 set_include_path ('../../libs');
 
 include 'db.php';
+include 'dbnames.php';
 include 'utils.php';
 
 //$fh = NULL;
@@ -64,17 +65,17 @@ function setter_delete_query ($data)
 	$setter_count = count ($id_list);
 
 	// How many routes will be deleted?
-	$table  = "craggy_route";
+	$table  = "$DB_ROUTE";
 	$column = "setter_id";
 	$where  = "setter_id in ($data)";
 	$route_count = db_count ($table, $column, $where);
 
 	// How many climbs will be deleted?
-	$table  = "craggy_setter, craggy_route, craggy_climb";
-	$column = "craggy_setter.id";
-	$where  = "(craggy_route.setter_id = craggy_setter.id) and " .
-		  "(craggy_climb.route_id = craggy_route.id) and " .
-		  "(craggy_setter.id in ($data))";
+	$table  = "$DB_SETTER, $DB_ROUTE, $DB_CLIMB";
+	$column = "$DB_SETTER.id";
+	$where  = "($DB_ROUTE.setter_id = $DB_SETTER.id) and " .
+		  "($DB_CLIMB.route_id = $DB_ROUTE.id) and " .
+		  "($DB_SETTER.id in ($data))";
 	$climb_count = db_count ($table, $column, $where);
 
 	// <result type='setter' action='delete_query'>
@@ -92,20 +93,20 @@ function setter_delete ($data)
 	$id_list = explode (',', $data);
 
 	// How many climbs will be deleted?
-	$table      = "craggy_climb";
-	$join_table = "craggy_climb, craggy_route, craggy_setter";
-	$where = "(craggy_climb.route_id = craggy_route.id) and (craggy_route.setter_id = craggy_setter.id) and (craggy_setter.id in ($data))";
+	$table      = "$DB_CLIMB";
+	$join_table = "$DB_CLIMB, $DB_ROUTE, $DB_SETTER";
+	$where = "($DB_CLIMB.route_id = $DB_ROUTE.id) and ($DB_ROUTE.setter_id = $DB_SETTER.id) and ($DB_SETTER.id in ($data))";
 	$climb_count = db_delete ($table, $join_table, $where);
 
 	// How many routes will be deleted?
 	$table = "";
-	$join_table = "craggy_route";
+	$join_table = "$DB_ROUTE";
 	$where = "setter_id in ($data)";
 	$route_count = db_delete ($table, $join_table, $where);
 
 	// How many setters will be deleted?
 	$table = "";
-	$join_table = "craggy_setter";
+	$join_table = "$DB_SETTER";
 	$where = "id in ($data)";
 	$setter_count = db_delete ($table, $join_table, $where);
 
@@ -125,14 +126,14 @@ function setter_list()
 //		<count>4</count>
 //	</setter>
 
-	$table   = "craggy_setter" .
-			" left join craggy_route on (setter_id=craggy_setter.id)";
+	$table   = "$DB_SETTER" .
+			" left join $DB_ROUTE on (setter_id=$DB_SETTER.id)";
 
-	$columns = array ("craggy_setter.id as id",
-			"craggy_setter.initials as initials",
-			"craggy_setter.first_name as first_name",
-			"craggy_setter.surname as surname",
-			"count(craggy_route.id) as count");
+	$columns = array ("$DB_SETTER.id as id",
+			"$DB_SETTER.initials as initials",
+			"$DB_SETTER.first_name as first_name",
+			"$DB_SETTER.surname as surname",
+			"count($DB_ROUTE.id) as count");
 
 	$where   = NULL;
 	$order   = "id";

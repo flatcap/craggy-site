@@ -14,7 +14,7 @@ function html_header ($title, $reldir = "")
 	$output .= "<title>$title - Craggy Island</title>";
 
 	// Google Analytics - not for home server
-	if (!isset ($_SERVER) || ($_SERVER['SERVER_ADDR'] != "192.168.2.2")) {
+	if (isset ($_SERVER) && array_key_exists ('SERVER_ADDR', $_SERVER) && ($_SERVER['SERVER_ADDR'] != "192.168.2.2")) {
 		$output .= "<script type='text/javascript' src='{$reldir}style/analytics.js'></script>";
 	}
 

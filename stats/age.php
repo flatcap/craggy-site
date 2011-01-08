@@ -7,7 +7,7 @@ include 'utils.php';
 
 function age_main()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'grade_seq', 'climb_type', 'date_set', 'date_climbed', 'success', 'd', 'o');

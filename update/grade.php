@@ -7,7 +7,7 @@ include 'utils.php';
 
 function grade_main()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'grade', 'climb_type');

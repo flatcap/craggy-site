@@ -162,7 +162,7 @@ function db_route_delete($where)
 
 function db_get_last_update()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$db = db_get_database();
 

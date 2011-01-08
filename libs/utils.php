@@ -564,7 +564,7 @@ function process_height_total (&$list)
 
 function get_stats()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$db = db_get_database();
 	$output = '';

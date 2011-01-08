@@ -7,7 +7,7 @@ include 'utils.php';
 
 function stats_style()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$output = '';
 

@@ -7,7 +7,7 @@ include 'utils.php';
 
 function six_main ($options)
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	// 'difficulty'
 	$table   = $DB_V_ROUTE;

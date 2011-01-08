@@ -3,7 +3,7 @@
 set_include_path ('../../libs');
 
 include 'db.php';
-include 'dbnames.php';
+include 'db_names.php';
 
 if (!isset ($_GET))
 	return;

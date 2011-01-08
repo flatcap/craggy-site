@@ -4,7 +4,7 @@ set_include_path ('../libs');
 
 include 'db.php';
 include 'utils.php';
-include 'dbnames.php';
+include 'db_names.php';
 
 function stats_grade_table ($grade_list, $whole_grades = FALSE)
 {

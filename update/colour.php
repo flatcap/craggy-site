@@ -7,7 +7,7 @@ include 'utils.php';
 
 function colour_main()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$table   = "$DB_COLOUR,$DB_ROUTE";
 	$columns = array ("$DB_COLOUR.id as id", "colour", "count($DB_ROUTE.id) as count");

@@ -42,7 +42,7 @@ function list_render_tabs (&$list, &$columns)
 
 function checklist_main ($options)
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'climb_type', 'colour', 'grade', 'grade_seq', 'notes', 'date_set');

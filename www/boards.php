@@ -28,7 +28,7 @@ function get_date ($date)
 
 function boards_main ($options)
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'setter', 'date_set');

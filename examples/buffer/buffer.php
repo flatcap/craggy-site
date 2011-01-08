@@ -63,7 +63,7 @@ function buffer_cache_get()
 
 function buffer_db_get()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade');

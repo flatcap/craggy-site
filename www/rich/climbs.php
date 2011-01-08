@@ -18,7 +18,7 @@ function process_binary(&$list, $field, $value)
 
 function climbs_main($options)
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 

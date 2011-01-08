@@ -7,7 +7,7 @@ include 'utils.php';
 
 function stats_colour()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$output = '';
 

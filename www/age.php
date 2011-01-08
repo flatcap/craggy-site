@@ -7,7 +7,7 @@ include 'utils.php';
 
 function stats_age()
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$output = '';
 

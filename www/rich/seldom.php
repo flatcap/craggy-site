@@ -7,7 +7,7 @@ include 'utils.php';
 
 function seldom_range ($m_start, $m_finish, $options)
 {
-	include 'dbnames.php';
+	include 'db_names.php';
 
 	$output = '';
 

@@ -428,9 +428,7 @@ function text_table_header (&$columns, &$widths)
 
 	$output = '';
 
-	//$output .= '[7m';
 	$output .= $header . "\r\n";
-	//$output .= '[0m';
 	$output .= sprintf ("%.{$len}s\r\n", $line);
 
 	return $output;

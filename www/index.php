@@ -11,11 +11,11 @@ function index_main()
 
 	$output  = html_header ('Overview');
 	$output .= '<body>';
-	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
+	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>";
 	$output .= html_menu();
-	$output .= "<div class='content'>\n";
+	$output .= "<div class='content'>";
 	$output .= get_stats();
-	$output .= '</div>\n';
+	$output .= '</div>';
 	$output .= get_errors();
 	$output .= '</body>';
 	$output .= '</html>';

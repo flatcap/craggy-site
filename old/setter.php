@@ -1,7 +1,7 @@
 <?php
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 $g_results = array();
 
@@ -359,7 +359,7 @@ function setter_main()
 
 // Global string: "Operation did this..."
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 db_get_database();
 
 $output = html_header ("Craggy Setters");

@@ -1,10 +1,10 @@
 <?php
 
-set_include_path ("../libs");
+set_include_path ('../libs');
 
-include "db.php";
-include "utils.php";
-include "dbnames.php";
+include 'db.php';
+include 'utils.php';
+include 'dbnames.php';
 
 function stats_grade_table ($grade_list, $whole_grades = FALSE)
 {
@@ -143,7 +143,7 @@ function stats_main()
 }
 
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 
 echo stats_main();
 

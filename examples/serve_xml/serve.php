@@ -1,8 +1,8 @@
 <?php
 
-set_include_path ("../../libs");
+set_include_path ('../../libs');
 
-include "db.php";
+include 'db.php';
 #include "utils.php";
 
 #if (!isset ($_GET))

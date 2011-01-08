@@ -1,7 +1,7 @@
 <?php
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 function cmp_age($a, $b)
 {
@@ -307,7 +307,7 @@ function route_main()
 }
 
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 db_get_database();
 
 $output = html_header ("Craggy Routes");

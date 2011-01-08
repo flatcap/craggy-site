@@ -1,9 +1,9 @@
 <?php
 
-set_include_path ("www");
+set_include_path ('www');
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 $g_routes  = NULL;
 $g_panels  = NULL;

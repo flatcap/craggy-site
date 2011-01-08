@@ -2,9 +2,9 @@
 
 // Transfer the climb data from the route table to the climbs table
 
-set_include_path ("/home/flatcap/downloads/update/www");
+set_include_path ('/home/flatcap/downloads/update/www');
 
-include "db.php";
+include 'db.php';
 
 /* CLIMBS
  *	id

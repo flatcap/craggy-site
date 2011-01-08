@@ -1,9 +1,9 @@
 <?php
 
-set_include_path ("../libs");
+set_include_path ('../libs');
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 function get_setter ($setters)
 {
@@ -108,7 +108,7 @@ function boards_browser_options ($format, $def_format)
 }
 
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 
 $format = array ("csv", "html", "text");
 

@@ -1,10 +1,10 @@
 <?php
 
-set_include_path ("../../libs");
+set_include_path ('../../libs');
 
-include "db.php";
+include 'db.php';
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 
 $db = db_get_database();
 $query = "select value from craggy_data where name = 'last_update'";

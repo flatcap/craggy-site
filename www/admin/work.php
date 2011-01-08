@@ -1,11 +1,11 @@
 <?php
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 
-set_include_path ("../../libs");
+set_include_path ('../../libs');
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 //$fh = NULL;
 

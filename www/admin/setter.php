@@ -1,9 +1,9 @@
 <?php
 
-set_include_path ("../../libs");
+set_include_path ('../../libs');
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 function setter_main()
 {
@@ -49,6 +49,6 @@ function setter_main()
 }
 
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 
 echo setter_main();

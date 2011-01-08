@@ -1,9 +1,9 @@
 <?php
 
-set_include_path ("/home/craggy/www");
+set_include_path ('/home/craggy/www');
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 function import_open()
 {

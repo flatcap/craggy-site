@@ -1,7 +1,7 @@
 <?php
 
-include "../db.php";
-include "../utils.php";
+include '../db.php';
+include '../utils.php';
 
 function login()
 {
@@ -135,7 +135,7 @@ function google_main ($routes)
 }
 
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 
 try {
     $client = login();

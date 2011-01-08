@@ -1,7 +1,7 @@
 <?php
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 function add_main()
 {
@@ -29,7 +29,7 @@ function add_main()
 }
 
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 db_get_database();
 
 //$g_colours = db_select("colour");

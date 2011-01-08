@@ -1,9 +1,9 @@
 <?php
 
-set_include_path ("../libs");
+set_include_path ('../libs');
 
-include "db.php";
-include "utils.php";
+include 'db.php';
+include 'utils.php';
 
 function routes_main($options)
 {
@@ -73,7 +73,7 @@ function routes_main($options)
 }
 
 
-date_default_timezone_set("UTC");
+date_default_timezone_set('UTC');
 
 $format = array ("csv", "html", "text");
 

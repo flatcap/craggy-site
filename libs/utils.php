@@ -566,10 +566,12 @@ function process_height_total (&$list)
 
 function get_stats()
 {
+	include "dbnames.php";
+
 	$db = db_get_database();
 	$output = "";
 
-	$all_routes = db_select("v_route");
+	$all_routes = db_select("$DB_V_ROUTE");
 
 	// Panels stats ----------------------------------------
 

@@ -7,8 +7,10 @@ include "utils.php";
 
 function six_main ($options)
 {
+	include "dbnames.php";
+
 	// "difficulty"
-	$table   = "v_route";
+	$table   = "$DB_V_ROUTE";
 	$columns = array ("id", "panel", "colour", "grade", "height");
 	$where   = array ("grade_seq >= 400", "grade_seq < 500", "climb_type <> 'lead'");
 	$order   = "panel_seq, grade_seq, colour";
@@ -43,8 +45,8 @@ function six_main ($options)
 			$output .= "<div class='header'>Top Roped 6a Routes <span>(Last updated: $last_update)</span></div>\n";
 			$output .= html_menu();
 			$output .= "<div class='content'>\n";
-			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0],[2,0],[1,0]]}");
 			$output .= "<p>$count climbs ({$total_height}m)</p>";
+			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0],[2,0],[1,0]]}");
 			$output .= "</div>";
 			$output .= get_errors();
 			$output .= "</body>";

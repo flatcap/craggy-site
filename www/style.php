@@ -7,9 +7,11 @@ include "utils.php";
 
 function stats_style()
 {
+	include "dbnames.php";
+
 	$output = "";
 
-	$table   = "craggy_panel";
+	$table   = "$DB_PANEL";
 	$columns = array("id", "tags");
 	$where   = NULL;
 	$order   = NULL;

@@ -7,11 +7,13 @@ include "utils.php";
 
 function stats_colour()
 {
+	include "dbnames.php";
+
 	$output = "";
 
-	$table   = "craggy_colour, craggy_route";
-	$columns = array ("craggy_colour.id as id", "colour", "count(craggy_route.id) as count");
-	$where   = "craggy_route.colour_id = craggy_colour.id";
+	$table   = "$DB_COLOUR,$DB_ROUTE";
+	$columns = array ("$DB_COLOUR.id as id", "colour", "count($DB_ROUTE.id) as count");
+	$where   = "$DB_ROUTE.colour_id = $DB_COLOUR.id";
 	$order   = "count desc";
 	$group   = "colour";
 

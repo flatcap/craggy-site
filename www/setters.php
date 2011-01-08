@@ -7,9 +7,11 @@ include "utils.php";
 
 function stats_setters()
 {
+	include "dbnames.php";
+
 	$output = "";
 
-	$table   = "v_route";
+	$table   = "$DB_V_ROUTE";
 	$columns = array("id", "setter");
 	$where   = NULL;
 	$order   = "setter";

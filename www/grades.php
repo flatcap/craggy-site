@@ -4,6 +4,7 @@ set_include_path ("../libs");
 
 include "db.php";
 include "utils.php";
+include "dbnames.php";
 
 function stats_grade_table ($grade_list, $whole_grades = FALSE)
 {
@@ -44,6 +45,8 @@ function stats_grade_table ($grade_list, $whole_grades = FALSE)
 
 function stats_grade_mean ($grade_list)
 {
+	global $DB_GRADE;
+
 	$output = "";
 
 	$g_both = 0; $c_both = 0;
@@ -70,7 +73,7 @@ function stats_grade_mean ($grade_list)
 	$g_lead = round ($g_lead / $c_lead);
 	$g_topr = round ($g_topr / $c_topr);
 
-	$table   = "craggy_grade";
+	$table   = "$DB_GRADE";
 	$columns = array("id", "grade", "sequence");
 	$order   = "sequence";
 
@@ -94,9 +97,11 @@ function stats_grade_mean ($grade_list)
 
 function stats_grade()
 {
+	global $DB_V_ROUTE;
+
 	$output = "";
 
-	$table   = "v_route";
+	$table   = "$DB_V_ROUTE";
 	$columns = array ("id", "grade", "grade_seq", "climb_type");
 	$where   = NULL;
 	$order   = "grade_seq";

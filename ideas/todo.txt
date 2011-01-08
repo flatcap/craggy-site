@@ -77,7 +77,6 @@ colour parsing based on abbrev (explode abbrev, search)
 tidy db cols, more name,id fewer reserved names
 stats functions -> array, then print
 generic parse function (x, table, match_field, out_field)
-count db actions and time them
 
 --------------------------------------------------------------------------------
 
@@ -93,12 +92,6 @@ refactor seldom to a array of arrays
 is everyone using the array form of db_select?
 
 sort out titles and headings on all the html pages
-
-add get_errors to all?
-or just in php
-or just in txt
-_log_ but don't display errors, how?
-add as a footer, _rich_ only
 
 --------------------------------------------------------------------------------
 
@@ -245,10 +238,6 @@ for new routes, queue the changes
 eliminate the views?
 make them more useful?
 
-make all db queries go through one function
-then log everything
-then time everything
-
 use mod_rewrite to change:
 	/rich/work.php
 to one of:
@@ -285,11 +274,6 @@ views how?
 local bin dir
 
 bash_history for craggy and work dir
-
-add a validation box (below "Route Data")
-validate all html/css/js
-only for rich user
-http://validator.w3.org/unicorn/check?ucn_uri=craggy.russon.org/routes.php
 
 link the styles table to a route search by that tag
 ie  styles.php/arch links to routes.php?tags=arch
@@ -383,11 +367,6 @@ graph sutton grades
 
 add check tables to cron
 
-last modified date on all pages (in footer)
-
-add "generated in x seconds" to every page - rich only
-total time, or db time, or both?
-
 date_set / date_climbed NULL? if unknown
 
 allow null setter => unknown
@@ -423,6 +402,10 @@ on insert/update adopt most recent date?
 272 routes, 78 have notes (29%), 194 don't (21 distinct)
 203 climbs, 56 have notes (28%), 147 don't (41 distinct)
 
+climb notes and route notes are mostly empty - move into separate tables?
+
+search for existing *matching* notes and use same id. edit -> COW
+
 export climbs as csv for logged-in climbers
 calculate *their* stats - mean grade / climb type
 
@@ -439,12 +422,6 @@ initials -> nickname?
 
 rate climbs - add comments - suggest grade
 
-add footer to all pages
-	last updated
-	copyright
-	etc
-	validators - rich only?
-
 routes - start_date, end_date
 end_date = midday, start_date = 12:01pm
 validate climb against these dates?
@@ -459,10 +436,6 @@ ratings display 5 outline stars, on hover colour them, then select one, others g
 ratings, easy, medium, hard, green, amber, red, VERY easy, VERY hard star + *!* in easy/hard colour
 display difficulty as icon? - colour blind? E!,E,M,H,H! alt-text -> add to db table?
 
-climb notes and route notes are mostly empty - move into separate tables?
-
-search for existing *matching* notes and use same id. edit -> COW
-
 sql-logging, sync between home and live, stored procedures?, partitioning?
 
 need view(s) encompassing
@@ -470,4 +443,43 @@ need view(s) encompassing
 	craggy_rating
 	craggy_climber
 	craggy_climb
+
+default onsight to false
+
+set_error_handler("customError");
+
+--------------------------------
+
+live button on dev version of pages links to russon.org
+
+add get_errors to all?
+or just in php
+or just in txt
+_log_ but don't display errors, how?
+add as a footer, _rich_ only
+
+last modified date on all pages (in footer)
+
+add footer to all pages
+	last updated
+	copyright
+	etc
+	validators - rich only?
+
+count db actions and time them
+make all db queries go through one function
+then log everything
+then time everything
+
+make all db queries go through one function
+then log everything
+then time everything
+
+add a validation box (below "Route Data")
+validate all html/css/js
+only for rich user
+http://validator.w3.org/unicorn/check?ucn_uri=craggy.russon.org/routes.php
+
+add "generated in x seconds" to every page - rich only
+total time, or db time, or both?
 

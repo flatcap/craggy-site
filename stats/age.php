@@ -10,9 +10,9 @@ function age_main()
 	include 'dbnames.php';
 
 	$table   = $DB_V_ROUTE;
-	$columns = array ("id", "panel", "colour", "grade", "grade_seq", "climb_type", "date_set", "date_climbed", "success", "d", "o");
+	$columns = array ('id', 'panel', 'colour', 'grade', 'grade_seq', 'climb_type', 'date_set', 'date_climbed', 'success', 'd', 'o');
 	$where   = NULL;
-	$order   = NULL; //"date_set"
+	$order   = NULL; //'date_set'
 
 	$list = db_select($table, $columns, $where, $order);
 
@@ -27,7 +27,7 @@ function age_main()
 
 	$route_count = count ($list);
 
-	process_date ($list, "date_set", TRUE);
+	process_date ($list, 'date_set', TRUE);
 
 	foreach ($list as $id => $route) {
 		$grade = $route['grade'];
@@ -75,9 +75,9 @@ function age_main()
 	printf ("Routes by grade:\n");
 	printf ("\tGrade T/R Lead Auto\n");
 	foreach ($routes_by_grade as $grade => $counts) {
-		array_key_exists ('Top Rope',   $counts) ? $tr   = $counts['Top Rope']   : $tr   = "";
-		array_key_exists ('Lead',       $counts) ? $lead = $counts['Lead']       : $lead = "";
-		array_key_exists ('Auto-belay', $counts) ? $auto = $counts['Auto-belay'] : $auto = "";
+		array_key_exists ('Top Rope',   $counts) ? $tr   = $counts['Top Rope']   : $tr   = '';
+		array_key_exists ('Lead',       $counts) ? $lead = $counts['Lead']       : $lead = '';
+		array_key_exists ('Auto-belay', $counts) ? $auto = $counts['Auto-belay'] : $auto = '';
 		printf ("\t %-3s %3s %3s   %s\n", $counts['grade'], $tr, $lead, $auto);
 	}
 	printf ("\n");

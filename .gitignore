@@ -5,8 +5,8 @@
 
 # Local files
 /.*
-libs/conf.php
-www/admin/.htaccess
+/libs/conf.php
+/www/admin/.htaccess
 
 # Generated files / Junk
 /craggy_flatcap.sql

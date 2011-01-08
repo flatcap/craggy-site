@@ -76,21 +76,21 @@ date_default_timezone_set("UTC");
 $format = array ("csv", "html", "text");
 
 if (isset ($argc)) {
-		$longopts = array("format:");
+	$longopts = array("format:");
 
-		$options = getopt(NULL, $longopts);
+	$options = getopt(NULL, $longopts);
 
-		if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-			$options["format"] = $format[2];
-		}
+	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
+		$options["format"] = $format[2];
+	}
 } else {
-		$options = array();
+	$options = array();
 
-		$f = get_url_variable ("format");
-		if (!in_array ($f, $format))
-			$f = $format[1];
+	$f = get_url_variable ("format");
+	if (!in_array ($f, $format))
+		$f = $format[1];
 
-		$options["format"] = $f;
+	$options["format"] = $f;
 }
 
 echo routes_main ($options);

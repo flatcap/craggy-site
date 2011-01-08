@@ -1,20 +1,20 @@
 <?php
 
 /* The names of all the database tables */
-$DB_CLIMB      = 'craggy_climb';
-$DB_CLIMB_NOTE = 'craggy_climb_note';
-$DB_CLIMB_TYPE = 'craggy_climb_type';
-$DB_CLIMBER    = 'craggy_climber';
-$DB_COLOUR     = 'craggy_colour';
-$DB_DATA       = 'craggy_data';
-$DB_DIFFICULTY = 'craggy_difficulty';
-$DB_GRADE      = 'craggy_grade';
-$DB_PANEL      = 'craggy_panel';
-$DB_RATING     = 'craggy_rating';
-$DB_ROUTE      = 'craggy_route';
-$DB_ROUTE_NOTE = 'craggy_route_note';
-$DB_SETTER     = 'craggy_setter';
-$DB_SUCCESS    = 'craggy_success';
+$DB_CLIMB      = 'climb';
+$DB_CLIMB_NOTE = 'climb_note';
+$DB_CLIMB_TYPE = 'climb_type';
+$DB_CLIMBER    = 'climber';
+$DB_COLOUR     = 'colour';
+$DB_DATA       = 'data';
+$DB_DIFFICULTY = 'difficulty';
+$DB_GRADE      = 'grade';
+$DB_PANEL      = 'panel';
+$DB_RATING     = 'rating';
+$DB_ROUTE      = 'route';
+$DB_ROUTE_NOTE = 'route_note';
+$DB_SETTER     = 'setter';
+$DB_SUCCESS    = 'success';
 
 /* The names of the database views */
 $DB_V_PANEL    = 'v_panel';

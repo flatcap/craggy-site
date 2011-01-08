@@ -2,7 +2,7 @@
 
 function db_get_database()
 {
-	include "conf.php";
+	include 'conf.php';
 
 	$db = mysql_connect($db_host, $db_user, $db_pass);
 	if (!$db) {
@@ -16,33 +16,33 @@ function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $grou
 {
 	if (isset($columns)) {
 		if (is_array($columns))
-			$cols = implode ($columns, ",");
+			$cols = implode ($columns, ',');
 		else
 			$cols = $columns;
 
 		$key = $columns[0];
-		$key = "id";
+		$key = 'id';
 	} else {
-		$cols = "*";
-		$key = "id";
+		$cols = '*';
+		$key = 'id';
 	}
 
 	$query = "select {$cols} from {$table}";
 
 	if (isset ($where)) {
 		if (is_array ($where))
-			$w = implode ($where, " and ");
+			$w = implode ($where, ' and ');
 		else
 			$w = $where;
-		$query .= " where " . $w;
+		$query .= ' where ' . $w;
 	}
 
 	if (isset ($group)) {
-		$query .= " group by " . $group;
+		$query .= ' group by ' . $group;
 	}
 
 	if (isset ($order)) {
-		$query .= " order by " . $order;
+		$query .= ' order by ' . $order;
 	}
 
 	$db = db_get_database();
@@ -63,12 +63,12 @@ function db_get_routes()
 {
 	$db = db_get_database();
 
-	$table_climb_type = db_select("climb_type");
-	$table_colour     = db_select("colour");
-	$table_grade      = db_select("grade");
-	$table_panel      = db_select("panel");
-	$table_setter     = db_select("setter");
-	$table_route      = db_select("route");
+	$table_climb_type = db_select('climb_type');
+	$table_colour     = db_select('colour');
+	$table_grade      = db_select('grade');
+	$table_panel      = db_select('panel');
+	$table_setter     = db_select('setter');
+	$table_route      = db_select('route');
 
 	$routes = array();
 	foreach ($table_route as $row) {
@@ -94,9 +94,9 @@ function db_date($date)
 {
 	$d = strtotime($date);
 	if ($d !== FALSE)
-		$result = strftime("%Y/%m/%d", $d);
+		$result = strftime('%Y/%m/%d', $d);
 	else
-		$result = "";
+		$result = '';
 
 	return $result;
 }
@@ -104,17 +104,17 @@ function db_date($date)
 function db_route_add($routes)
 {
 	foreach ($routes as $key => $r) {
-		// check for both "valid" and "set"
-		$panel    = parse_panel ($r['panel'], "id");
-		$colour   = parse_colour ($r['colour'], "id");
-		$grade    = parse_grade ($r['grade'], "id");
-		$setter   = parse_setter ($r['setter'], "id");
+		// check for both 'valid' and 'set'
+		$panel    = parse_panel ($r['panel'], 'id');
+		$colour   = parse_colour ($r['colour'], 'id');
+		$grade    = parse_grade ($r['grade'], 'id');
+		$setter   = parse_setter ($r['setter'], 'id');
 		$notes    = $r['notes'];
 		$date_set = db_date ($r['date_set']);
 
-		$sql  = "INSERT INTO route (panel,colour,grade,notes,setter,date_set) ";
+		$sql  = 'INSERT INTO route (panel,colour,grade,notes,setter,date_set) ';
 		$sql .= "VALUES ('$panel','$colour','$grade','$notes','$setter','$date_set')";
-		$result = mysql_query($sql) or die("query failed: " . mysql_error());
+		$result = mysql_query($sql) or die('query failed: ' . mysql_error());
 
 		if ($result) {
 			$id = mysql_insert_id();
@@ -134,9 +134,9 @@ function db_route_add2($routes)
 		$notes        = mysql_real_escape_string ($r['notes']);
 		$date_set     = $r['date_set'];
 
-		$sql  = "INSERT INTO route (panel,colour,grade,notes,setter,date_set) ";
+		$sql  = 'INSERT INTO route (panel,colour,grade,notes,setter,date_set) ';
 		$sql .= "VALUES ('$panel','$colour','$grade','$notes','$setter','$date_set')";
-		$result = mysql_query($sql) or die("query failed: " . mysql_error());
+		$result = mysql_query($sql) or die('query failed: ' . mysql_error());
 
 		if ($result) {
 			$id = mysql_insert_id();
@@ -151,7 +151,7 @@ function db_route_delete($where)
 	if (empty ($where))
 		return FALSE;
 
-	$query = "delete from route where " . $where;
+	$query = 'delete from route where ' . $where;
 
 	$db = db_get_database();
 
@@ -173,17 +173,17 @@ function db_get_last_update()
 	$row = mysql_fetch_array($result, MYSQL_ASSOC);
 	mysql_free_result($result);
 
-	return $row["value"];
+	return $row['value'];
 }
 
-function db_set_last_update($date = "")
+function db_set_last_update($date = '')
 {
 	$db = db_get_database();
 
 	if (empty ($date))
-		$date = date ("Y-m-d");
+		$date = date ('Y-m-d');
 
-	$query  = "update data set ";
+	$query  = 'update data set ';
 	$query .= "data.value='$date' ";
 	$query .= "where name='last_update';";
 
@@ -198,7 +198,7 @@ function db_truncate_route()
 {
 	$db = db_get_database();
 
-	$query = "truncate route;";
+	$query = 'truncate route;';
 
 	return mysql_query($query);
 }
@@ -209,10 +209,10 @@ function db_count($table, $column, $where = NULL)
 
 	if (isset ($where)) {
 		if (is_array ($where))
-			$w = implode ($where, " and ");
+			$w = implode ($where, ' and ');
 		else
 			$w = $where;
-		$query .= " where " . $w;
+		$query .= ' where ' . $w;
 	}
 
 	$db = db_get_database();

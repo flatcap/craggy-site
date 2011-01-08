@@ -148,20 +148,20 @@ function work_todo()
 			"$DB_COLOUR.colour as colour",
 			"$DB_GRADE.grade as grade",
 			"$DB_GRADE.sequence as grade_seq",
-			"climber_id",
-			"date_climbed",
-			"climb_type",
+			'climber_id',
+			'date_climbed',
+			'climb_type',
 			"$DB_SUCCESS.outcome as success",
-			"nice as n",
-			"onsight as o",
+			'nice as n',
+			'onsight as o',
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
-	$where   = array ("((success_id < 3) OR (success_id is NULL))", "$DB_GRADE.sequence < 600");
+	$where   = array ('((success_id < 3) OR (success_id is NULL))', "$DB_GRADE.sequence < 600");
 
 	$list = db_select($table, $columns, $where);
 
-	work_priority ($list, "T");
+	work_priority ($list, 'T');
 	return $list;
 }
 
@@ -184,20 +184,20 @@ function work_downclimb()
 			"$DB_COLOUR.colour as colour",
 			"$DB_GRADE.grade as grade",
 			"$DB_GRADE.sequence as grade_seq",
-			"climber_id",
-			"date_climbed",
-			"climb_type",
+			'climber_id',
+			'date_climbed',
+			'climb_type',
 			"$DB_SUCCESS.outcome as success",
-			"nice as n",
-			"onsight as o",
+			'nice as n',
+			'onsight as o',
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
-	$where   = array ("success_id <> 4", "$DB_GRADE.sequence < 400");
+	$where   = array ('success_id <> 4', "$DB_GRADE.sequence < 400");
 
 	$list = db_select($table, $columns, $where);
 
-	work_priority ($list, "D");
+	work_priority ($list, 'D');
 	return $list;
 }
 
@@ -222,12 +222,12 @@ function work_seldom_range ($m_start, $m_finish)
 			"$DB_COLOUR.colour as colour",
 			"$DB_GRADE.grade as grade",
 			"$DB_GRADE.sequence as grade_seq",
-			"climber_id",
-			"date_climbed",
-			"climb_type",
+			'climber_id',
+			'date_climbed',
+			'climb_type',
 			"$DB_SUCCESS.outcome as success",
-			"nice as n",
-			"onsight as o",
+			'nice as n',
+			'onsight as o',
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
@@ -271,11 +271,11 @@ function work_score (&$list)
 	foreach ($list as $row) {
 		$p = $row['panel'];
 		switch ($row['priority']) {
-			case "2": $score = 1; break;
-			case "3": $score = 2; break;
-			case "4": $score = 4; break;
-			case "D": $score = 6; break;
-			case "T": $score = 8; break;
+			case '2': $score = 1; break;
+			case '3': $score = 2; break;
+			case '4': $score = 4; break;
+			case 'D': $score = 6; break;
+			case 'T': $score = 8; break;
 			default:  $score = 1; break;
 		}
 
@@ -319,52 +319,52 @@ function work_main ($options)
 	$list_seld = work_seldom();
 
 	$all = array_merge ($list_todo, $list_down, $list_seld);
-	usort ($all, "cmp_panel2");
+	usort ($all, 'cmp_panel2');
 	$all = work_flatten ($all);
 	$score = work_score ($all);
 
-	$cmp = "cmp_panel2";
+	$cmp = 'cmp_panel2';
 	usort ($all, $cmp);
 
 	process_type ($all);
-	$columns = array ("panel", "colour", "grade", "climb_type", "priority", "score");
+	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'priority', 'score');
 	$widths = column_widths ($all, $columns, TRUE);
 	fix_justification ($widths);
 
 	$count  = count ($all);
-	$output = "";
-	switch ($options["format"]) {
-		case "html":
-			$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$output = '';
+	switch ($options['format']) {
+		case 'html':
+			$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-			$output .= html_header ("Work", "../");
-			$output .= "<body>";
+			$output .= html_header ('Work', '../');
+			$output .= '<body>';
 
 			$output .= "<div class='download'>";
-			$output .= "<h1>Route Data</h1>";
+			$output .= '<h1>Route Data</h1>';
 			$output .= "<a href='?format=text'><img alt='work list as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
-			$output .= "&nbsp;&nbsp;";
+			$output .= '&nbsp;&nbsp;';
 			$output .= "<a href='?format=csv'><img alt='work list as a csv document' width='24' height='24' src='../img/ss.png'></a>";
-			$output .= "</div>";
+			$output .= '</div>';
 
 			$output .= "<div class='header'>Work <span>(Last updated: $last_update)</span></div>\n";
-			$output .= html_menu("../");
+			$output .= html_menu('../');
 			$output .= "<div class='content'>\n";
 			$output .= "<h2>Work <span>($count climbs)</span><span> (Score = $score)</span></h2>\n";
-			$output .= list_render_html ($all, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
-			$output .= "</div>";
+			$output .= list_render_html ($all, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
+			$output .= '</div>';
 			$output .= get_errors();
-			$output .= "</body>";
-			$output .= "</html>";
+			$output .= '</body>';
+			$output .= '</html>';
 			break;
 
-		case "csv":
+		case 'csv':
 			header('Content-type: text/csv');
 			header('Content-Disposition: attachment; filename="work.csv"');
 			$output .= list_render_csv ($all, $columns);
 			break;
 
-		case "text":
+		case 'text':
 		default:
 			header('Content-type: text/plain');
 			header('Content-Disposition: attachment; filename="work.txt"');
@@ -379,24 +379,24 @@ function work_main ($options)
 
 date_default_timezone_set('UTC');
 
-$format = array ("csv", "html", "text");
+$format = array ('csv', 'html', 'text');
 
 if (isset ($argc)) {
-	$longopts = array("format:");
+	$longopts = array('format:');
 
 	$options = getopt(NULL, $longopts);
 
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[2];
+	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
+		$options['format'] = $format[2];
 	}
 } else {
 	$options = array();
 
-	$f = get_url_variable ("format");
+	$f = get_url_variable ('format');
 	if (!in_array ($f, $format))
 		$f = $format[1];
 
-	$options["format"] = $f;
+	$options['format'] = $f;
 }
 
 echo work_main($options);

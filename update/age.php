@@ -9,10 +9,10 @@ function age_main()
 {
 	include 'dbnames.php';
 
-	$output = "";
+	$output = '';
 
 	$table   = "$DB_V_ROUTE";
-	$columns = array("id", "date_set");
+	$columns = array('id', 'date_set');
 
 	$list = db_select($table, $columns);
 
@@ -20,12 +20,12 @@ function age_main()
 	for ($i = -1; $i < 8; $i++) {
 		$totals[$i] = array ('age' => $i, 'count' => 0);
 	}
-	$totals[-1]['age'] = "N/A";
+	$totals[-1]['age'] = 'N/A';
 
-	$today = strtotime ("today");
+	$today = strtotime ('today');
 	foreach ($list as $row) {
 		$date = $row['date_set'];
-		if (empty ($date) || ($date == "0000-00-00"))
+		if (empty ($date) || ($date == '0000-00-00'))
 			$age = -1;
 		else
 			$age = floor (($today - strtotime ($row['date_set'])) / 2635200);

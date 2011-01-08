@@ -19,7 +19,7 @@ function buffer_cache_expiry()
 	if ($age < 0)
 		return NULL;
 
-	return sprintf ("%.1f", $age);
+	return sprintf ('%.1f', $age);
 }
 
 function buffer_cache_clear()
@@ -63,14 +63,14 @@ function buffer_cache_get()
 
 function buffer_db_get()
 {
-	include "dbnames.php";
+	include 'dbnames.php';
 
 	$table   = "$DB_V_ROUTE";
-	$columns = array ("id", "panel", "colour", "grade");
-	$where   = array ("grade_seq >= 400", "grade_seq < 500", "climb_type <> 'lead'");
+	$columns = array ('id', 'panel', 'colour', 'grade');
+	$where   = array ('grade_seq >= 400', 'grade_seq < 500', "climb_type <> 'lead'");
 	$where   = NULL;
-	$order   = "panel_seq, grade_seq, colour";
-	//$order  .= " limit 10";
+	$order   = 'panel_seq, grade_seq, colour';
+	//$order  .= ' limit 10';
 
 	$list = db_select($table, $columns, $where, $order);
 
@@ -80,7 +80,7 @@ function buffer_db_get()
 
 function buffer_render_xml ($name, $list)
 {
-	$output = "";
+	$output = '';
 	foreach ($list as $row) {
 		$output .= "\t<$name>\n";
 		$output .= "\t\t<id>{$row['id']}</id>\n";
@@ -99,9 +99,9 @@ function buffer_get_6a (&$notes)
 	$list = buffer_cache_get();
 	if ($list === NULL) {
 		$list = buffer_db_get();
-		$notes = "data from database";
+		$notes = 'data from database';
 	} else {
-		$notes = "data from cache";
+		$notes = 'data from cache';
 	}
 
 	return $list;
@@ -109,7 +109,7 @@ function buffer_get_6a (&$notes)
 
 function buffer_read()
 {
-	$notes = "";
+	$notes = '';
 
 	$time_start = microtime (true);
 	$list = buffer_get_6a ($notes);
@@ -118,7 +118,7 @@ function buffer_read()
 	if ($diff == 0)
 		$diff = 1;
 
-	$time_elapsed = sprintf ("%.6f (1/%.0f)", $diff, 1/$diff);
+	$time_elapsed = sprintf ('%.6f (1/%.0f)', $diff, 1/$diff);
 
 	$xml = buffer_render_xml ('route', $list);
 
@@ -136,9 +136,9 @@ function buffer_main()
 	$output = "<?xml version='1.0' encoding='UTF-8' standalone='yes'?" . ">\n";
 
 	if (isset ($_GET) && array_key_exists ('action', $_GET))
-		$action = $_GET["action"];
+		$action = $_GET['action'];
 	else
-		$action = "";
+		$action = '';
 
 	switch ($action) {
 		case 'read':
@@ -151,7 +151,7 @@ function buffer_main()
 		case 'keep':
 			buffer_cache_keep();
 			$expiry = buffer_cache_expiry();
-			$notes = "cache kept";
+			$notes = 'cache kept';
 			$output .= "<data cache_expiry='$expiry' notes='$notes'></data>\n";
 			break;
 		default:
@@ -163,7 +163,7 @@ function buffer_main()
 }
 
 
-header("Pragma: no-cache");
+header('Pragma: no-cache');
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
 echo buffer_main();

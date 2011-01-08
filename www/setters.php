@@ -7,14 +7,14 @@ include 'utils.php';
 
 function stats_setters()
 {
-	include "dbnames.php";
+	include 'dbnames.php';
 
-	$output = "";
+	$output = '';
 
 	$table   = "$DB_V_ROUTE";
-	$columns = array("id", "setter");
+	$columns = array('id', 'setter');
 	$where   = NULL;
-	$order   = "setter";
+	$order   = 'setter';
 
 	$list = db_select($table, $columns, $where, $order);
 
@@ -22,7 +22,7 @@ function stats_setters()
 	foreach ($list as $s) {
 		$name = $s['setter'];
 		if (empty ($name)) {
-			$name = "N/A";
+			$name = 'N/A';
 		}
 		if (array_key_exists ($name, $setters)) {
 			$setters[$name]['count']++;
@@ -31,12 +31,12 @@ function stats_setters()
 		}
 	}
 
-	$output .= "<h2>Stats - Setters</h2>";
+	$output .= '<h2>Stats - Setters</h2>';
 	$columns = array ('setter', 'count');
 	$widths = column_widths ($setters, $columns, TRUE);
 	fix_justification ($widths);
 
-	$output .= list_render_html ($setters, $columns, $widths, "{sortlist: [[1,1],[0,0]]}");
+	$output .= list_render_html ($setters, $columns, $widths, '{sortlist: [[1,1],[0,0]]}');
 
 	return $output;
 }
@@ -45,19 +45,19 @@ function stats_main()
 {
 	$type = get_url_variable('type');
 
-	$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-	$output  = "<body>";
+	$output  = '<body>';
 	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
 	$output .= html_menu();
 	$output .= "<div class='content'>\n";
 	$output .= stats_setters();
-	$output .= "</div>";
+	$output .= '</div>';
 	$output .= get_errors();
-	$output .= "</body>";
-	$output .= "</html>";
+	$output .= '</body>';
+	$output .= '</html>';
 
-	$header  = html_header ("Setter");
+	$header  = html_header ('Setter');
 
 	return $header . $output;
 }

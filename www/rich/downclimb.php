@@ -26,29 +26,29 @@ function downclimb_main ($options)
 			"$DB_COLOUR.colour as colour",
 			"$DB_GRADE.grade as grade",
 			"$DB_GRADE.sequence as grade_seq",
-			"climber_id",
-			"date_climbed",
-			"climb_type",
-			"success_id as success",
-			"nice as n",
-			"onsight as o",
+			'climber_id',
+			'date_climbed',
+			'climb_type',
+			'success_id as success',
+			'nice as n',
+			'onsight as o',
 			"$DB_DIFFICULTY.description as difficulty",
 			"$DB_CLIMB.notes as notes");
 
-	$where   = array ("success_id <> 4", "$DB_GRADE.sequence < 400", "$DB_CLIMB.active = true");
-	$order = "panel_seq, grade_seq, colour";
+	$where   = array ('success_id <> 4', "$DB_GRADE.sequence < 400", "$DB_CLIMB.active = true");
+	$order = 'panel_seq, grade_seq, colour';
 
 	$list = db_select($table, $columns, $where, $order);
 
 	// manipulate data (Lead -> L)
 	foreach ($list as $key => $row) {
-		if ($row['climb_type'] == "Lead")
-			$list[$key]['climb_type'] = "L";
+		if ($row['climb_type'] == 'Lead')
+			$list[$key]['climb_type'] = 'L';
 		else
-			$list[$key]['climb_type'] = "";
+			$list[$key]['climb_type'] = '';
 	}
 
-	$columns = array ("panel", "colour", "grade", "climb_type", "difficulty", "notes");
+	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'difficulty', 'notes');
 
 	// calculate widths (include headers?)
 	$widths = column_widths ($list, $columns, TRUE);
@@ -57,39 +57,39 @@ function downclimb_main ($options)
 	fix_justification ($widths);
 
 	$count  = count ($list);
-	$output = "";
-	switch ($options["format"]) {
-		case "html":
-			$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$output = '';
+	switch ($options['format']) {
+		case 'html':
+			$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-			$output .= html_header ("Downclimbs", "../");
-			$output .= "<body>";
+			$output .= html_header ('Downclimbs', '../');
+			$output .= '<body>';
 
 			$output .= "<div class='download'>";
-			$output .= "<h1>Route Data</h1>";
+			$output .= '<h1>Route Data</h1>';
 			$output .= "<a href='?format=text'><img alt='downclimb data as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
-			$output .= "&nbsp;&nbsp;";
+			$output .= '&nbsp;&nbsp;';
 			$output .= "<a href='?format=csv'><img alt='downclimb data as a csv document' width='24' height='24' src='../img/ss.png'></a>";
-			$output .= "</div>";
+			$output .= '</div>';
 
 			$output .= "<div class='header'>Downclimbs <span>(Last updated: $last_update)</span></div>\n";
-			$output .= html_menu("../");
+			$output .= html_menu('../');
 			$output .= "<div class='content'>\n";
 			$output .= "<h2>Downclimb <span>($count climbs)</span></h2>\n";
-			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
-			$output .= "</div>";
+			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
+			$output .= '</div>';
 			$output .= get_errors();
-			$output .= "</body>";
-			$output .= "</html>";
+			$output .= '</body>';
+			$output .= '</html>';
 			break;
 
-		case "csv":
+		case 'csv':
 			header('Content-type: text/csv');
 			header('Content-Disposition: attachment; filename="downclimbs.csv"');
 			$output .= list_render_csv ($list, $columns);
 			break;
 
-		case "text":
+		case 'text':
 		default:
 			header('Content-type: text/plain');
 			header('Content-Disposition: attachment; filename="downclimbs.txt"');
@@ -104,24 +104,24 @@ function downclimb_main ($options)
 
 date_default_timezone_set('UTC');
 
-$format = array ("csv", "html", "text");
+$format = array ('csv', 'html', 'text');
 
 if (isset ($argc)) {
-	$longopts = array("format:");
+	$longopts = array('format:');
 
 	$options = getopt(NULL, $longopts);
 
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[2];
+	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
+		$options['format'] = $format[2];
 	}
 } else {
 	$options = array();
 
-	$f = get_url_variable ("format");
+	$f = get_url_variable ('format');
 	if (!in_array ($f, $format))
 		$f = $format[1];
 
-	$options["format"] = $f;
+	$options['format'] = $f;
 }
 
 echo downclimb_main($options);

@@ -11,7 +11,7 @@ if (!isset ($_GET))
 if (!array_key_exists ('q', $_GET))
 	return;
 
-$q=trim($_GET["q"]);
+$q=trim($_GET['q']);
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 

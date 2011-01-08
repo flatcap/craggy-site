@@ -8,7 +8,7 @@ include 'dbnames.php';
 
 function stats_grade_table ($grade_list, $whole_grades = FALSE)
 {
-	$output = "";
+	$output = '';
 
 	if ($whole_grades)
 		$divisor = 100;
@@ -28,7 +28,7 @@ function stats_grade_table ($grade_list, $whole_grades = FALSE)
 			$results[$gnum]['lead'] = 0;
 		}
 
-		if ($row['climb_type'] == "Lead")
+		if ($row['climb_type'] == 'Lead')
 			$results[$gnum]['lead']++;
 		else
 			$results[$gnum]['top_rope']++;
@@ -39,7 +39,7 @@ function stats_grade_table ($grade_list, $whole_grades = FALSE)
 	$widths = column_widths ($results, $columns, TRUE);
 	fix_justification ($widths);
 
-	$output .= list_render_html ($results, $columns, $widths, "{sortlist: [[0,0]]}");
+	$output .= list_render_html ($results, $columns, $widths, '{sortlist: [[0,0]]}');
 	return $output;
 }
 
@@ -47,7 +47,7 @@ function stats_grade_mean ($grade_list)
 {
 	global $DB_GRADE;
 
-	$output = "";
+	$output = '';
 
 	$g_both = 0; $c_both = 0;
 	$g_lead = 0; $c_lead = 0;
@@ -60,7 +60,7 @@ function stats_grade_mean ($grade_list)
 		$g_both += $g_num;
 		$c_both++;
 
-		if ($route['climb_type'] == "Lead") {
+		if ($route['climb_type'] == 'Lead') {
 			$g_lead += $g_num;
 			$c_lead++;
 		} else {
@@ -74,21 +74,21 @@ function stats_grade_mean ($grade_list)
 	$g_topr = round ($g_topr / $c_topr);
 
 	$table   = "$DB_GRADE";
-	$columns = array("id", "grade", "sequence");
-	$order   = "sequence";
+	$columns = array('id', 'grade', 'sequence');
+	$order   = 'sequence';
 
 	$grades = db_select ($table, $columns, NULL, $order);
 
-	$output .= "<h2>Average Grades</h2>";
-	$output .= "<b>All Routes</b>:<br>";
+	$output .= '<h2>Average Grades</h2>';
+	$output .= '<b>All Routes</b>:<br>';
 	$g_both = ($g_both / 2) - 25;
 	$output .= "<div class='grade'><div class='marker' style='margin-left: {$g_both}px'></div></div><br>";
 
-	$output .= "<b>Top Ropes</b>:<br>";
+	$output .= '<b>Top Ropes</b>:<br>';
 	$g_topr = ($g_topr / 2) - 25;
 	$output .= "<div class='grade'><div class='marker' style='margin-left: {$g_topr}px'></div></div><br>";
 
-	$output .= "<b>Lead Routes</b>:<br>";
+	$output .= '<b>Lead Routes</b>:<br>';
 	$g_lead = ($g_lead / 2) - 25;
 	$output .= "<div class='grade'><div class='marker' style='margin-left: {$g_lead}px'></div></div><br>";
 
@@ -99,23 +99,23 @@ function stats_grade()
 {
 	global $DB_V_ROUTE;
 
-	$output = "";
+	$output = '';
 
 	$table   = "$DB_V_ROUTE";
-	$columns = array ("id", "grade", "grade_seq", "climb_type");
+	$columns = array ('id', 'grade', 'grade_seq', 'climb_type');
 	$where   = NULL;
-	$order   = "grade_seq";
+	$order   = 'grade_seq';
 
 	$grade_list = db_select($table, $columns, $where, $order);
 
-	$output .= "<h2>Stats - Grade</h2>";
+	$output .= '<h2>Stats - Grade</h2>';
 
 	$output .= stats_grade_mean ($grade_list);
-	$output .= "<br>";
+	$output .= '<br>';
 	$output .= "<div class='graph'>";
 	$output .= "<img alt='graph of grade vs frequency' width='800' height='400' src='img/grade.png'>";
-	$output .= "</div>";
-	$output .= "<br>";
+	$output .= '</div>';
+	$output .= '<br>';
 	$output .= stats_grade_table ($grade_list, FALSE);
 
 	return $output;
@@ -125,19 +125,19 @@ function stats_main()
 {
 	$type = get_url_variable('type');
 
-	$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-	$output  = "<body>";
+	$output  = '<body>';
 	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
 	$output .= html_menu();
 	$output .= "<div class='content'>\n";
 	$output .= stats_grade();
-	$output .= "</div>";
+	$output .= '</div>';
 	$output .= get_errors();
-	$output .= "</body>";
-	$output .= "</html>";
+	$output .= '</body>';
+	$output .= '</html>';
 
-	$header  = html_header ("Grades");
+	$header  = html_header ('Grades');
 
 	return $header . $output;
 }

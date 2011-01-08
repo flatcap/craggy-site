@@ -7,43 +7,43 @@ include 'utils.php';
 
 function setter_main()
 {
-	$output = "";
-	$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$output = '';
+	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-	$output .= html_header ("Setter", "../");
-	$output .= "<body>";
+	$output .= html_header ('Setter', '../');
+	$output .= '<body>';
 
 	$output .= "<div class='header'>Setters <span>(Last updated: $last_update)</span></div>";
-	$output .= html_menu("../");
+	$output .= html_menu('../');
 
 	$output .= "<div class='content'>";
-	$output .= "<h2>Setters</h2>";
+	$output .= '<h2>Setters</h2>';
 
 	$output .= "<div id='list_area'>";
 	$output .= "<div id='setter_table'>";
-	$output .= "</div>";
+	$output .= '</div>';
 
-	$output .= "<br>";
+	$output .= '<br>';
 	$output .= "<div class='buttons'>";
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
-	$output .= "&nbsp;";
+	$output .= '&nbsp;';
 	$output .= "<input type='submit' type='button' id='button_edit' value='Edit'>";
-	$output .= "&nbsp;";
+	$output .= '&nbsp;';
 	$output .= "<input type='submit' type='button' id='button_delete' value='Delete'>";
-	$output .= "&nbsp;";
+	$output .= '&nbsp;';
 	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
-	$output .= "</div>";
-	$output .= "</div>";
+	$output .= '</div>';
+	$output .= '</div>';
 	$output .= "<div id='notify_area'>";
-	$output .= "</div";
+	$output .= '</div';
 	$output .= "<div id='work_area'>";
-	$output .= "</div";
-	$output .= "</div>";
+	$output .= '</div';
+	$output .= '</div>';
 
 	$output .= "<script type='text/javascript' src='setter.js'></script>";
 	$output .= get_errors();
-	$output .= "</body>";
-	$output .= "</html>";
+	$output .= '</body>';
+	$output .= '</html>';
 
 	return $output;
 }

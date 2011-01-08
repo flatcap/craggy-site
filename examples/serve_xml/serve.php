@@ -4,7 +4,7 @@ set_include_path ('../../libs');
 
 include 'db.php';
 include 'dbnames.php';
-#include "utils.php";
+#include 'utils.php';
 
 #if (!isset ($_GET))
 #	return;
@@ -12,19 +12,19 @@ include 'dbnames.php';
 #if (!array_key_exists ('q', $_GET))
 #	return;
 #
-#$q=trim($_GET["q"]);
-#if ($q != "climb")
+#$q=trim($_GET['q']);
+#if ($q != 'climb')
 #	return;
 
-#$g_routes  = db_select("route");
-#$g_colours = db_select("colour");
-#$g_panels  = db_select("panel");
+#$g_routes  = db_select('route');
+#$g_colours = db_select('colour');
+#$g_panels  = db_select('panel');
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
 $table   = "$DB_CLIMB";
-$columns = array ("id", "route_id", "date_climbed", "success_id");
-$where   = array ("climber_id = 1", "active = 1"); 
+$columns = array ('id', 'route_id', 'date_climbed', 'success_id');
+$where   = array ('climber_id = 1', 'active = 1'); 
 $order   = NULL;
 
 $climb_list = db_select($table, $columns, $where, $order);

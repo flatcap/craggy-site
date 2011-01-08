@@ -66,7 +66,7 @@ function setter_delete_query ($data)
 
 	// How many routes will be deleted?
 	$table  = "$DB_ROUTE";
-	$column = "setter_id";
+	$column = 'setter_id';
 	$where  = "setter_id in ($data)";
 	$route_count = db_count ($table, $column, $where);
 
@@ -99,13 +99,13 @@ function setter_delete ($data)
 	$climb_count = db_delete ($table, $join_table, $where);
 
 	// How many routes will be deleted?
-	$table = "";
+	$table = '';
 	$join_table = "$DB_ROUTE";
 	$where = "setter_id in ($data)";
 	$route_count = db_delete ($table, $join_table, $where);
 
 	// How many setters will be deleted?
-	$table = "";
+	$table = '';
 	$join_table = "$DB_SETTER";
 	$where = "id in ($data)";
 	$setter_count = db_delete ($table, $join_table, $where);
@@ -136,14 +136,14 @@ function setter_list()
 			"count($DB_ROUTE.id) as count");
 
 	$where   = NULL;
-	$order   = "id";
-	$group   = "id";
+	$order   = 'id';
+	$group   = 'id';
 
 	$list = db_select ($table, $columns, $where, $order, $group);
 
 	$columns = array ('id', 'initials', 'first_name', 'surname', 'count');
 
-	return list_render_xml ("setter", $list, $columns);
+	return list_render_xml ('setter', $list, $columns);
 }
 
 function setter_main()
@@ -152,12 +152,12 @@ function setter_main()
 	//global $fh;
 
 	if (!isset ($_GET)) {
-		echo "NO GET";
+		echo 'NO GET';
 		return;
 	}
 
 	if (!array_key_exists ('action', $_GET)) {
-		echo "NO ACTION";
+		echo 'NO ACTION';
 		return;
 	}
 	$action = $_GET['action'];
@@ -165,10 +165,10 @@ function setter_main()
 	if (array_key_exists ('data', $_GET)) {
 		$data = $_GET['data'];
 	} else {
-		$data = "";
+		$data = '';
 	}
 
-	//$fh = fopen ("/tmp/db_log", "a");
+	//$fh = fopen ('/tmp/db_log', 'a');
 	//fwrite ($fh, "action=$action,data=$data\n");
 
 	// action: delete, list, update

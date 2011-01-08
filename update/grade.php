@@ -10,32 +10,32 @@ function grade_main()
 	include 'dbnames.php';
 
 	$table   = "$DB_V_ROUTE";
-	$columns = array ("id", "grade", "climb_type");
-	$order   = "grade_seq";
+	$columns = array ('id', 'grade', 'climb_type');
+	$order   = 'grade_seq';
 
 	$list = db_select($table, $columns, NULL, $order);
 
 	$totals = array(
-		"3"   => array (0, 0, 0),
-		"3+"  => array (0, 0, 0),
-		"4"   => array (0, 0, 0),
-		"4+"  => array (0, 0, 0),
-		"5"   => array (0, 0, 0),
-		"5+"  => array (0, 0, 0),
-		"6a"  => array (0, 0, 0),
-		"6a+" => array (0, 0, 0),
-		"6b"  => array (0, 0, 0),
-		"6b+" => array (0, 0, 0),
-		"6c"  => array (0, 0, 0),
-		"6c+" => array (0, 0, 0),
-		"7a"  => array (0, 0, 0),
-		"7a+" => array (0, 0, 0),
-		"7b"  => array (0, 0, 0),
-		"7b+" => array (0, 0, 0),
-		"7c"  => array (0, 0, 0),
-		"7c+" => array (0, 0, 0),
-		"8a"  => array (0, 0, 0),
-		"8a+" => array (0, 0, 0));
+		'3'   => array (0, 0, 0),
+		'3+'  => array (0, 0, 0),
+		'4'   => array (0, 0, 0),
+		'4+'  => array (0, 0, 0),
+		'5'   => array (0, 0, 0),
+		'5+'  => array (0, 0, 0),
+		'6a'  => array (0, 0, 0),
+		'6a+' => array (0, 0, 0),
+		'6b'  => array (0, 0, 0),
+		'6b+' => array (0, 0, 0),
+		'6c'  => array (0, 0, 0),
+		'6c+' => array (0, 0, 0),
+		'7a'  => array (0, 0, 0),
+		'7a+' => array (0, 0, 0),
+		'7b'  => array (0, 0, 0),
+		'7b+' => array (0, 0, 0),
+		'7c'  => array (0, 0, 0),
+		'7c+' => array (0, 0, 0),
+		'8a'  => array (0, 0, 0),
+		'8a+' => array (0, 0, 0));
 
 	foreach ($list as $row) {
 		$g = $row['grade'];
@@ -43,13 +43,13 @@ function grade_main()
 		//	$totals[$g] = array(0, 0, 0);
 
 		$totals[$g][0]++;
-		if ($row['climb_type'] == "Lead")
+		if ($row['climb_type'] == 'Lead')
 			$totals[$g][2]++;
 		else
 			$totals[$g][1]++;
 	}
 
-	$output = "";
+	$output = '';
 	foreach ($totals as $grade => $counts) {
 		$output .= sprintf ("%s\t%d\t%d\t%d\n", $grade, $counts[0], $counts[1], $counts[2]);
 	}

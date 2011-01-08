@@ -7,12 +7,12 @@ include 'utils.php';
 
 function stats_age()
 {
-	include "dbnames.php";
+	include 'dbnames.php';
 
-	$output = "";
+	$output = '';
 
 	$table   = "$DB_V_ROUTE";
-	$columns = array("id", "date_set");
+	$columns = array('id', 'date_set');
 
 	$list = db_select($table, $columns);
 
@@ -20,12 +20,12 @@ function stats_age()
 	for ($i = -1; $i < 8; $i++) {
 		$totals[$i] = array ('age' => $i, 'count' => 0);
 	}
-	$totals[-1]['age'] = "N/A";
+	$totals[-1]['age'] = 'N/A';
 
-	$today = strtotime ("today");
+	$today = strtotime ('today');
 	foreach ($list as $row) {
 		$date = $row['date_set'];
-		if (empty ($date) || ($date == "0000-00-00"))
+		if (empty ($date) || ($date == '0000-00-00'))
 			$age = -1;
 		else
 			$age = floor (($today - strtotime ($row['date_set'])) / 2635200);
@@ -36,13 +36,13 @@ function stats_age()
 		$totals[$age]['count']++;
 	}
 
-	$output .= "<h2>Stats - Age</h2>";
+	$output .= '<h2>Stats - Age</h2>';
 	$output .= "<img alt='graph of age vs route count' width='800' height='400' src='img/age.png'>";
 
-	$columns = array ("age", "count");
+	$columns = array ('age', 'count');
 	$widths = column_widths ($totals, $columns, TRUE);
 
-	$output .= list_render_html ($totals, $columns, $widths, "{sortlist: [[0,0]]}");
+	$output .= list_render_html ($totals, $columns, $widths, '{sortlist: [[0,0]]}');
 	return $output;
 }
 
@@ -50,19 +50,19 @@ function stats_main()
 {
 	$type = get_url_variable('type');
 
-	$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-	$output  = "<body>";
+	$output  = '<body>';
 	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
 	$output .= html_menu();
 	$output .= "<div class='content'>\n";
 	$output .= stats_age();
-	$output .= "</div>";
+	$output .= '</div>';
 	$output .= get_errors();
-	$output .= "</body>";
-	$output .= "</html>";
+	$output .= '</body>';
+	$output .= '</html>';
 
-	$header  = html_header ("Age");
+	$header  = html_header ('Age');
 
 	return $header . $output;
 }

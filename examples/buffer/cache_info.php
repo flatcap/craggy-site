@@ -8,7 +8,7 @@ printf ("jim = %d\n", strlen ($jim));
 
 for ($i = 0; $i < 10; $i++) {
 	apc_store ("rich_key$i", $jim);
-	//$ci = apc_cache_info("user");
+	//$ci = apc_cache_info('user');
 	//printf ("num_slots = %d\n", $ci['num_slots']);
 	//printf ("ttl = %d\n", $ci['ttl']);
 	//printf ("num_hits = %d\n", $ci['num_hits']);
@@ -23,7 +23,7 @@ for ($i = 0; $i < 10; $i++) {
 	//printf ("\n");
 }
 
-$ci = apc_cache_info("user");
+$ci = apc_cache_info('user');
 printf ("User cache keys:\n");
 foreach ($ci['cache_list'] as $item) {
 	printf ("\t%s\n", $item['info']);

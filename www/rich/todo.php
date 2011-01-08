@@ -9,7 +9,7 @@ function todo_main($options)
 {
 	include 'dbnames.php';
 
-	$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$climber_id = 1;
 
@@ -28,21 +28,21 @@ function todo_main($options)
 			"$DB_COLOUR.colour as colour",
 			"$DB_GRADE.grade as grade",
 			"$DB_GRADE.sequence as grade_seq",
-			"climber_id",
-			"date_climbed",
-			"climb_type",
+			'climber_id',
+			'date_climbed',
+			'climb_type',
 			"$DB_SUCCESS.outcome as success",
-			"nice as n",
-			"onsight as o",
+			'nice as n',
+			'onsight as o',
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
-	$where   = array ("((success_id < 3) OR (success_id is NULL))", "$DB_GRADE.sequence < 600");
-	$order = "panel_seq, grade_seq, colour";
+	$where   = array ('((success_id < 3) OR (success_id is NULL))', "$DB_GRADE.sequence < 600");
+	$order = 'panel_seq, grade_seq, colour';
 
 	$list = db_select($table, $columns, $where, $order);
 
-	$columns = array ("panel", "colour", "grade", "climb_type", "success", "notes");
+	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'notes');
 
 	// calculate widths (include headers?)
 	$widths = column_widths ($list, $columns, TRUE);
@@ -51,39 +51,39 @@ function todo_main($options)
 	fix_justification ($widths);
 
 	$count  = count ($list);
-	$output = "";
-	switch ($options["format"]) {
-		case "html":
-			$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$output = '';
+	switch ($options['format']) {
+		case 'html':
+			$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-			$output .= html_header ("To Do", "../");
-			$output .= "<body>";
+			$output .= html_header ('To Do', '../');
+			$output .= '<body>';
 
 			$output .= "<div class='download'>";
-			$output .= "<h1>Route Data</h1>";
+			$output .= '<h1>Route Data</h1>';
 			$output .= "<a href='?format=text'><img alt='todo list as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
-			$output .= "&nbsp;&nbsp;";
+			$output .= '&nbsp;&nbsp;';
 			$output .= "<a href='?format=csv'><img alt='todo list as a csv document' width='24' height='24' src='../img/ss.png'></a>";
-			$output .= "</div>";
+			$output .= '</div>';
 
 			$output .= "<div class='header'>To Do <span>(Last updated: $last_update)</span></div>\n";
-			$output .= html_menu("../");
+			$output .= html_menu('../');
 			$output .= "<div class='content'>\n";
 			$output .= "<h2>To Do <span>($count climbs)</span></h2>\n";
-			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
-			$output .= "</div>";
+			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
+			$output .= '</div>';
 			$output .= get_errors();
-			$output .= "</body>";
-			$output .= "</html>";
+			$output .= '</body>';
+			$output .= '</html>';
 			break;
 
-		case "csv":
+		case 'csv':
 			header('Content-type: text/csv');
 			header('Content-Disposition: attachment; filename="todo.csv"');
 			$output .= list_render_csv ($list, $columns);
 			break;
 
-		case "text":
+		case 'text':
 		default:
 			header('Content-type: text/plain');
 			header('Content-Disposition: attachment; filename="todo.txt"');
@@ -98,24 +98,24 @@ function todo_main($options)
 
 date_default_timezone_set('UTC');
 
-$format = array ("csv", "html", "text");
+$format = array ('csv', 'html', 'text');
 
 if (isset ($argc)) {
-	$longopts = array("format:");
+	$longopts = array('format:');
 
 	$options = getopt(NULL, $longopts);
 
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[2];
+	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
+		$options['format'] = $format[2];
 	}
 } else {
 	$options = array();
 
-	$f = get_url_variable ("format");
+	$f = get_url_variable ('format');
 	if (!in_array ($f, $format))
 		$f = $format[1];
 
-	$options["format"] = $f;
+	$options['format'] = $f;
 }
 
 echo todo_main ($options);

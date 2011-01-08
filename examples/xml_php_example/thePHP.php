@@ -2,13 +2,13 @@
 
 /*
 Assumes you have connected to your database and that you have a table
-called "people" with 3 columns - title, firstname, surname
+called 'people' with 3 columns - title, firstname, surname
 */
 
-$query = "SELECT title,firstname,surname FROM people";
+$query = 'SELECT title,firstname,surname FROM people';
 $result = mysql_query($query);
 
-$xml = "";
+$xml = '';
 
 while($array = mysql_fetch_array($result)) {
 

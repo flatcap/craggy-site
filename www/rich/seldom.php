@@ -9,7 +9,7 @@ function seldom_range ($m_start, $m_finish, $options)
 {
 	include 'dbnames.php';
 
-	$output = "";
+	$output = '';
 
 	$when_start  = db_date ("$m_start months ago");
 
@@ -30,17 +30,17 @@ function seldom_range ($m_start, $m_finish, $options)
 			"$DB_COLOUR.colour as colour",
 			"$DB_GRADE.grade as grade",
 			"$DB_GRADE.sequence as grade_seq",
-			"climber_id",
-			"date_climbed",
-			"climb_type",
+			'climber_id',
+			'date_climbed',
+			'climb_type',
 			"$DB_SUCCESS.outcome as success",
-			"nice as n",
-			"onsight as o",
+			'nice as n',
+			'onsight as o',
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
 	$where   = array ("$DB_GRADE.sequence < 600");
-	$order = "panel_seq, grade_seq, colour";
+	$order = 'panel_seq, grade_seq, colour';
 
 	if (isset ($m_finish)) {
 		array_push ($where, "date_climbed < '$when_start'");
@@ -53,30 +53,30 @@ function seldom_range ($m_start, $m_finish, $options)
 	// print data (based on column names)
 	$list = db_select($table, $columns, $where, $order);
 
-	$today = strtotime("today");
+	$today = strtotime('today');
 	// manipulate data (Lead -> L)
 	foreach ($list as $index => $row) {
-		if ($row['climb_type'] == "Lead")
-			$list[$index]['climb_type'] = "L";
+		if ($row['climb_type'] == 'Lead')
+			$list[$index]['climb_type'] = 'L';
 		else
-			$list[$index]['climb_type'] = "";
+			$list[$index]['climb_type'] = '';
 
-		$d = $row["date_climbed"];
-		if ($d == "0000-00-00")
-			$d = "";
-		$list[$index]["date_climbed"] = $d;
+		$d = $row['date_climbed'];
+		if ($d == '0000-00-00')
+			$d = '';
+		$list[$index]['date_climbed'] = $d;
 
 		if (empty($d)) {
-			$m = "";
+			$m = '';
 		} else {
 			$a = floor (($today - strtotime($d)) / 86400);
-			$m = sprintf ("%.1f", $a / 30.44);
+			$m = sprintf ('%.1f', $a / 30.44);
 		}
 
-		$list[$index]["months"] = $m;
+		$list[$index]['months'] = $m;
 	}
 
-	array_push ($columns, "months");
+	array_push ($columns, 'months');
 	unset ($columns[6]);
 
 	return $list;
@@ -84,34 +84,34 @@ function seldom_range ($m_start, $m_finish, $options)
 
 function seldom_main ($options)
 {
-	$output = "";
+	$output = '';
 	$ranges = array (12, 6, 4, 3, 2);
 
-	switch ($options["format"]) {
-		case "html":
-			$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	switch ($options['format']) {
+		case 'html':
+			$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-			$output .= html_header ("Seldom", "../");
-			$output .= "<body>";
+			$output .= html_header ('Seldom', '../');
+			$output .= '<body>';
 
 			$output .= "<div class='download'>";
-			$output .= "<h1>Route Data</h1>";
+			$output .= '<h1>Route Data</h1>';
 			$output .= "<a href='?format=text'><img alt='seldom list as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
-			$output .= "&nbsp;&nbsp;";
+			$output .= '&nbsp;&nbsp;';
 			$output .= "<a href='?format=csv'><img alt='seldom list as a csv document' width='24' height='24' src='../img/ss.png'></a>";
-			$output .= "</div>";
+			$output .= '</div>';
 
 			$output .= "<div class='header'>Seldom <span>(Last updated: $last_update)</span></div>";
-			$output .= html_menu("../");
+			$output .= html_menu('../');
 			$output .= "<div class='content'>";
 			break;
 
-		case "csv":
+		case 'csv':
 			header('Content-type: text/csv');
 			header('Content-Disposition: attachment; filename="seldom.csv"');
 			break;
 
-		case "text":
+		case 'text':
 		default:
 			header('Content-type: text/plain');
 			header('Content-Disposition: attachment; filename="seldom.txt"');
@@ -129,26 +129,26 @@ function seldom_main ($options)
 		if ($count == 0)
 			continue;
 
-		process_date ($list, "date_climbed", FALSE);
+		process_date ($list, 'date_climbed', FALSE);
 
-		$columns = array ("panel", "colour", "grade", "climb_type", "success", "notes", "date_climbed");
+		$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'notes', 'date_climbed');
 		$widths = column_widths ($list, $columns, TRUE);
 		fix_justification ($widths);
 
 		// render section
-		switch ($options["format"]) {
-			case "html":
+		switch ($options['format']) {
+			case 'html':
 				$output .= "<h2>$start-$finish months <span>($count climbs)</span></h2>\n";
-				$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
-				$output .= "<br>";
+				$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
+				$output .= '<br>';
 				break;
 
-			case "csv":
+			case 'csv':
 				$output .= list_render_csv ($list, $columns);
 				$output .= '""' . "\r\n";
 				break;
 
-			case "text":
+			case 'text':
 			default:
 				$output .= "$start-$finish months ($count climbs)\r\n";
 				$output .= list_render_text ($list, $columns, $widths);
@@ -157,18 +157,18 @@ function seldom_main ($options)
 		}
 	}
 
-	switch ($options["format"]) {
-		case "html":
-			$output .= "</div>";
+	switch ($options['format']) {
+		case 'html':
+			$output .= '</div>';
 			$output .= get_errors();
-			$output .= "</body>";
-			$output .= "</html>";
+			$output .= '</body>';
+			$output .= '</html>';
 			break;
 
-		case "csv":
+		case 'csv':
 			break;
 
-		case "text":
+		case 'text':
 		default:
 			break;
 	}
@@ -179,24 +179,24 @@ function seldom_main ($options)
 
 date_default_timezone_set('UTC');
 
-$format = array ("csv", "html", "text");
+$format = array ('csv', 'html', 'text');
 
 if (isset ($argc)) {
-	$longopts = array("format:");
+	$longopts = array('format:');
 
 	$options = getopt(NULL, $longopts);
 
-	if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-		$options["format"] = $format[2];
+	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
+		$options['format'] = $format[2];
 	}
 } else {
 	$options = array();
 
-	$f = get_url_variable ("format");
+	$f = get_url_variable ('format');
 	if (!in_array ($f, $format))
 		$f = $format[1];
 
-	$options["format"] = $f;
+	$options['format'] = $f;
 }
 
 echo seldom_main ($options);

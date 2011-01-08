@@ -16,18 +16,18 @@ if (!isset ($_GET))
 if (!array_key_exists ('q', $_GET))
 	return;
 
-$q=$_GET["q"];
+$q=$_GET['q'];
 $len = strlen ($q);
 $last = $q[$len-1];
-$trail_space = (($last == " ") || ($last == ","));
+$trail_space = (($last == ' ') || ($last == ','));
 $q=trim ($q);
 if (empty ($q))
 	return;
 
-$parts = preg_split("/[\s,]+/", $q);
+$parts = preg_split('/[\s,]+/', $q);
 $panel = array_shift ($parts);
 foreach ($parts as $key => $p) {
-	if ($p == "") {
+	if ($p == '') {
 		unset ($parts[$key]);
 	}
 }
@@ -75,7 +75,7 @@ if ($num_routes == 0) {
 
 $list = array();
 foreach ($matches as $m) {
-	$list[] = $g_colours[$m['colour_id']]['colour'] . " " . $m['grade'];
+	$list[] = $g_colours[$m['colour_id']]['colour'] . ' ' . $m['grade'];
 }
 
 function colours_process ($colours)
@@ -143,11 +143,11 @@ if ($trail_space) {
 }
 
 $c = $panel;
-$cols = implode (", ", $parts);
+$cols = implode (', ', $parts);
 if (!empty ($cols))
-	$c .= " " . $cols;
+	$c .= ' ' . $cols;
 
 if ($trail_space)
-	$c .= " ";
-printf ("%s - %d %s", $c, $panel, implode (", ", $list));
+	$c .= ' ';
+printf ('%s - %d %s', $c, $panel, implode (', ', $list));
 

@@ -7,19 +7,19 @@ if (!isset ($_GET))
 if (!array_key_exists ('q', $_GET))
 	return;
 
-$q=trim ($_GET["q"]);
+$q=trim ($_GET['q']);
 if (empty ($q))
 	return;
 
 $date = strtotime ($q);
-$now  = strtotime ("now");
+$now  = strtotime ('now');
 
 if ($date == FALSE)
-	$result = "Invalid date";
+	$result = 'Invalid date';
 else if ($date > $now)
-	$result = "Date cannot be in the future";
+	$result = 'Date cannot be in the future';
 else
-	$result = date ("D j M Y", $date);
+	$result = date ('D j M Y', $date);
 
-printf ("%s (%s)", $q, $result);
+printf ('%s (%s)', $q, $result);
 

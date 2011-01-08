@@ -11,16 +11,16 @@ function process_binary(&$list, $field, $value)
 		if ($row[$field] == 1)
 			$d = $value;
 		else
-			$d = "";
+			$d = '';
 		$list[$index][$field] = $d;
 	}
 }
 
 function climbs_main($options)
 {
-	include "dbnames.php";
+	include 'dbnames.php';
 
-	$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$climber_id = 1;
 
@@ -39,27 +39,27 @@ function climbs_main($options)
 			"$DB_COLOUR.colour as colour",
 			"$DB_GRADE.grade as grade",
 			"$DB_GRADE.sequence as grade_seq",
-			"climber_id",
-			"date_climbed",
-			"climb_type",
+			'climber_id',
+			'date_climbed',
+			'climb_type',
 			"$DB_SUCCESS.outcome as success",
-			"nice as n",
-			"onsight as o",
+			'nice as n',
+			'onsight as o',
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
 	$where   = NULL;
-	$order   = "panel_seq, grade_seq, colour";
+	$order   = 'panel_seq, grade_seq, colour';
 
 	$list = db_select($table, $columns, $where, $order);
 	$count = count($list);
 
-	process_binary ($list, "n", "N");
-	process_binary ($list, "o", "O");
-	process_date ($list, "date_climbed", TRUE);
+	process_binary ($list, 'n', 'N');
+	process_binary ($list, 'o', 'O');
+	process_date ($list, 'date_climbed', TRUE);
 	process_type ($list);
 
-	$columns = array ("panel", "colour", "grade", "climb_type", "date_climbed", "success", "n", "o", "diff", "notes");
+	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'date_climbed', 'success', 'n', 'o', 'diff', 'notes');
 
 	// calculate widths (include headers?)
 	$widths = column_widths ($list, $columns, TRUE);
@@ -67,39 +67,39 @@ function climbs_main($options)
 	// alter justification of widths
 	fix_justification ($widths);
 
-	$output = "";
-	switch ($options["format"]) {
-		case "html":
-			$last_update = date ("j M Y", strtotime (db_get_last_update()));
+	$output = '';
+	switch ($options['format']) {
+		case 'html':
+			$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
-			$output .= html_header ("Climbs", "../");
-			$output .= "<body>";
+			$output .= html_header ('Climbs', '../');
+			$output .= '<body>';
 
 			$output .= "<div class='download'>";
-			$output .= "<h1>Route Data</h1>";
+			$output .= '<h1>Route Data</h1>';
 			$output .= "<a href='?format=text'><img alt='climb list as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
-			$output .= "&nbsp;&nbsp;";
+			$output .= '&nbsp;&nbsp;';
 			$output .= "<a href='?format=csv'><img alt='climb list as a csv document' width='24' height='24' src='../img/ss.png'></a>";
-			$output .= "</div>";
+			$output .= '</div>';
 
 			$output .= "<div class='header'>Climbs <span>(Last updated: $last_update)</span></div>\n";
-			$output .= html_menu("../");
+			$output .= html_menu('../');
 			$output .= "<div class='content'>";
 			$output .= "<h2>Climbs <span>({$count})</span></h2>";
-			$output .= list_render_html ($list, $columns, $widths, "{sortlist: [[0,0], [2,0], [1,0]]}");
-			$output .= "</div>";
+			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
+			$output .= '</div>';
 			$output .= get_errors();
-			$output .= "</body>";
-			$output .= "</html>";
+			$output .= '</body>';
+			$output .= '</html>';
 			break;
 
-		case "csv":
+		case 'csv':
 			header('Content-type: text/csv');
 			header('Content-Disposition: attachment; filename="climbs.csv"');
 			$output .= list_render_csv ($list, $columns);
 			break;
 
-		case "text":
+		case 'text':
 		default:
 			header('Content-type: text/plain');
 			header('Content-Disposition: attachment; filename="climbs.txt"');
@@ -113,24 +113,24 @@ function climbs_main($options)
 
 date_default_timezone_set('UTC');
 
-$format = array ("csv", "html", "text");
+$format = array ('csv', 'html', 'text');
 
 if (isset ($argc)) {
-		$longopts = array("format:");
+		$longopts = array('format:');
 
 		$options = getopt(NULL, $longopts);
 
-		if (!array_key_exists ("format", $options) || !in_array ($options["format"], $format)) {
-			$options["format"] = $format[2];
+		if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
+			$options['format'] = $format[2];
 		}
 } else {
 		$options = array();
 
-		$f = get_url_variable ("format");
+		$f = get_url_variable ('format');
 		if (!in_array ($f, $format))
 			$f = $format[1];
 
-		$options["format"] = $f;
+		$options['format'] = $f;
 }
 
 echo climbs_main ($options);

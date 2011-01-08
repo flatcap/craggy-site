@@ -9,7 +9,7 @@ function grade_main()
 {
 	include 'dbnames.php';
 
-	$table   = "$DB_V_ROUTE";
+	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'grade', 'climb_type');
 	$order   = 'grade_seq';
 

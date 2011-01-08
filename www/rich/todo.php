@@ -13,7 +13,7 @@ function todo_main($options)
 
 	$climber_id = 1;
 
-	$table   = "$DB_ROUTE" .
+	$table   = $DB_ROUTE .
 			" left join $DB_CLIMB on (($DB_CLIMB.route_id = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
 			" left join $DB_COLOUR on ($DB_ROUTE.colour_id = $DB_COLOUR.id)" .
 			" left join $DB_PANEL on ($DB_ROUTE.panel_id = $DB_PANEL.id)" .

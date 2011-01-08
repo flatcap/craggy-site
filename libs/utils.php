@@ -571,7 +571,7 @@ function get_stats()
 	$db = db_get_database();
 	$output = '';
 
-	$all_routes = db_select("$DB_V_ROUTE");
+	$all_routes = db_select($DB_V_ROUTE);
 
 	// Panels stats ----------------------------------------
 

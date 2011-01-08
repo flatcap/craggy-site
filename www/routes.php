@@ -9,7 +9,7 @@ function routes_main($options)
 {
 	include 'dbnames.php';
 
-	$table   = "$DB_V_ROUTE";
+	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'climb_type', 'notes', 'setter', 'date_set');
 	$order   = 'panel_seq, grade_seq, colour';
 

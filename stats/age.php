@@ -9,7 +9,7 @@ function age_main()
 {
 	include 'dbnames.php';
 
-	$table   = "$DB_V_ROUTE";
+	$table   = $DB_V_ROUTE;
 	$columns = array ("id", "panel", "colour", "grade", "grade_seq", "climb_type", "date_set", "date_climbed", "success", "d", "o");
 	$where   = NULL;
 	$order   = NULL; //"date_set"

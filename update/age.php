@@ -11,7 +11,7 @@ function age_main()
 
 	$output = '';
 
-	$table   = "$DB_V_ROUTE";
+	$table   = $DB_V_ROUTE;
 	$columns = array('id', 'date_set');
 
 	$list = db_select($table, $columns);

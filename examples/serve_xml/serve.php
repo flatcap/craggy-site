@@ -22,7 +22,7 @@ include 'dbnames.php';
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$table   = "$DB_CLIMB";
+$table   = $DB_CLIMB;
 $columns = array ('id', 'route_id', 'date_climbed', 'success_id');
 $where   = array ('climber_id = 1', 'active = 1'); 
 $order   = NULL;

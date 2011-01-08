@@ -10,7 +10,7 @@ function six_main ($options)
 	include 'dbnames.php';
 
 	// 'difficulty'
-	$table   = "$DB_V_ROUTE";
+	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'height');
 	$where   = array ('grade_seq >= 400', 'grade_seq < 500', "climb_type <> 'lead'");
 	$order   = 'panel_seq, grade_seq, colour';

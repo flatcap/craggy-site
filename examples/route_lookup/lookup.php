@@ -37,10 +37,10 @@ if (!is_numeric ($panel)) {
 	return;
 }
 
-$g_routes  = db_select("$DB_ROUTE");
-$g_colours = db_select("$DB_COLOUR");
-$g_panels  = db_select("$DB_PANEL");
-$g_grades  = db_select("$DB_GRADE");
+$g_routes  = db_select($DB_ROUTE);
+$g_colours = db_select($DB_COLOUR);
+$g_panels  = db_select($DB_PANEL);
+$g_grades  = db_select($DB_GRADE);
 
 $panel_id = NULL;
 foreach ($g_panels as $id => $p) {

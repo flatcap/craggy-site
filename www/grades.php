@@ -73,7 +73,7 @@ function stats_grade_mean ($grade_list)
 	$g_lead = round ($g_lead / $c_lead);
 	$g_topr = round ($g_topr / $c_topr);
 
-	$table   = "$DB_GRADE";
+	$table   = $DB_GRADE;
 	$columns = array('id', 'grade', 'sequence');
 	$order   = 'sequence';
 
@@ -101,7 +101,7 @@ function stats_grade()
 
 	$output = '';
 
-	$table   = "$DB_V_ROUTE";
+	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'grade', 'grade_seq', 'climb_type');
 	$where   = NULL;
 	$order   = 'grade_seq';

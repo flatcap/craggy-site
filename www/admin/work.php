@@ -65,7 +65,7 @@ function setter_delete_query ($data)
 	$setter_count = count ($id_list);
 
 	// How many routes will be deleted?
-	$table  = "$DB_ROUTE";
+	$table  = $DB_ROUTE;
 	$column = 'setter_id';
 	$where  = "setter_id in ($data)";
 	$route_count = db_count ($table, $column, $where);
@@ -93,20 +93,20 @@ function setter_delete ($data)
 	$id_list = explode (',', $data);
 
 	// How many climbs will be deleted?
-	$table      = "$DB_CLIMB";
+	$table      = $DB_CLIMB;
 	$join_table = "$DB_CLIMB, $DB_ROUTE, $DB_SETTER";
 	$where = "($DB_CLIMB.route_id = $DB_ROUTE.id) and ($DB_ROUTE.setter_id = $DB_SETTER.id) and ($DB_SETTER.id in ($data))";
 	$climb_count = db_delete ($table, $join_table, $where);
 
 	// How many routes will be deleted?
 	$table = '';
-	$join_table = "$DB_ROUTE";
+	$join_table = $DB_ROUTE;
 	$where = "setter_id in ($data)";
 	$route_count = db_delete ($table, $join_table, $where);
 
 	// How many setters will be deleted?
 	$table = '';
-	$join_table = "$DB_SETTER";
+	$join_table = $DB_SETTER;
 	$where = "id in ($data)";
 	$setter_count = db_delete ($table, $join_table, $where);
 
@@ -126,7 +126,7 @@ function setter_list()
 //		<count>4</count>
 //	</setter>
 
-	$table   = "$DB_SETTER" .
+	$table   = $DB_SETTER .
 			" left join $DB_ROUTE on (setter_id=$DB_SETTER.id)";
 
 	$columns = array ("$DB_SETTER.id as id",

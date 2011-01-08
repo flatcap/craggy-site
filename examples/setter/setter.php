@@ -15,7 +15,7 @@ $q=trim($_GET['q']);
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$table   = "$DB_SETTER";
+$table   = $DB_SETTER;
 $columns = array ('id', 'initials', 'first_name', 'surname');
 $where   = array ("initials like '%{$q}%' or first_name like '%{$q}%' or surname like '%{$q}%'"); 
 $order   = NULL;

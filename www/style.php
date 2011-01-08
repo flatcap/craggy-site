@@ -11,7 +11,7 @@ function stats_style()
 
 	$output = '';
 
-	$table   = "$DB_PANEL";
+	$table   = $DB_PANEL;
 	$columns = array('id', 'tags');
 	$where   = NULL;
 	$order   = NULL;

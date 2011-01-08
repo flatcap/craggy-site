@@ -7,9 +7,11 @@ include 'utils.php';
 
 function age_main()
 {
+	include 'dbnames.php';
+
 	$output = "";
 
-	$table   = "v_route";
+	$table   = "$DB_V_ROUTE";
 	$columns = array("id", "date_set");
 
 	$list = db_select($table, $columns);

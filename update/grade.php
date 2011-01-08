@@ -7,32 +7,34 @@ include 'utils.php';
 
 function grade_main()
 {
-	$table   = "v_route";
+	include 'dbnames.php';
+
+	$table   = "$DB_V_ROUTE";
 	$columns = array ("id", "grade", "climb_type");
 	$order   = "grade_seq";
 
 	$list = db_select($table, $columns, NULL, $order);
 
 	$totals = array(
-		"3" => array (0, 0, 0),
-		"3+" => array (0, 0, 0),
-		"4" => array (0, 0, 0),
-		"4+" => array (0, 0, 0),
-		"5" => array (0, 0, 0),
-		"5+" => array (0, 0, 0),
-		"6a" => array (0, 0, 0),
+		"3"   => array (0, 0, 0),
+		"3+"  => array (0, 0, 0),
+		"4"   => array (0, 0, 0),
+		"4+"  => array (0, 0, 0),
+		"5"   => array (0, 0, 0),
+		"5+"  => array (0, 0, 0),
+		"6a"  => array (0, 0, 0),
 		"6a+" => array (0, 0, 0),
-		"6b" => array (0, 0, 0),
+		"6b"  => array (0, 0, 0),
 		"6b+" => array (0, 0, 0),
-		"6c" => array (0, 0, 0),
+		"6c"  => array (0, 0, 0),
 		"6c+" => array (0, 0, 0),
-		"7a" => array (0, 0, 0),
+		"7a"  => array (0, 0, 0),
 		"7a+" => array (0, 0, 0),
-		"7b" => array (0, 0, 0),
+		"7b"  => array (0, 0, 0),
 		"7b+" => array (0, 0, 0),
-		"7c" => array (0, 0, 0),
+		"7c"  => array (0, 0, 0),
 		"7c+" => array (0, 0, 0),
-		"8a" => array (0, 0, 0),
+		"8a"  => array (0, 0, 0),
 		"8a+" => array (0, 0, 0));
 
 	foreach ($list as $row) {

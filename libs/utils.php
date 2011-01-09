@@ -85,6 +85,7 @@ function html_menu($reldir = '')
 		$output .= '  <h1>Admin</h1>';
 		$output .= '  <ul>';
 		$output .= "    <li><a href='{$reldir}admin/setter.php'>Setter</a></li>";
+		$output .= "    <li><a href='{$reldir}admin/route.php'>Route</a></li>";
 		$output .= '  </ul>';
 	}
 
@@ -738,6 +739,28 @@ function list_render_csv (&$list, &$columns)
 
 	  $output .= implode ($out_row, ',') . "\r\n";
 	}
+
+	return $output;
+}
+
+function list_render_xml ($object_name, &$list, &$columns)
+{
+	$output = "<{$object_name}_list>\n";
+
+	// foreach row of list
+	foreach ($list as $row) {
+		$id = $row['id'];
+		$output .= "\t<$object_name>\n";
+
+		// foreach col of columns
+		foreach ($columns as $col) {
+			$output .= sprintf ("\t\t<%s>%s</%s>\n", $col, $row[$col], $col);
+		}
+
+		$output .= "\t</$object_name>\n";
+	}
+
+	$output .= "</{$object_name}_list>\n";
 
 	return $output;
 }

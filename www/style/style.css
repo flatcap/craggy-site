@@ -59,6 +59,12 @@ div.menu ul {
 	margin-top: 0;
 }
 
+div.content, div.entry, div#list_area, div.buttons, div#notify_area {
+  /*
+  border: 1px solid red;
+  */
+}
+
 div.content {
 	margin-left: 0.5em;
 	float: left;

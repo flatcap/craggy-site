@@ -157,7 +157,44 @@ function db_route_delete($where)
 
 	$result = mysql_query($query);
 
-	return $result;
+	return mysql_affected_rows();
+}
+
+function db_route_delete2($ids)
+{
+	if (count ($ids) == 0)
+		return NULL;
+
+	$retval = array();
+
+	$db = db_get_database();
+	$id_list = implode (',', $ids);
+
+	$query = "update climb set active = 0 where route_id in ($id_list)";
+	$result = mysql_query($query);
+	if ($result === TRUE) {
+		$retval['climbs'] = mysql_affected_rows();
+	} else {
+		$retval['climbs'] = -1;
+	}
+
+	$query = "update rating set active = 0 where route_id in ($id_list)";
+	$result = mysql_query($query);
+	if ($result === TRUE) {
+		$retval['ratings'] = mysql_affected_rows();
+	} else {
+		$retval['ratings'] = -1;
+	}
+
+	$query = "update route set date_end = date(now()) where id in ($id_list)";	// date needs to be passed in
+	$result = mysql_query($query);
+	if ($result === TRUE) {
+		$retval['routes'] = mysql_affected_rows();
+	} else {
+		$retval['routes'] = -1;
+	}
+
+	return $retval;
 }
 
 function db_get_last_update()

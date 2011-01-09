@@ -15,28 +15,6 @@ function xml_error()
 	// render error info in xml
 }
 
-function list_render_xml ($object_name, &$list, &$columns)
-{
-	$output = "<{$object_name}_list>\n";
-
-	// foreach row of list
-	foreach ($list as $row) {
-		$id = $row['id'];
-		$output .= "\t<$object_name>\n";
-
-		// foreach col of columns
-		foreach ($columns as $col) {
-			$output .= sprintf ("\t\t<%s>%s</%s>\n", $col, $row[$col], $col);
-		}
-
-		$output .= "\t</$object_name>\n";
-	}
-
-	$output .= "</{$object_name}_list>\n";
-
-	return $output;
-}
-
 function db_delete($table, $join_tables, $where)
 {
 	//global $fh;

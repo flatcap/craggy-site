@@ -24,36 +24,6 @@ function html_set_focus($name)
     return $output;
 }
 
-function parse_range ($string)
-{
-    $delim = ", \n\t";
-    $ranges = array();
-
-    $tok = strtok($string, $delim);
-
-    while ($tok !== FALSE) {
-        $pos = strpos ($tok, '-');
-        if ($pos !== FALSE) {
-            $start = substr ($tok, 0, $pos);
-            $end   = substr ($tok, $pos+1);
-        } else {
-            $start = $tok;
-            $end   = $tok;
-        }
-
-        if (is_numeric ($start) && is_numeric ($end) && ($end >= $start)) {
-            $a = array();
-            $a['start'] = $start;
-            $a['end']   = $end;
-            array_push ($ranges, $a);
-        }
-
-        $tok = strtok($delim);
-    }
-
-    return $ranges;
-}
-
 function parse_routes($string, $defaults)
 {
     $delim = ", \t";

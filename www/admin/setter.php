@@ -35,9 +35,9 @@ function setter_main()
 	$output .= '</div>';
 	$output .= '</div>';
 	$output .= "<div id='notify_area'>";
-	$output .= '</div';
+	$output .= '</div>';
 	$output .= "<div id='work_area'>";
-	$output .= '</div';
+	$output .= '</div>';
 	$output .= '</div>';
 
 	$output .= "<script type='text/javascript' src='setter.js'></script>";

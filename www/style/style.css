@@ -60,9 +60,9 @@ div.menu ul {
 }
 
 div.content, div.entry, div#list_area, div.buttons, div#notify_area {
-  /*
-  border: 1px solid red;
-  */
+	/*
+	border: 1px solid red;
+	*/
 }
 
 div.content {

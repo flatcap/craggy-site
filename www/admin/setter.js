@@ -163,7 +163,7 @@ function click_delete()
 		xmlhttp_delq = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_delq.onreadystatechange = callback_delete_query;
-	xmlhttp_delq.open ("GET", "work.php?action=delete_query&data=" + str, true);
+	xmlhttp_delq.open ("GET", "setter_work.php?action=delete_query&data=" + str, true);
 	xmlhttp_delq.send();
 }
 
@@ -175,7 +175,7 @@ function click_list()
 		xmlhttp_list = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_list.onreadystatechange = callback_list;
-	xmlhttp_list.open ("GET", "work.php?action=list");
+	xmlhttp_list.open ("GET", "setter_work.php?action=list");
 	xmlhttp_list.send();
 }
 
@@ -227,7 +227,7 @@ function callback_delete_query()
 		xmlhttp_del = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_del.onreadystatechange = callback_delete;
-	xmlhttp_del.open ("GET", "work.php?action=delete&data=" + str, true);
+	xmlhttp_del.open ("GET", "setter_work.php?action=delete&data=" + str, true);
 	xmlhttp_del.send();
 }
 

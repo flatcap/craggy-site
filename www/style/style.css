@@ -1,6 +1,8 @@
 body {
 	background: #fff;
 	color: #000;
+	border: 5px solid #dfd;
+	margin: 0;
 }
 
 div.grade {
@@ -10,18 +12,25 @@ div.grade {
 	height: 30px;
 }
 
-div.marker {
-	background: red;
-	width: 2px;
-	height: 30px;
-}
-
 div.header {
-	background: #ddf;
+	background: #dfd;
 	color: #000;
-	margin: 0 0 0.5em 0;
+	margin: 0;
 	padding: 0.5em;
 	font-weight: bold;
+}
+
+div.footer {
+	background: #dfd;
+	color: #bdb;
+	margin: 0;
+	padding: 5px;
+	clear: both;
+	font-size: 50%;
+}
+
+div.footer:hover {
+	color: #000;
 }
 
 span {
@@ -30,12 +39,14 @@ span {
 }
 
 div.menu {
+	background: #dfd;
+	color: #000;
 	width: 9em;
 	float: left;
 }
 
 div.menu h1 {
-	background: #ddf;
+	background: #dfd;
 	color: #000;
 	padding-left: 0.5em;
 	margin: 0;
@@ -44,12 +55,8 @@ div.menu h1 {
 
 div.menu ul {
 	list-style: none;
-	padding-left: 1em;
+	padding-left: 1.5em;
 	margin-top: 0;
-}
-
-li.selected {
-	font-weight: bold;
 }
 
 div.content, div.entry, div#list_area, div.buttons, div#notify_area {
@@ -102,9 +109,6 @@ input.checkbox {
 
 table {
 	border-collapse: collapse;
-	/*
-	font-size: 75%;
-	*/
 }
 
 th, dt {
@@ -140,27 +144,26 @@ img {
 }
 
 div.download {
-	float: right;
-	border: 2px solid #333;
-	background: #fff;
+	background: #efe;
 	color: #000;
-	margin: 1em;
-	padding: 0 1em 1em 1em;
+	float: right;
+	border: 1px solid #bcb;
+	margin: 0.5em 0.5em 0.5em 0;
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+div.download img {
+	margin-right: 0.5em;
 }
 
 div.download h1 {
-	font-size: 100%;
+	font-size: 90%;
+	padding: 0;
+	margin: 0;
 }
-
-/*
-.quiet {
-	background: inherit;
-	color: #ccc;
-}
-*/
 
 tr:hover {
-	background: #ddddff;
+	background: #dfd;
 }
 
 input.enabled {

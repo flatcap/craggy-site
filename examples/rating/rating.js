@@ -4,13 +4,13 @@ var all_status = new Array();
 var all_locked = new Array();
 var all_css    = new Array();
 
-function rating_initialise (div, status, desc, ids, texts, css)
+function rating_initialise (div_name, status, desc, ids, texts, css)
 {
-	var div = document.getElementById (div);
+	var div = document.getElementById (div_name);
 	star_count = ids.length;
 
 	var index = all_id.length;
-	div.className = "rating"
+	div.className = "rating";
 	div.id = index;
 	div.title = desc;
 
@@ -39,8 +39,9 @@ function get_star (index, item)
 	var ch = div.childNodes;
 
 	for (var i = 0; i < ch.length; i++) {
-		if (ch[i] == item)
+		if (ch[i] == item) {
 			return all_css[index][i];
+		}
 	}
 
 	return all_css[index][0];
@@ -60,15 +61,17 @@ function get_div (item)
 function rating_mouseover()
 {
 	var index = get_index (this);
-	if (!all_locked[index])
+	if (!all_locked[index]) {
 		rating_refresh (index, this);
+	}
 }
 
 function rating_mouseout()
 {
 	var index = get_index (this);
-	if (all_locked[index])
+	if (all_locked[index]) {
 		return;
+	}
 
 	var div = get_div (this);
 	var star_count = all_id[index].length;
@@ -83,8 +86,9 @@ function rating_mouseout()
 
 function rating_status (index, text)
 {
-	if (all_status[index])
+	if (all_status[index]) {
 		all_status[index].innerHTML = text;
+	}
 }
 
 function rating_refresh (index, item)

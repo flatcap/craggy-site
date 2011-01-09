@@ -12,6 +12,7 @@ function routes_main($options)
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'climb_type', 'notes', 'setter', 'date_set');
 	$order   = 'panel_seq, grade_seq, colour';
+	//$order  .= ' limit 10';
 
 	$list = db_select($table, $columns, NULL, $order);
 
@@ -37,20 +38,54 @@ function routes_main($options)
 			$output .= '<body>';
 
 			$output .= "<div class='download'>";
-			$output .= '<h1>Route Data</h1>';
-			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' width='24' height='24' src='img/pdf.png'></a>";
-			$output .= '&nbsp;&nbsp;';
-			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' width='24' height='24' src='img/txt.png'></a>";
-			$output .= '&nbsp;&nbsp;';
-			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='24' height='24' src='img/ss.png'></a>";
+			//$output .= '<h1>Route Data</h1>';
+			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' width='32' height='32' src='img/pdf.png'></a>";
+			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' width='32' height='32' src='img/txt.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='32' height='32' src='img/ss.png'></a>";
 			$output .= '</div>';
 
-			$output .= "<div class='header'>All Routes <span>(Last updated: $last_update)</span></div>\n";
+			$output .= "<div class='download'>";
+			//$output .= '<h1>Validation</h1>';
+			$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-html.png'></a>";
+			//$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-css.png'></a>";
+			//$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-rss.png'></a>";
+			$output .= '</div>';
+
+			$output .= "<div class='download'>";
+			//$output .= '<h1>Live</h1>';
+			$output .= "<a href=''><img alt='' width='32' height='32' src='img/lightning.png'></a>";
+			$output .= '</div>';
+
+			$output .= "<div class='download'>";
+			//$output .= '<h1>Error</h1>';
+			$output .= "<a href=''><img alt='' width='32' height='32' src='img/error.png'></a>";
+			$output .= '</div>';
+
+			$output .= "<div class='header'>";
+			$output .= "<img alt='' width='135' height='66' src='img/craggy2.png'></a>";
+			$output .= "All Routes <span>(Last updated: $last_update)</span>";
+			$output .= "</div>";
 			$output .= html_menu();
 			$output .= "<div class='content'>\n";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
+
+			// use js
+			//	to add error icon
+			//	put anchor in get_errors
+			//	link icon to anchor
 			$output .= get_errors();
+
+			$output .= "<div class='footer'>";
+			$output .= "Copyright &copy; Rich Russon 2010-2011";
+			$output .= '&nbsp;&mdash;&nbsp;';
+			$output .= "Last Modified: 2011/01/05 16:45";
+			$output .= '&nbsp;&mdash;&nbsp;';
+			$output .= "Database 3 txn, 0.04s";
+			$output .= '&nbsp;&mdash;&nbsp;';
+			$output .= "Page Generated in 0.06s";
+			$output .= "</div>";
+
 			$output .= '</body>';
 			$output .= '</html>';
 			break;

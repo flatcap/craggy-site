@@ -1,160 +1,163 @@
 body {
-  background: #fff;
-  color: #000;
+	background: #fff;
+	color: #000;
+	border: 5px solid #dfd;
+	margin: 0;
 }
 
 div.grade {
-  background-image: url(../img/grades.png);
-  border: 1px solid black;
-  width: 500px;
-  height: 30px;
-}
-
-div.marker {
-  background: red;
-  width: 2px;
-  height: 30px;
+	background-image: url(../img/grades.png);
+	border: 1px solid black;
+	width: 500px;
+	height: 30px;
 }
 
 div.header {
-  background: #ddf;
-  color: #000;
-  margin: 0 0 0.5em 0;
-  padding: 0.5em;
-  font-weight: bold;
+	background: #dfd;
+	color: #000;
+	margin: 0;
+	padding: 0.5em;
+	font-weight: bold;
+}
+
+div.footer {
+	background: #dfd;
+	color: #bdb;
+	margin: 0;
+	padding: 5px;
+	clear: both;
+	font-size: 50%;
+}
+
+div.footer:hover {
+	color: #000;
 }
 
 span {
-  font-size: 75%;
-  font-weight: normal;
+	font-size: 75%;
+	font-weight: normal;
 }
 
 div.menu {
-  width: 9em;
-  float: left;
+	background: #dfd;
+	color: #000;
+	width: 9em;
+	float: left;
 }
 
 div.menu h1 {
-  background: #ddf;
-  color: #000;
-  padding-left: 0.5em;
-  margin: 0;
-  font-size: 120%;
+	background: #dfd;
+	color: #000;
+	padding-left: 0.5em;
+	margin: 0;
+	font-size: 120%;
 }
 
 div.menu ul {
-  list-style: none;
-  padding-left: 1em;
-  margin-top: 0;
-}
-
-li.selected {
-  font-weight: bold;
+	list-style: none;
+	padding-left: 1.5em;
+	margin-top: 0;
 }
 
 div.content {
-  margin-left: 0.5em;
-  float: left;
+	margin-left: 0.5em;
+	float: left;
 }
 
 input, textarea, .checkbox {
-  border: 1px solid #ccc;
-  padding: 2px;
-  background: inherit;
-  color: #000;
+	border: 1px solid #ccc;
+	padding: 2px;
+	background: inherit;
+	color: #000;
 }
 
 input.default {
-  border: 2px solid #ccc;
-  background: inherit;
+	border: 2px solid #ccc;
+	background: inherit;
 }
 
 input:focus, textarea:focus {
-  border: 1px solid #000;
+	border: 1px solid #000;
 }
 
 input.default:focus {
-  border: 2px solid #000;
+	border: 2px solid #000;
 }
 
 input.mand, textarea.mand, tr.mand {
-  color: inherit;
-  background: #fee;
+	color: inherit;
+	background: #fee;
 }
 
 form label {
-  display: block;
-  float: left;
-  width: 8em;
+	display: block;
+	float: left;
+	width: 8em;
 }
 
 input.checkbox {
-  margin-left: 0;
-  width: 1em;
-  height: 1em;
+	margin-left: 0;
+	width: 1em;
+	height: 1em;
 }
 
 table {
-  border-collapse: collapse;
-  /*
-  font-size: 75%;
-  */
+	border-collapse: collapse;
 }
 
 th, dt {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 th, td {
-  border: 1px solid #ccc;
-  text-align: left;
-  padding: 0 0.5em 0 0.5em;
+	border: 1px solid #ccc;
+	text-align: left;
+	padding: 0 0.5em 0 0.5em;
 }
 
 td.right {
-  text-align: right;
+	text-align: right;
 }
 
 table input {
-  border: 1px solid transparent;
+	border: 1px solid transparent;
 }
 
 h2 {
-  margin: 0 0 1em 0;
-  font-size: 110%;
+	margin: 0 0 1em 0;
+	font-size: 110%;
 }
 
 div.error {
-  clear: both;
-  border: 3px solid red;
+	clear: both;
+	border: 3px solid red;
 }
 
 img {
-  border: 0px;
+	border: 0px;
 }
 
 div.download {
-  float: right;
-  border: 2px solid #333;
-  background: #fff;
-  color: #000;
-  margin: 1em;
-  padding: 0 1em 1em 1em;
+	background: #fff;
+	color: #000;
+	float: right;
+	border: 1px solid #bcb;
+	margin: 0.5em 0.5em 0.5em 0;
+	padding: 0.5em 0 0.5em 0.5em;
+}
+
+div.download img {
+	margin-right: 0.5em;
 }
 
 div.download h1 {
-  font-size: 100%;
+	font-size: 90%;
+	padding: 0;
+	margin: 0;
 }
-
-/*
-.quiet {
-  background: inherit;
-  color: #ccc;
-}
-*/
 
 tr:hover {
-  background: #ddddff;
+	background: #dfd;
 }
 
 input.enabled {

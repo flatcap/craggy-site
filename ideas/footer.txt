@@ -1,0 +1,34 @@
+
+live button on dev version of pages links to russon.org
+
+add get_errors to all?
+or just in php
+or just in txt
+_log_ but don't display errors, how?
+add as a footer, _rich_ only
+
+last modified date on all pages (in footer)
+
+add footer to all pages
+	last updated
+	copyright
+	etc
+	validators - rich only?
+
+count db actions and time them
+make all db queries go through one function
+then log everything
+then time everything
+
+make all db queries go through one function
+then log everything
+then time everything
+
+add a validation box (below "Route Data")
+validate all html/css/js
+only for rich user
+http://validator.w3.org/unicorn/check?ucn_uri=craggy.russon.org/routes.php
+
+add "generated in x seconds" to every page - rich only
+total time, or db time, or both?
+

@@ -448,3 +448,7 @@ default onsight to false
 
 set_error_handler("customError");
 
+downloads menu item (drop down)
+	Route data as pdf
+	Route data as a text file
+	Route data as a csv

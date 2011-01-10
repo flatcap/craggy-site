@@ -1,7 +1,7 @@
 body {
 	background: #fff;
 	color: #000;
-	border: 5px solid #dfd;
+	border: 15px solid #dfd;
 	margin: 0;
 }
 
@@ -16,7 +16,7 @@ div.header {
 	background: #dfd;
 	color: #000;
 	margin: 0;
-	padding: 0.5em;
+	padding: 8px;
 	font-weight: bold;
 }
 
@@ -59,11 +59,40 @@ div.menu ul {
 	margin-top: 0;
 }
 
-div.content, div.entry, div#list_area, div.buttons, div#notify_area {
+span.menu {
+	margin-left: 0.5em;
+	padding-bottom: 0.5em;
+	padding-top: 1em;
+	font-size: 120%;
+	font-family: sans;
+}
+
+span.menu a {
+	margin-right: 0.5em;
+	text-decoration: none;
+	padding: 8px;
+	border-width: 2px;
+	border-style: solid;
+	border-bottom-style: none;
+	border-color: #cec;
 	/*
-	border: 1px solid red;
+	border: solid black;
 	*/
 }
+
+span.menu a.selected {
+	background: white;
+}
+
+/*
+div.content, div.entry, div#list_area, div.buttons, div#notify_area {
+	border: 1px solid red;
+}
+
+div, img, span {
+	border: 1px solid red !important;
+}
+*/
 
 div.content {
 	margin-left: 0.5em;

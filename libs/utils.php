@@ -94,6 +94,57 @@ function html_menu($reldir = '')
 	return $output;
 }
 
+function html_menu2 ($reldir = '')
+{
+	$rich = FALSE;
+
+	if (isset ($_SERVER)) {
+		if (array_key_exists ('PHP_SELF', $_SERVER))
+			$rich = strstr ($_SERVER['PHP_SELF'], '/rich/') ||
+				strstr ($_SERVER['PHP_SELF'], '/admin/');
+		if (!$rich && array_key_exists ('REMOTE_ADDR', $_SERVER))
+			$rich = (($_SERVER['REMOTE_ADDR'] == '127.0.0.1') ||
+				 ($_SERVER['REMOTE_ADDR'] == '192.168.2.2') ||
+				 ($_SERVER['REMOTE_ADDR'] == '192.168.2.3') ||
+				 ($_SERVER['REMOTE_ADDR'] == '82.8.178.149'));
+	}
+
+	$output  = "<span class='menu'>";
+
+	$output .= "<a href='{$reldir}index.php'>Home</a>";
+
+	$output .= "<a href='{$reldir}routes.php' class='selected'>Routes</a>";
+	$output .= "<a href='{$reldir}6a.php'>6a</a>";
+	$output .= "<a href='{$reldir}checklist.php'>Checklist</a>";
+	$output .= "<a href='{$reldir}boards.php'>Boards</a>";
+
+	$output .= "<a href='{$reldir}grades.php'>Grades</a>";
+	$output .= "<a href='{$reldir}age.php'>Age</a>";
+	$output .= "<a href='{$reldir}style.php'>Style</a>";
+	$output .= "<a href='{$reldir}setters.php'>Setters</a>";
+	$output .= "<a href='{$reldir}colour.php'>Colour</a>";
+
+	/*
+	if ($rich) {
+		$output .= "    <a href='{$reldir}rich/climbs.php'>Climbs</a>";
+		$output .= "    <a href='{$reldir}rich/coverage.php'>Coverage</a>";
+		$output .= "    <a href='{$reldir}rich/downclimb.php'>Downclimb</a>";
+		$output .= "    <a href='{$reldir}rich/seldom.php'>Seldom</a>";
+		$output .= "    <a href='{$reldir}rich/todo.php'>To Do</a>";
+		$output .= "    <a href='{$reldir}rich/work.php'>Work</a>";
+	}
+
+	if ($rich) {
+		$output .= "    <li><a href='{$reldir}admin/setter.php'>Setter</a></li>";
+		$output .= "    <li><a href='{$reldir}admin/route.php'>Route</a></li>";
+	}
+	*/
+
+	$output .= '</span>';
+
+	return $output;
+}
+
 function get_url_variable($name)
 {
 	$result = FALSE;

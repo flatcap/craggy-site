@@ -12,7 +12,7 @@ function routes_main($options)
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'climb_type', 'notes', 'setter', 'date_set');
 	$order   = 'panel_seq, grade_seq, colour';
-	//$order  .= ' limit 10';
+	$order  .= ' limit 10';
 
 	$list = db_select($table, $columns, NULL, $order);
 
@@ -37,6 +37,7 @@ function routes_main($options)
 			$output .= html_header ('Routes');
 			$output .= '<body>';
 
+			/*
 			$output .= "<div class='download'>";
 			//$output .= '<h1>Route Data</h1>';
 			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' width='32' height='32' src='img/pdf.png'></a>";
@@ -60,12 +61,36 @@ function routes_main($options)
 			//$output .= '<h1>Error</h1>';
 			$output .= "<a href=''><img alt='' width='32' height='32' src='img/error.png'></a>";
 			$output .= '</div>';
+			*/
 
 			$output .= "<div class='header'>";
 			$output .= "<img alt='' width='135' height='66' src='img/craggy2.png'></a>";
-			$output .= "All Routes <span>(Last updated: $last_update)</span>";
+			//$output .= "All Routes <span>(Last updated: $last_update)</span>";
+
+			/*
+			$output .= "<span class='menu'>";
+			//$output .= "<span>Routes</span>";
+			$output .= "<a href='routes.php'>Home</a>";
+			$output .= "<a href='routes.php'>Home</a>";
+			$output .= "<a href='routes.php'>Home</a>";
+			$output .= "<a href='routes.php' class='selected'>Routes</a>";
+			$output .= "<a href='routes.php'>Home</a>";
+			//$output .= "<span>Stats</span>";
+			$output .= "<a href='routes.php'>Home</a>";
+			$output .= "<a href='routes.php'>Home</a>";
+			$output .= "<a href='routes.php'>Home</a>";
+			$output .= "</span>";
+			*/
+
+			$output .= html_menu2();
 			$output .= "</div>";
-			$output .= html_menu();
+
+			//Home
+			//Routes 6a Checklist Boards
+			//Grades Age Style Setters Colour
+
+			//$output .= html_menu();
+
 			$output .= "<div class='content'>\n";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';

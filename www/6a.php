@@ -43,7 +43,7 @@ function six_main ($options)
 			$output .= '</div>';
 
 			$output .= "<div class='header'>Top Roped 6a Routes <span>(Last updated: $last_update)</span></div>\n";
-			$output .= html_menu();
+			$output .= html_menu2();
 			$output .= "<div class='content'>\n";
 			$output .= "<p>$count climbs ({$total_height}m)</p>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0],[2,0],[1,0]]}');

@@ -455,3 +455,10 @@ downloads menu item (drop down)
 
 56 red 6c (no arete) 2011-01-07
 
+myip has changed
+alter utils to match
+read values from config file?
+
+cursor: text;
+cursor: default;
+cursor: pointer;

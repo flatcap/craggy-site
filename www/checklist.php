@@ -76,7 +76,10 @@ function checklist_main ($options)
 			$output .= "<a href='?format=csv'><img alt='checklist as a csv document' width='24' height='24' src='img/ss.png'></a>";
 			$output .= '</div>';
 
-			$output .= "<div class='header'>Checklist (Routes in grade order) <span>(Last updated: $last_update)</span></div>";
+			$output .= "<div class='header'>";
+			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
+			$output .= "Checklist (Routes in grade order) <span>(Last updated: $last_update)</span>";
+			$output .= "</div>";
 			$output .= html_menu();
 			$output .= "<div class='content'>";
 			break;

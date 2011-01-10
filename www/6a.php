@@ -42,7 +42,10 @@ function six_main ($options)
 			$output .= "<a href='?format=csv'><img alt='6a route list as a csv document' width='24' height='24' src='img/ss.png'></a>";
 			$output .= '</div>';
 
-			$output .= "<div class='header'>Top Roped 6a Routes <span>(Last updated: $last_update)</span></div>\n";
+			$output .= "<div class='header'>";
+			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
+			$output .= "Top Roped 6a Routes <span>(Last updated: $last_update)</span>";
+			$output .= "</div>";
 			$output .= html_menu();
 			$output .= "<div class='content'>\n";
 			$output .= "<p>$count climbs ({$total_height}m)</p>";

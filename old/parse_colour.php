@@ -1,6 +1,6 @@
 <?php
 
-set_include_path ('www');
+set_include_path ('../libs');
 
 include 'db.php';
 include 'utils.php';
@@ -75,6 +75,7 @@ function colours_main()
 
 	array_shift ($argv);
 	$text = implode (' ', $argv);
+
 	$colours = preg_split("/[\s,]+/", $text);
 
 	$first = array_shift ($colours);
@@ -99,7 +100,7 @@ function colours_main()
 
 	$panel_id = NULL;
 	foreach ($g_panels as $id => $p) {
-		if ($p['number'] == $panel) {
+		if ($p['name'] == $panel) {
 			$panel_id = $p['id'];
 			break;
 		}
@@ -112,9 +113,9 @@ function colours_main()
 
 	$matches = array();
 	foreach ($g_routes as $id => $r) {
-		if ($r['panel'] == $panel_id) {
-			$col_id = $r['colour'];
-			$col = $g_colours[$r['colour']]['colour'];
+		if ($r['panel_id'] == $panel_id) {
+			$col_id = $r['colour_id'];
+			$col = $g_colours[$r['colour_id']]['colour'];
 			$matches[$col] = $r;
 		}
 	}
@@ -127,7 +128,7 @@ function colours_main()
 
 	printf ("Found %d routes on panel %d\n", $num_routes, $panel);
 	foreach ($matches as $m) {
-		printf ("\t%d %s\n", $panel, $g_colours[$m['colour']]['colour']);
+		printf ("\t%d %s\n", $panel, $g_colours[$m['colour_id']]['colour']);
 	}
 	printf ("\n");
 
@@ -158,7 +159,7 @@ function colours_main()
 
 	printf ("Matched panel %s:\n", $panel);
 	foreach ($valid as $v) {
-		printf ("\t%s\n", $g_colours[$v['colour']]['colour']);
+		printf ("\t%s\n", $g_colours[$v['colour_id']]['colour']);
 	}
 	printf ("\n");
 

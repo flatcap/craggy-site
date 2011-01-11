@@ -33,7 +33,7 @@ function add_main()
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	$output .= "</div>";
 
-	$output .= "<div id='notify_area'>NOTIFY<br>more stuff</div>";
+	$output .= "<div id='notify_area'>NOTIFY<br>more stuff<br>more text<br>and more</div>";
 	$output .= "<div id='list_area'>LIST";
 	$output .= "<div id='route_list'>ROUTE</div>";
 
@@ -47,7 +47,7 @@ function add_main()
 
 	$output .= '</div>'; // content
 
-	//$output .= "<script type='text/javascript' src='add.js'></script>";
+	$output .= "<script type='text/javascript' src='add.js'></script>";
 
 	$output .= get_errors();
 	$output .= '</body>';

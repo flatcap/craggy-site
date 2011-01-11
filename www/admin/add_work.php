@@ -8,7 +8,32 @@ include 'utils.php';
 
 function route_add ($data)
 {
-	return "message from add";
+	//printf ("data = >>$data<<\n");
+	// parse:
+	//	45 red 5+, gn 6a, bg 6b into
+	// into
+	//	45 Red 5+
+	//	45 Green 6a
+	//	45 Beige 6b
+
+	$routes = array();
+
+	$list = explode (' ', $data, 2);
+
+	$panel = $list[0];
+	$data  = $list[1];
+
+	$list = explode (',', $data);
+	foreach ($list as $item) {
+		$item = trim ($item);
+		list ($colour, $grade) = explode (' ', $item, 2);
+		$colour = trim ($colour);
+		$grade = trim ($grade);
+		$routes[] = array ('panel' => $panel, 'colour' => $colour, 'grade' => $grade);
+	}
+
+	var_dump ($routes);
+	return;
 }
 
 function route_save ($data)
@@ -38,7 +63,7 @@ function route_main()
 
 	switch ($action) {
 		case 'add':
-			header('Content-Type: application/xml; charset=ISO-8859-1');
+			//header('Content-Type: application/xml; charset=ISO-8859-1');
 			$response = route_add($data);
 			break;
 		case 'save':
@@ -53,6 +78,9 @@ function route_main()
 }
 
 
-//$_GET = array('action' => 'delete', 'data' => '42-45');
+if (isset ($argc)) {
+	$_GET = array('action' => 'add', 'data' => '45   red  5+,     gn   6a  ,  bg   6b  ');
+}
+
 echo route_main();
 

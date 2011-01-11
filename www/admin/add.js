@@ -28,10 +28,10 @@ function notify_message (message, background, colour)
 		colour = 'black';
 	}
 
-	notify_area.innerHTML        = message;
-	notify_area.style.background = background;
-	notify_area.style.color      = colour;
-	notify_area.style.display    = 'block';
+	notify_area.innerHTML             = message;
+	notify_area.style.backgroundColor = background;
+	notify_area.style.color           = colour;
+	notify_area.style.display         = 'block';
 }
 
 function notify_close()
@@ -74,7 +74,7 @@ function initialise_buttons()
 	entry_panel.onkeypress = callback_catch_enter;
 	entry_panel.focus();
 
-	//notify_initialise ('notify_area');
+	notify_initialise ('notify_area');
 
 	//buttons_update();
 }
@@ -123,7 +123,7 @@ function click_add()
 		xmlhttp_add = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_add.onreadystatechange = callback_add;
-	xmlhttp_add.open ("GET", "route_work.php?action=add&data=" + encodeURI (entry_panel.value));
+	xmlhttp_add.open ("GET", "add_work.php?action=add&data=" + encodeURIComponent (entry_panel.value));
 	xmlhttp_add.send();
 }
 
@@ -154,7 +154,7 @@ function click_delete()
 		xmlhttp_del = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_del.onreadystatechange = callback_delete;
-	xmlhttp_del.open ("GET", "route_work.php?action=delete&data=" + str, true);
+	xmlhttp_del.open ("GET", "add_work.php?action=delete&data=" + str, true);
 	xmlhttp_del.send();
 }
 

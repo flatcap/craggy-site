@@ -5,11 +5,12 @@ body {
 }
 
 div#notify_area {
-	background: #f90;	/* amber */
-	background-image: url(../style/icon_close.png) no-repeat right top;
 	padding: 5px;
 	padding-right: 20px;
 	border: 2px solid #666;
+	background: #f90 url(../style/icon_close.png) no-repeat right top;
+	margin: 1em;
+	display: none;
 }
 
 div.grade {

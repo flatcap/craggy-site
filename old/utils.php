@@ -1,19 +1,4 @@
-function get_post_variable($name)
-{
-	$result = "";
-
-	if (isset($_POST)) {
-		if (array_key_exists($name, $_POST)) {
-			$result = $_POST[$name];
-		} else {
-			if (($name == "button") && array_key_exists('action', $_POST)) {
-				$result = $_POST['action'];
-			}
-		}
-	}
-
-	return $result;
-}
+<?php
 
 function html_set_focus($name)
 {

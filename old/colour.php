@@ -1,9 +1,29 @@
 <?php
 
+set_include_path ('../libs');
+
 include 'db.php';
 include 'utils.php';
 
 $g_results = array();
+
+function get_post_variable($name)
+{
+	$result = "";
+
+	if (isset($_POST)) {
+		if (array_key_exists($name, $_POST)) {
+			$result = $_POST[$name];
+		} else {
+			if (($name == "button") && array_key_exists('action', $_POST)) {
+				$result = $_POST['action'];
+			}
+		}
+	}
+
+	return $result;
+}
+
 
 /* Helpers */
 

@@ -4,6 +4,14 @@ body {
 	margin: 0;
 }
 
+div#notify_area {
+	background: #f90;	/* amber */
+	background-image: url(../style/icon_close.png) no-repeat right top;
+	padding: 5px;
+	padding-right: 20px;
+	border: 2px solid #666;
+}
+
 div.grade {
 	background-image: url(../img/grades.png);
 	border: 1px solid black;
@@ -94,10 +102,11 @@ input.mand, textarea.mand, tr.mand {
 	background: #fee;
 }
 
-form label {
-	display: block;
+label {
+	display: inline;
+	width: 5em;
 	float: left;
-	width: 8em;
+	clear: both;
 }
 
 input.checkbox {

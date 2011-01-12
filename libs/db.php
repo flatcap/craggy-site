@@ -14,8 +14,6 @@ function db_get_database()
 
 function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $group = NULL)
 {
-	printf ("Entering: %s\n", __FUNCTION__);
-
 	if (isset($columns)) {
 		if (is_array($columns))
 			$cols = implode ($columns, ',');

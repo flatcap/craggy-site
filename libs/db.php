@@ -14,6 +14,8 @@ function db_get_database()
 
 function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $group = NULL)
 {
+	printf ("Entering: %s\n", __FUNCTION__);
+
 	if (isset($columns)) {
 		if (is_array($columns))
 			$cols = implode ($columns, ',');
@@ -229,6 +231,25 @@ function db_set_last_update($date = '')
 	//var_dump ($result);
 
 	return $result;
+}
+
+function db_get_data ($name)
+{
+	include 'db_names.php';
+
+	$db = db_get_database();
+
+	$query = "select value from $DB_DATA where name = '$name'";
+
+	$result = mysql_query($query);
+	if (!$result) {
+		return false;
+	}
+
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	mysql_free_result($result);
+
+	return $row['value'];
 }
 
 function db_truncate_route()

@@ -544,7 +544,6 @@ function list_render_xml ($object_name, &$list, &$columns)
 
 	// foreach row of list
 	foreach ($list as $row) {
-		$id = $row['id'];
 		$output .= "\t<$object_name>\n";
 
 		// foreach col of columns

@@ -47,6 +47,7 @@ function add_main()
 
 	$output .= '</div>'; // content
 
+	$output .= "<script type='text/javascript' src='notify.js'></script>";
 	$output .= "<script type='text/javascript' src='add.js'></script>";
 
 	$output .= get_errors();

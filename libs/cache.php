@@ -2,13 +2,13 @@
 
 include 'db.php';
 
-function cache_uptodate($name)
+function cache_uptodate ($name)
 {
 	$time_cache = null;
 	$time_db    = null;
 
 	// find 'table_XXX' in cache, extract creation_time
-	$ci = apc_cache_info('user');
+	$ci = apc_cache_info ('user');
 	foreach ($ci['cache_list'] as $item) {
 		if ($item['info'] == "table_$name") {
 			$time_cache = $item['creation_time'];
@@ -31,7 +31,7 @@ function cache_uptodate($name)
 	return ($time_cache > $time_db);
 }
 
-function cache_get($name)
+function cache_get ($name)
 {
 	static $cache = array();
 

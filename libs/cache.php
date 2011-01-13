@@ -55,6 +55,7 @@ function cache_get_table ($name)
 
 function cache_put_something_else()
 {
+	// how do I tie the life time of this object to a particular db table?
 }
 
 function cache_get_something_else()

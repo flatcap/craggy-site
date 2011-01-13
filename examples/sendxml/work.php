@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('UTC');
+
 //sleep (2);
 
 echo '<br>';

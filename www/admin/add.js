@@ -1,14 +1,13 @@
 var button_add;
 var button_save;
 var button_delete;
-var button_cancel;
 var entry_panel;
 
 var list_ticks;
 var route_data;
 
 var xmlhttp_add;
-var xmlhttp_del;
+var xmlhttp_save;
 
 //initialise_ticks();
 //initialise_rows();
@@ -65,6 +64,36 @@ function initialise_rows()
 }
 
 
+function htmlentities(str)
+{
+	return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function render_html (xml)
+{
+	return "";
+}
+
+function render_xml (list)
+{
+	var xml = "";
+
+	xml += "<route_list>";
+	for (var i = 0; i < list.length; i++) {
+		xml += "\t<route>";
+		for (var j in list[i]) {
+			xml += "\t\t<" + j + ">";
+			xml += list[i][j];
+			xml += "</" + j + ">";
+		}
+		xml += "\t</route>";
+	}
+	xml += "</route_list>";
+
+	return xml;
+}
+
+
 function click_add()
 {
 	notify_close();
@@ -84,37 +113,48 @@ function click_add()
 function click_delete()
 {
 	notify_close();
-	var count = list_ticks.length;
+
+	var ticks = get_ticks();
+	var count = ticks.length;
 	if (count === 0) {
 		buttons_update();	// Shouldn't happen
 		return;
 	}
 
-	var ids = new Array();
-	for (i = 0; i < count; i++) {
-		if (list_ticks[i].checked) {
-			ids.push (list_ticks[i].id.substring(3));
-		}
-	}
+	var table = document.getElementById ('route_list');
+	var body = table.getElementsByTagName('tbody');
+	var trs = body[0].childNodes;
 
-	if (!confirm ("About to delete " + count + " routes.\nAre you sure?")) {
-		return;
+	ticks.reverse();
+	for (var i = 0; i < count; i++) {
+		var index = ticks[i];
+		route_data.splice (index, 1);
+		body[0].removeChild (trs[index]);
 	}
-
-	var str = ids.join(',');
-	if (window.XMLHttpRequest) {
-		xmlhttp_del = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		xmlhttp_del = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	xmlhttp_del.onreadystatechange = callback_delete;
-	xmlhttp_del.open ("GET", "add_work.php?action=delete&data=" + str, true);
-	xmlhttp_del.send();
 }
 
 function click_save()
 {
 	notify_close();
+
+	var ticks = get_ticks();
+	var count = ticks.length;
+	if (count === 0) {
+		buttons_update();	// Shouldn't happen
+		return;
+	}
+
+	var xml = render_xml (route_data);
+
+	if (window.XMLHttpRequest) {
+		xmlhttp_save = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+	} else {
+		xmlhttp_save = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+	}
+	xmlhttp_save.onreadystatechange = callback_save;
+	xmlhttp_save.open ("GET", "add_work.php?action=save&data=" + encodeURIComponent (xml));
+	xmlhttp_save.setRequestHeader ("Content-Type", "text/plain");
+	xmlhttp_save.send();
 }
 
 
@@ -134,15 +174,11 @@ function callback_add()
 	if ((xmlhttp_add.readyState != 4) || (xmlhttp_add.status != 200))
 		return;
 
-	x = xmlhttp_add.responseText;
-	notify_message (x);
-	return;
-
 	var txt = "<table cellspacing=0 border=1>" +
 		"<thead>" +
 		"<tr>" +
 		"<th><input type='checkbox' id='tick_master'></th>" +
-		//"<th>ID</th>" +
+		"<th>ID</th>" +
 		"<th>Panel</th>" +
 		"<th>Colour</th>" +
 		"<th>Grade</th>" +
@@ -152,25 +188,28 @@ function callback_add()
 
 
 	x = xmlhttp_add.responseXML.documentElement.getElementsByTagName("route");
-	route_data = new Array();
+	if (!route_data)
+		route_data = new Array();
+	var id_base = route_data.length;
 	for (i = 0; i < x.length; i++) {
-		var route = new Array();
-		var id = route_get_node (x[i], "id");
-		route['id']     = id;
-		route['panel']  = route_get_node (x[i], "panel");
-		route['colour'] = route_get_node (x[i], "colour");
-		route['grade']  = route_get_node (x[i], "grade");
-		route_data[id]  = route;
+		var route = new Object();
+		id = id_base + i;
+		route.id       = id;
+		route.panel    = route_get_node (x[i], "panel");
+		route.colour   = route_get_node (x[i], "colour");
+		route.grade    = route_get_node (x[i], "grade");
+		route_data[id] = route;
 	}
+
 	for (s in route_data) {
-		id     = route_data[s]['id'];
-		panel  = route_data[s]['panel'];
-		colour = route_data[s]['colour'];
-		grade  = route_data[s]['grade'];
+		id     = route_data[s].id;
+		panel  = route_data[s].panel;
+		colour = route_data[s].colour;
+		grade  = route_data[s].grade;
 
 		txt += "<tr>";
 		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";
-		//txt += "<td>" + id + "</td>";
+		txt += "<td>" + id + "</td>";
 		txt += "<td>" + panel + "</td>";
 		txt += "<td>" + colour + "</td>";
 		txt += "<td>" + grade + "</td>";
@@ -183,31 +222,18 @@ function callback_add()
 	var table = document.getElementById ('route_list');
 	table.innerHTML = txt;
 
-	//button_set_state (button_list, false);
 	initialise_ticks();
 	initialise_rows();
 	buttons_update();
 }
 
-function callback_delete()
+function callback_save()
 {
-	if ((xmlhttp_del.readyState != 4) || (xmlhttp_del.status != 200))
+	if ((xmlhttp_save.readyState != 4) || (xmlhttp_save.status != 200))
 		return;
 
-	var response = xmlhttp_del.responseText;
-	if (response.length === 0)
-		return;
-
-	alert (response);
-
-	var table = document.getElementById ('route_list');
-	table.innerHTML = "";
-	buttons_update();
-}
-
-function callback_cancel()
-{
-	alert ('cancel');
+	x = xmlhttp_save.responseText;
+	notify_message (x);
 }
 
 function callback_catch_enter (e)
@@ -256,17 +282,25 @@ function button_set_state (button, enabled)
 
 function buttons_update()
 {
-	var set = false;
-	for (i = 0; i < list_ticks.length; i++) {
-		if (list_ticks[i].checked) {
-			set = true;
-			break;
+	var ticks = get_ticks();
+	var set = (ticks.length > 0);
+
+	button_set_state (button_add,    true);
+	button_set_state (button_save,   set);
+	button_set_state (button_delete, set);
+}
+
+function get_ticks()
+{
+	var ids = new Array();
+
+	if (list_ticks) {
+		for (var i = 0; i < list_ticks.length; i++) {
+			if (list_ticks[i].checked) {
+				ids.push (list_ticks[i].id.substring(3));
+			}
 		}
 	}
 
-	button_set_state (button_list, true);
-	button_set_state (button_delete, set);
-	button_set_state (button_cancel, set);
+	return ids;
 }
-
-

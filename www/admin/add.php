@@ -17,25 +17,29 @@ function add_main()
 	$output .= "<img alt='craggy logo' src='../img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
 	$output .= "Add Routes <span>(Last updated: $last_update)</span>";
 	$output .= "</div>";
-	$output .= html_menu('../');
+	//$output .= html_menu('../');
 
-	$output .= "<div class='content'>CONTENT";
+	$output .= "<div class='content'>";
 	$output .= '<h2>Add Routes</h2>';
 
-	$output .= "<div id='entry_area'>ENTRY<br>";
+	$output .= "<div id='entry_area'>";
 
 	$output .= "<label for='date' accesskey='d'><u>D</u>ate</label>";
 	$output .= "<input id='date' type='text' size='30' value='today'><br>";
 
+	$output .= "<label for='setter' accesskey='s'><u>S</u>etter</label>";
+	$output .= "<input id='setter' type='text' size='30' value='Mark Croxall'><br>";
+
 	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
-	$output .= "<input id='entry' type='text' size='30' value='45 red 5+, gn 6a, bg 6b'>";		// FOCUS
+	//$output .= "<input id='entry' type='text' size='30' value='36 blue 3, red 3+, red 4, red 4+, red 5, green 5+, green 6a, green 6a+, green 6b, green 6b, green 6c, green 6c+, green 7a, red 7a+, red 7b, red 7b+, red 7c, red 7c+, yellow 8a'>";		// FOCUS
+	$output .= "<input id='entry' type='text' size='30' value='36 blue 3, red 3+, red 4, red 4+, red 5'>";
 
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	$output .= "</div>";
 
-	$output .= "<div id='notify_area'>NOTIFY<br>more stuff<br>more text<br>and more</div>";
-	$output .= "<div id='list_area'>LIST";
-	$output .= "<div id='route_list'>ROUTE</div>";
+	$output .= "<div id='notify_area'></div>";
+	$output .= "<div id='list_area'>";
+	$output .= "<div id='route_list'></div>";
 
 	$output .= '<br>';
 	$output .= "<div class='buttons'>";
@@ -50,6 +54,7 @@ function add_main()
 	$output .= "<script type='text/javascript' src='notify.js'></script>";
 	$output .= "<script type='text/javascript' src='add.js'></script>";
 
+	$output .= "<div id='debug_area'></div>";
 	$output .= get_errors();
 	$output .= '</body>';
 	$output .= '</html>';

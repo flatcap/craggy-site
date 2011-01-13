@@ -104,12 +104,27 @@ function route_add ($data)
 		$routes[] = array ('panel' => $panel, 'colour' => $colour, 'grade' => $grade);
 	}
 
-	var_dump ($routes);
-	return;
+	$columns = array ('panel', 'colour', 'grade');
+	$xml = '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>';
+	$xml .= list_render_xml ('route', $routes, $columns);
+	echo $xml;
 }
 
 function route_save ($data)
 {
+	$xml = simplexml_load_string ($data);
+
+	$query = "insert into routes (panel, colour, grade) values ";
+	$values = array();
+
+	for ($i = 0; $i < $xml->count(); $i++) {
+		$a = $xml->route[$i];
+		$values[] = "($a->panel, '$a->colour', '$a->grade')";
+	}
+
+	$query .= implode (',', $values);
+
+	return $query;
 }
 
 function route_main()
@@ -135,7 +150,7 @@ function route_main()
 
 	switch ($action) {
 		case 'add':
-			//header('Content-Type: application/xml; charset=ISO-8859-1');
+			header('Content-Type: application/xml; charset=ISO-8859-1');
 			$response = route_add($data);
 			break;
 		case 'save':

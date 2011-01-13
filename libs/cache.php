@@ -31,7 +31,7 @@ function cache_uptodate ($name)
 	return ($time_cache > $time_db);
 }
 
-function cache_get ($name)
+function cache_get_table ($name)
 {
 	static $cache = array();
 
@@ -39,14 +39,25 @@ function cache_get ($name)
 		if (!array_key_exists ($name, $cache)) {
 			$data = apc_fetch ("table_$name");
 			$cache[$name] = unserialize ($data);
+			// if unserialize fails, I don't want to put null into my local cache
 
 		}
 	} else {
 		$cache[$name] = db_select ($name);
+		// if db_select fails I don't want to put null into my local cache
 		$data = serialize ($cache[$name]);
 		apc_store ("table_$name", $data);
 	}
 
 	return $cache[$name];
+}
+
+
+function cache_put_something_else()
+{
+}
+
+function cache_get_something_else()
+{
 }
 

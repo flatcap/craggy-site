@@ -14,3 +14,5 @@ footer
 	page generated in x sec
 	errors
 
+abbreviate last mod
+Page last changed 4 years ago

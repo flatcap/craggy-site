@@ -1,10 +1,82 @@
 <?php
 
+date_default_timezone_set('UTC');
+
 set_include_path ('../../libs');
 
 include 'db.php';
 include 'db_names.php';
+include 'cache.php';
 include 'utils.php';
+
+function colours_process ($colours)
+{
+	$lookup = array();
+
+	foreach ($colours as $ckey => $c) {
+		$lookup[strtolower ($c['colour'])] = &$colours[$ckey];
+		$abbr = explode (',', $c['abbr']);
+		foreach ($abbr as $a) {
+			$lookup[$a] = &$colours[$ckey];
+		}
+		unset ($colours[$ckey]['abbr']);
+	}
+
+	return $lookup;
+}
+
+function colours_match_single ($lookup, $test)
+{
+	if (array_key_exists ($test, $lookup))
+		return $lookup[$test]['id'];
+	else
+		return NULL;
+}
+
+function colours_match ($lookup, $test)
+{
+	global $g_colours;
+
+	$test = strtolower ($test);
+
+	$id = colours_match_single ($lookup, $test);
+	if ($id !== NULL)
+		return $id;
+
+	$pos = strpos ($test, '/');
+	if ($pos === FALSE)
+		return $id;
+
+	$id1 = colours_match_single ($lookup, substr($test, 0, $pos));
+	$id2 = colours_match_single ($lookup, substr($test, $pos+1));
+
+	if (($id1 === NULL) || ($id2 === NULL))
+		return NULL;
+
+	$col1 = $g_colours[$id1]['colour'];
+	$col2 = $g_colours[$id2]['colour'];
+
+	$test = strtolower ($col1.'/'.$col2);
+	$id = colours_match_single ($lookup, $test);
+
+	return $id;
+}
+
+
+function parse_colour ($text)
+{
+	global $DB_COLOUR;
+	static $colours = null;
+	static $lookup  = null;
+
+	if (!$colours)
+		$colours = cache_get_table ($DB_COLOUR);
+	if (!$lookup)
+		$lookup = colours_process ($colours);
+
+	$id = colours_match ($lookup, $text);
+	return $colours[$id]['colour'];
+}
 
 function route_add ($data)
 {
@@ -27,7 +99,7 @@ function route_add ($data)
 	foreach ($list as $item) {
 		$item = trim ($item);
 		list ($colour, $grade) = explode (' ', $item, 2);
-		$colour = trim ($colour);
+		$colour = parse_colour ($colour);
 		$grade = trim ($grade);
 		$routes[] = array ('panel' => $panel, 'colour' => $colour, 'grade' => $grade);
 	}

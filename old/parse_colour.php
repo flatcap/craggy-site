@@ -9,58 +9,6 @@ $g_routes  = NULL;
 $g_panels  = NULL;
 $g_colours = NULL;
 
-function colours_process ($colours)
-{
-	$lookup = array();
-
-	foreach ($colours as $ckey => $c) {
-		$lookup[strtolower ($c['colour'])] = &$colours[$ckey];
-		$abbr = explode (',', $c['abbr']);
-		foreach ($abbr as $a) {
-			$lookup[$a] = &$colours[$ckey];
-		}
-	}
-
-	return $lookup;
-}
-
-function colours_match_single ($lookup, $test)
-{
-	if (array_key_exists ($test, $lookup))
-		return $lookup[$test]['id'];
-	else
-		return NULL;
-}
-
-function colours_match ($lookup, $test)
-{
-	global $g_colours;
-
-	$test = strtolower ($test);
-
-	$id = colours_match_single ($lookup, $test);
-	if ($id !== NULL)
-		return $id;
-
-	$pos = strpos ($test, '/');
-	if ($pos === FALSE)
-		return $id;
-
-	$id1 = colours_match_single ($lookup, substr($test, 0, $pos));
-	$id2 = colours_match_single ($lookup, substr($test, $pos+1));
-
-	if (($id1 === NULL) || ($id2 === NULL))
-		return NULL;
-
-	$col1 = $g_colours[$id1]['colour'];
-	$col2 = $g_colours[$id2]['colour'];
-
-	$test = strtolower ($col1.'/'.$col2);
-	$id = colours_match_single ($lookup, $test);
-
-	return $id;
-}
-
 function colours_main()
 {
 	global $argc;

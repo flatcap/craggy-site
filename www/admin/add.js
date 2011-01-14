@@ -182,15 +182,19 @@ function callback_add()
 		"<th>Panel</th>" +
 		"<th>Colour</th>" +
 		"<th>Grade</th>" +
+		"<th>Setter</th>" +
+		"<th>Date</th>" +
+		"<th>Notes</th>" +
 		"</tr>" +
 		"</thead>" +
 		"<tbody>";
 
 
-	x = xmlhttp_add.responseXML.documentElement.getElementsByTagName("route");
 	if (!route_data)
 		route_data = new Array();
+	var i;
 	var id_base = route_data.length;
+	x = xmlhttp_add.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
 		var route = new Object();
 		id = id_base + i;
@@ -201,11 +205,11 @@ function callback_add()
 		route_data[id] = route;
 	}
 
-	for (s in route_data) {
-		id     = route_data[s].id;
-		panel  = route_data[s].panel;
-		colour = route_data[s].colour;
-		grade  = route_data[s].grade;
+	for (i = 0; i < route_data.length; i++) {
+		id     = route_data[i].id;
+		panel  = route_data[i].panel;
+		colour = route_data[i].colour;
+		grade  = route_data[i].grade;
 
 		txt += "<tr>";
 		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";
@@ -213,6 +217,9 @@ function callback_add()
 		txt += "<td>" + panel + "</td>";
 		txt += "<td>" + colour + "</td>";
 		txt += "<td>" + grade + "</td>";
+		txt += "<td>" + 'setter' +i+ "</td>";
+		txt += "<td>" + 'date' +i+ "</td>";
+		txt += "<td>" + 'notes' +i+ "</td>";
 		txt += "</tr>";
 	}
 

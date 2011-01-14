@@ -62,8 +62,7 @@ function colours_match ($lookup, $test)
 	return $id;
 }
 
-
-function parse_colour ($text)
+function colour_parse ($text)
 {
 	global $DB_COLOUR;
 	static $colours = null;
@@ -75,8 +74,42 @@ function parse_colour ($text)
 		$lookup = colours_process ($colours);
 
 	$id = colours_match ($lookup, $text);
-	return $colours[$id]['colour'];
+	return $colours[$id];
 }
+
+
+function validate_route ($route, &$message)
+{
+	//$values[] = "($a->panel, '$a->colour', '$a->grade')";
+	// validate route
+	//	valid panel
+	//	valid colour
+	//	valid grade
+	//	valid setter
+	//	valid date (in past)
+	//	notes?
+	// if (valid)
+	//	try db insert
+	//	if (success)
+	//		<route result='success'>
+	// else
+	//	<route result='failure'>
+
+	if (rand(1,10) > 4) {
+		return array();
+	} else {
+		if (rand (1,10) > 3) $message[] = "this is a random message " . rand(1,10);
+		if (rand (1,10) > 3) $message[] = "this is a random message " . rand(1,10);
+		if (rand (1,10) > 3) $message[] = "this is a random message " . rand(1,10);
+		return NULL;
+	}
+}
+
+function db_route_add ($route)
+{
+	return rand (101,200);
+}
+
 
 function route_add ($data)
 {
@@ -99,7 +132,7 @@ function route_add ($data)
 	foreach ($list as $item) {
 		$item = trim ($item);
 		list ($colour, $grade) = explode (' ', $item, 2);
-		$colour = parse_colour ($colour);
+		$colour = colour_parse ($colour);
 		$grade = trim ($grade);
 		$routes[] = array ('panel' => $panel, 'colour' => $colour, 'grade' => $grade);
 	}
@@ -110,21 +143,44 @@ function route_add ($data)
 	echo $xml;
 }
 
+
 function route_save ($data)
 {
 	$xml = simplexml_load_string ($data);
-
-	$query = "insert into routes (panel, colour, grade) values ";
-	$values = array();
+	$xml_result = '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>'."\n";
+	$xml_result .= "<list type='route'>\n";
 
 	for ($i = 0; $i < $xml->count(); $i++) {
+		$message = array();
 		$a = $xml->route[$i];
-		$values[] = "($a->panel, '$a->colour', '$a->grade')";
+		$route = validate_route ($a, $message);
+		if ($route !== NULL) {
+			$route_id = db_route_add ($a);
+		} else {
+			$route_id = FALSE;
+		}
+
+		if ($route_id) {
+			$xml_result .= "\t<route result='success'>\n";
+			$xml_result .= "\t\t<route_id>$route_id</route_id>\n";
+		} else {
+			$xml_result .= "\t<route result='failure'>\n";
+		}
+		$xml_result .= "\t\t<id>$a->id</id>\n";
+		$xml_result .= "\t\t<panel>$a->panel</panel>\n";
+		$xml_result .= "\t\t<colour>$a->colour</colour>\n";
+		$xml_result .= "\t\t<grade>$a->grade</grade>\n";
+		$xml_result .= "\t\t<setter>$a->setter</setter>\n";
+		$xml_result .= "\t\t<date>$a->date</date>\n";
+		$xml_result .= "\t\t<notes>$a->notes</notes>\n";
+		foreach ($message as $m) {
+			$xml_result .= "\t\t<message>$m</message>\n";
+		}
+		$xml_result .= "\t</route>\n";
 	}
 
-	$query .= implode (',', $values);
-
-	return $query;
+	$xml_result .= "</list>\n";
+	return $xml_result;
 }
 
 function route_main()
@@ -164,10 +220,49 @@ function route_main()
 	return $response;
 }
 
+function get_data()
+{
+	$xml  = '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>';
+	$xml .= '<list type="route">';
+	$xml .= '	<route>';
+	$xml .= '		<id>0</id>';
+	$xml .= '		<panel>45</panel>';
+	$xml .= '		<colour>Red</colour>';
+	$xml .= '		<grade>6a+</grade>';
+	$xml .= '		<setter>Mark Croxall</setter>';
+	$xml .= '		<date>2010-01-05</date>';
+	$xml .= '		<notes>No arete</notes>';
+	$xml .= '	</route>';
+	$xml .= '	<route>';
+	$xml .= '		<id>1</id>';
+	$xml .= '		<panel>45</panel>';
+	$xml .= '		<colour>Blug</colour>';
+	$xml .= '		<grade>5</grade>';
+	$xml .= '		<setter>Mark Croxall</setter>';
+	$xml .= '		<date>2010-13-05</date>';
+	$xml .= '		<notes>Hands and feet allowed on the volume</notes>';
+	$xml .= '	</route>';
+	$xml .= '	<route>';
+	$xml .= '		<id>2</id>';
+	$xml .= '		<panel>45</panel>';
+	$xml .= '		<colour>Green</colour>';
+	$xml .= '		<grade>6b</grade>';
+	$xml .= '		<setter>Mike Hadcocks</setter>';
+	$xml .= '		<date>2010-01-06</date>';
+	$xml .= '		<notes></notes>';
+	$xml .= '	</route>';
+	$xml .= '</list>';
 
-if (isset ($argc)) {
-	$_GET = array('action' => 'add', 'data' => '45   red  5+,     gn   6a  ,  bg   6b  ');
+	$_GET = array('action' => 'save', 'data' => $xml);
+
+	return $_GET;
 }
+
+
+if (!isset ($argc))
+	$_GET = array('action' => 'add', 'data' => '45   red  5+,     gn   6a  ,  bg   6b  ');
+else
+	$_GET = get_data();
 
 echo route_main();
 

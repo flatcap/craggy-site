@@ -13,11 +13,13 @@ function add_main()
 	$output .= html_header ('Add Routes', '../');
 	$output .= '<body>';
 
+	/*
 	$output .= "<div class='header'>";
 	$output .= "<img alt='craggy logo' src='../img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
 	$output .= "Add Routes <span>(Last updated: $last_update)</span>";
 	$output .= "</div>";
-	//$output .= html_menu('../');
+	$output .= html_menu('../');
+	*/
 
 	$output .= "<div class='content'>";
 	$output .= '<h2>Add Routes</h2>';

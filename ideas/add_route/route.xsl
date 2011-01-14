@@ -8,10 +8,19 @@
 	<xsl:variable name="date_exists" select="//date[1]" />
 	<xsl:variable name="notes_exists" select="//notes[1]" />
 	<html>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>List of <xsl:value-of select="/list/@type"/>s</title>
+		<style type="text/css">
+			th { background: #ddd; }
+			tr.success { background: #cfc; }
+			tr.failure { background: #fcc; }
+		</style>
+	<head>
+	</head>
 	<body>
-	<h2>List of <xsl:value-of select="/list/@type" />s:</h2>
+	<h2>List of <xsl:value-of select="/list/@type"/>s:</h2>
 	<table border="1" cellspacing="0" cellpadding="3">
-		<tr style='background: #ddd'>
+		<tr>
 			<xsl:if test="$id_exists">
 			<th>ID</th>
 			</xsl:if>
@@ -33,30 +42,29 @@
 		</tr>
 		<xsl:for-each select="//route">
 			<xsl:element name='tr'>
-			<xsl:if test="@result = 'failure'">
-			<xsl:attribute name='style'>background: #fcc;</xsl:attribute>
-			</xsl:if>
-			<xsl:if test="@result = 'success'">
-			<xsl:attribute name='style'>background: #cfc;</xsl:attribute>
-			</xsl:if>
+			<xsl:attribute name='class'>
+			<xsl:value-of select="@result"/>
+			</xsl:attribute>
 				<xsl:if test="$id_exists">
-				<td><xsl:value-of select="id" /></td>
+				<td><xsl:value-of select="id"/></td>
 				</xsl:if>
-				<td><xsl:value-of select="panel" /></td>
-				<td><xsl:value-of select="colour" /></td>
-				<td><xsl:value-of select="grade" /></td>
+				<td><xsl:value-of select="panel"/></td>
+				<td><xsl:value-of select="colour"/></td>
+				<td><xsl:value-of select="grade"/></td>
 				<xsl:if test="$setter_exists">
-				<td><xsl:value-of select="setter" /></td>
+				<td><xsl:value-of select="setter"/></td>
 				</xsl:if>
 				<xsl:if test="$date_exists">
-				<td><xsl:value-of select="date" /></td>
+				<td><xsl:value-of select="date"/></td>
 				</xsl:if>
 				<xsl:if test="$notes_exists">
-				<td><xsl:value-of select="notes" /></td>
+				<td><xsl:value-of select="notes"/></td>
 				</xsl:if>
 				<xsl:if test="$message_exists">
 				<td>
-				<xsl:value-of select="message" />
+				<xsl:for-each select="message">
+				<xsl:value-of select="."/><xsl:element name="br"/>
+				</xsl:for-each>
 				</td>
 				</xsl:if>
 			</xsl:element>

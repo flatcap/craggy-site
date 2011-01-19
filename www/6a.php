@@ -21,7 +21,7 @@ function six_main ($options)
 	process_height_abbreviate ($list);
 
 	array_shift ($columns);		// Ignore the id column
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 	fix_justification ($widths);
 
 	$count  = count ($list);
@@ -42,8 +42,12 @@ function six_main ($options)
 			$output .= "<a href='?format=csv'><img alt='6a route list as a csv document' width='24' height='24' src='img/ss.png'></a>";
 			$output .= '</div>';
 
-			$output .= "<div class='header'>Top Roped 6a Routes <span>(Last updated: $last_update)</span></div>\n";
+			$output .= "<div class='header'>";
+			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
+			$output .= "Top Roped 6a Routes <span>(Last updated: $last_update)</span>";
+			$output .= "</div>";
 			$output .= html_menu2();
+
 			$output .= "<div class='content'>\n";
 			$output .= "<p>$count climbs ({$total_height}m)</p>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0],[2,0],[1,0]]}');
@@ -79,7 +83,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts  = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

@@ -12,7 +12,7 @@ function db_get_database()
 	return $db;
 }
 
-function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $group = NULL)
+function db_select ($table, $columns = null, $where = null, $order = null, $group = null)
 {
 	if (isset($columns)) {
 		if (is_array($columns))
@@ -59,41 +59,10 @@ function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $grou
 	return $list;
 }
 
-function db_get_routes()
-{
-	$db = db_get_database();
-
-	$table_climb_type = db_select('climb_type');
-	$table_colour     = db_select('colour');
-	$table_grade      = db_select('grade');
-	$table_panel      = db_select('panel');
-	$table_setter     = db_select('setter');
-	$table_route      = db_select('route');
-
-	$routes = array();
-	foreach ($table_route as $row) {
-		$route = array();
-
-		$route['panel']    = &$table_panel[$row['panel']];
-		$route['type']     = &$table_climb_type[$table_panel[$row['panel']]['type']];
-		$route['colour']   = &$table_colour[$row['colour']];
-		$route['grade']    = &$table_grade[$row['grade']];
-		$route['setter']   = &$table_setter[$row['setter']];
-		$route['notes']    = $row['notes'];
-		$route['date_set'] = $row['date_set'];
-
-		array_push ($routes, $route);
-	}
-
-	mysql_close($db);
-
-	return $routes;
-}
-
 function db_date($date)
 {
 	$d = strtotime($date);
-	if ($d !== FALSE)
+	if ($d !== false)
 		$result = strftime('%Y/%m/%d', $d);
 	else
 		$result = '';
@@ -101,69 +70,10 @@ function db_date($date)
 	return $result;
 }
 
-function db_route_add($routes)
-{
-	foreach ($routes as $key => $r) {
-		// check for both 'valid' and 'set'
-		$panel    = parse_panel ($r['panel'], 'id');
-		$colour   = parse_colour ($r['colour'], 'id');
-		$grade    = parse_grade ($r['grade'], 'id');
-		$setter   = parse_setter ($r['setter'], 'id');
-		$notes    = $r['notes'];
-		$date_set = db_date ($r['date_set']);
-
-		$sql  = 'INSERT INTO route (panel,colour,grade,notes,setter,date_set) ';
-		$sql .= "VALUES ('$panel','$colour','$grade','$notes','$setter','$date_set')";
-		$result = mysql_query($sql) or die('query failed: ' . mysql_error());
-
-		if ($result) {
-			$id = mysql_insert_id();
-		} else {
-			$id = 0;
-		}
-	}
-}
-
-function db_route_add2($routes)
-{
-	foreach ($routes as $r) {
-		$panel        = $r['panel'];
-		$colour       = $r['colour'];
-		$grade        = $r['grade'];
-		$setter       = $r['setter'];
-		$notes        = mysql_real_escape_string ($r['notes']);
-		$date_set     = $r['date_set'];
-
-		$sql  = 'INSERT INTO route (panel,colour,grade,notes,setter,date_set) ';
-		$sql .= "VALUES ('$panel','$colour','$grade','$notes','$setter','$date_set')";
-		$result = mysql_query($sql) or die('query failed: ' . mysql_error());
-
-		if ($result) {
-			$id = mysql_insert_id();
-		} else {
-			$id = 0;
-		}
-	}
-}
-
-function db_route_delete($where)
-{
-	if (empty ($where))
-		return FALSE;
-
-	$query = 'delete from route where ' . $where;
-
-	$db = db_get_database();
-
-	$result = mysql_query($query);
-
-	return mysql_affected_rows();
-}
-
 function db_route_delete2($ids)
 {
 	if (count ($ids) == 0)
-		return NULL;
+		return null;
 
 	$retval = array();
 
@@ -172,7 +82,7 @@ function db_route_delete2($ids)
 
 	$query = "update climb set active = 0 where route_id in ($id_list)";
 	$result = mysql_query($query);
-	if ($result === TRUE) {
+	if ($result === true) {
 		$retval['climbs'] = mysql_affected_rows();
 	} else {
 		$retval['climbs'] = -1;
@@ -180,7 +90,7 @@ function db_route_delete2($ids)
 
 	$query = "update rating set active = 0 where route_id in ($id_list)";
 	$result = mysql_query($query);
-	if ($result === TRUE) {
+	if ($result === true) {
 		$retval['ratings'] = mysql_affected_rows();
 	} else {
 		$retval['ratings'] = -1;
@@ -188,7 +98,7 @@ function db_route_delete2($ids)
 
 	$query = "update route set date_end = date(now()) where id in ($id_list)";	// date needs to be passed in
 	$result = mysql_query($query);
-	if ($result === TRUE) {
+	if ($result === true) {
 		$retval['routes'] = mysql_affected_rows();
 	} else {
 		$retval['routes'] = -1;
@@ -231,16 +141,26 @@ function db_set_last_update($date = '')
 	return $result;
 }
 
-function db_truncate_route()
+function db_get_data ($name)
 {
+	include 'db_names.php';
+
 	$db = db_get_database();
 
-	$query = 'truncate route;';
+	$query = "select value from $DB_DATA where name = '$name'";
 
-	return mysql_query($query);
+	$result = mysql_query($query);
+	if (!$result) {
+		return false;
+	}
+
+	$row = mysql_fetch_array($result, MYSQL_ASSOC);
+	mysql_free_result($result);
+
+	return $row['value'];
 }
 
-function db_count($table, $column, $where = NULL)
+function db_count($table, $column, $where = null)
 {
 	$query = "select count({$column}) as total from {$table}";
 

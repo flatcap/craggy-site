@@ -12,11 +12,11 @@ function import_open()
 
     if ($argc != 2) {
         echo "params\n";
-        return FALSE;
+        return false;
     }
 
     $handle = fopen ($argv[1], "r");
-    if ($handle === FALSE) {
+    if ($handle === false) {
         echo "fopen\n";
     }
 
@@ -45,7 +45,7 @@ function import_main($handle)
         }
 
         array_push ($routes, $r);
-    } while ($line !== FALSE);
+    } while ($line !== false);
 
     /*
     foreach ($headings as $id => $h) {

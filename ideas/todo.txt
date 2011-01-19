@@ -318,6 +318,9 @@ is this a rich or not?
 		rich menu
 		google analytics
 		validation box
+	
+similar check: is_this_live_site()
+	disable debugging, etc
 
 change the css to avoid the 4 * &nbsp; in the table headers
 
@@ -455,3 +458,10 @@ downloads menu item (drop down)
 
 56 red 6c (no arete) 2011-01-07
 
+myip has changed
+alter utils to match
+read values from config file?
+
+cursor: text;
+cursor: default;
+cursor: pointer;

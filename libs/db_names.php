@@ -17,6 +17,5 @@ $DB_SETTER     = 'setter';
 $DB_SUCCESS    = 'success';
 
 /* The names of the database views */
-$DB_V_PANEL    = 'v_panel';
 $DB_V_ROUTE    = 'v_route';
 

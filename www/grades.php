@@ -6,7 +6,7 @@ include 'db.php';
 include 'utils.php';
 include 'db_names.php';
 
-function stats_grade_table ($grade_list, $whole_grades = FALSE)
+function stats_grade_table ($grade_list, $whole_grades = false)
 {
 	$output = '';
 
@@ -36,7 +36,7 @@ function stats_grade_table ($grade_list, $whole_grades = FALSE)
 	}
 
 	$columns = array ('grade', 'count', 'top_rope', 'lead');
-	$widths = column_widths ($results, $columns, TRUE);
+	$widths = column_widths ($results, $columns, true);
 	fix_justification ($widths);
 
 	$output .= list_render_html ($results, $columns, $widths, '{sortlist: [[0,0]]}');
@@ -77,7 +77,7 @@ function stats_grade_mean ($grade_list)
 	$columns = array('id', 'grade', 'sequence');
 	$order   = 'sequence';
 
-	$grades = db_select ($table, $columns, NULL, $order);
+	$grades = db_select ($table, $columns, null, $order);
 
 	$output .= '<h2>Average Grades</h2>';
 	$output .= '<b>All Routes</b>:<br>';
@@ -103,7 +103,7 @@ function stats_grade()
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'grade', 'grade_seq', 'climb_type');
-	$where   = NULL;
+	$where   = null;
 	$order   = 'grade_seq';
 
 	$grade_list = db_select($table, $columns, $where, $order);
@@ -116,7 +116,7 @@ function stats_grade()
 	$output .= "<img alt='graph of grade vs frequency' width='800' height='400' src='img/grade.png'>";
 	$output .= '</div>';
 	$output .= '<br>';
-	$output .= stats_grade_table ($grade_list, FALSE);
+	$output .= stats_grade_table ($grade_list, false);
 
 	return $output;
 }
@@ -128,7 +128,10 @@ function stats_main()
 	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$output  = '<body>';
-	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
+	$output .= "<div class='header'>";
+	$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
+	$output .= "Craggy Routes <span>(Last updated: $last_update)</span>";
+	$output .= "</div>";
 	$output .= html_menu();
 	$output .= "<div class='content'>\n";
 	$output .= stats_grade();

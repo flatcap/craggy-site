@@ -13,7 +13,7 @@ function stats_setters()
 
 	$table   = $DB_V_ROUTE;
 	$columns = array('id', 'setter');
-	$where   = NULL;
+	$where   = null;
 	$order   = 'setter';
 
 	$list = db_select($table, $columns, $where, $order);
@@ -33,7 +33,7 @@ function stats_setters()
 
 	$output .= '<h2>Stats - Setters</h2>';
 	$columns = array ('setter', 'count');
-	$widths = column_widths ($setters, $columns, TRUE);
+	$widths = column_widths ($setters, $columns, true);
 	fix_justification ($widths);
 
 	$output .= list_render_html ($setters, $columns, $widths, '{sortlist: [[1,1],[0,0]]}');
@@ -48,7 +48,10 @@ function stats_main()
 	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$output  = '<body>';
-	$output .= "<div class='header'>Craggy Routes <span>(Last updated: $last_update)</span></div>\n";
+	$output .= "<div class='header'>";
+	$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
+	$output .= "Craggy Routes <span>(Last updated: $last_update)</span>";
+	$output .= "</div>";
 	$output .= html_menu();
 	$output .= "<div class='content'>\n";
 	$output .= stats_setters();

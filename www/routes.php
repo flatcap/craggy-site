@@ -14,9 +14,9 @@ function routes_main($options)
 	$order   = 'panel_seq, grade_seq, colour';
 	$order  .= ' limit 10';
 
-	$list = db_select($table, $columns, NULL, $order);
+	$list = db_select($table, $columns, null, $order);
 
-	process_date ($list, 'date_set', TRUE);
+	process_date ($list, 'date_set', true);
 	process_key ($list);
 
 	array_shift ($columns);		// Lose the id column
@@ -24,7 +24,7 @@ function routes_main($options)
 	$columns[] = 'months';
 
 	// calculate widths (include headers?)
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 
 	// alter justification of widths
 	fix_justification ($widths);
@@ -45,6 +45,7 @@ function routes_main($options)
 			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='32' height='32' src='img/ss.png'></a>";
 			$output .= '</div>';
 
+<<<<<<< HEAD
 			$output .= "<div class='download'>";
 			//$output .= '<h1>Validation</h1>';
 			$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-html.png'></a>";
@@ -64,7 +65,7 @@ function routes_main($options)
 			*/
 
 			$output .= "<div class='header'>";
-			$output .= "<img alt='' width='135' height='66' src='img/craggy2.png'></a>";
+			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
 			//$output .= "All Routes <span>(Last updated: $last_update)</span>";
 
 			/*
@@ -140,7 +141,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

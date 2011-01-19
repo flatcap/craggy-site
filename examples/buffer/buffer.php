@@ -13,11 +13,11 @@ function buffer_cache_expiry()
 {
 	$expiry = apc_fetch ('6a_expiry');
 	if (empty ($expiry) || !is_numeric ($expiry))
-		return NULL;
+		return null;
 
 	$age = $expiry - microtime (true);
 	if ($age < 0)
-		return NULL;
+		return null;
 
 	return sprintf ('%.1f', $age);
 }
@@ -51,11 +51,11 @@ function buffer_cache_get()
 {
 	$data = apc_fetch ('6a_list');
 	if (empty ($data))
-		return NULL;
+		return null;
 
 	$expiry = buffer_cache_expiry();
-	if ($expiry === NULL)
-		return NULL;
+	if ($expiry === null)
+		return null;
 
 	return unserialize ($data);
 }
@@ -68,7 +68,7 @@ function buffer_db_get()
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade');
 	$where   = array ('grade_seq >= 400', 'grade_seq < 500', "climb_type <> 'lead'");
-	$where   = NULL;
+	$where   = null;
 	$order   = 'panel_seq, grade_seq, colour';
 	//$order  .= ' limit 10';
 
@@ -97,7 +97,7 @@ function buffer_render_xml ($name, $list)
 function buffer_get_6a (&$notes)
 {
 	$list = buffer_cache_get();
-	if ($list === NULL) {
+	if ($list === null) {
 		$list = buffer_db_get();
 		$notes = 'data from database';
 	} else {

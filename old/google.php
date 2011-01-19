@@ -30,7 +30,7 @@ function getSpreadsheetId($client, $ss)
             return array_pop(explode("/",$entry->id->text));
     }
 
-    return FALSE;
+    return false;
 }
 
 function getWorksheetId($client,$ss_id,$ws)
@@ -45,10 +45,10 @@ function getWorksheetId($client,$ss_id,$ws)
             return array_pop(explode("/",$entry->id->text));
     }
 
-    return FALSE;
+    return false;
 }
 
-function findRows($client, $spreadsheet, $worksheet, $search=FALSE)
+function findRows($client, $spreadsheet, $worksheet, $search=false)
 {
     $query = new Zend_Gdata_Spreadsheets_ListQuery();
 
@@ -65,7 +65,7 @@ function findRows($client, $spreadsheet, $worksheet, $search=FALSE)
     return $feed;
 }
 
-function getRows($client, $spreadsheet, $worksheet, $search=FALSE)
+function getRows($client, $spreadsheet, $worksheet, $search=false)
 {
     $rows = array();
 

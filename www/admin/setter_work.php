@@ -8,7 +8,7 @@ include 'db.php';
 include 'db_names.php';
 include 'utils.php';
 
-//$fh = NULL;
+//$fh = null;
 
 function xml_error()
 {
@@ -20,7 +20,7 @@ function db_delete($table, $join_tables, $where)
 	//global $fh;
 
 	if (empty ($where))
-		return FALSE;
+		return false;
 
 	$db = db_get_database();
 
@@ -113,7 +113,7 @@ function setter_list()
 			"$DB_SETTER.surname as surname",
 			"count($DB_ROUTE.id) as count");
 
-	$where   = NULL;
+	$where   = null;
 	$order   = 'id';
 	$group   = 'id';
 

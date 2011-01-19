@@ -1,0 +1,24 @@
+Replace an Element Node
+
+The replaceChild() method is used to replace a node.
+
+The following code fragment replaces the first <book> element:
+Example
+xmlDoc=loadXMLDoc("books.xml");
+
+x=xmlDoc.documentElement;
+
+//create a book element, title element and a text node
+newNode=xmlDoc.createElement("book");
+newTitle=xmlDoc.createElement("title");
+newText=xmlDoc.createTextNode("A Notebook");
+
+//add the text node to the title node,
+newTitle.appendChild(newText);
+//add the title node to the book node
+newNode.appendChild(newTitle);
+
+y=xmlDoc.getElementsByTagName("book")[0]
+//replace the first book node with the new node
+x.replaceChild(newNode,y);
+

@@ -1,0 +1,50 @@
+http://www.w3schools.com/dom/dom_examples.asp
+
+XML DOM Properties
+
+These are some typical DOM properties:
+
+    * x.nodeName - the name of x
+    * x.nodeValue - the value of x
+    * x.parentNode - the parent node of x
+    * x.childNodes - the child nodes of x
+    * x.attributes - the attributes nodes of x
+
+XML DOM Methods
+
+    * x.getElementsByTagName(name) - get all elements with a specified tag name
+    * x.appendChild(node) - insert a child node to x
+    * x.removeChild(node) - remove a child node from x
+
+The nodeName property specifies the name of a node.
+
+    * nodeName is read-only
+    * nodeName of an element node is the same as the tag name
+    * nodeName of an attribute node is the attribute name
+    * nodeName of a text node is always #text
+    * nodeName of the document node is always #document
+
+The nodeValue property specifies the value of a node.
+
+    * nodeValue for element nodes is undefined
+    * nodeValue for text nodes is the text itself
+    * nodeValue for attribute nodes is the attribute value
+
+Avoid Empty Text Nodes
+
+Firefox, and some other browsers, will treat empty white-spaces or new lines as text nodes, Internet Explorer will not.
+
+This causes a problem when using the properties: firstChild, lastChild, nextSibling, previousSibling.
+
+To avoid navigating to empty text nodes (spaces and new-line characters between element nodes), we use a function that checks the node type:
+function get_nextSibling(n)
+{
+y=n.nextSibling;
+while (y.nodeType!=1)
+  {
+  y=y.nextSibling;
+  }
+return y;
+}
+
+

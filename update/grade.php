@@ -13,7 +13,7 @@ function grade_main()
 	$columns = array ('id', 'grade', 'climb_type');
 	$order   = 'grade_seq';
 
-	$list = db_select($table, $columns, NULL, $order);
+	$list = db_select($table, $columns, null, $order);
 
 	$totals = array(
 		'3'   => array (0, 0, 0),

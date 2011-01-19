@@ -16,18 +16,18 @@ function grade_hash($row)
 
 function grade_array_verify(&$grades)
 {
-    $all_valid = TRUE;
+    $all_valid = true;
 
     foreach ($grades as $key => &$r) {
-        $r['valid'] = TRUE;
+        $r['valid'] = true;
 
         if (!is_numeric ($r['order']))
-            $r['valid'] = FALSE;
+            $r['valid'] = false;
         if ($r['order'] < 1)
-            $r['valid'] = FALSE;
+            $r['valid'] = false;
 
         if (!$r['valid'])
-            $all_valid = FALSE;
+            $all_valid = false;
     }
 
     return $all_valid;
@@ -37,7 +37,7 @@ function grade_row_to_array($row)
 {
     $id = get_post_variable("id_{$row}");
     if (empty($id))
-        return FALSE;
+        return false;
 
     $r = array();
 
@@ -61,7 +61,7 @@ function grade_form_to_array()
         if (empty($matches))
             continue;
         $row = grade_row_to_array($matches[2]);
-        if ($row === FALSE)
+        if ($row === false)
             break;
 
         array_push($grades, $row);
@@ -86,7 +86,7 @@ function grade_array_to_form($grades, $readwrite, $checkbox)
     $output .= "</tr>\n";
 
     foreach ($grades as $g) {
-        if (array_key_exists ("valid", $g) && ($g['valid'] == FALSE) && ($readwrite == TRUE))
+        if (array_key_exists ("valid", $g) && ($g['valid'] == false) && ($readwrite == true))
             $output .= "<tr class='mand'>\n";
         else
             $output .= "<tr>\n";
@@ -121,9 +121,9 @@ function grade_array_to_form($grades, $readwrite, $checkbox)
 /* Database */
 // add debug_database variable
 
-function grade_get_grades($hash = FALSE)
+function grade_get_grades($hash = false)
 {
-    $grades = db_select("grade", NULL, NULL, "grade.order");
+    $grades = db_select("grade", null, null, "grade.order");
     if ($hash) {
         foreach ($grades as &$g) {
             $g['hash'] = grade_hash($g);
@@ -139,7 +139,7 @@ function grade_row_add($row)
     $g = $row['grade'];
 
     if (empty ($o) || empty ($g))
-        return FALSE;
+        return false;
 
     $query  = "insert into grade (grade.order,grade) VALUES ";
     $query .= "('{$o}', '{$g}');";
@@ -184,12 +184,12 @@ function grade_row_delete($id)
 
 function grade_list()
 {
-    $grades = grade_get_grades(TRUE);
+    $grades = grade_get_grades(true);
     $output = "";
     $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='grade_list'>\n";
 
-    $output .= grade_array_to_form ($grades, FALSE, FALSE);
+    $output .= grade_array_to_form ($grades, false, false);
 
     $output .= "<br>\n";
     $output .= "<input name='button' accesskey='a' value='Add' type='submit'>\n";
@@ -229,7 +229,7 @@ function grade_add()
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='grade_add'>\n";
 
-        $output .= grade_array_to_form ($grades, TRUE, FALSE);
+        $output .= grade_array_to_form ($grades, true, false);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit'>\n";
@@ -271,7 +271,7 @@ function grade_edit($grades)
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='grade_edit'>\n";
 
-        $output .= grade_array_to_form ($grades, TRUE, FALSE);
+        $output .= grade_array_to_form ($grades, true, false);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit' class='default'>\n";
@@ -310,7 +310,7 @@ function grade_delete($grades)
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='grade_delete'>\n";
 
-        $output .= grade_array_to_form ($grades, FALSE, TRUE);
+        $output .= grade_array_to_form ($grades, false, true);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit' class='default'>\n";
@@ -349,10 +349,10 @@ function grade_main()
             if ($button == "Add") {
                 $output .= grade_add();
             } else if ($button == "Edit") {
-                $grades = grade_get_grades(TRUE);
+                $grades = grade_get_grades(true);
                 $output .= grade_edit($grades);
             } else if ($button == "Delete") {
-                $grades = grade_get_grades(TRUE);
+                $grades = grade_get_grades(true);
                 $output .= grade_delete($grades);
             } else {
                 $output .= grade_list();

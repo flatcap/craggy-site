@@ -6,9 +6,9 @@ include 'db.php';
 include 'db_names.php';
 include 'utils.php';
 
-$g_routes  = NULL;
-$g_panels  = NULL;
-$g_colours = NULL;
+$g_routes  = null;
+$g_panels  = null;
+$g_colours = null;
 
 if (!isset ($_GET))
 	return;
@@ -42,7 +42,7 @@ $g_colours = db_select($DB_COLOUR);
 $g_panels  = db_select($DB_PANEL);
 $g_grades  = db_select($DB_GRADE);
 
-$panel_id = NULL;
+$panel_id = null;
 foreach ($g_panels as $id => $p) {
 	if ($p['name'] == $panel) {
 		$panel_id = $p['id'];
@@ -50,7 +50,7 @@ foreach ($g_panels as $id => $p) {
 	}
 }
 
-if ($panel_id === NULL) {
+if ($panel_id === null) {
 	printf ("Panel '%d' doesn't exist\n", $panel);
 	return;
 }
@@ -98,7 +98,7 @@ function colours_match_single ($lookup, $test)
 	if (array_key_exists ($test, $lookup))
 		return $lookup[$test]['id'];
 	else
-		return NULL;
+		return null;
 }
 
 function colours_match ($lookup, $test)
@@ -108,18 +108,18 @@ function colours_match ($lookup, $test)
 	$test = strtolower ($test);
 
 	$id = colours_match_single ($lookup, $test);
-	if ($id !== NULL)
+	if ($id !== null)
 		return $id;
 
 	$pos = strpos ($test, '/');
-	if ($pos === FALSE)
+	if ($pos === false)
 		return $id;
 
 	$id1 = colours_match_single ($lookup, substr($test, 0, $pos));
 	$id2 = colours_match_single ($lookup, substr($test, $pos+1));
 
-	if (($id1 === NULL) || ($id2 === NULL))
-		return NULL;
+	if (($id1 === null) || ($id2 === null))
+		return null;
 
 	$col1 = $g_colours[$id1]['colour'];
 	$col2 = $g_colours[$id2]['colour'];
@@ -136,7 +136,7 @@ $lookup = colours_process ($g_colours);
 if ($trail_space) {
 	foreach ($parts as &$p) {
 		$id = colours_match ($lookup, $p);
-		if ($id !== NULL) {
+		if ($id !== null) {
 			$p = $g_colours[$id]['colour'];
 		}
 	}

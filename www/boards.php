@@ -32,7 +32,7 @@ function boards_main ($options)
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'setter', 'date_set');
-	$where   = NULL;
+	$where   = null;
 	$order   = 'panel_seq,grade_seq,colour';
 
 	$list = db_select($table, $columns, $where, $order);
@@ -44,10 +44,10 @@ function boards_main ($options)
 		$p = $row['panel'];
 		if ($panel != $p) {
 			$panel = $p;
-			$boards[$panel] = array('setter' => array(), 'date_set' => NULL);
+			$boards[$panel] = array('setter' => array(), 'date_set' => null);
 		}
 
-		$boards[$panel]['setter'][$row['setter']] = NULL;
+		$boards[$panel]['setter'][$row['setter']] = null;
 		$d1 = $row['date_set'];
 		$d2 = $boards[$panel]['date_set'];
 		if ($d1 > $d2)
@@ -85,7 +85,7 @@ function boards_command_line ($format, $def_format)
 {
 	$longopts  = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[$def_format];

@@ -7,8 +7,7 @@ function html_header ($title, $reldir = '')
 	$output .= "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>";
 	$output .= '<html>';
 	$output .= '<head>';
-	$output .= "<link rel='stylesheet' title='Purple' href='{$reldir}style/style.css' type='text/css'>";
-	$output .= "<link rel='alternate stylesheet' title='Dark' href='{$reldir}style/style_dark.css' type='text/css'>";
+	$output .= "<link rel='stylesheet' title='green' href='{$reldir}style/style.css' type='text/css'>";
 	$output .= "<link rel='alternate' title='Craggy RSS' href='http://craggy.russon.org/rss.xml' type='application/rss+xml'>";
 	$output .= "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 	$output .= "<title>$title - Craggy Island</title>";
@@ -32,7 +31,7 @@ function html_header ($title, $reldir = '')
 
 function html_menu($reldir = '')
 {
-	$rich = FALSE;
+	$rich = false;
 
 	if (isset ($_SERVER)) {
 		if (array_key_exists ('PHP_SELF', $_SERVER))
@@ -85,7 +84,8 @@ function html_menu($reldir = '')
 		$output .= '  <h1>Admin</h1>';
 		$output .= '  <ul>';
 		$output .= "    <li><a href='{$reldir}admin/setter.php'>Setter</a></li>";
-		$output .= "    <li><a href='{$reldir}admin/route.php'>Route</a></li>";
+		$output .= "    <li><a href='{$reldir}admin/route.php'>Del Route</a></li>";
+		$output .= "    <li><a href='{$reldir}admin/add.php'>Add Route</a></li>";
 		$output .= '  </ul>';
 	}
 
@@ -147,7 +147,7 @@ function html_menu2 ($reldir = '')
 
 function get_url_variable($name)
 {
-	$result = FALSE;
+	$result = false;
 
 	if (isset($_GET)) {
 		if (array_key_exists($name, $_GET)) {
@@ -158,211 +158,6 @@ function get_url_variable($name)
 	return $result;
 }
 
-
-function parse_single_colour ($string)
-{
-	$string = strtolower($string);
-
-	switch ($string) {
-		case 'beige':
-		case 'beig':
-		case 'bei':
-		case 'be':
-		case 'bg':
-			$colour = 'Beige';
-			break;
-		case 'black':
-		case 'blac':
-		case 'bla':
-		case 'blk':
-			$colour = 'Black';
-			break;
-		case 'blue':
-		case 'blu':
-			$colour = 'Blue';
-			break;
-		case 'features':
-		case 'feature':
-		case 'featur':
-		case 'featu':
-		case 'feat':
-		case 'fea':
-		case 'fe':
-		case 'ft':
-			$colour = 'Features';
-			break;
-		case 'green':
-		case 'gree':
-		case 'gren':
-		case 'grn':
-		case 'gn':
-			$colour = 'Green';
-			break;
-		case 'grey':
-		case 'gray':
-		case 'gry':
-		case 'gy':
-			$colour = 'Grey';
-			break;
-		case 'mushroom':
-		case 'mushroo':
-		case 'mushro':
-		case 'mushr':
-		case 'mush':
-		case 'mus':
-		case 'mu':
-			$colour = 'Mushroom';
-			break;
-		case 'orange':
-		case 'orang':
-		case 'oran':
-		case 'ora':
-		case 'or':
-			$colour = 'Orange';
-			break;
-		case 'pink':
-		case 'pin':
-		case 'pi':
-		case 'pk':
-			$colour = 'Pink';
-			break;
-		case 'purple':
-		case 'purpl':
-		case 'purp':
-		case 'pur':
-		case 'pu':
-		case 'pp';
-			$colour = 'Purple';
-			break;
-		case 'red':
-		case 're':
-		case 'rd':
-			$colour = 'Red';
-			break;
-		case 'turquoise':
-		case 'turquois':
-		case 'turquoi':
-		case 'turquo':
-		case 'turqu':
-		case 'turq':
-		case 'tur':
-		case 'tq':
-		case 'tr':
-			$colour = 'Turquoise';
-			break;
-		case 'white':
-		case 'whit':
-		case 'whi':
-		case 'wh':
-			$colour = 'White';
-			break;
-		case 'yellow':
-		case 'yello':
-		case 'yell':
-		case 'yel':
-		case 'ye':
-		case 'yl':
-			$colour = 'Yellow';
-			break;
-		default:
-			$colour = '';
-			break;
-	}
-
-	return $colour;
-}
-
-function parse_colour ($string)
-{
-	$string = strtolower($string);
-
-	$pos = strpos ($string, '/');
-	if ($pos === FALSE) {
-		$colour = parse_single_colour($string);
-	} else {
-		$colour = parse_single_colour(substr($string, 0, $pos)) . '/' .
-				  parse_single_colour(substr($string, $pos+1));
-	}
-
-	// then parse the colour against the database
-
-	return $colour;
-}
-
-function parse_setter($setter, $field)
-{
-	global $g_setters;
-	$result = NULL;
-
-	foreach ($g_setters as $id => $key) {
-		if (($key['initials'] == $setter) ||
-			($key['name']     == $setter)) {
-			$result = $key[$field];
-			break;
-		}
-	}
-
-	return $result;
-}
-
-function parse_grade($grade, $field)
-{
-	global $g_grades;
-	$result = NULL;
-
-	foreach ($g_grades as $id => $key) {
-		if ($key['grade'] == $grade) {
-			$result = $key[$field];
-			break;
-		}
-	}
-
-	return $result;
-}
-
-function parse_panel($panel, $field)
-{
-	global $g_panels;
-	$result = NULL;
-
-	foreach ($g_panels as $id => $key) {
-		if ($key['number'] == $panel) {
-			$result = $key[$field];
-			break;
-		}
-	}
-
-	return $result;
-}
-
-function parse_colour2($colour, $field)
-{
-	global $g_colours;
-	$c = '';
-
-	foreach ($g_colours as $id => $key) {
-		if ($key['colour'] == $colour) {
-			$c = $key['id'];
-			break;
-		}
-	}
-
-	return $c;
-}
-
-
-function grade_block($grade)
-{
-	if ($grade[0] < '6')
-		return $grade[0];
-
-	$g = substr($grade, 0, 2);
-	switch ($g) {
-		case '6a': return 6;
-		case '6b': return 7;
-		default:   return 8;
-	}
-}
 
 function cmp_age($a, $b)
 {
@@ -433,7 +228,7 @@ function grade_base ($grade)
 }
 
 
-function column_widths ($data, $columns, $header = FALSE, $widths = NULL)
+function column_widths ($data, $columns, $header = false, $widths = null)
 {
 	if (!isset ($widths))
 		$widths = array();
@@ -520,7 +315,7 @@ function csv_table_header (&$columns)
 	return $output;
 }
 
-function process_date(&$list, $field, $add_age = FALSE)
+function process_date(&$list, $field, $add_age = false)
 {
 	// Manipulate dates ('0000-00-00' -> '')
 	$today = strtotime('today');
@@ -579,7 +374,7 @@ function process_key (&$list)
 			$k .= 'L';
 		if ((!empty($a) && ($a < 32)) || ($a === (float) 0.0))
 			$k .= 'N';
-		if (!empty($n) && (stristr($n, 'competition') === FALSE))
+		if (!empty($n) && (stristr($n, 'competition') === false))
 			$k .= '!';
 
 		$list[$index]['key'] = $k;
@@ -708,7 +503,7 @@ function get_stats()
 }
 
 
-function list_render_html (&$list, &$columns, &$widths, $ts_metadata = NULL)
+function list_render_html (&$list, &$columns, &$widths, $ts_metadata = null)
 {
 	$output = '';
 
@@ -800,7 +595,6 @@ function list_render_xml ($object_name, &$list, &$columns)
 
 	// foreach row of list
 	foreach ($list as $row) {
-		$id = $row['id'];
 		$output .= "\t<$object_name>\n";
 
 		// foreach col of columns
@@ -824,7 +618,7 @@ function get_errors()
 	if (!empty ($errors)) {
 		$output .= "<div class='error'>";
 		$output .= '<h2>Last Error</h2><pre>';
-		$output .= print_r ($errors, TRUE);
+		$output .= print_r ($errors, true);
 		$output .= '</pre></div>';
 	}
 

@@ -1,9 +1,29 @@
 <?php
 
+set_include_path ('../libs');
+
 include 'db.php';
 include 'utils.php';
 
 $g_results = array();
+
+function get_post_variable($name)
+{
+	$result = "";
+
+	if (isset($_POST)) {
+		if (array_key_exists($name, $_POST)) {
+			$result = $_POST[$name];
+		} else {
+			if (($name == "button") && array_key_exists('action', $_POST)) {
+				$result = $_POST['action'];
+			}
+		}
+	}
+
+	return $result;
+}
+
 
 /* Helpers */
 
@@ -16,7 +36,7 @@ function colour_hash($row)
 
 function colour_array_verify(&$colours)
 {
-    $all_valid = TRUE;
+    $all_valid = true;
 
     return $all_valid;
 }
@@ -25,7 +45,7 @@ function colour_row_to_array($row)
 {
     $id = get_post_variable("id_{$row}");
     if (empty($id))
-        return FALSE;
+        return false;
 
     $r = array();
 
@@ -49,7 +69,7 @@ function colour_form_to_array()
         if (empty($matches))
             continue;
         $row = colour_row_to_array($matches[2]);
-        if ($row === FALSE)
+        if ($row === false)
             break;
 
         array_push($colours, $row);
@@ -74,7 +94,7 @@ function colour_array_to_form($colours, $readwrite, $checkbox)
     $output .= "</tr>\n";
 
     foreach ($colours as $g) {
-        if (array_key_exists ("valid", $g) && ($g['valid'] == FALSE) && ($readwrite == TRUE))
+        if (array_key_exists ("valid", $g) && ($g['valid'] == false) && ($readwrite == true))
             $output .= "<tr class='mand'>\n";
         else
             $output .= "<tr>\n";
@@ -109,9 +129,9 @@ function colour_array_to_form($colours, $readwrite, $checkbox)
 /* Database */
 // add debug_database variable
 
-function colour_get_colours($hash = FALSE)
+function colour_get_colours($hash = false)
 {
-    $colours = db_select("colour", NULL, NULL, "colour");
+    $colours = db_select("colour", null, null, "colour");
     if ($hash) {
         foreach ($colours as &$g) {
             $g['hash'] = colour_hash($g);
@@ -127,7 +147,7 @@ function colour_row_add($row)
     $grade = $row['colour'];
 
     if (empty ($abbr) || empty ($grade))
-        return FALSE;
+        return false;
 
     $abbr = strtolower ($abbr);
     $abbr = str_replace (" ", "", $abbr);
@@ -178,12 +198,12 @@ function colour_row_delete($id)
 
 function colour_list()
 {
-    $colours = colour_get_colours(TRUE);
+    $colours = colour_get_colours(true);
     $output = "";
     $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='colour_list'>\n";
 
-    $output .= colour_array_to_form ($colours, FALSE, FALSE);
+    $output .= colour_array_to_form ($colours, false, false);
 
     $output .= "<br>\n";
     $output .= "<input name='button' accesskey='a' value='Add' type='submit'>\n";
@@ -223,7 +243,7 @@ function colour_add()
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='colour_add'>\n";
 
-        $output .= colour_array_to_form ($colours, TRUE, FALSE);
+        $output .= colour_array_to_form ($colours, true, false);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit'>\n";
@@ -265,7 +285,7 @@ function colour_edit($colours)
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='colour_edit'>\n";
 
-        $output .= colour_array_to_form ($colours, TRUE, FALSE);
+        $output .= colour_array_to_form ($colours, true, false);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit' class='default'>\n";
@@ -304,7 +324,7 @@ function colour_delete($colours)
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='colour_delete'>\n";
 
-        $output .= colour_array_to_form ($colours, FALSE, TRUE);
+        $output .= colour_array_to_form ($colours, false, true);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit' class='default'>\n";
@@ -343,10 +363,10 @@ function colour_main()
             if ($button == "Add") {
                 $output .= colour_add();
             } else if ($button == "Edit") {
-                $colours = colour_get_colours(TRUE);
+                $colours = colour_get_colours(true);
                 $output .= colour_edit($colours);
             } else if ($button == "Delete") {
-                $colours = colour_get_colours(TRUE);
+                $colours = colour_get_colours(true);
                 $output .= colour_delete($colours);
             } else {
                 $output .= colour_list();

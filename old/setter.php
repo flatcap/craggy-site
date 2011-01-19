@@ -16,7 +16,7 @@ function setter_hash($row)
 
 function setter_array_verify(&$setters)
 {
-    $all_valid = TRUE;
+    $all_valid = true;
 
     return $all_valid;
 }
@@ -25,7 +25,7 @@ function setter_row_to_array($row)
 {
     $id = get_post_variable("id_{$row}");
     if (empty($id))
-        return FALSE;
+        return false;
 
     $r = array();
 
@@ -49,7 +49,7 @@ function setter_form_to_array()
         if (empty($matches))
             continue;
         $row = setter_row_to_array($matches[2]);
-        if ($row === FALSE)
+        if ($row === false)
             break;
 
         array_push($setters, $row);
@@ -74,7 +74,7 @@ function setter_array_to_form($setters, $readwrite, $checkbox)
     $output .= "</tr>\n";
 
     foreach ($setters as $g) {
-        if (array_key_exists ("valid", $g) && ($g['valid'] == FALSE) && ($readwrite == TRUE))
+        if (array_key_exists ("valid", $g) && ($g['valid'] == false) && ($readwrite == true))
             $output .= "<tr class='mand'>\n";
         else
             $output .= "<tr>\n";
@@ -109,9 +109,9 @@ function setter_array_to_form($setters, $readwrite, $checkbox)
 /* Database */
 // add debug_database variable
 
-function setter_get_setters($hash = FALSE)
+function setter_get_setters($hash = false)
 {
-    $setters = db_select("setter", NULL, NULL, "name");
+    $setters = db_select("setter", null, null, "name");
     if ($hash) {
         foreach ($setters as &$g) {
             $g['hash'] = setter_hash($g);
@@ -127,7 +127,7 @@ function setter_row_add($row)
     $name = $row['name'];
 
     if (empty ($initials) || empty ($name))
-        return FALSE;
+        return false;
 
     $initials = strtolower ($initials);
 
@@ -177,12 +177,12 @@ function setter_row_delete($id)
 
 function setter_list()
 {
-    $setters = setter_get_setters(TRUE);
+    $setters = setter_get_setters(true);
     $output = "";
     $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='setter_list'>\n";
 
-    $output .= setter_array_to_form ($setters, FALSE, FALSE);
+    $output .= setter_array_to_form ($setters, false, false);
 
     $output .= "<br>\n";
     $output .= "<input name='button' accesskey='a' value='Add' type='submit'>\n";
@@ -222,7 +222,7 @@ function setter_add()
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='setter_add'>\n";
 
-        $output .= setter_array_to_form ($setters, TRUE, FALSE);
+        $output .= setter_array_to_form ($setters, true, false);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit'>\n";
@@ -264,7 +264,7 @@ function setter_edit($setters)
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='setter_edit'>\n";
 
-        $output .= setter_array_to_form ($setters, TRUE, FALSE);
+        $output .= setter_array_to_form ($setters, true, false);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit' class='default'>\n";
@@ -303,7 +303,7 @@ function setter_delete($setters)
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='setter_delete'>\n";
 
-        $output .= setter_array_to_form ($setters, FALSE, TRUE);
+        $output .= setter_array_to_form ($setters, false, true);
 
         $output .= "<br>\n";
         $output .= "<input name='button' accesskey='o' value='OK' type='submit' class='default'>\n";
@@ -342,10 +342,10 @@ function setter_main()
             if ($button == "Add") {
                 $output .= setter_add();
             } else if ($button == "Edit") {
-                $setters = setter_get_setters(TRUE);
+                $setters = setter_get_setters(true);
                 $output .= setter_edit($setters);
             } else if ($button == "Delete") {
-                $setters = setter_get_setters(TRUE);
+                $setters = setter_get_setters(true);
                 $output .= setter_delete($setters);
             } else {
                 $output .= setter_list();

@@ -69,7 +69,7 @@ function cmp_panel($a, $b)
 function user_date($date)
 {
     $d = strtotime($date);
-    if ($d !== FALSE)
+    if ($d !== false)
         $result = strftime("%d %b %Y", $d);
     else
         $result = "";
@@ -111,7 +111,7 @@ function route_array_to_form($routes, $readwrite, $checkbox)
         break;
         */
 
-        if (array_key_exists ("valid", $r) && ($r['valid'] == FALSE) && ($readwrite == TRUE))
+        if (array_key_exists ("valid", $r) && ($r['valid'] == false) && ($readwrite == true))
             $output .= "<tr class='mand'>\n";
         else
             $output .= "<tr>\n";
@@ -150,7 +150,7 @@ function route_array_to_form($routes, $readwrite, $checkbox)
                 $k .= "L";
             if (!empty($a) && ($a < 32))
                 $k .= "N";
-            if (!empty($n) && (stristr($n, "competition") === FALSE))
+            if (!empty($n) && (stristr($n, "competition") === false))
                 $k .= "!";
 
             if (empty($a)) $a = "&nbsp;";
@@ -185,7 +185,7 @@ function route_list($routes)
 
     $output .= "Add Edit Delete Search<br>";
 
-    $output .= route_array_to_form ($routes, FALSE, TRUE);
+    $output .= route_array_to_form ($routes, false, true);
 
     return $output;
 }
@@ -252,7 +252,7 @@ function route_list2($routes)
             $k .= "L";
         if (!empty($a) && ($a < 32))
             $k .= "N";
-        if (!empty($n) && (stristr($n, "competition") === FALSE))
+        if (!empty($n) && (stristr($n, "competition") === false))
             $k .= "!";
 
         if (empty($n)) $n = "&nbsp;";

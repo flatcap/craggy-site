@@ -13,8 +13,11 @@ function route_main()
 	$output .= html_header ('Delete Routes', '../');
 	$output .= '<body>';
 
-	$output .= "<div class='header'>Delete Routes <span>(Last updated: $last_update)</span></div>";
-	//$output .= html_menu('../');
+	$output .= "<div class='header'>";
+	$output .= "<img alt='craggy logo' src='../img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
+	$output .= "Delete Routes <span>(Last updated: $last_update)</span>";
+	$output .= "</div>";
+	$output .= html_menu('../');
 
 	$output .= "<div class='content'>CONTENT";
 	$output .= '<h2>Delete Routes</h2>';

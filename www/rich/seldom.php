@@ -118,8 +118,8 @@ function seldom_main ($options)
 			break;
 	}
 
-	$start  = NULL;
-	$finish = NULL;
+	$start  = null;
+	$finish = null;
 	foreach ($ranges as $num) {
 		$finish = $start;
 		$start  = $num;
@@ -129,10 +129,10 @@ function seldom_main ($options)
 		if ($count == 0)
 			continue;
 
-		process_date ($list, 'date_climbed', FALSE);
+		process_date ($list, 'date_climbed', false);
 
 		$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'notes', 'date_climbed');
-		$widths = column_widths ($list, $columns, TRUE);
+		$widths = column_widths ($list, $columns, true);
 		fix_justification ($widths);
 
 		// render section
@@ -184,7 +184,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

@@ -37,7 +37,7 @@ function todo_main($options)
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
-	$where   = array ('((success_id < 3) OR (success_id is NULL))', "$DB_GRADE.sequence < 600");
+	$where   = array ('((success_id < 3) OR (success_id is null))', "$DB_GRADE.sequence < 600");
 	$order = 'panel_seq, grade_seq, colour';
 
 	$list = db_select($table, $columns, $where, $order);
@@ -45,7 +45,7 @@ function todo_main($options)
 	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'notes');
 
 	// calculate widths (include headers?)
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 
 	// alter justification of widths
 	fix_justification ($widths);
@@ -103,7 +103,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

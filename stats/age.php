@@ -11,8 +11,8 @@ function age_main()
 
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'grade_seq', 'climb_type', 'date_set', 'date_climbed', 'success', 'd', 'o');
-	$where   = NULL;
-	$order   = NULL; //'date_set'
+	$where   = null;
+	$order   = null; //'date_set'
 
 	$list = db_select($table, $columns, $where, $order);
 
@@ -27,7 +27,7 @@ function age_main()
 
 	$route_count = count ($list);
 
-	process_date ($list, 'date_set', TRUE);
+	process_date ($list, 'date_set', true);
 
 	foreach ($list as $id => $route) {
 		$grade = $route['grade'];

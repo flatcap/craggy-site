@@ -51,7 +51,7 @@ function downclimb_main ($options)
 	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'difficulty', 'notes');
 
 	// calculate widths (include headers?)
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 
 	// alter justification of widths
 	fix_justification ($widths);
@@ -109,7 +109,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

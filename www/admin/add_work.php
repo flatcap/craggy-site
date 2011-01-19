@@ -62,7 +62,7 @@ function colours_match ($lookup, $test)
 	return $id;
 }
 
-function colour_parse ($text)
+function colour_parse2 ($text, &$message)
 {
 	global $DB_COLOUR;
 	static $colours = null;
@@ -78,31 +78,118 @@ function colour_parse ($text)
 }
 
 
+function parse_colour ($text, &$message)
+{
+	global $DB_COLOUR;
+	static $colours = null;
+
+	if (!$colours)
+		$colours = cache_get_table ($DB_COLOUR);
+
+	foreach ($colours as $c) {
+		if ($text == $c['colour'])
+			return $c;
+	}
+
+	$message[] = sprintf ("'%s' is not a valid colour", $text);
+	return NULL;
+}
+
+function parse_panel ($text, &$message)
+{
+	global $DB_PANEL;
+	static $panels = null;
+
+	if (!$panels)
+		$panels = cache_get_table ($DB_PANEL);
+
+	foreach ($panels as $p) {
+		if ($text == $p['name'])
+			return $p;
+	}
+
+	$message[] = sprintf ("'%s' is not a valid panel", $text);
+	return NULL;
+}
+
+function parse_grade ($text, &$message)
+{
+	global $DB_GRADE;
+	static $grades = null;
+
+	if (!$grades)
+		$grades = cache_get_table ($DB_GRADE);
+
+	foreach ($grades as $g) {
+		if ($text == $g['grade'])
+			return $g;
+	}
+
+	$message[] = sprintf ("'%s' is not a valid grade", $text);
+	return NULL;
+}
+
+function parse_date ($text, &$message)
+{
+	$time = strtotime ($text);
+
+	if ($time === NULL) {
+		$message[] = sprintf ("'%s' is not a valid date", $text);
+	}
+
+	return $time;
+}
+
+function parse_setter ($text, &$message)
+{
+	global $DB_SETTER;
+	static $setters = null;
+
+	if (!$setters)
+		$setters = cache_get_table ($DB_SETTER);
+
+	foreach ($setters as $s) {
+		$name = $s['first_name'] . ' ' . $s['surname'];
+		if ($text == $name)
+			return $s;
+	}
+
+	$message[] = sprintf ("'%s' is not a valid setter", $text);
+	return NULL;
+}
+
+
 function validate_route ($route, &$message)
 {
-	//$values[] = "($a->panel, '$a->colour', '$a->grade')";
-	// validate route
-	//	valid panel
-	//	valid colour
-	//	valid grade
-	//	valid setter
-	//	valid date (in past)
-	//	notes?
-	// if (valid)
+	/*
+	printf ("colour = %s\n", $route->colour);
+	printf ("date   = %s\n", $route->date);
+	printf ("grade  = %s\n", $route->grade);
+	printf ("panel  = %s\n", $route->panel);
+	printf ("setter = %s\n", $route->setter);
+	printf ("notes  = %s\n", $route->notes);
+	printf ("\n");
+	*/
+
+	$colour = parse_colour ($route->colour, $message);
+	$date   = parse_date   ($route->date,   $message);
+	$grade  = parse_grade  ($route->grade,  $message);
+	$panel  = parse_panel  ($route->panel,  $message);
+	$setter = parse_setter ($route->setter, $message);
+	$notes  = $route->notes;
+
+	$valid = ($colour && $grade && $panel);
+	if ($valid) {
+		//printf ("valid\n");
 	//	try db insert
 	//	if (success)
 	//		<route result='success'>
-	// else
-	//	<route result='failure'>
-
-	if (rand(1,10) > 4) {
-		return array();
 	} else {
-		if (rand (1,10) > 3) $message[] = "this is a random message " . rand(1,10);
-		if (rand (1,10) > 3) $message[] = "this is a random message " . rand(1,10);
-		if (rand (1,10) > 3) $message[] = "this is a random message " . rand(1,10);
-		return NULL;
+		//printf ("invalid\n");
+	//	<route result='failure'>
 	}
+
+	return NULL;
 }
 
 function db_route_add ($route)
@@ -153,6 +240,8 @@ function route_save ($data)
 	for ($i = 0; $i < $xml->count(); $i++) {
 		$message = array();
 		$a = $xml->route[$i];
+		$a->colour = "Blue";
+		$a->wibble = "hatstand";
 		$route = validate_route ($a, $message);
 		if ($route !== NULL) {
 			$route_id = db_route_add ($a);
@@ -180,6 +269,8 @@ function route_save ($data)
 	}
 
 	$xml_result .= "</list>\n";
+
+	echo $xml->asXML();
 	return $xml_result;
 }
 
@@ -259,10 +350,15 @@ function get_data()
 }
 
 
-if (!isset ($argc))
-	$_GET = array('action' => 'add', 'data' => '45   red  5+,     gn   6a  ,  bg   6b  ');
-else
-	$_GET = get_data();
+//$_GET = array('action' => 'add', 'data' => '45   red  5+,     gn   6a  ,  bg   6b  ');
+if (isset ($argc)) {
+} else {
+	header('Content-Type: application/xml; charset=ISO-8859-1');
+	//echo "<pre>";
+}
 
-echo route_main();
+$_GET = get_data();
+$result = route_main();
+//$result = htmlentities ($result);
+//echo $result;
 

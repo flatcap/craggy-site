@@ -20,6 +20,12 @@ div.grade {
 	height: 30px;
 }
 
+div.marker {
+	background: red;
+	width: 2px;
+	height: 30px;
+}
+
 div.header {
 	background: #dfd;
 	color: #000;

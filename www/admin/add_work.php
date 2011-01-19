@@ -62,7 +62,7 @@ function colours_match ($lookup, $test)
 	return $id;
 }
 
-function colour_parse2 ($text, &$message)
+function colour_parse2 ($text)
 {
 	global $DB_COLOUR;
 	static $colours = null;
@@ -75,6 +75,44 @@ function colour_parse2 ($text, &$message)
 
 	$id = colours_match ($lookup, $text);
 	return $colours[$id];
+}
+
+
+function valid_colour ($text)
+{
+	return $g_colours[$id];
+}
+
+function valid_date ($text)
+{
+	// valid or empty
+	return $g_dates[$id];
+}
+
+function valid_grade ($text)
+{
+	global $DB_GRADE;
+	static $grades = null;
+
+	if (!$grades)
+		$grades = cache_get_table ($DB_GRADE);
+
+	foreach ($grades as $g) {
+		if ($text == $g['grade'])
+			return $g;
+	}
+
+	return NULL;
+}
+
+function valid_panel ($text)
+{
+	return $g_panels[$id];
+}
+
+function valid_setter ($text)
+{
+	return $g_setters[$id];
 }
 
 
@@ -95,6 +133,32 @@ function parse_colour ($text, &$message)
 	return NULL;
 }
 
+function parse_date ($text, &$message)
+{
+	$time = strtotime ($text);
+
+	if ($time === NULL) {
+		$message[] = sprintf ("'%s' is not a valid date", $text);
+	}
+
+	return $time;
+}
+
+function parse_grade ($route)
+{
+	$text = $route->grade;
+	$g = valid_grade ($text);
+	if ($g !== NULL) {
+		$route->grade = $g['grade'];
+		return true;
+	} else {
+		$route->addChild ('message', sprintf ("'%s' is not a valid grade", $text));
+		return false;
+	} else {
+	}
+
+}
+
 function parse_panel ($text, &$message)
 {
 	global $DB_PANEL;
@@ -110,34 +174,6 @@ function parse_panel ($text, &$message)
 
 	$message[] = sprintf ("'%s' is not a valid panel", $text);
 	return NULL;
-}
-
-function parse_grade ($text, &$message)
-{
-	global $DB_GRADE;
-	static $grades = null;
-
-	if (!$grades)
-		$grades = cache_get_table ($DB_GRADE);
-
-	foreach ($grades as $g) {
-		if ($text == $g['grade'])
-			return $g;
-	}
-
-	$message[] = sprintf ("'%s' is not a valid grade", $text);
-	return NULL;
-}
-
-function parse_date ($text, &$message)
-{
-	$time = strtotime ($text);
-
-	if ($time === NULL) {
-		$message[] = sprintf ("'%s' is not a valid date", $text);
-	}
-
-	return $time;
 }
 
 function parse_setter ($text, &$message)
@@ -171,11 +207,11 @@ function validate_route ($route, &$message)
 	printf ("\n");
 	*/
 
-	$colour = parse_colour ($route->colour, $message);
-	$date   = parse_date   ($route->date,   $message);
-	$grade  = parse_grade  ($route->grade,  $message);
-	$panel  = parse_panel  ($route->panel,  $message);
-	$setter = parse_setter ($route->setter, $message);
+	$colour = parse_colour ($route->colour);
+	$date   = parse_date   ($route->date);
+	$grade  = parse_grade  ($route->grade);
+	$panel  = parse_panel  ($route->panel);
+	$setter = parse_setter ($route->setter);
 	$notes  = $route->notes;
 
 	$valid = ($colour && $grade && $panel);
@@ -311,15 +347,6 @@ function route_main()
 	return $response;
 }
 
-function get_data()
-{
-	$xml = file_get_contents ('route.xml');
-
-	$_GET = array('action' => 'save', 'data' => $xml);
-
-	return $_GET;
-}
-
 
 //$_GET = array('action' => 'add', 'data' => '45   red  5+,     gn   6a  ,  bg   6b  ');
 if (isset ($argc)) {
@@ -328,7 +355,8 @@ if (isset ($argc)) {
 	//echo "<pre>";
 }
 
-$_GET = get_data();
+$xml = file_get_contents ('route.xml');
+$_GET = array('action' => 'save', 'data' => $xml);
 $result = route_main();
 //$result = htmlentities ($result);
 //echo $result;

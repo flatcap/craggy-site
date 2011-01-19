@@ -25,7 +25,7 @@ function coverage_get_data()
 	$o = 0;			// Onsight
 	$d = 0;			// Downclimbed
 
-	$route = NULL;
+	$route = null;
 
 	foreach ($climbs as $id => $climb) {
 		$r = $climb['route_id'];
@@ -82,7 +82,7 @@ function coverage_main ($options)
 	$columns = get_columns ($list[0]);
 
 	// calculate widths (include headers?)
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 	$widths['Routes'] *= -1;
 
 	$count = $list[0]['To Do'] + $list[1]['To Do'] + $list[2]['To Do'];
@@ -138,7 +138,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts  = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[1];

@@ -14,7 +14,7 @@ if (empty ($q))
 $date = strtotime ($q);
 $now  = strtotime ('now');
 
-if ($date == FALSE)
+if ($date == false)
 	$result = 'Invalid date';
 else if ($date > $now)
 	$result = 'Date cannot be in the future';

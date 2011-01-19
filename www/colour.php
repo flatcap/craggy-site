@@ -23,7 +23,7 @@ function stats_colour()
 	$output .= "<img alt='graph of colour vs frequency' width='800' height='400' src='img/colour.png'>";
 
 	$columns = array ('colour', 'count');
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 	$widths['colour'] *= -1;
 	$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[1,1],[0,0]]}');
 

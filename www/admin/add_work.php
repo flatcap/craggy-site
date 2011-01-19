@@ -30,7 +30,7 @@ function colours_match_single ($lookup, $test)
 	if (array_key_exists ($test, $lookup))
 		return $lookup[$test]['id'];
 	else
-		return NULL;
+		return null;
 }
 
 function colours_match ($lookup, $test)
@@ -40,18 +40,18 @@ function colours_match ($lookup, $test)
 	$test = strtolower ($test);
 
 	$id = colours_match_single ($lookup, $test);
-	if ($id !== NULL)
+	if ($id !== null)
 		return $id;
 
 	$pos = strpos ($test, '/');
-	if ($pos === FALSE)
+	if ($pos === false)
 		return $id;
 
 	$id1 = colours_match_single ($lookup, substr($test, 0, $pos));
 	$id2 = colours_match_single ($lookup, substr($test, $pos+1));
 
-	if (($id1 === NULL) || ($id2 === NULL))
-		return NULL;
+	if (($id1 === null) || ($id2 === null))
+		return null;
 
 	$col1 = $g_colours[$id1]['colour'];
 	$col2 = $g_colours[$id2]['colour'];
@@ -102,7 +102,7 @@ function valid_grade ($text)
 			return $g;
 	}
 
-	return NULL;
+	return null;
 }
 
 function valid_panel ($text)
@@ -130,14 +130,14 @@ function parse_colour ($text, &$message)
 	}
 
 	$message[] = sprintf ("'%s' is not a valid colour", $text);
-	return NULL;
+	return null;
 }
 
 function parse_date ($text, &$message)
 {
 	$time = strtotime ($text);
 
-	if ($time === NULL) {
+	if ($time === null) {
 		$message[] = sprintf ("'%s' is not a valid date", $text);
 	}
 
@@ -148,7 +148,7 @@ function parse_grade ($route)
 {
 	$text = $route->grade;
 	$g = valid_grade ($text);
-	if ($g !== NULL) {
+	if ($g !== null) {
 		$route->grade = $g['grade'];
 		return true;
 	} else {
@@ -173,7 +173,7 @@ function parse_panel ($text, &$message)
 	}
 
 	$message[] = sprintf ("'%s' is not a valid panel", $text);
-	return NULL;
+	return null;
 }
 
 function parse_setter ($text, &$message)
@@ -191,7 +191,7 @@ function parse_setter ($text, &$message)
 	}
 
 	$message[] = sprintf ("'%s' is not a valid setter", $text);
-	return NULL;
+	return null;
 }
 
 
@@ -225,7 +225,7 @@ function validate_route ($route, &$message)
 	//	<route result='failure'>
 	}
 
-	return NULL;
+	return null;
 }
 
 function db_route_add ($route)
@@ -279,10 +279,10 @@ function route_save ($data)
 		//$a->colour = "Blue";
 		//$a->wibble = "hatstand";
 		$route = validate_route ($a, $message);
-		if ($route !== NULL) {
+		if ($route !== null) {
 			$route_id = db_route_add ($a);
 		} else {
-			$route_id = FALSE;
+			$route_id = false;
 		}
 
 		if ($route_id) {

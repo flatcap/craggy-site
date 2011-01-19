@@ -104,7 +104,7 @@ function checklist_main ($options)
 		$title = $titles[$gb];
 		$count = count ($list);
 
-		$widths = column_widths ($list, $columns, TRUE);
+		$widths = column_widths ($list, $columns, true);
 		fix_justification ($widths);
 
 		// render section
@@ -165,7 +165,7 @@ $format = array ('csv', 'html', 'text', 'tabs');
 if (isset ($argc)) {
 //	$longopts  = array('format:');
 
-//	$options = getopt(NULL, $longopts);
+//	$options = getopt(null, $longopts);
 //	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 //		$options['format'] = $format[2];
 //	}

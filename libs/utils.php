@@ -31,7 +31,7 @@ function html_header ($title, $reldir = '')
 
 function html_menu($reldir = '')
 {
-	$rich = FALSE;
+	$rich = false;
 
 	if (isset ($_SERVER)) {
 		if (array_key_exists ('PHP_SELF', $_SERVER))
@@ -96,7 +96,7 @@ function html_menu($reldir = '')
 
 function get_url_variable($name)
 {
-	$result = FALSE;
+	$result = false;
 
 	if (isset($_GET)) {
 		if (array_key_exists($name, $_GET)) {
@@ -177,7 +177,7 @@ function grade_base ($grade)
 }
 
 
-function column_widths ($data, $columns, $header = FALSE, $widths = NULL)
+function column_widths ($data, $columns, $header = false, $widths = null)
 {
 	if (!isset ($widths))
 		$widths = array();
@@ -264,7 +264,7 @@ function csv_table_header (&$columns)
 	return $output;
 }
 
-function process_date(&$list, $field, $add_age = FALSE)
+function process_date(&$list, $field, $add_age = false)
 {
 	// Manipulate dates ('0000-00-00' -> '')
 	$today = strtotime('today');
@@ -323,7 +323,7 @@ function process_key (&$list)
 			$k .= 'L';
 		if ((!empty($a) && ($a < 32)) || ($a === (float) 0.0))
 			$k .= 'N';
-		if (!empty($n) && (stristr($n, 'competition') === FALSE))
+		if (!empty($n) && (stristr($n, 'competition') === false))
 			$k .= '!';
 
 		$list[$index]['key'] = $k;
@@ -452,7 +452,7 @@ function get_stats()
 }
 
 
-function list_render_html (&$list, &$columns, &$widths, $ts_metadata = NULL)
+function list_render_html (&$list, &$columns, &$widths, $ts_metadata = null)
 {
 	$output = '';
 
@@ -567,7 +567,7 @@ function get_errors()
 	if (!empty ($errors)) {
 		$output .= "<div class='error'>";
 		$output .= '<h2>Last Error</h2><pre>';
-		$output .= print_r ($errors, TRUE);
+		$output .= print_r ($errors, true);
 		$output .= '</pre></div>';
 	}
 

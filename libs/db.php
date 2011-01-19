@@ -12,7 +12,7 @@ function db_get_database()
 	return $db;
 }
 
-function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $group = NULL)
+function db_select ($table, $columns = null, $where = null, $order = null, $group = null)
 {
 	if (isset($columns)) {
 		if (is_array($columns))
@@ -62,7 +62,7 @@ function db_select ($table, $columns = NULL, $where = NULL, $order = NULL, $grou
 function db_date($date)
 {
 	$d = strtotime($date);
-	if ($d !== FALSE)
+	if ($d !== false)
 		$result = strftime('%Y/%m/%d', $d);
 	else
 		$result = '';
@@ -73,7 +73,7 @@ function db_date($date)
 function db_route_delete2($ids)
 {
 	if (count ($ids) == 0)
-		return NULL;
+		return null;
 
 	$retval = array();
 
@@ -82,7 +82,7 @@ function db_route_delete2($ids)
 
 	$query = "update climb set active = 0 where route_id in ($id_list)";
 	$result = mysql_query($query);
-	if ($result === TRUE) {
+	if ($result === true) {
 		$retval['climbs'] = mysql_affected_rows();
 	} else {
 		$retval['climbs'] = -1;
@@ -90,7 +90,7 @@ function db_route_delete2($ids)
 
 	$query = "update rating set active = 0 where route_id in ($id_list)";
 	$result = mysql_query($query);
-	if ($result === TRUE) {
+	if ($result === true) {
 		$retval['ratings'] = mysql_affected_rows();
 	} else {
 		$retval['ratings'] = -1;
@@ -98,7 +98,7 @@ function db_route_delete2($ids)
 
 	$query = "update route set date_end = date(now()) where id in ($id_list)";	// date needs to be passed in
 	$result = mysql_query($query);
-	if ($result === TRUE) {
+	if ($result === true) {
 		$retval['routes'] = mysql_affected_rows();
 	} else {
 		$retval['routes'] = -1;
@@ -160,7 +160,7 @@ function db_get_data ($name)
 	return $row['value'];
 }
 
-function db_count($table, $column, $where = NULL)
+function db_count($table, $column, $where = null)
 {
 	$query = "select count({$column}) as total from {$table}";
 

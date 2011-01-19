@@ -88,7 +88,7 @@ function db_route_add($routes)
 function db_route_delete($where)
 {
 	if (empty ($where))
-		return FALSE;
+		return false;
 
 	$query = 'delete from route where ' . $where;
 

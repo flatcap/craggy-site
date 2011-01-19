@@ -13,9 +13,9 @@ function parse_range ($string)
 
     $tok = strtok($string, $delim);
 
-    while ($tok !== FALSE) {
+    while ($tok !== false) {
         $pos = strpos ($tok, '-');
-        if ($pos !== FALSE) {
+        if ($pos !== false) {
             $start = substr ($tok, 0, $pos);
             $end   = substr ($tok, $pos+1);
         } else {

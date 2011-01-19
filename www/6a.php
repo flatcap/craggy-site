@@ -21,7 +21,7 @@ function six_main ($options)
 	process_height_abbreviate ($list);
 
 	array_shift ($columns);		// Ignore the id column
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 	fix_justification ($widths);
 
 	$count  = count ($list);
@@ -82,7 +82,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts  = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

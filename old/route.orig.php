@@ -6,7 +6,7 @@ include 'utils.php';
 function user_date($date)
 {
     $d = strtotime($date);
-    if ($d !== FALSE)
+    if ($d !== false)
         $result = strftime("%d %b %Y", $d);
     else
         $result = "";
@@ -16,44 +16,44 @@ function user_date($date)
 
 function route_array_verify(&$routes)
 {
-    $all_valid = TRUE;
+    $all_valid = true;
 
     foreach ($routes as $key => &$r) {
-        $r['valid'] = TRUE;
+        $r['valid'] = true;
 
         if (!is_numeric ($r['panel']))
-            $r['valid'] = FALSE;
+            $r['valid'] = false;
 
         $tmp = parse_colour ($r['colour']);
         if (empty($tmp))
-            $r['valid'] = FALSE;
+            $r['valid'] = false;
         else
             $r['colour'] = $tmp;
 
         $tmp = parse_grade ($r['grade']);
         if (empty ($tmp))
-            $r['valid'] = FALSE;
+            $r['valid'] = false;
         else
             $r['grade'] = $tmp;
 
         $tmp = parse_setter ($r['setter']);
         if (empty ($tmp))
-            $r['valid'] = FALSE;
+            $r['valid'] = false;
         else
             $r['setter'] = $tmp;
 
         $tmp = strtotime($r['date_set']);
-        if ($tmp == FALSE)
-            $r['valid'] = FALSE;
+        if ($tmp == false)
+            $r['valid'] = false;
         else
             $r['date_set'] = strftime("%a %d %b %Y", $tmp);
 
         $tmp = strtotime($r['date_end']);
-        if ($tmp != FALSE)
+        if ($tmp != false)
             $r['date_end'] = strftime("%a %d %b %Y", $tmp);
 
-        if (($r['set'] == 'on') && ($r['valid'] == FALSE))
-            $all_valid = FALSE;
+        if (($r['set'] == 'on') && ($r['valid'] == false))
+            $all_valid = false;
     }
 
     return $all_valid;
@@ -65,7 +65,7 @@ function route_row_to_array($row)
 
     $id = get_post_variable("id_{$row}");
     if (empty($id))
-        return FALSE;
+        return false;
 
     $r['id']       = $id;
     $r['panel']    = get_post_variable("panel_{$row}");
@@ -92,7 +92,7 @@ function route_form_to_array()
         if (empty($matches))
             continue;
         $row = route_row_to_array($matches[2]);
-        if ($row === FALSE)
+        if ($row === false)
             break;
 
         array_push($routes, $row);
@@ -120,7 +120,7 @@ function route_array_to_form($routes, $readwrite, $checkbox)
     $output .= "</tr>\n";
 
     foreach ($routes as $r) {
-        if (array_key_exists ("valid", $r) && ($r['valid'] == FALSE) && ($readwrite == TRUE))
+        if (array_key_exists ("valid", $r) && ($r['valid'] == false) && ($readwrite == true))
             $output .= "<tr class='mand'>\n";
         else
             $output .= "<tr>\n";
@@ -247,7 +247,7 @@ function route_parse_new()
         $date = "today";
 
     $d = strtotime($date);
-    if ($d !== FALSE)
+    if ($d !== false)
         $defaults['date_set'] = strftime("%a %d %b %Y", $d);
 
     $defaults['setter'] = parse_setter($setter);
@@ -269,7 +269,7 @@ function route_form_delete_confirm($routes)
 
     $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='delete_confirm'>\n";
-    $output .= route_array_to_form ($routes, FALSE, TRUE);
+    $output .= route_array_to_form ($routes, false, true);
     $output .= "<br>\n";
     $output .= "<input name='button' accesskey='d' value='Delete' type='submit'>\n";
     $output .= "</form>\n";
@@ -288,7 +288,7 @@ function route_form_deleted($routes)
 
     if ($count > 0) {
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
-        $output .= route_array_to_form ($routes, FALSE, FALSE);
+        $output .= route_array_to_form ($routes, false, false);
         $output .= "</form>\n";
     }
 
@@ -312,7 +312,7 @@ function route_form_edit_existing($routes)
 
     $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='edit_routes'>\n";
-    $output .= route_array_to_form($routes, TRUE, FALSE);
+    $output .= route_array_to_form($routes, true, false);
     $output .= "<br>\n";
     $output .= "<input name='button' accesskey='v' value='Verify' type='submit'>\n";
     $output .= "<input name='button' accesskey='s' value='Save' type='submit'>\n";
@@ -333,7 +333,7 @@ function route_form_edited($routes)
     if ($count > 0) {
         $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
         $output .= "<input type='hidden' name='stage' value='routes_edited'>\n";
-        $output .= route_array_to_form ($routes, FALSE, FALSE);
+        $output .= route_array_to_form ($routes, false, false);
         $output .= "</form>\n";
     }
 
@@ -394,7 +394,7 @@ function route_form_search_results($routes)
     $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='search_results'>\n";
 
-    $output .= route_array_to_form ($routes, FALSE, FALSE);
+    $output .= route_array_to_form ($routes, false, false);
 
     $output .= "<br>\n";
     $output .= "<input name='button' accesskey='e' value='Edit' type='submit'>\n";
@@ -415,7 +415,7 @@ function route_addnew_commit($routes)
     // generate new form
     $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='2'>\n";
-    $output .= route_array_to_form($routes, TRUE, FALSE);
+    $output .= route_array_to_form($routes, true, false);
     $output .= "</form>";
 
     return $output;
@@ -441,7 +441,7 @@ function route_addnew()
             } else {
                 $output .= "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
                 $output .= "<input type='hidden' name='stage' value='2'>\n";
-                $output .= route_array_to_form($routes, TRUE, FALSE);
+                $output .= route_array_to_form($routes, true, false);
                 $output .= "<br>";
                 $output .= "<input name='button' accesskey='v' value='Verify' type='submit'>";
                 $output .= "<input name='button' accesskey='o' value='OK' type='submit'>";
@@ -484,7 +484,7 @@ function route_form_edit_new($routes)
 {
     $output  = "<form name='focus' action='{$_SERVER['PHP_SELF']}' method='post'>\n";
     $output .= "<input type='hidden' name='stage' value='2'>\n";
-    $output .= route_array_to_form($routes, TRUE, FALSE);
+    $output .= route_array_to_form($routes, true, false);
     $output .= "<br>";
     $output .= "<input name='button' accesskey='v' value='Verify' type='submit'>";
     $output .= "<input name='button' accesskey='o' value='OK' type='submit'>";
@@ -520,7 +520,7 @@ function route_main()
         case "edit_routes";
             $routes = route_form_to_array();
             $valid = route_array_verify($routes);
-            if (($button == "Save") && ($valid == TRUE)) {
+            if (($button == "Save") && ($valid == true)) {
                 $result = route_save_edits($routes);
                 $output .= route_form_edited($routes);
             } else {

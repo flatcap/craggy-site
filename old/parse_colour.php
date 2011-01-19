@@ -5,9 +5,9 @@ set_include_path ('../libs');
 include 'db.php';
 include 'utils.php';
 
-$g_routes  = NULL;
-$g_panels  = NULL;
-$g_colours = NULL;
+$g_routes  = null;
+$g_panels  = null;
+$g_colours = null;
 
 function colours_main()
 {
@@ -46,7 +46,7 @@ function colours_main()
 
 	$panel = intval ($first);
 
-	$panel_id = NULL;
+	$panel_id = null;
 	foreach ($g_panels as $id => $p) {
 		if ($p['name'] == $panel) {
 			$panel_id = $p['id'];
@@ -54,7 +54,7 @@ function colours_main()
 		}
 	}
 
-	if ($panel_id === NULL) {
+	if ($panel_id === null) {
 		printf ("Panel '%d' doesn't exist\n", $panel);
 		return 0;
 	}
@@ -84,7 +84,7 @@ function colours_main()
 	$bad   = array();
 	foreach ($colours as $c) {
 		$id = colours_match ($lookup, $c);
-		if ($id === NULL) {
+		if ($id === null) {
 			// Unknown colour
 			$bad[] = "Unknown colour: '$c'";
 			continue;

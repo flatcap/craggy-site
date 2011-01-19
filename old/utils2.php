@@ -118,7 +118,7 @@ function parse_colour ($string)
 	$string = strtolower($string);
 
 	$pos = strpos ($string, '/');
-	if ($pos === FALSE) {
+	if ($pos === false) {
 		$colour = parse_single_colour($string);
 	} else {
 		$colour = parse_single_colour(substr($string, 0, $pos)) . '/' .
@@ -148,7 +148,7 @@ function parse_colour2($colour, $field)
 function parse_setter($setter, $field)
 {
 	global $g_setters;
-	$result = NULL;
+	$result = null;
 
 	foreach ($g_setters as $id => $key) {
 		if (($key['initials'] == $setter) ||
@@ -164,7 +164,7 @@ function parse_setter($setter, $field)
 function parse_grade($grade, $field)
 {
 	global $g_grades;
-	$result = NULL;
+	$result = null;
 
 	foreach ($g_grades as $id => $key) {
 		if ($key['grade'] == $grade) {
@@ -179,7 +179,7 @@ function parse_grade($grade, $field)
 function parse_panel($panel, $field)
 {
 	global $g_panels;
-	$result = NULL;
+	$result = null;
 
 	foreach ($g_panels as $id => $key) {
 		if ($key['number'] == $panel) {

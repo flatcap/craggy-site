@@ -157,7 +157,7 @@ function work_todo()
 			"$DB_DIFFICULTY.description as diff",
 			"$DB_CLIMB.notes as notes");
 
-	$where   = array ('((success_id < 3) OR (success_id is NULL))', "$DB_GRADE.sequence < 600");
+	$where   = array ('((success_id < 3) OR (success_id is null))', "$DB_GRADE.sequence < 600");
 
 	$list = db_select($table, $columns, $where);
 
@@ -248,8 +248,8 @@ function work_seldom()
 	$output = array();
 	$ranges = array (6, 4, 3, 2);
 
-	$start  = NULL;
-	$finish = NULL;
+	$start  = null;
+	$finish = null;
 	foreach ($ranges as $num) {
 		$finish = $start;
 		$start  = $num;
@@ -299,7 +299,7 @@ function work_flatten ($list)
 {
 	$output = array();
 
-	$old = NULL;
+	$old = null;
 	foreach ($list as $row) {
 		$new = $row['panel'] . $row['colour'] . $row['grade'];
 		if ($new != $old) {
@@ -328,7 +328,7 @@ function work_main ($options)
 
 	process_type ($all);
 	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'priority', 'score');
-	$widths = column_widths ($all, $columns, TRUE);
+	$widths = column_widths ($all, $columns, true);
 	fix_justification ($widths);
 
 	$count  = count ($all);
@@ -384,7 +384,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

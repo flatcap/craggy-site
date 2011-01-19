@@ -13,8 +13,8 @@ function stats_style()
 
 	$table   = $DB_PANEL;
 	$columns = array('id', 'tags');
-	$where   = NULL;
-	$order   = NULL;
+	$where   = null;
+	$order   = null;
 
 	$list = db_select($table, $columns, $where, $order);
 
@@ -33,7 +33,7 @@ function stats_style()
 	ksort ($tag_list);
 
 	$columns = array ('style', 'count');
-	$widths = column_widths ($tag_list, $columns, TRUE);
+	$widths = column_widths ($tag_list, $columns, true);
 	$widths['style'] *= -1;
 
 	$output .= '<h2>Stats - Styles</h2>';

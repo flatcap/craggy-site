@@ -38,7 +38,7 @@ function parse_routes($string, $defaults)
                 $r['id']     = $count;
                 $r['panel']  = $panel;
                 $r['colour'] = $colour;
-                $r['set']    = TRUE;
+                $r['set']    = true;
                 array_push ($routes, $r);
             }
         }
@@ -76,7 +76,7 @@ function cmp_checklist($a, $b)
 	return ($c1 < $c2) ? -1 : 1;
 }
 
-function format_string ($widths, $html = FALSE)
+function format_string ($widths, $html = false)
 {
 	$format   = "";
 	$wstrings = array();
@@ -101,7 +101,7 @@ function format_string ($widths, $html = FALSE)
 	return $format;
 }
 
-function format_string2 ($widths, $html = FALSE)
+function format_string2 ($widths, $html = false)
 {
 	$format   = "";
 	$wstrings = array();
@@ -126,11 +126,11 @@ function format_string2 ($widths, $html = FALSE)
 
 function get_url_boolean($name)
 {
-	$result = FALSE;
+	$result = false;
 
 	if (isset($_GET)) {
 		if (array_key_exists($name, $_GET)) {
-			$result = TRUE;
+			$result = true;
 		}
 	}
 

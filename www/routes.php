@@ -13,9 +13,9 @@ function routes_main($options)
 	$columns = array ('id', 'panel', 'colour', 'grade', 'climb_type', 'notes', 'setter', 'date_set');
 	$order   = 'panel_seq, grade_seq, colour';
 
-	$list = db_select($table, $columns, NULL, $order);
+	$list = db_select($table, $columns, null, $order);
 
-	process_date ($list, 'date_set', TRUE);
+	process_date ($list, 'date_set', true);
 	process_key ($list);
 
 	array_shift ($columns);		// Lose the id column
@@ -23,7 +23,7 @@ function routes_main($options)
 	$columns[] = 'months';
 
 	// calculate widths (include headers?)
-	$widths = column_widths ($list, $columns, TRUE);
+	$widths = column_widths ($list, $columns, true);
 
 	// alter justification of widths
 	fix_justification ($widths);
@@ -83,7 +83,7 @@ $format = array ('csv', 'html', 'text');
 if (isset ($argc)) {
 	$longopts = array('format:');
 
-	$options = getopt(NULL, $longopts);
+	$options = getopt(null, $longopts);
 
 	if (!array_key_exists ('format', $options) || !in_array ($options['format'], $format)) {
 		$options['format'] = $format[2];

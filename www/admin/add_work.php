@@ -240,8 +240,8 @@ function route_save ($data)
 	for ($i = 0; $i < $xml->count(); $i++) {
 		$message = array();
 		$a = $xml->route[$i];
-		$a->colour = "Blue";
-		$a->wibble = "hatstand";
+		//$a->colour = "Blue";
+		//$a->wibble = "hatstand";
 		$route = validate_route ($a, $message);
 		if ($route !== NULL) {
 			$route_id = db_route_add ($a);
@@ -313,36 +313,7 @@ function route_main()
 
 function get_data()
 {
-	$xml  = '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>';
-	$xml .= '<list type="route">';
-	$xml .= '	<route>';
-	$xml .= '		<id>0</id>';
-	$xml .= '		<panel>45</panel>';
-	$xml .= '		<colour>Red</colour>';
-	$xml .= '		<grade>6a+</grade>';
-	$xml .= '		<setter>Mark Croxall</setter>';
-	$xml .= '		<date>2010-01-05</date>';
-	$xml .= '		<notes>No arete</notes>';
-	$xml .= '	</route>';
-	$xml .= '	<route>';
-	$xml .= '		<id>1</id>';
-	$xml .= '		<panel>45</panel>';
-	$xml .= '		<colour>Blug</colour>';
-	$xml .= '		<grade>5</grade>';
-	$xml .= '		<setter>Mark Croxall</setter>';
-	$xml .= '		<date>2010-13-05</date>';
-	$xml .= '		<notes>Hands and feet allowed on the volume</notes>';
-	$xml .= '	</route>';
-	$xml .= '	<route>';
-	$xml .= '		<id>2</id>';
-	$xml .= '		<panel>45</panel>';
-	$xml .= '		<colour>Green</colour>';
-	$xml .= '		<grade>6b</grade>';
-	$xml .= '		<setter>Mike Hadcocks</setter>';
-	$xml .= '		<date>2010-01-06</date>';
-	$xml .= '		<notes></notes>';
-	$xml .= '	</route>';
-	$xml .= '</list>';
+	$xml = file_get_contents ('route.xml');
 
 	$_GET = array('action' => 'save', 'data' => $xml);
 

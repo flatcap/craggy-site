@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css" media="Screen">
+* .grandContainer {
+  position: relative;
+  z-index: 1;
+  width: 800px;
+  height: 800px;
+  background: red;
+}
+
+#in-place {
+  position: fixed;
+  z-index: 1; width 600px;
+  height: 600px;
+  background: yellow;
+}
+
+#shrinkwrapped {
+  position: fixed;
+  z-index: 0;
+  width: auto;
+  left: 0;
+  bottom: 0;
+  margin: 0;
+  background: blue;
+}
+
+#sized {
+  position: fixed;
+  z-index: auto;
+  width: 170px;
+  height: 115px;
+  bottom: 0;
+  left: 270px;
+  margin: 0;
+  background: gold;
+}
+
+#stretched {
+  position: fixed;
+  z-index: -1;
+  height: auto;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  background: pink;
+}
+</style>
+</head>
+<body>
+<div class="grandContainer"><h2>Positioned Grandparent</h2>
+  <div class="parent">
+    <h2>Non-positioned Parent</h2>
+    <span id="in-place" class="box">In-place Absolute</span>
+    <span id="sized" class="box">Sized Absolute</span>
+    <p id="stretched" class="box">Stretched Absolute</p>
+    <p id="shrinkwrapped" class="box">Shrinkwrapped Absolute</p>
+  </div>
+</div>
+<script type='text/javascript' src='hundred.js'></script>
+</body>
+</html>

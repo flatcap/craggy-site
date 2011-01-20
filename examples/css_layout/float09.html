@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title></title>
+<style type="text/css">
+.section{
+  position: fix;
+  width: 600px;
+  height: 600px;
+  background: gray;
+}
+
+* .absolute {
+  position: absolute;
+  top: 20px;
+  left: 215px;
+  background: yellow;
+  width: auto;
+}
+
+* .fixed {
+  position: fixed;
+  bottom: 20px;
+  right: 5px;
+  background: gold;
+}
+
+</style>
+</head>
+<body>
+
+<div class="section">
+  <p class="static centered" >
+    <div class="absolute">Absolute</div>
+    <div class="fixed">Fixed</div>
+  </p>
+</div>
+<script type='text/javascript' src='hundred.js'></script>
+
+</body>
+</html>

@@ -4,9 +4,9 @@
 	<route>
 		<id>0</id>
 		<panel>45</panel>
-		<colour>Red</colour>
+		<colour>rd</colour>
 		<grade>6a+</grade>
-		<setter>Mark Croxall</setter>
+		<setter>MC</setter>
 		<date>a week ago</date>
 		<notes>No arete</notes>
 	</route>
@@ -15,7 +15,7 @@
 		<panel>45</panel>
 		<colour>Blug</colour>
 		<grade>5</grade>
-		<setter>Mark Croxall</setter>
+		<setter>mc</setter>
 		<date>next tuesday</date>
 		<notes>Hands and feet allowed on the volume</notes>
 	</route>

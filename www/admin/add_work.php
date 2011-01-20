@@ -62,7 +62,8 @@ function colours_match ($lookup, $test)
 	return $id;
 }
 
-function colour_parse2 ($text)
+
+function parse_colour ($text)
 {
 	global $DB_COLOUR;
 	static $colours = null;
@@ -74,26 +75,10 @@ function colour_parse2 ($text)
 		$lookup = colours_process ($colours);
 
 	$id = colours_match ($lookup, $text);
-	return $colours[$id];
-}
-
-
-function parse_colour ($text)
-{
-	// Need to match against lookup of abbreviations
-
-	global $DB_COLOUR;
-	static $colours = null;
-
-	if (!$colours)
-		$colours = cache_get_table ($DB_COLOUR);
-
-	foreach ($colours as $c) {
-		if ($text == $c['colour'])
-			return $c;
-	}
-
-	return null;
+	if ($id !== null)
+		return $colours[$id];
+	else
+		return null;
 }
 
 function parse_grade ($text)
@@ -142,9 +127,12 @@ function parse_setter ($text)
 	if (!$setters)
 		$setters = cache_get_table ($DB_SETTER);
 
+	$text = strtolower ($text);
 	foreach ($setters as $s) {
-		$name = $s['first_name'] . ' ' . $s['surname'];
+		$name = strtolower ($s['first_name'] . ' ' . $s['surname']);
 		if ($text == $name)
+			return $s;
+		if ($text == strtolower ($s['initials']))
 			return $s;
 	}
 

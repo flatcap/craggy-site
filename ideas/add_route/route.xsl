@@ -2,6 +2,7 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template match="/">
+	<xsl:variable name="route_id_exists" select="//route_id[1]" />
 	<xsl:variable name="id_exists" select="//id[1]" />
 	<xsl:variable name="message_exists" select="//message[1]" />
 	<xsl:variable name="setter_exists" select="//setter[1]" />
@@ -21,6 +22,9 @@
 	<h2>List of <xsl:value-of select="/list/@type"/>s:</h2>
 	<table border="1" cellspacing="0" cellpadding="3">
 		<tr>
+			<xsl:if test="$route_id_exists">
+			<th>Route ID</th>
+			</xsl:if>
 			<xsl:if test="$id_exists">
 			<th>ID</th>
 			</xsl:if>
@@ -45,6 +49,9 @@
 			<xsl:attribute name='class'>
 			<xsl:value-of select="@result"/>
 			</xsl:attribute>
+				<xsl:if test="$route_id_exists">
+				<td><xsl:value-of select="route_id"/></td>
+				</xsl:if>
 				<xsl:if test="$id_exists">
 				<td><xsl:value-of select="id"/></td>
 				</xsl:if>

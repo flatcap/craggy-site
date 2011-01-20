@@ -78,18 +78,25 @@ function colour_parse2 ($text)
 }
 
 
-function valid_colour ($text)
+function parse_colour ($text)
 {
-	return $g_colours[$id];
+	// Need to match against lookup of abbreviations
+
+	global $DB_COLOUR;
+	static $colours = null;
+
+	if (!$colours)
+		$colours = cache_get_table ($DB_COLOUR);
+
+	foreach ($colours as $c) {
+		if ($text == $c['colour'])
+			return $c;
+	}
+
+	return null;
 }
 
-function valid_date ($text)
-{
-	// valid or empty
-	return $g_dates[$id];
-}
-
-function valid_grade ($text)
+function parse_grade ($text)
 {
 	global $DB_GRADE;
 	static $grades = null;
@@ -105,61 +112,7 @@ function valid_grade ($text)
 	return null;
 }
 
-function valid_panel ($text)
-{
-	return $g_panels[$id];
-}
-
-function valid_setter ($text)
-{
-	return $g_setters[$id];
-}
-
-
-function parse_colour ($text, &$message)
-{
-	global $DB_COLOUR;
-	static $colours = null;
-
-	if (!$colours)
-		$colours = cache_get_table ($DB_COLOUR);
-
-	foreach ($colours as $c) {
-		if ($text == $c['colour'])
-			return $c;
-	}
-
-	$message[] = sprintf ("'%s' is not a valid colour", $text);
-	return null;
-}
-
-function parse_date ($text, &$message)
-{
-	$time = strtotime ($text);
-
-	if ($time === null) {
-		$message[] = sprintf ("'%s' is not a valid date", $text);
-	}
-
-	return $time;
-}
-
-function parse_grade ($route)
-{
-	$text = $route->grade;
-	$g = valid_grade ($text);
-	if ($g !== null) {
-		$route->grade = $g['grade'];
-		return true;
-	} else {
-		$route->addChild ('message', sprintf ("'%s' is not a valid grade", $text));
-		return false;
-	} else {
-	}
-
-}
-
-function parse_panel ($text, &$message)
+function parse_panel ($text)
 {
 	global $DB_PANEL;
 	static $panels = null;
@@ -172,12 +125,17 @@ function parse_panel ($text, &$message)
 			return $p;
 	}
 
-	$message[] = sprintf ("'%s' is not a valid panel", $text);
 	return null;
 }
 
-function parse_setter ($text, &$message)
+function parse_setter ($text)
 {
+	// Need to match:
+	//     initials
+	//     unique first_name
+	//     unique surname
+	//     first_name surname
+
 	global $DB_SETTER;
 	static $setters = null;
 
@@ -190,42 +148,93 @@ function parse_setter ($text, &$message)
 			return $s;
 	}
 
-	$message[] = sprintf ("'%s' is not a valid setter", $text);
 	return null;
 }
 
 
-function validate_route ($route, &$message)
+function valid_colour (&$route)
 {
-	/*
-	printf ("colour = %s\n", $route->colour);
-	printf ("date   = %s\n", $route->date);
-	printf ("grade  = %s\n", $route->grade);
-	printf ("panel  = %s\n", $route->panel);
-	printf ("setter = %s\n", $route->setter);
-	printf ("notes  = %s\n", $route->notes);
-	printf ("\n");
-	*/
-
-	$colour = parse_colour ($route->colour);
-	$date   = parse_date   ($route->date);
-	$grade  = parse_grade  ($route->grade);
-	$panel  = parse_panel  ($route->panel);
-	$setter = parse_setter ($route->setter);
-	$notes  = $route->notes;
-
-	$valid = ($colour && $grade && $panel);
-	if ($valid) {
-		//printf ("valid\n");
-	//	try db insert
-	//	if (success)
-	//		<route result='success'>
+	$c = parse_colour ($route->colour);
+	if ($c !== null) {
+		$route->colour = $c['colour'];
+		return true;
 	} else {
-		//printf ("invalid\n");
-	//	<route result='failure'>
+		$route->addChild ('message', sprintf ("'%s' is not a valid colour", $route->colour));
+		return false;
+	}
+}
+
+function valid_date (&$route)
+{
+	$d = strtotime ($route->date);
+
+	if ($d !== false) {
+		$now = strtotime ('now');
+		if ($d <= $now) {
+			$route->date = strftime('%Y-%m-%d', $d);
+			return true;
+		}
+		$route->addChild ('message', 'Date cannot be in the future');
+	} else {
+		$route->addChild ('message', sprintf ("'%s' is not a valid date", $route->date));
 	}
 
-	return null;
+	return false;
+}
+
+function valid_grade (&$route)
+{
+	$g = parse_grade ($route->grade);
+	if ($g !== null) {
+		$route->grade = $g['grade'];
+		return true;
+	} else {
+		$route->addChild ('message', sprintf ("'%s' is not a valid grade", $route->grade));
+		return false;
+	}
+}
+
+function valid_notes (&$route)
+{
+	// check for invalid characters
+	return true;
+}
+
+function valid_panel (&$route)
+{
+	$p = parse_panel ($route->panel);
+	if ($p !== null) {
+		$route->panel = $p['name'];
+		return true;
+	} else {
+		$route->addChild ('message', sprintf ("'%s' is not a valid panel", $route->panel));
+		return false;
+	}
+}
+
+function valid_setter (&$route)
+{
+	$s = parse_setter ($route->setter);
+	if ($s !== null) {
+		$route->setter = $s['first_name'] . ' ' . $s['surname'];
+		return true;
+	} else {
+		$route->addChild ('message', sprintf ("'%s' is not a valid setter", $route->setter));
+		return false;
+	}
+}
+
+
+function validate_route (&$route)
+{
+	$colour = valid_colour ($route);
+	$date   = valid_date   ($route);
+	$grade  = valid_grade  ($route);
+	$notes  = valid_notes  ($route);
+	$panel  = valid_panel  ($route);
+	$setter = valid_setter ($route);
+
+	return ($colour && $date && $grade && $notes && $panel && $setter);
 }
 
 function db_route_add ($route)
@@ -270,44 +279,28 @@ function route_add ($data)
 function route_save ($data)
 {
 	$xml = simplexml_load_string ($data);
-	$xml_result = '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>'."\n";
-	$xml_result .= "<list type='route'>\n";
 
 	for ($i = 0; $i < $xml->count(); $i++) {
 		$message = array();
 		$a = $xml->route[$i];
-		//$a->colour = "Blue";
-		//$a->wibble = "hatstand";
-		$route = validate_route ($a, $message);
-		if ($route !== null) {
+		$route = validate_route ($a);
+		if ($route !== false) {
 			$route_id = db_route_add ($a);
 		} else {
 			$route_id = false;
 		}
 
 		if ($route_id) {
-			$xml_result .= "\t<route result='success'>\n";
-			$xml_result .= "\t\t<route_id>$route_id</route_id>\n";
+			//add attribute
+			$xml->route[$i]->addAttribute ('result', 'success');
+			$xml->route[$i]->addChild ('route_id', $route_id);
 		} else {
-			$xml_result .= "\t<route result='failure'>\n";
+			//add attribute
+			$xml->route[$i]->addAttribute ('result', 'failure');
 		}
-		$xml_result .= "\t\t<id>$a->id</id>\n";
-		$xml_result .= "\t\t<panel>$a->panel</panel>\n";
-		$xml_result .= "\t\t<colour>$a->colour</colour>\n";
-		$xml_result .= "\t\t<grade>$a->grade</grade>\n";
-		$xml_result .= "\t\t<setter>$a->setter</setter>\n";
-		$xml_result .= "\t\t<date>$a->date</date>\n";
-		$xml_result .= "\t\t<notes>$a->notes</notes>\n";
-		foreach ($message as $m) {
-			$xml_result .= "\t\t<message>$m</message>\n";
-		}
-		$xml_result .= "\t</route>\n";
 	}
 
-	$xml_result .= "</list>\n";
-
-	echo $xml->asXML();
-	return $xml_result;
+	return $xml->asXML();
 }
 
 function route_main()
@@ -359,5 +352,5 @@ $xml = file_get_contents ('route.xml');
 $_GET = array('action' => 'save', 'data' => $xml);
 $result = route_main();
 //$result = htmlentities ($result);
-//echo $result;
+echo $result;
 

@@ -62,7 +62,8 @@ function colours_match ($lookup, $test)
 	return $id;
 }
 
-function colour_parse2 ($text)
+
+function parse_colour ($text)
 {
 	global $DB_COLOUR;
 	static $colours = null;
@@ -74,26 +75,10 @@ function colour_parse2 ($text)
 		$lookup = colours_process ($colours);
 
 	$id = colours_match ($lookup, $text);
-	return $colours[$id];
-}
-
-
-function parse_colour ($text)
-{
-	// Need to match against lookup of abbreviations
-
-	global $DB_COLOUR;
-	static $colours = null;
-
-	if (!$colours)
-		$colours = cache_get_table ($DB_COLOUR);
-
-	foreach ($colours as $c) {
-		if ($text == $c['colour'])
-			return $c;
-	}
-
-	return null;
+	if ($id !== null)
+		return $colours[$id];
+	else
+		return null;
 }
 
 function parse_grade ($text)
@@ -142,9 +127,12 @@ function parse_setter ($text)
 	if (!$setters)
 		$setters = cache_get_table ($DB_SETTER);
 
+	$text = strtolower ($text);
 	foreach ($setters as $s) {
-		$name = $s['first_name'] . ' ' . $s['surname'];
+		$name = strtolower ($s['first_name'] . ' ' . $s['surname']);
 		if ($text == $name)
+			return $s;
+		if ($text == strtolower ($s['initials']))
 			return $s;
 	}
 
@@ -157,6 +145,7 @@ function valid_colour (&$route)
 	$c = parse_colour ($route->colour);
 	if ($c !== null) {
 		$route->colour = $c['colour'];
+		$route->colour_id = $c['id'];
 		return true;
 	} else {
 		$route->addChild ('message', sprintf ("'%s' is not a valid colour", $route->colour));
@@ -186,7 +175,8 @@ function valid_grade (&$route)
 {
 	$g = parse_grade ($route->grade);
 	if ($g !== null) {
-		$route->grade = $g['grade'];
+		$route->grade    = $g['grade'];
+		$route->grade_id = $g['id'];
 		return true;
 	} else {
 		$route->addChild ('message', sprintf ("'%s' is not a valid grade", $route->grade));
@@ -204,7 +194,8 @@ function valid_panel (&$route)
 {
 	$p = parse_panel ($route->panel);
 	if ($p !== null) {
-		$route->panel = $p['name'];
+		$route->panel    = $p['name'];
+		$route->panel_id = $p['id'];
 		return true;
 	} else {
 		$route->addChild ('message', sprintf ("'%s' is not a valid panel", $route->panel));
@@ -216,7 +207,8 @@ function valid_setter (&$route)
 {
 	$s = parse_setter ($route->setter);
 	if ($s !== null) {
-		$route->setter = $s['first_name'] . ' ' . $s['surname'];
+		$route->setter    = $s['first_name'] . ' ' . $s['surname'];
+		$route->setter_id = $s['id'];
 		return true;
 	} else {
 		$route->addChild ('message', sprintf ("'%s' is not a valid setter", $route->setter));
@@ -239,6 +231,14 @@ function validate_route (&$route)
 
 function db_route_add ($route)
 {
+	/*
+	printf ("panel   = %s (%d)\n", $route->panel,  $route->panel_id);
+	printf ("colour  = %s (%d)\n", $route->colour, $route->colour_id);
+	printf ("grade   = %s (%d)\n", $route->grade,  $route->grade_id);
+	printf ("setter  = %s (%d)\n", $route->setter, $route->setter_id);
+	printf ("date    = %s\n",      $route->date);
+	printf ("notes   = %s\n",      $route->notes);
+	*/
 	return rand (101,200);
 }
 

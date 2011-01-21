@@ -1,6 +1,7 @@
 html,body {
 	margin: 0;
 	padding: 0;
+	background: #fff;
 }
 
 #top-bar {
@@ -9,7 +10,7 @@ html,body {
 	left: 0;
 	z-index: 999;
 	width: 100%;
-	height: 23px;
+	height: 70px;
 }
 
 * html #top-bar {
@@ -17,8 +18,10 @@ html,body {
 }
 
 #topbar-inner {
-	height: 23px;
-	background: #bbb;
+	height: 70px;
+	background: #dfd;
+	padding-top: 2px;
+	padding-left: 2px;
 }
 
 * html #topbar-inner {
@@ -26,23 +29,23 @@ html,body {
 }
 
 * html body {
-	padding-top: 23px;
+	padding-top: 70px;
 }
 
 * html,* html body {
 	overflow-y: hidden;
 	height: 100%;
-	margin-top: -23px;
+	margin-top: -70px;
 }
 
 #mainouter {
 	position: relative;
 	z-index: 2;
-	padding-top: 23px;
-	padding-bottom: 40px;
+	margin-top: 72px;
+	margin-bottom: 20px;
 	margin-left: 150px;
-	background: #ccc;
 	min-height: 100%;
+	background: #fff;
 }
 
 * html #mainouter {
@@ -51,8 +54,8 @@ html,body {
 	overflow-y: scroll;
 	position: relative;
 	z-index: 2;
-	padding-top: 23px;
-	padding-bottom: 40px;
+	padding-top: 70px;
+	padding-bottom: 20px;
 }
 
 #bottom {
@@ -61,7 +64,7 @@ html,body {
 	left: 0;
 	z-index: 999;
 	width: 100%;
-	height: 40px;
+	height: 20px;
 }
 
 * html #bottom {
@@ -70,8 +73,9 @@ html,body {
 }
 
 #bottom-inner {
-	height: 40px;
-	background: #aaa;
+	height: 20px;
+	background: #dfd;
+	color: #bdb;
 }
 
 * html #bottom-inner {
@@ -83,19 +87,23 @@ html,body {
 	height: 100%;
 	width: 150px;
 	left: 0;
-	top: 23px;
+	top: 70px;
 	overflow: auto;
 	z-index: 100;
-	margin-bottom: -63px;
+	margin-bottom: -97px;
+	margin-bottom: 0px;
 }
 
 html>body #left {
 	position: fixed;
 	left: 0;
-	top: 23px;
-	bottom: 40px;
+	top: 72px;
+	bottom: 20px;
 	padding: 0;
-	width: 149px;
+	width: 150px;
+	/*
 	border-right: 1px solid #000;
+	*/
+	background: #dfd;
 }
 

@@ -127,14 +127,31 @@ function parse_setter ($text)
 	if (!$setters)
 		$setters = cache_get_table ($DB_SETTER);
 
+	$count = 0;
+	$match = null;
 	$text = strtolower ($text);
 	foreach ($setters as $s) {
-		$name = strtolower ($s['first_name'] . ' ' . $s['surname']);
-		if ($text == $name)
+		$inits   = strtolower ($s['initials']);
+		$first   = strtolower ($s['first_name']);
+		$surname = strtolower ($s['surname']);
+		$whole   = "$first $surname";
+		if ($text == $whole)
 			return $s;
-		if ($text == strtolower ($s['initials']))
+		if ($text == $inits)
 			return $s;
+		if ($text == $first) {
+			$count++;
+			$match = $s;
+		}
+		if ($text == $surname) {
+			$count++;
+			$match = $s;
+		}
 	}
+
+	// check there's only one match
+	if ($count == 1)
+		return $match;
 
 	return null;
 }

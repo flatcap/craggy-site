@@ -45,7 +45,6 @@ function routes_main($options)
 			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='32' height='32' src='img/ss.png'></a>";
 			$output .= '</div>';
 
-<<<<<<< HEAD
 			$output .= "<div class='download'>";
 			//$output .= '<h1>Validation</h1>';
 			$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-html.png'></a>";
@@ -103,7 +102,7 @@ function routes_main($options)
 			$output .= get_errors();
 
 			$output .= "<div class='footer'>";
-			$output .= "Copyright &copy; Rich Russon 2010-2011";
+			$output .= "Copyright &copy; Rich Russon 2006-2011";
 			$output .= '&nbsp;&mdash;&nbsp;';
 			$output .= "Last Modified: 2011/01/05 16:45";
 			$output .= '&nbsp;&mdash;&nbsp;';

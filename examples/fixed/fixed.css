@@ -8,7 +8,7 @@ html,body {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 999;
+	z-index: 900;
 	width: 100%;
 	height: 70px;
 }
@@ -58,7 +58,7 @@ html,body {
 	padding-bottom: 20px;
 }
 
-#bottom {
+#footer {
 	position: fixed;
 	bottom: 0;
 	left: 0;
@@ -67,22 +67,22 @@ html,body {
 	height: 20px;
 }
 
-* html #bottom {
+* html #footer {
 	position: absolute;
 	bottom: -1px;
 }
 
-#bottom-inner {
+#footer-inner {
 	height: 20px;
 	background: #dfd;
 	color: #bdb;
 }
 
-* html #bottom-inner {
+* html #footer-inner {
 	margin-right: 17px;
 }
 
-* html #left {
+* html #menu {
 	position: absolute;
 	height: 100%;
 	width: 150px;
@@ -94,7 +94,7 @@ html,body {
 	margin-bottom: 0px;
 }
 
-html>body #left {
+html>body #menu {
 	position: fixed;
 	left: 0;
 	top: 72px;
@@ -107,3 +107,35 @@ html>body #left {
 	background: #dfd;
 }
 
+h1, div.download {
+	display: inline;
+}
+
+img { 
+	border: 0;
+}
+
+h1 {
+	font-size: 150%;
+	margin: 0;
+	position: fixed;
+	top: 20px;
+	left: 150px;
+	z-index: 950;
+}
+
+h3 {
+	color: #8a8;
+	font-size: 75%;
+	padding: 0;
+	margin: 0;
+}
+
+div.download {
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 5px 5px 0 0;
+	margin: 0;
+	z-index: 950;
+}

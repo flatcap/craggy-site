@@ -610,6 +610,27 @@ function list_render_xml ($object_name, &$list, &$columns)
 	return $output;
 }
 
+function list_render_xml2 ($object_name, &$list, &$columns)
+{
+	$output = "<list type='{$object_name}'>\n";
+
+	// foreach row of list
+	foreach ($list as $row) {
+		$output .= "\t<$object_name>\n";
+
+		// foreach col of columns
+		foreach ($columns as $col) {
+			$output .= sprintf ("\t\t<%s>%s</%s>\n", $col, $row[$col], $col);
+		}
+
+		$output .= "\t</$object_name>\n";
+	}
+
+	$output .= "</list>\n";
+
+	return $output;
+}
+
 
 function get_errors()
 {

@@ -30,11 +30,11 @@ function add_main()
 	$output .= "<input id='date' type='text' size='30' value='today'><br>";
 
 	$output .= "<label for='setter' accesskey='s'><u>S</u>etter</label>";
-	$output .= "<input id='setter' type='text' size='30' value='Mark Croxall'><br>";
+	$output .= "<input id='setter' type='text' size='30' value='mc'><br>";
 
 	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
-	//$output .= "<input id='entry' type='text' size='30' value='36 blue 3, red 3+, red 4, red 4+, red 5, green 5+, green 6a, green 6a+, green 6b, green 6b, green 6c, green 6c+, green 7a, red 7a+, red 7b, red 7b+, red 7c, red 7c+, yellow 8a'>";		// FOCUS
-	$output .= "<input id='entry' type='text' size='30' value='36 blue 3, red 3+, red 4, red 4+, red 5'>";
+	//$output .= "<input id='entry' type='text' size='30' value='36 blue 3, red 3+, red 4, red 4+, red 5'>";
+	$output .= "<input id='entry' type='text' size='30' value=''>";
 
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	$output .= "</div>";

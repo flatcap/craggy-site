@@ -1,0 +1,69 @@
+PHP Warning:  simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '<' not found in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 298
+PHP Stack trace:
+PHP   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+PHP   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+PHP   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+PHP   4. simplexml_load_string() /home/flatcap/downloads/craggy/www/admin/add_work.php:298
+
+
+Warning: simplexml_load_string(): Entity: line 1: parser error : Start tag expected, '<' not found in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 298
+
+
+Call Stack:
+    0.0016     773456   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+    0.0094    1085264   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+    0.0094    1085264   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+    0.0094    1085312   4. simplexml_load_string() /home/flatcap/downloads/craggy/www/admin/add_work.php:298
+
+
+PHP Warning:  simplexml_load_string(): ?xml version="1.0"?> in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 298
+PHP Stack trace:
+PHP   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+PHP   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+PHP   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+PHP   4. simplexml_load_string() /home/flatcap/downloads/craggy/www/admin/add_work.php:298
+
+
+Warning: simplexml_load_string(): ?xml version="1.0"?> in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 298
+
+
+Call Stack:
+    0.0016     773456   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+    0.0094    1085264   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+    0.0094    1085264   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+    0.0094    1085312   4. simplexml_load_string() /home/flatcap/downloads/craggy/www/admin/add_work.php:298
+
+
+PHP Warning:  simplexml_load_string(): ^ in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 298
+PHP Stack trace:
+PHP   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+PHP   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+PHP   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+PHP   4. simplexml_load_string() /home/flatcap/downloads/craggy/www/admin/add_work.php:298
+
+
+Warning: simplexml_load_string(): ^ in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 298
+
+
+Call Stack:
+    0.0016     773456   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+    0.0094    1085264   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+    0.0094    1085264   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+    0.0094    1085312   4. simplexml_load_string() /home/flatcap/downloads/craggy/www/admin/add_work.php:298
+
+
+PHP Fatal error:  Call to a member function count() on a non-object in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 300
+PHP Stack trace:
+PHP   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+PHP   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+PHP   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+
+
+Fatal error: Call to a member function count() on a non-object in /home/flatcap/downloads/craggy/www/admin/add_work.php on line 300
+
+
+Call Stack:
+    0.0016     773456   1. {main}() /home/flatcap/downloads/craggy/www/admin/add_work.php:0
+    0.0094    1085264   2. route_main() /home/flatcap/downloads/craggy/www/admin/add_work.php:370
+    0.0094    1085264   3. route_save() /home/flatcap/downloads/craggy/www/admin/add_work.php:350
+

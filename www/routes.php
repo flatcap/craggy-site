@@ -12,7 +12,7 @@ function routes_main($options)
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'climb_type', 'notes', 'setter', 'date_set');
 	$order   = 'panel_seq, grade_seq, colour';
-	$order  .= ' limit 10';
+	//$order  .= ' limit 10';
 
 	$list = db_select($table, $columns, null, $order);
 
@@ -65,6 +65,7 @@ function routes_main($options)
 
 			$output .= "<div class='header'>";
 			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
+			$output .= "</div>";
 			//$output .= "All Routes <span>(Last updated: $last_update)</span>";
 
 			/*
@@ -82,8 +83,7 @@ function routes_main($options)
 			$output .= "</span>";
 			*/
 
-			$output .= html_menu2();
-			$output .= "</div>";
+			$output .= html_menu();
 
 			//Home
 			//Routes 6a Checklist Boards

@@ -46,8 +46,7 @@ function six_main ($options)
 			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
 			$output .= "Top Roped 6a Routes <span>(Last updated: $last_update)</span>";
 			$output .= "</div>";
-			$output .= html_menu2();
-
+			$output .= html_menu();
 			$output .= "<div class='content'>\n";
 			$output .= "<p>$count climbs ({$total_height}m)</p>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0],[2,0],[1,0]]}');

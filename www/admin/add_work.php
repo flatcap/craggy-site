@@ -124,6 +124,8 @@ function parse_setter ($text)
 	global $DB_SETTER;
 	static $setters = null;
 
+	if (empty ($text))
+		return null;
 	if (!$setters)
 		$setters = cache_get_table ($DB_SETTER);
 
@@ -256,7 +258,20 @@ function db_route_add ($route)
 	printf ("date    = %s\n",      $route->date);
 	printf ("notes   = %s\n",      $route->notes);
 	*/
-	return rand (101,200);
+
+	$query = "insert into route (panel_id,colour_id,grade_id,setter_id,note_id,date_set) values ";
+	$query .= "($route->panel_id, $route->colour_id, $route->grade_id, $route->setter_id, null, '$route->date')";
+	//echo $query . "\n";
+
+	$db = db_get_database();
+	$result = mysql_query($query);
+	if ($result === true) {
+		$route_id = mysql_insert_id();
+	} else {
+		$route_id = false;
+	}
+
+	return $route_id;
 }
 
 
@@ -281,17 +296,20 @@ function route_add ($data)
 	foreach ($list as $item) {
 		$item = trim ($item);
 		list ($colour, $grade) = explode (' ', $item, 2);
-		$colour = colour_parse ($colour);
+		$c = parse_colour($colour);
+		if ($c !== null) {
+			$colour = $c['colour'];
+		}
 		$grade = trim ($grade);
 		$routes[] = array ('panel' => $panel, 'colour' => $colour, 'grade' => $grade);
 	}
 
 	$columns = array ('panel', 'colour', 'grade');
-	$xml = '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>';
-	$xml .= list_render_xml ('route', $routes, $columns);
-	echo $xml;
+	$xml = '<?xml version="1.0"?'.">\n";
+	$xml .= '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.">\n";
+	$xml .= list_render_xml2 ('route', $routes, $columns);
+	return $xml;
 }
-
 
 function route_save ($data)
 {
@@ -307,13 +325,11 @@ function route_save ($data)
 			$route_id = false;
 		}
 
-		if ($route_id) {
-			//add attribute
-			$xml->route[$i]->addAttribute ('result', 'success');
+		if ($route_id !== false) {
+			$xml->route[$i]->addAttribute ('result', 'valid');
 			$xml->route[$i]->addChild ('route_id', $route_id);
 		} else {
-			//add attribute
-			$xml->route[$i]->addAttribute ('result', 'failure');
+			$xml->route[$i]->addAttribute ('result', 'invalid');
 		}
 	}
 
@@ -347,6 +363,7 @@ function route_main()
 			$response = route_add($data);
 			break;
 		case 'save':
+			header('Content-Type: application/xml; charset=ISO-8859-1');
 			$response = route_save($data);
 			break;
 		default:
@@ -358,6 +375,7 @@ function route_main()
 }
 
 
+/*
 //$_GET = array('action' => 'add', 'data' => '45   red  5+,     gn   6a  ,  bg   6b  ');
 if (isset ($argc)) {
 } else {
@@ -367,6 +385,7 @@ if (isset ($argc)) {
 
 $xml = file_get_contents ('route.xml');
 $_GET = array('action' => 'save', 'data' => $xml);
+*/
 $result = route_main();
 //$result = htmlentities ($result);
 echo $result;

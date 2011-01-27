@@ -13,8 +13,8 @@
 		<title>List of <xsl:value-of select="/list/@type"/>s</title>
 		<style type="text/css">
 			th { background: #ddd; }
-			tr.success { background: #cfc; }
-			tr.failure { background: #fcc; }
+			tr.valid { background: #cfc; }
+			tr.invalid { background: #fcc; }
 		</style>
 	<head>
 	</head>

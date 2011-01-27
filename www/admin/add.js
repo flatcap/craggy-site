@@ -2,6 +2,8 @@ var button_add;
 var button_save;
 var button_delete;
 var entry_panel;
+var entry_date;
+var entry_setter;
 
 var list_ticks;
 var route_data;
@@ -26,6 +28,9 @@ function initialise_buttons()
 	entry_panel = document.getElementById ('entry');
 	entry_panel.onkeypress = callback_catch_enter;
 	entry_panel.focus();
+
+	entry_date   = document.getElementById ('date');
+	entry_setter = document.getElementById ('setter');
 
 	notify_initialise ('notify_area');
 
@@ -78,7 +83,7 @@ function render_xml (list)
 {
 	var xml = "";
 
-	xml += "<route_list>";
+	xml += "<list type='route'>";
 	for (var i = 0; i < list.length; i++) {
 		xml += "\t<route>";
 		for (var j in list[i]) {
@@ -88,7 +93,7 @@ function render_xml (list)
 		}
 		xml += "\t</route>";
 	}
-	xml += "</route_list>";
+	xml += "</list>";
 
 	return xml;
 }
@@ -145,6 +150,7 @@ function click_save()
 	}
 
 	var xml = render_xml (route_data);
+	xml = encodeURIComponent (xml);
 
 	if (window.XMLHttpRequest) {
 		xmlhttp_save = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
@@ -152,7 +158,7 @@ function click_save()
 		xmlhttp_save = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_save.onreadystatechange = callback_save;
-	xmlhttp_save.open ("GET", "add_work.php?action=save&data=" + encodeURIComponent (xml));
+	xmlhttp_save.open ("GET", "add_work.php?action=save&data=" + xml);
 	xmlhttp_save.setRequestHeader ("Content-Type", "text/plain");
 	xmlhttp_save.send();
 }
@@ -189,6 +195,8 @@ function callback_add()
 		"</thead>" +
 		"<tbody>";
 
+	var setter = entry_setter.value;
+	var date   = entry_date.value;
 
 	if (!route_data)
 		route_data = new Array();
@@ -202,6 +210,8 @@ function callback_add()
 		route.panel    = route_get_node (x[i], "panel");
 		route.colour   = route_get_node (x[i], "colour");
 		route.grade    = route_get_node (x[i], "grade");
+		route.date     = date;
+		route.setter   = setter;
 		route_data[id] = route;
 	}
 
@@ -210,6 +220,8 @@ function callback_add()
 		panel  = route_data[i].panel;
 		colour = route_data[i].colour;
 		grade  = route_data[i].grade;
+		date   = route_data[i].date;
+		setter = route_data[i].setter;
 
 		txt += "<tr>";
 		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";
@@ -217,9 +229,9 @@ function callback_add()
 		txt += "<td>" + panel + "</td>";
 		txt += "<td>" + colour + "</td>";
 		txt += "<td>" + grade + "</td>";
-		txt += "<td>" + 'setter' +i+ "</td>";
-		txt += "<td>" + 'date' +i+ "</td>";
-		txt += "<td>" + 'notes' +i+ "</td>";
+		txt += "<td>" + setter + "</td>";
+		txt += "<td>" + date + "</td>";
+		txt += "<td>" + '' + "</td>";
 		txt += "</tr>";
 	}
 
@@ -232,6 +244,9 @@ function callback_add()
 	initialise_ticks();
 	initialise_rows();
 	buttons_update();
+
+	// empty route entry
+	// set focus
 }
 
 function callback_save()

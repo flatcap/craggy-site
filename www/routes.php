@@ -37,61 +37,25 @@ function routes_main($options)
 			$output .= html_header ('Routes');
 			$output .= '<body>';
 
-			/*
-			$output .= "<div class='download'>";
-			//$output .= '<h1>Route Data</h1>';
+			$output .= "<div id='download'>";
+			$output .= '<h3>Route Data</h3>';
 			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' width='32' height='32' src='img/pdf.png'></a>";
 			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' width='32' height='32' src='img/txt.png'></a>";
 			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='32' height='32' src='img/ss.png'></a>";
 			$output .= '</div>';
 
-			$output .= "<div class='download'>";
-			//$output .= '<h1>Validation</h1>';
-			$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-html.png'></a>";
-			//$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-css.png'></a>";
-			//$output .= "<a href=''><img alt='' width='88' height='32' src='img/valid-rss.png'></a>";
-			$output .= '</div>';
-
-			$output .= "<div class='download'>";
-			//$output .= '<h1>Live</h1>';
-			$output .= "<a href=''><img alt='' width='32' height='32' src='img/lightning.png'></a>";
-			$output .= '</div>';
-
-			$output .= "<div class='download'>";
-			//$output .= '<h1>Error</h1>';
-			$output .= "<a href=''><img alt='' width='32' height='32' src='img/error.png'></a>";
-			$output .= '</div>';
-			*/
-
-			$output .= "<div class='header'>";
+			$output .= "<div id='header'>";
 			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
 			$output .= "</div>";
 			//$output .= "All Routes <span>(Last updated: $last_update)</span>";
 
-			/*
-			$output .= "<span class='menu'>";
-			//$output .= "<span>Routes</span>";
-			$output .= "<a href='routes.php'>Home</a>";
-			$output .= "<a href='routes.php'>Home</a>";
-			$output .= "<a href='routes.php'>Home</a>";
-			$output .= "<a href='routes.php' class='selected'>Routes</a>";
-			$output .= "<a href='routes.php'>Home</a>";
-			//$output .= "<span>Stats</span>";
-			$output .= "<a href='routes.php'>Home</a>";
-			$output .= "<a href='routes.php'>Home</a>";
-			$output .= "<a href='routes.php'>Home</a>";
-			$output .= "</span>";
-			*/
-
 			$output .= html_menu();
 
-			//Home
-			//Routes 6a Checklist Boards
-			//Grades Age Style Setters Colour
+			$output .= "<div id='title'>";
+			$output .= "<h1>Route List</h1>";
+			$output .= '</div>';
 
-			//$output .= html_menu();
-
-			$output .= "<div class='content'>\n";
+			$output .= "<div id='content'>\n";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
 
@@ -101,8 +65,8 @@ function routes_main($options)
 			//	link icon to anchor
 			$output .= get_errors();
 
-			$output .= "<div class='footer'>";
-			$output .= "Copyright &copy; Rich Russon 2006-2011";
+			$output .= "<div id='footer'>";
+			$output .= "Copyright &copy; 2006-2011 Rich Russon";
 			$output .= '&nbsp;&mdash;&nbsp;';
 			$output .= "Last Modified: 2011/01/05 16:45";
 			$output .= '&nbsp;&mdash;&nbsp;';

@@ -1,8 +1,8 @@
 body {
 	background: #fff;
 	color: #000;
-	border: 15px solid #dfd;
 	margin: 0;
+	padding: 0;
 }
 
 div#notify_area {
@@ -35,17 +35,40 @@ div.header {
 	font-weight: bold;
 }
 
-div.footer {
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	height: 70px;
 	background: #dfd;
-	color: #bdb;
+	padding-top: 2px;
+	padding-left: 2px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 100;
+	width: 100%;
+	height: 2px;
+	background: #dfd;
+	color: #000;
 	margin: 0;
-	padding: 5px;
-	clear: both;
+	padding: 0;
 	font-size: 50%;
 }
 
-div.footer:hover {
-	color: #000;
+#footer:hover {
+	height: 20px;
+	padding: 5px;
+}
+
+* html #footer {
+	position: absolute;
+	bottom: -1px;
 }
 
 span {
@@ -53,14 +76,18 @@ span {
 	font-weight: normal;
 }
 
-div.menu {
+#menu {
+	position: fixed;
+	left: 0;
+	top: 72px;
+	bottom: 0;
+	padding: 0;
+	width: 150px;
 	background: #dfd;
 	color: #000;
-	width: 9em;
-	float: left;
 }
 
-div.menu h1 {
+#menu h1 {
 	background: #dfd;
 	color: #000;
 	padding-left: 0.5em;
@@ -68,50 +95,21 @@ div.menu h1 {
 	font-size: 120%;
 }
 
-div.menu ul {
+#menu ul {
 	list-style: none;
 	padding-left: 1.5em;
 	margin-top: 0;
 }
 
-span.menu {
-	margin-left: 0.5em;
-	padding-bottom: 0.5em;
-	padding-top: 1em;
-	font-size: 120%;
-	font-family: sans;
-}
-
-span.menu a {
-	margin-right: 0.5em;
-	text-decoration: none;
-	padding: 8px;
-	border-width: 2px;
-	border-style: solid;
-	border-bottom-style: none;
-	border-color: #cec;
-	/*
-	border: solid black;
-	*/
-}
-
-span.menu a.selected {
-	background: white;
-}
-
-/*
-div.content, div.entry, div#list_area, div.buttons, div#notify_area {
-	border: 1px solid red;
-}
-
-div, img, span {
-	border: 1px solid red !important;
-}
-*/
-
-div.content {
-	margin-left: 0.5em;
-	float: left;
+#content {
+	position: relative;
+	z-index: 2;
+	margin-top: 72px;
+	margin-bottom: 20px;
+	margin-left: 160px;
+	min-height: 100%;
+	background: #fff;
+	padding: 0;
 }
 
 input, textarea, .checkbox {
@@ -188,23 +186,30 @@ img {
 	border: 0px;
 }
 
-div.download {
-	background: #efe;
-	color: #000;
-	float: right;
-	border: 1px solid #bcb;
-	margin: 0.5em 0.5em 0.5em 0;
-	padding: 0.5em 0 0.5em 0.5em;
-}
-
-div.download img {
-	margin-right: 0.5em;
-}
-
-div.download h1 {
-	font-size: 90%;
-	padding: 0;
+div#download {
+	position: fixed;
+	top: 0;
+	right: 0;
+	padding: 5px 5px 0 0;
 	margin: 0;
+	z-index: 150;
+}
+
+div#title {
+	margin: 0;
+	position: fixed;
+	top: 20px;
+	left: 150px;
+	z-index: 150;
+}
+
+div#title h1 {
+	font-size: 150%;
+}
+
+div#title span {
+	font-size: 75%;
+	color: grey;
 }
 
 tr:hover {
@@ -219,3 +224,11 @@ input.disabled {
 	color: #cccccc;
 	border: 2px outset ButtonFace;
 }
+
+h3 {
+	color: #8a8;
+	font-size: 75%;
+	padding: 0;
+	margin: 0;
+}
+

@@ -44,7 +44,7 @@ function html_menu($reldir = '')
 				 ($_SERVER['REMOTE_ADDR'] == '82.8.178.149'));
 	}
 
-	$output  = "<div class='menu'>";
+	$output  = "<div id='menu'>";
 
 	$output .= '  <h1>Home</h1>';
 	$output .= '  <ul>';

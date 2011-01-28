@@ -10,7 +10,7 @@ function rss_get_routes()
 	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "date_set", "setter");
 	$where   = null;
-	$order   = "date_set desc";
+	$order   = "date_set desc, panel_seq, grade_seq";
 
 	$list = db_select($table, $columns, $where, $order);
 

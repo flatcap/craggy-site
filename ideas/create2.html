@@ -1,0 +1,33 @@
+<html>
+<body>
+<script type="text/javascript">
+	var text = "<list />";
+	if (window.DOMParser) {
+		// Firefox
+		parser=new DOMParser();
+		xmlDoc=parser.parseFromString(text,"text/xml");
+	} else {
+		// Internet Explorer
+		xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
+		xmlDoc.async="false";
+		xmlDoc.loadXML(text); 
+	} 
+
+	d = xmlDoc.documentElement;
+	d.setAttribute ('type', 'route');
+
+	var r1 = d.appendChild ('route');
+	var r2 = d.appendChild ('route');
+	var r3 = d.appendChild ('route');
+
+	if (r1) {
+		r1.appendChild ('panel');
+		r1.appendChild ('colour');
+		r1.appendChild ('grade');
+	}
+
+</script>
+</body>
+</html>
+
+

@@ -204,6 +204,7 @@ div#title {
 }
 
 div#title h1 {
+	display: inline;
 	font-size: 150%;
 }
 

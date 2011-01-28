@@ -12,10 +12,15 @@ function index_main()
 	$output  = html_header ('Overview');
 	$output .= '<body>';
 	$output .= "<div id='header'>";
-	$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
-	$output .= "Craggy Routes <span>(Last updated: $last_update)</span>";
+	$output .= "<img alt='craggy logo' width='135' height='66' src='img/craggy.png'>";
 	$output .= "</div>";
+
 	$output .= html_menu();
+
+	$output .= "<div id='title'>";
+	$output .= "<h1>Craggy Routes</h1> <span>(Last updated: $last_update)</span>";
+	$output .= '</div>';
+
 	$output .= "<div id='content'>";
 	$output .= get_stats();
 	$output .= '</div>';

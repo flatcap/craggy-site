@@ -68,20 +68,23 @@ function checklist_main ($options)
 
 			$output .= html_header ('Checklist');
 			$output .= '<body>';
+			$output .= "<div id='header'>";
+			$output .= "<img alt='craggy logo' width='135' height='66' src='img/craggy.png'>";
+			$output .= "</div>";
 
-			$output .= "<div class='download'>";
-			$output .= '<h1>Route Data</h1>';
-			$output .= "<a href='?format=text'><img alt='checklist as a formatted text document' width='24' height='24' src='img/txt.png'></a>";
-			$output .= '&nbsp;&nbsp;';
-			$output .= "<a href='?format=csv'><img alt='checklist as a csv document' width='24' height='24' src='img/ss.png'></a>";
+			$output .= html_menu();
+
+			$output .= "<div id='title'>";
+			$output .= "<h1>Checklist (Routes in grade order)</h1> <span>(Last updated: $last_update)</span>";
 			$output .= '</div>';
 
-			$output .= "<div class='header'>";
-			$output .= "<img alt='craggy logo' src='img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
-			$output .= "Checklist (Routes in grade order) <span>(Last updated: $last_update)</span>";
-			$output .= "</div>";
-			$output .= html_menu();
-			$output .= "<div class='content'>";
+			$output .= "<div id='download'>";
+			$output .= '<h3>Route Data</h3>';
+			$output .= "<a href='?format=text'><img alt='checklist as a formatted text document' width='32' height='32' src='img/txt.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='checklist as a csv document' width='32' height='32' src='img/ss.png'></a>";
+			$output .= '</div>';
+
+			$output .= "<div id='content'>";
 			break;
 
 		case 'csv':

@@ -69,7 +69,6 @@ function climbs_main($options)
 			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
 			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
 
-
 	$columns = array (
 			  "$DB_ROUTE.id               as route_id",
 		//	  "$DB_CLIMB.id               as climb_id",
@@ -90,7 +89,6 @@ function climbs_main($options)
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";
 
 	$list = db_select2($table, $columns, $where, $order);
-	$count = count($list);
 
 	$list = process_best ($list);
 
@@ -131,7 +129,6 @@ function climbs_main($options)
 			$output .= '</div>';
 
 			$output .= "<div id='content'>";
-			//$output .= count($list) . " climbs<br>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
 			$output .= get_errors();

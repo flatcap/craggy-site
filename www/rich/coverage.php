@@ -5,16 +5,54 @@ set_include_path ('../../libs');
 include 'db.php';
 include 'utils.php';
 
+function process_best ($list)
+{
+	$result = array();
+
+	$id = 0;
+	foreach ($list as $row) {
+		if ($row['route_id'] == $id) {
+			// duplicate
+			$s1 = intval ($result[$id]['success_id']);
+			$s2 = intval ($row['success_id']);
+			if ($s2 > $s1) {
+				$result[$id]['success_id'] = $s2;
+			}
+		} else {
+			// copy the whole row
+			$id = $row['route_id'];
+			$result[$id] = $row;
+			$result[$id]['onsight'] = ($row['success_id'] > 2);	// Generate the onsight column
+		}
+	}
+
+	return $result;
+}
+
 function coverage_get_data()
 {
-	$table   = $DB_CLIMB;
-	$columns = array ('id', 'route_id', 'success_id as success', 'onsight');
-	$where   = array ('climber_id = 1', 'active = true');
-	$order   = 'route_id';
+	include 'db_names.php';
 
-	$climbs = db_select($table, $columns, $where, $order);
+	$climber_id = 1;
 
-	$num_routes  = db_count ($DB_ROUTE, 'id', 'date_end is null');
+	$table   = $DB_ROUTE .
+			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
+			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)";
+
+	$columns = array ("$DB_ROUTE.id               as route_id",
+			  "panel_id",
+			  "$DB_GRADE.sequence         as grade_seq",
+			  "success_id");
+
+	$where   = array ('date_end is null');
+	$order   = "panel_id, $DB_GRADE.sequence, colour_id, date_climbed";
+
+	$climbs = db_select2($table, $columns, $where, $order);
+
+	$climbs = process_best ($climbs);
+
+	$num_routes  = count ($climbs);
+	//printf ("count = %d\n", $num_routes);
 	$num_tried   = 0;
 	$num_clean   = 0;
 	$num_onsight = 0;
@@ -37,10 +75,10 @@ function coverage_get_data()
 			$route = $r;
 		}
 
-		if (!empty ($climb['success'])) $t++;
-		if ($climb['success'] >= 3)     $c++;
-		if ($climb['onsight'] == 1)     $o++;
-		if ($climb['success'] == 4)     $d++;
+		if (!empty ($climb['success_id'])) $t++;
+		if ($climb['success_id'] >= 3)     $c++;
+		if ($climb['onsight']    == 1)     $o++;
+		if ($climb['success_id'] == 4)     $d++;
 	}
 
 	if ($t > 0) $num_tried++;
@@ -93,17 +131,23 @@ function coverage_main ($options)
 
 			$output .= html_header ('Coverage', '../');
 			$output .= '<body>';
+			$output .= "<div id='header'>";
+			$output .= "<img alt='craggy logo' width='135' height='66' src='../img/craggy.png'>";
+			$output .= "</div>";
 
-			$output .= "<div class='download'>";
-			$output .= '<h1>Route Data</h1>';
-			$output .= "<a href='?format=text'><img alt='coverage as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
-			$output .= '&nbsp;&nbsp;';
-			$output .= "<a href='?format=csv'><img alt='coverage as a csv document' width='24' height='24' src='../img/ss.png'></a>";
+			$output .= html_menu('../');
+
+			$output .= "<div id='title'>";
+			$output .= "<h1>Coverage</h1> <span>(Last updated: $last_update)</span>\n";
 			$output .= '</div>';
 
-			$output .= "<div class='header'>Coverage <span>(Last updated: $last_update)</span></div>\n";
-			$output .= html_menu('../');
-			$output .= "<div class='content'>\n";
+			$output .= "<div id='download'>";
+			$output .= '<h3>Route Data</h3>';
+			$output .= "<a href='?format=text'><img alt='coverage as a formatted text document' width='32' height='32' src='../img/txt.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='coverage as a csv document' width='32' height='32' src='../img/ss.png'></a>";
+			$output .= '</div>';
+
+			$output .= "<div id='content'>\n";
 			$output .= "<h2>Coverage <span>($count to go)</span></h2>\n";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[1,1]]}');
 			$output .= '</div>';

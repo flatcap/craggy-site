@@ -32,6 +32,7 @@ function process_best ($list)
 			// copy the whole row
 			$id = $row['route_id'];
 			$result[$id] = $row;
+			$result[$id]['o'] = ($row['success_id'] > 2);	// Generate the onsight column
 		}
 	}
 
@@ -82,7 +83,6 @@ function climbs_main($options)
 			  "success_id",
 			  "$DB_SUCCESS.outcome        as success",
 			  "nice                       as n",
-			  "onsight                    as o",
 			  "$DB_DIFFICULTY.description as diff",
 			  "notes");
 
@@ -131,7 +131,7 @@ function climbs_main($options)
 			$output .= '</div>';
 
 			$output .= "<div id='content'>";
-			$output .= count($list) . " climbs<br>";
+			//$output .= count($list) . " climbs<br>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
 			$output .= get_errors();

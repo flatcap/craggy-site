@@ -197,7 +197,7 @@ function column_widths ($data, $columns, $header = false, $widths = null)
 
 function fix_justification (&$widths)
 {
-	$columns = array ('climb_notes', 'climb_type', 'colour', 'difficulty', 'grade', 'notes', 'priority', 'setter', 'success', 'key');
+	$columns = array ('climb_notes', 'climb_type', 'colour', 'diff', 'grade', 'notes', 'priority', 'setter', 'success', 'key');
 
 	foreach ($columns as $key) {
 		if (array_key_exists ($key, $widths))

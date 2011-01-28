@@ -59,6 +59,49 @@ function db_select ($table, $columns = null, $where = null, $order = null, $grou
 	return $list;
 }
 
+function db_select2 ($table, $columns = null, $where = null, $order = null, $group = null)
+{
+	if (isset($columns)) {
+		if (is_array($columns))
+			$cols = implode ($columns, ',');
+		else
+			$cols = $columns;
+	} else {
+		$cols = '*';
+	}
+
+	$query = "select {$cols} from {$table}";
+
+	if (isset ($where)) {
+		if (is_array ($where))
+			$w = implode ($where, ' and ');
+		else
+			$w = $where;
+		$query .= ' where ' . $w;
+	}
+
+	if (isset ($group)) {
+		$query .= ' group by ' . $group;
+	}
+
+	if (isset ($order)) {
+		$query .= ' order by ' . $order;
+	}
+
+	$db = db_get_database();
+
+	//echo "$query;<br>";
+	$result = mysql_query($query);
+
+	$list = array();
+	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+		$list[] = $row;
+	}
+
+	mysql_free_result($result);
+	return $list;
+}
+
 function db_date($date)
 {
 	$d = strtotime($date);

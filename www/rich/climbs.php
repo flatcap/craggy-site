@@ -5,6 +5,39 @@ set_include_path ('../../libs');
 include 'db.php';
 include 'utils.php';
 
+function process_best ($list)
+{
+	$result = array();
+
+	$id = 0;
+	foreach ($list as $row) {
+		if ($row['route_id'] == $id) {
+			// duplicate
+			$d1 = $result[$id]['date_climbed'];
+			$d2 = $row['date_climbed'];
+			if ($d2 > $d1) {
+				$result[$id]['date_climbed'] = $d2;
+			}
+
+			$s1 = intval ($result[$id]['success_id']);
+			$s2 = intval ($row['success_id']);
+			if ($s2 > $s1) {
+				$result[$id]['success_id'] = $s2;
+				$result[$id]['success'] = $row['success'];
+			}
+
+			if ($row['notes'])
+				$results[$id]['notes'] = $row['notes'];
+		} else {
+			// copy the whole row
+			$id = $row['route_id'];
+			$result[$id] = $row;
+		}
+	}
+
+	return $result;
+}
+
 function process_binary(&$list, $field, $value)
 {
 	foreach ($list as $index => $row) {
@@ -36,14 +69,17 @@ function climbs_main($options)
 			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
 
 
-	$columns = array ("$DB_ROUTE.id as id",
+	$columns = array (
+			  "$DB_ROUTE.id               as route_id",
+		//	  "$DB_CLIMB.id               as climb_id",
 			  "$DB_PANEL.name             as panel",
 		//	  "$DB_PANEL.sequence         as panel_seq",
 			  "$DB_COLOUR.colour          as colour",
 			  "$DB_GRADE.grade            as grade",
 		//	  "$DB_GRADE.sequence         as grade_seq",
-			  'climb_type',
-			  'date_climbed',
+			  "climb_type",
+			  "date_climbed",
+			  "success_id",
 			  "$DB_SUCCESS.outcome        as success",
 			  "nice                       as n",
 			  "onsight                    as o",
@@ -53,8 +89,10 @@ function climbs_main($options)
 	$where   = array ('date_end is null');
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";
 
-	$list = db_select($table, $columns, $where, $order);
+	$list = db_select2($table, $columns, $where, $order);
 	$count = count($list);
+
+	$list = process_best ($list);
 
 	process_binary ($list, 'n', 'N');
 	process_binary ($list, 'o', 'O');
@@ -93,6 +131,7 @@ function climbs_main($options)
 			$output .= '</div>';
 
 			$output .= "<div id='content'>";
+			$output .= count($list) . " climbs<br>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
 			$output .= get_errors();

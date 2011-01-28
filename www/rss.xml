@@ -9,7 +9,7 @@ function rss_get_routes()
 {
 	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "date_set", "setter");
-	$where   = NULL;
+	$where   = null;
 	$order   = "date_set desc";
 
 	$list = db_select($table, $columns, $where, $order);
@@ -20,7 +20,7 @@ function rss_get_routes()
 function rss_recent_records($routes)
 {
 	$records   = array();
-	$route_set = NULL;
+	$route_set = null;
 	$count     = 0;
 	$date      = "";
 

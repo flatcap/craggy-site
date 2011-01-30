@@ -131,35 +131,38 @@ function work_priority(&$list, $pri)
 
 function work_todo()
 {
+	include 'db_names.php';
+
 	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
-			" left join $DB_CLIMB on (($DB_CLIMB.route_id = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
-			" left join $DB_COLOUR on ($DB_ROUTE.colour_id = $DB_COLOUR.id)" .
-			" left join $DB_PANEL on ($DB_ROUTE.panel_id = $DB_PANEL.id)" .
-			" left join $DB_GRADE on ($DB_ROUTE.grade_id = $DB_GRADE.id)" .
-			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id = $DB_CLIMB_TYPE.id)" .
-			" left join $DB_SUCCESS on ($DB_CLIMB.success_id = $DB_SUCCESS.id)" .
-			" left join $DB_DIFFICULTY on ($DB_CLIMB.difficulty_id = $DB_DIFFICULTY.id)";
+			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
+			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
+			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
+			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
+			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
+			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
+			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
+			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
+			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
 
-	$columns = array ("$DB_ROUTE.id as id",
-			"$DB_PANEL.name as panel",
-			"$DB_PANEL.sequence as panel_seq",
-			"$DB_COLOUR.colour as colour",
-			"$DB_GRADE.grade as grade",
-			"$DB_GRADE.sequence as grade_seq",
-			'climber_id',
-			'date_climbed',
-			'climb_type',
-			"$DB_SUCCESS.outcome as success",
-			'nice as n',
-			'onsight as o',
-			"$DB_DIFFICULTY.description as diff",
-			"$DB_CLIMB.notes as notes");
+	$columns = array (
+			  "$DB_ROUTE.id               as route_id",
+			  "$DB_PANEL.name             as panel",
+			  "$DB_COLOUR.colour          as colour",
+			  "$DB_GRADE.grade            as grade",
+			  "$DB_GRADE.sequence         as grade_seq",
+			  "climb_type",
+			  "date_climbed",
+			  "success_id",
+			  "$DB_SUCCESS.outcome        as success",
+			  "nice                       as n",
+			  "$DB_DIFFICULTY.description as diff",
+			  "notes");
 
-	$where   = array ('((success_id < 3) OR (success_id is null))', "$DB_GRADE.sequence < 600");
+	$where   = array ('date_end is null', '((success_id < 3) OR (success_id is null))', "$DB_GRADE.sequence < 600");
 
-	$list = db_select($table, $columns, $where);
+	$list = db_select2($table, $columns, $where);
 
 	work_priority ($list, 'T');
 	return $list;
@@ -167,35 +170,38 @@ function work_todo()
 
 function work_downclimb()
 {
+	include 'db_names.php';
+
 	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
-			" left join $DB_CLIMB on (($DB_CLIMB.route_id = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
-			" left join $DB_COLOUR on ($DB_ROUTE.colour_id = $DB_COLOUR.id)" .
-			" left join $DB_PANEL on ($DB_ROUTE.panel_id = $DB_PANEL.id)" .
-			" left join $DB_GRADE on ($DB_ROUTE.grade_id = $DB_GRADE.id)" .
-			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id = $DB_CLIMB_TYPE.id)" .
-			" left join $DB_SUCCESS on ($DB_CLIMB.success_id = $DB_SUCCESS.id)" .
-			" left join $DB_DIFFICULTY on ($DB_CLIMB.difficulty_id = $DB_DIFFICULTY.id)";
+			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
+			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
+			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
+			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
+			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
+			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
+			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
+			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
+			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
 
-	$columns = array ("$DB_ROUTE.id as id",
-			"$DB_PANEL.name as panel",
-			"$DB_PANEL.sequence as panel_seq",
-			"$DB_COLOUR.colour as colour",
-			"$DB_GRADE.grade as grade",
-			"$DB_GRADE.sequence as grade_seq",
-			'climber_id',
-			'date_climbed',
-			'climb_type',
-			"$DB_SUCCESS.outcome as success",
-			'nice as n',
-			'onsight as o',
-			"$DB_DIFFICULTY.description as diff",
-			"$DB_CLIMB.notes as notes");
+	$columns = array (
+			  "$DB_ROUTE.id               as route_id",
+			  "$DB_PANEL.name             as panel",
+			  "$DB_COLOUR.colour          as colour",
+			  "$DB_GRADE.grade            as grade",
+			  "$DB_GRADE.sequence         as grade_seq",
+			  "climb_type",
+			  "date_climbed",
+			  "success_id",
+			  "$DB_SUCCESS.outcome        as success",
+			  "nice                       as n",
+			  "$DB_DIFFICULTY.description as diff",
+			  "notes");
 
-	$where   = array ('success_id <> 4', "$DB_GRADE.sequence < 400");
+	$where   = array ('date_end is null', 'success_id <> 4', "$DB_GRADE.sequence < 400");
 
-	$list = db_select($table, $columns, $where);
+	$list = db_select2($table, $columns, $where);
 
 	work_priority ($list, 'D');
 	return $list;
@@ -203,42 +209,45 @@ function work_downclimb()
 
 function work_seldom_range ($m_start, $m_finish)
 {
+	include 'db_names.php';
+
 	$when_start  = db_date ("$m_start months ago");
 
 	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
-			" left join $DB_CLIMB on (($DB_CLIMB.route_id = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
-			" left join $DB_COLOUR on ($DB_ROUTE.colour_id = $DB_COLOUR.id)" .
-			" left join $DB_PANEL on ($DB_ROUTE.panel_id = $DB_PANEL.id)" .
-			" left join $DB_GRADE on ($DB_ROUTE.grade_id = $DB_GRADE.id)" .
-			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id = $DB_CLIMB_TYPE.id)" .
-			" left join $DB_SUCCESS on ($DB_CLIMB.success_id = $DB_SUCCESS.id)" .
-			" left join $DB_DIFFICULTY on ($DB_CLIMB.difficulty_id = $DB_DIFFICULTY.id)";
+			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
+			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
+			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
+			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
+			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
+			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
+			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
+			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
+			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
 
-	$columns = array ("$DB_ROUTE.id as id",
-			"$DB_PANEL.name as panel",
-			"$DB_PANEL.sequence as panel_seq",
-			"$DB_COLOUR.colour as colour",
-			"$DB_GRADE.grade as grade",
-			"$DB_GRADE.sequence as grade_seq",
-			'climber_id',
-			'date_climbed',
-			'climb_type',
-			"$DB_SUCCESS.outcome as success",
-			'nice as n',
-			'onsight as o',
-			"$DB_DIFFICULTY.description as diff",
-			"$DB_CLIMB.notes as notes");
+	$columns = array (
+			  "$DB_ROUTE.id               as route_id",
+			  "$DB_PANEL.name             as panel",
+			  "$DB_COLOUR.colour          as colour",
+			  "$DB_GRADE.grade            as grade",
+			  "$DB_GRADE.sequence         as grade_seq",
+			  "climb_type",
+			  "date_climbed",
+			  "success_id",
+			  "$DB_SUCCESS.outcome        as success",
+			  "nice                       as n",
+			  "$DB_DIFFICULTY.description as diff",
+			  "notes");
 
-	$where   = array ("$DB_GRADE.sequence < 600", "date_climbed < '$when_start'");
+	$where   = array ('date_end is null', "$DB_GRADE.sequence < 600", "date_climbed < '$when_start'");
 
 	if (isset ($m_finish)) {
 		$when_finish = db_date ("$m_finish months ago");
 		array_push ($where, "date_climbed > '$when_finish'");
 	}
 
-	$list = db_select($table, $columns, $where);
+	$list = db_select2($table, $columns, $where);
 
 	return $list;
 }

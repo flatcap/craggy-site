@@ -339,17 +339,24 @@ function work_main ($options)
 
 			$output .= html_header ('Work', '../');
 			$output .= '<body>';
+			$output .= "<div id='header'>";
+			$output .= "<img alt='craggy logo' width='135' height='66' src='../img/craggy.png'>";
+			$output .= "</div>";
 
-			$output .= "<div class='download'>";
-			$output .= '<h1>Route Data</h1>';
-			$output .= "<a href='?format=text'><img alt='work list as a formatted text document' width='24' height='24' src='../img/txt.png'></a>";
-			$output .= '&nbsp;&nbsp;';
-			$output .= "<a href='?format=csv'><img alt='work list as a csv document' width='24' height='24' src='../img/ss.png'></a>";
+			$output .= html_menu('../');
+
+			$output .= "<div id='title'>";
+			$output .= "<h1>Work</h1> <span>(Last updated: $last_update)</span></div>\n";
 			$output .= '</div>';
 
-			$output .= "<div class='header'>Work <span>(Last updated: $last_update)</span></div>\n";
-			$output .= html_menu('../');
-			$output .= "<div class='content'>\n";
+
+			$output .= "<div id='download'>";
+			$output .= '<h3>Route Data</h3>';
+			$output .= "<a href='?format=text'><img alt='work list as a formatted text document' width='32' height='32' src='../img/txt.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='work list as a csv document' width='32' height='32' src='../img/ss.png'></a>";
+			$output .= '</div>';
+
+			$output .= "<div id='content'>\n";
 			$output .= "<h2>Work <span>($count climbs)</span><span> (Score = $score)</span></h2>\n";
 			$output .= list_render_html ($all, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';

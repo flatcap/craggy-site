@@ -65,6 +65,7 @@ function routes_main($options)
 			//	link icon to anchor
 			$output .= get_errors();
 
+			/*
 			$output .= "<div id='footer'>";
 			$output .= "Copyright &copy; 2006-2011 Rich Russon";
 			$output .= '&nbsp;&mdash;&nbsp;';
@@ -74,6 +75,7 @@ function routes_main($options)
 			$output .= '&nbsp;&mdash;&nbsp;';
 			$output .= "Page Generated in 0.06s";
 			$output .= "</div>";
+			*/
 
 			$output .= '</body>';
 			$output .= '</html>';

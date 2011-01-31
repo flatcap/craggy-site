@@ -26,6 +26,7 @@ function index_main()
 	$output .= '</div>';
 	$output .= get_errors();
 
+	/*
 	$output .= "<div id='footer'>";
 	$output .= "Copyright &copy; 2006-2011 Rich Russon";
 	$output .= '&nbsp;&mdash;&nbsp;';
@@ -35,6 +36,7 @@ function index_main()
 	$output .= '&nbsp;&mdash;&nbsp;';
 	$output .= "Page Generated in 0.06s";
 	$output .= "</div>";
+	*/
 
 	$output .= '</body>';
 	$output .= '</html>';

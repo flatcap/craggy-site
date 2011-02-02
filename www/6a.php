@@ -9,13 +9,31 @@ function six_main ($options)
 {
 	include 'db_names.php';
 
-	// 'difficulty'
-	$table   = $DB_V_ROUTE;
-	$columns = array ('id', 'panel', 'colour', 'grade', 'height');
-	$where   = array ('grade_seq >= 400', 'grade_seq < 500', "climb_type <> 'lead'");
-	$order   = 'panel_seq, grade_seq, colour';
+	$table   = $DB_ROUTE .
+			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
+			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
+			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
+			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
+			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
+			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)";
 
-	$list = db_select($table, $columns, $where, $order);
+	$columns = array (
+			  "$DB_ROUTE.id               as route_id",
+			  "$DB_PANEL.name             as panel",
+			  "$DB_COLOUR.colour          as colour",
+			  "$DB_GRADE.grade            as grade",
+			  "$DB_PANEL.height           as height",
+			  "climb_type",
+			  "nice                       as n",
+			  "$DB_DIFFICULTY.description as diff");
+
+	# where climber_id = 1 or null
+	$where   = array ("date_end is null", "$DB_GRADE.sequence >= 400", "$DB_GRADE.sequence < 500", "$DB_CLIMB_TYPE.id <> 1");
+	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour";
+
+	$list = db_select2($table, $columns, $where, $order);
+
+	$columns = array ('id', 'panel', 'colour', 'grade', 'diff', 'height');
 
 	$total_height = process_height_total ($list);
 	process_height_abbreviate ($list);

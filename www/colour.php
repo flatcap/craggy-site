@@ -37,17 +37,13 @@ function stats_main()
 	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$output  = '<body>';
-	$output .= "<div id='header'>";
-	$output .= "<img alt='craggy logo' width='135' height='66' src='img/craggy.png'>";
-	$output .= "</div>";
-
 	$output .= html_menu();
 
-	$output .= "<div id='title'>";
+	$output .= "<div class='content'>";
+	$output .= "<div class='title'>";
 	$output .= "<h1>Craggy Routes</h1> <span>(Last updated: $last_update)</span>";
 	$output .= '</div>';
 
-	$output .= "<div id='content'>";
 	$output .= stats_colour();
 	$output .= '</div>';
 	$output .= get_errors();

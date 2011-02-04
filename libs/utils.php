@@ -44,8 +44,9 @@ function html_menu($reldir = '')
 				 ($_SERVER['REMOTE_ADDR'] == '82.8.178.149'));
 	}
 
-	$output  = "<div id='menu'>";
+	$output  = "<div class='menu'>";
 
+	$output .= "  <img alt='craggy logo' width='135' height='66' src='{$reldir}img/craggy.png'>";
 	$output .= '  <h1>Home</h1>';
 	$output .= '  <ul>';
 	$output .= "    <li><a href='{$reldir}index.php'>Craggy</a></li>";

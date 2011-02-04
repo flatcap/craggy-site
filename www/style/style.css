@@ -35,40 +35,14 @@ div.header {
 	font-weight: bold;
 }
 
-#header {
-	position: fixed;
-	top: 0;
-	left: 0;
-	z-index: 100;
-	width: 100%;
-	height: 70px;
-	background: #dfd;
-	padding-top: 2px;
-	padding-left: 2px;
-}
-
-#footer {
-	position: fixed;
-	bottom: 0;
-	left: 0;
-	z-index: 100;
-	width: 100%;
-	height: 2px;
+div.footer {
+	height: 20px;
 	background: #dfd;
 	color: #000;
 	margin: 0;
-	padding: 0;
-	font-size: 50%;
-}
-
-#footer:hover {
-	height: 20px;
 	padding: 5px;
-}
-
-* html #footer {
-	position: absolute;
-	bottom: -1px;
+	font-size: 50%;
+	margin-left: 150px;
 }
 
 span {
@@ -76,18 +50,17 @@ span {
 	font-weight: normal;
 }
 
-#menu {
-	position: fixed;
-	left: 0;
-	top: 72px;
-	bottom: 0;
-	padding: 0;
+div.menu {
 	width: 150px;
 	background: #dfd;
 	color: #000;
+	float: left;
+	margin: 0;
+	height: 100%;
+	position: fixed;
 }
 
-#menu h1 {
+div.menu h1 {
 	background: #dfd;
 	color: #000;
 	padding-left: 0.5em;
@@ -95,19 +68,18 @@ span {
 	font-size: 120%;
 }
 
-#menu ul {
+div.menu ul {
 	list-style: none;
 	padding-left: 1.5em;
 	margin-top: 0;
 }
 
-#content {
-	position: relative;
-	z-index: 2;
-	margin-top: 72px;
-	margin-bottom: 20px;
+div.menu img {
+	padding: 5px;
+}
+
+div.content {
 	margin-left: 160px;
-	min-height: 100%;
 	background: #fff;
 	padding: 0;
 }
@@ -186,29 +158,26 @@ img {
 	border: 0px;
 }
 
-div#download {
-	position: fixed;
-	top: 0;
-	right: 0;
+span.download {
+	margin-top: -15px;
+	float: right;
 	padding: 5px 5px 0 0;
-	margin: 0;
-	z-index: 150;
 }
 
-div#title {
-	margin: 0;
-	position: fixed;
-	top: 20px;
+div.title {
+	background: #dfd;
+	padding-top: 1em;
+	padding-bottom: 1em;
+	margin-left: -10px;
 	left: 150px;
-	z-index: 150;
 }
 
-div#title h1 {
+div.title h1 {
 	display: inline;
 	font-size: 150%;
 }
 
-div#title span {
+div.title span {
 	font-size: 75%;
 	color: grey;
 }

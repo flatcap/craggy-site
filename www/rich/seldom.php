@@ -132,23 +132,18 @@ function seldom_main ($options)
 
 			$output .= html_header ('Seldom', '../');
 			$output .= '<body>';
-			$output .= "<div id='header'>";
-			$output .= "<img alt='craggy logo' width='135' height='66' src='../img/craggy.png'>";
-			$output .= "</div>";
-
 			$output .= html_menu('../');
+			$output .= "<div class='content'>";
 
-			$output .= "<div id='title'>";
-			$output .= "<h1>Seldom</h1> <span>(Last updated: $last_update)</span></div>";
-			$output .= '</div>';
-
-			$output .= "<div id='download'>";
+			$output .= "<div class='title'>";
+			$output .= "<h1>Seldom</h1> <span>(Last updated: $last_update)</span>";
+			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
 			$output .= "<a href='?format=text'><img alt='seldom list as a formatted text document' width='32' height='32' src='../img/txt.png'></a>";
 			$output .= "<a href='?format=csv'><img alt='seldom list as a csv document' width='32' height='32' src='../img/ss.png'></a>";
+			$output .= '</span>';
 			$output .= '</div>';
 
-			$output .= "<div id='content'>";
 			break;
 
 		case 'csv':

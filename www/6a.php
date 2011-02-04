@@ -51,27 +51,24 @@ function six_main ($options)
 			$output .= html_header ('6a');
 			$output .= '<body>';
 
-			$output .= "<div id='download'>";
+			$output .= html_menu();
+
+			$output .= "<div class='content'>\n";
+
+			$output .= "<div class='title'>";
+			$output .= "<h1>Top Roped 6a Routes</h1> <span>(Last updated: $last_update)</span>";
+			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
 			//$output .= "<a href='files/guildford_6a.pdf'><img alt='6a route list as a pdf document' width='32' height='32' src='img/pdf.png'></a>";
 			$output .= "<a href='?format=text'><img alt='6a route list as a formatted text document' width='32' height='32' src='img/txt.png'></a>";
 			$output .= "<a href='?format=csv'><img alt='6a route list as a csv document' width='32' height='32' src='img/ss.png'></a>";
-			$output .= '</div>';
+			$output .= '</span>';
 
-			$output .= "<div id='header'>";
-			$output .= "<img alt='craggy logo' width='135' height='66' src='img/craggy.png'>";
-			$output .= "</div>";
+			$output .= '</div>';	// title
 
-			$output .= html_menu();
-
-			$output .= "<div id='title'>";
-			$output .= "<h1>Top Roped 6a Routes</h1> <span>(Last updated: $last_update)</span>";
-			$output .= '</div>';
-
-			$output .= "<div id='content'>\n";
 			$output .= "<p>$count climbs ({$total_height}m)</p>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0],[2,0],[1,0]]}');
-			$output .= '</div>';
+			$output .= '</div>';	// content
 			$output .= get_errors();
 			$output .= '</body>';
 			$output .= '</html>';

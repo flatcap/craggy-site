@@ -11,23 +11,21 @@ function index_main()
 
 	$output  = html_header ('Overview');
 	$output .= '<body>';
-	$output .= "<div id='header'>";
-	$output .= "<img alt='craggy logo' width='135' height='66' src='img/craggy.png'>";
-	$output .= "</div>";
 
 	$output .= html_menu();
 
-	$output .= "<div id='title'>";
-	$output .= "<h1>Craggy Routes</h1> <span>(Last updated: $last_update)</span>";
-	$output .= '</div>';
+	$output .= "<div class='content'>";
 
-	$output .= "<div id='content'>";
+	$output .= "<div class='title'>";
+	$output .= "<h1>Craggy Routes</h1> <span>(Last updated: $last_update)</span>";
+	$output .= '</div>';	// title
+
 	$output .= get_stats();
-	$output .= '</div>';
+	$output .= '</div>';	// content
 	$output .= get_errors();
 
 	/*
-	$output .= "<div id='footer'>";
+	$output .= "<div class='footer'>";
 	$output .= "Copyright &copy; 2006-2011 Rich Russon";
 	$output .= '&nbsp;&mdash;&nbsp;';
 	$output .= "Last Modified: 2011/01/05 16:45";

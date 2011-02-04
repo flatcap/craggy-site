@@ -115,24 +115,20 @@ function downclimb_main ($options)
 
 			$output .= html_header ('Downclimbs', '../');
 			$output .= '<body>';
-			$output .= "<div id='header'>";
-			$output .= "<img alt='craggy logo' width='135' height='66' src='../img/craggy.png'>";
-			$output .= "</div>";
-
 			$output .= html_menu('../');
 
-			$output .= "<div id='download'>";
+			$output .= "<div class='content'>";
+
+			$output .= "<div class='title'>";
+			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
 			$output .= "<a href='?format=text'><img alt='downclimb data as a formatted text document' width='32' height='32' src='../img/txt.png'></a>";
 			$output .= "<a href='?format=csv'><img alt='downclimb data as a csv document' width='32' height='32' src='../img/ss.png'></a>";
+			$output .= '</span>';
+			$output .= "<h1>Downclimbs</h1> <span>(Last updated: $last_update)</span>";
 			$output .= '</div>';
 
-			$output .= "<div id='title'>";
-			$output .= "<h1>Downclimbs</h1> <span>(Last updated: $last_update)</span></div>\n";
-			$output .= '</div>';
-
-			$output .= "<div id='content'>\n";
-			$output .= "<h2>Downclimb <span>($count climbs)</span></h2>\n";
+			$output .= "<h2>Downclimb <span>($count climbs)</span></h2>";
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
 			$output .= get_errors();

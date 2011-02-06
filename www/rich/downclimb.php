@@ -36,6 +36,12 @@ function process_best ($list)
 		}
 	}
 
+	foreach ($result as $id => $row) {
+		if ($row['success_id'] == 4) {
+			unset ($result[$id]);
+		}
+	}
+
 	return $result;
 }
 
@@ -67,8 +73,7 @@ function downclimb_main ($options)
 			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
 			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
 
-	$columns = array (
-			  "$DB_ROUTE.id               as route_id",
+	$columns = array ("$DB_ROUTE.id               as route_id",
 		//	  "$DB_CLIMB.id               as climb_id",
 			  "$DB_PANEL.name             as panel",
 			  "$DB_COLOUR.colour          as colour",
@@ -81,7 +86,7 @@ function downclimb_main ($options)
 			  "$DB_DIFFICULTY.description as diff",
 			  "notes");
 
-	$where   = array ('date_end is null', '((success_id is null) or (success_id <> 4))', "$DB_GRADE.sequence < 400");
+	$where   = array ('date_end is null', "$DB_GRADE.sequence < 400");
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";
 
 	$list = db_select2($table, $columns, $where, $order);

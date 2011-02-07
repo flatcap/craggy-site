@@ -36,6 +36,12 @@ function process_best ($list)
 		}
 	}
 
+	foreach ($result as $id => $row) {
+		if ($row['success_id'] > 2) {
+			unset ($result[$id]);
+		}
+	}
+
 	return $result;
 }
 
@@ -74,7 +80,7 @@ function todo_main($options)
 			  "$DB_DIFFICULTY.description as diff",
 			  "notes");
 
-	$where   = array ('date_end is null', '((success_id < 3) OR (success_id is null))', "$DB_GRADE.sequence < 600");
+	$where   = array ('date_end is null', "$DB_GRADE.sequence < 600");
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";
 
 	$list = db_select2($table, $columns, $where, $order);

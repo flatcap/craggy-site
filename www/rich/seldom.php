@@ -39,15 +39,9 @@ function process_best ($list)
 	return $result;
 }
 
-function seldom_range ($m_start, $m_finish, $options)
+function seldom_climbs ($climber_id, $ranges)
 {
 	include 'db_names.php';
-
-	$output = '';
-
-	$when_start  = db_date ("$m_start months ago");
-
-	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
 			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
@@ -62,12 +56,9 @@ function seldom_range ($m_start, $m_finish, $options)
 
 	$columns = array (
 			  "$DB_ROUTE.id               as route_id",
-		//	  "$DB_CLIMB.id               as climb_id",
 			  "$DB_PANEL.name             as panel",
-		//	  "$DB_PANEL.sequence         as panel_seq",
 			  "$DB_COLOUR.colour          as colour",
 			  "$DB_GRADE.grade            as grade",
-		//	  "$DB_GRADE.sequence         as grade_seq",
 			  "climb_type",
 			  "date_climbed",
 			  "success_id",
@@ -79,46 +70,30 @@ function seldom_range ($m_start, $m_finish, $options)
 	$where   = array ('date_end is null', "$DB_GRADE.sequence < 600");
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";
 
-	if (isset ($m_finish)) {
-		array_push ($where, "date_climbed < '$when_start'");
-		$when_finish = db_date ("$m_finish months ago");
-		array_push ($where, "date_climbed > '$when_finish'");
-	} else {
-		array_push ($where, "((date_climbed < '$when_start') or (date_climbed is null))");
-	}
-
 	// print data (based on column names)
 	$list = db_select2($table, $columns, $where, $order);
 
 	$list = process_best ($list);
 
+	process_type ($list);
+	process_date ($list, 'date_climbed', true);
+
 	$today = strtotime('today');
-	// manipulate data (Lead -> L)
+	$results = array();
 	foreach ($list as $index => $row) {
-		if ($row['climb_type'] == 'Lead')
-			$list[$index]['climb_type'] = 'L';
-		else
-			$list[$index]['climb_type'] = '';
+		$m = $row['months'];
+		if (empty ($m))
+			$m = 99;
 
-		$d = $row['date_climbed'];
-		if ($d == '0000-00-00')
-			$d = '';
-		$list[$index]['date_climbed'] = $d;
-
-		if (empty($d)) {
-			$m = '';
-		} else {
-			$a = floor (($today - strtotime($d)) / 86400);
-			$m = sprintf ('%.1f', $a / 30.44);
+		foreach ($ranges as $lower) {
+			if ($m > $lower) {
+				$results[$lower][] = $row;
+				break;
+			}
 		}
-
-		$list[$index]['months'] = $m;
 	}
 
-	array_push ($columns, 'months');
-	unset ($columns[6]);
-
-	return $list;
+	return $results;
 }
 
 function seldom_main ($options)
@@ -158,40 +133,38 @@ function seldom_main ($options)
 			break;
 	}
 
-	$start  = null;
-	$finish = null;
-	foreach ($ranges as $num) {
-		$finish = $start;
-		$start  = $num;
+	$climber_id = 1;
+	$list = seldom_climbs ($climber_id, $ranges);
 
-		$list = seldom_range ($start, $finish, $options);
-		$count = count ($list);
+	$total = 0;
+	foreach ($ranges as $lower) {
+		$l= $list[$lower];
+		$count = count ($l);
 		if ($count == 0)
 			continue;
+		$total += $count;
 
-		process_date ($list, 'date_climbed', false);
-
-		$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'notes', 'date_climbed');
-		$widths = column_widths ($list, $columns, true);
+		$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'notes', 'date_climbed', 'age', 'months');
+		$widths = column_widths ($l, $columns, true);
 		fix_justification ($widths);
 
 		// render section
 		switch ($options['format']) {
 			case 'html':
-				$output .= "<h2>$start-$finish months <span>($count climbs)</span></h2>\n";
-				$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
+				$output .= "<h2>$lower months <span>($count climbs)</span></h2>";
+				$output .= list_render_html ($l, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 				$output .= '<br>';
 				break;
 
 			case 'csv':
-				$output .= list_render_csv ($list, $columns);
+				$output .= list_render_csv ($l, $columns);
 				$output .= '""' . "\r\n";
 				break;
 
 			case 'text':
 			default:
-				$output .= "$start-$finish months ($count climbs)\r\n";
-				$output .= list_render_text ($list, $columns, $widths);
+				$output .= "$lower months ($count climbs)\r\n";
+				$output .= list_render_text ($l, $columns, $widths);
 				$output .= "\r\n";
 				break;
 		}
@@ -206,8 +179,6 @@ function seldom_main ($options)
 			break;
 
 		case 'csv':
-			break;
-
 		case 'text':
 		default:
 			break;

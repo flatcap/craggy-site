@@ -85,7 +85,7 @@ function html_menu($reldir = '')
 		$output .= '  <h1>Admin</h1>';
 		$output .= '  <ul>';
 		$output .= "    <li><a href='{$reldir}admin/setter.php'>Setter</a></li>";
-		$output .= "    <li><a href='{$reldir}admin/route.php'>Del Route</a></li>";
+		$output .= "    <li><a href='{$reldir}admin/del_route.php'>Del Route</a></li>";
 		$output .= "    <li><a href='{$reldir}admin/add_route.php'>Add Route</a></li>";
 		$output .= '  </ul>';
 	}

@@ -41,7 +41,7 @@ function route_main()
 
 	$output .= '</div>'; // content
 
-	$output .= "<script type='text/javascript' src='route.js'></script>";
+	$output .= "<script type='text/javascript' src='del_route.js'></script>";
 
 	$output .= get_errors();
 	$output .= '</body>';

@@ -73,7 +73,7 @@ function click_list()
 		xmlhttp_list = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_list.onreadystatechange = callback_list;
-	xmlhttp_list.open ("GET", "route_work.php?action=list&data=" + encodeURI (entry_panel.value));
+	xmlhttp_list.open ("GET", "del_route_work.php?action=list&data=" + encodeURI (entry_panel.value));
 	xmlhttp_list.send();
 }
 
@@ -103,7 +103,7 @@ function click_delete()
 		xmlhttp_del = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_del.onreadystatechange = callback_delete;
-	xmlhttp_del.open ("GET", "route_work.php?action=delete&data=" + str, true);
+	xmlhttp_del.open ("GET", "del_route_work.php?action=delete&data=" + str, true);
 	xmlhttp_del.send();
 }
 

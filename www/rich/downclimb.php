@@ -56,11 +56,9 @@ function process_binary(&$list, $field, $value)
 	}
 }
 
-function downclimb_main ($options)
+function downclimb_main ($options, $climber_id)
 {
 	include 'db_names.php';
-
-	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
 			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
@@ -181,5 +179,6 @@ if (isset ($argc)) {
 	$options['format'] = $f;
 }
 
-echo downclimb_main($options);
+$climber_id = 1;
+echo downclimb_main ($options, $climber_id);
 

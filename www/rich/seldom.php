@@ -39,7 +39,7 @@ function process_best ($list)
 	return $result;
 }
 
-function seldom_climbs ($climber_id, $ranges)
+function seldom_climbs ($ranges, $climber_id)
 {
 	include 'db_names.php';
 
@@ -96,7 +96,7 @@ function seldom_climbs ($climber_id, $ranges)
 	return $results;
 }
 
-function seldom_main ($options)
+function seldom_main ($options, $climber_id)
 {
 	$output = '';
 	$ranges = array (12, 6, 4, 3, 2);
@@ -133,8 +133,7 @@ function seldom_main ($options)
 			break;
 	}
 
-	$climber_id = 1;
-	$list = seldom_climbs ($climber_id, $ranges);
+	$list = seldom_climbs ($ranges, $climber_id);
 
 	$total = 0;
 	foreach ($ranges as $lower) {
@@ -210,5 +209,6 @@ if (isset ($argc)) {
 	$options['format'] = $f;
 }
 
-echo seldom_main ($options);
+$climber_id = 1;
+echo seldom_main ($options, $climber_id);
 

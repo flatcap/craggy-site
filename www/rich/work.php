@@ -61,7 +61,6 @@ function work_score (&$list)
 	return $total;
 }
 
-
 function process_best ($list)
 {
 	$result = array();
@@ -163,7 +162,6 @@ function work_all_climbs ($climber_id)
 
 	return $list;
 }
-
 
 function work_main ($options, $climber_id)
 {

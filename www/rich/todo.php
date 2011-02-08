@@ -45,13 +45,11 @@ function process_best ($list)
 	return $result;
 }
 
-function todo_main($options)
+function todo_main($options, $climber_id)
 {
 	include 'db_names.php';
 
 	$last_update = date ('j M Y', strtotime (db_get_last_update()));
-
-	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
 			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
@@ -165,5 +163,6 @@ if (isset ($argc)) {
 	$options['format'] = $f;
 }
 
-echo todo_main ($options);
+$climber_id = 1;
+echo todo_main ($options, $climber_id);
 

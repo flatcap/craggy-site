@@ -50,13 +50,11 @@ function process_binary(&$list, $field, $value)
 	}
 }
 
-function climbs_main($options)
+function climbs_main ($options, $climber_id)
 {
 	include 'db_names.php';
 
 	$last_update = date ('j M Y', strtotime (db_get_last_update()));
-
-	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
 			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
@@ -172,5 +170,6 @@ if (isset ($argc)) {
 		$options['format'] = $f;
 }
 
-echo climbs_main ($options);
+$climber_id = 1;
+echo climbs_main ($options, $climber_id);
 

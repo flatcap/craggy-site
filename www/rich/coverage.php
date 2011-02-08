@@ -29,11 +29,9 @@ function process_best ($list)
 	return $result;
 }
 
-function coverage_get_data()
+function coverage_get_data ($climber_id)
 {
 	include 'db_names.php';
-
-	$climber_id = 1;
 
 	$table   = $DB_ROUTE .
 			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
@@ -113,9 +111,9 @@ function coverage_get_data()
 	return $output;
 }
 
-function coverage_main ($options)
+function coverage_main ($options, $climber_id)
 {
-	$list = coverage_get_data();
+	$list = coverage_get_data ($climber_id);
 
 	$columns = get_columns ($list[0]);
 
@@ -193,5 +191,6 @@ if (isset ($argc)) {
 	$options['format'] = $f;
 }
 
-echo coverage_main ($options);
+$climber_id = 1;
+echo coverage_main ($options, $climber_id);
 

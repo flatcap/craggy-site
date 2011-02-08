@@ -95,6 +95,9 @@ function colours_process ($colours)
 
 function colours_match_single ($lookup, $test)
 {
+	if (!$test)
+		return null;
+
 	if (array_key_exists ($test, $lookup))
 		return $lookup[$test]['id'];
 	else

@@ -74,7 +74,6 @@ function downclimb_main ($options)
 			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
 
 	$columns = array ("$DB_ROUTE.id               as route_id",
-		//	  "$DB_CLIMB.id               as climb_id",
 			  "$DB_PANEL.name             as panel",
 			  "$DB_COLOUR.colour          as colour",
 			  "$DB_GRADE.grade            as grade",

@@ -3,77 +3,9 @@
 set_include_path ('../../libs');
 
 include 'db.php';
-include 'db_names.php';
 include 'utils.php';
 
 function cmp_panel2($a, $b)
-{
-	$p1 = $a['panel'];
-	$g1 = $a['grade_seq'];
-	$c1 = $a['colour'];
-	$x1 = $a['priority'];
-
-	$p2 = $b['panel'];
-	$g2 = $b['grade_seq'];
-	$c2 = $b['colour'];
-	$x2 = $b['priority'];
-
-	if ($p1 != $p2)
-		return ($p1 < $p2) ? -1 : 1;
-
-	if ($g1 != $g2)
-		return ($g1 < $g2) ? -1 : 1;
-
-	if ($c1 != $c2)
-		return ($c1 < $c2) ? -1 : 1;
-
-	return ($x1 < $x2) ? -1 : 1;
-}
-
-function cmp_colour($a, $b)
-{
-	$c1 = $a['colour'];
-	$p1 = $a['panel'];
-	$g1 = $a['grade_seq'];
-
-	$c2 = $b['colour'];
-	$p2 = $b['panel'];
-	$g2 = $b['grade_seq'];
-
-	if ($c1 != $c2)
-		return ($c1 < $c2) ? -1 : 1;
-
-	if ($p1 != $p2)
-		return ($p1 < $p2) ? -1 : 1;
-
-	return ($g1 < $g2) ? -1 : 1;
-}
-
-function cmp_priority($a, $b)
-{
-	$x1 = $a['priority'];
-	$p1 = $a['panel'];
-	$g1 = $a['grade_seq'];
-	$c1 = $a['colour'];
-
-	$x2 = $b['priority'];
-	$p2 = $b['panel'];
-	$g2 = $b['grade_seq'];
-	$c2 = $b['colour'];
-
-	if ($x1 != $x2)
-		return ($x1 < $x2) ? -1 : 1;
-
-	if ($p1 != $p2)
-		return ($p1 < $p2) ? -1 : 1;
-
-	if ($g1 != $g2)
-		return ($g1 < $g2) ? -1 : 1;
-
-	return ($c1 < $c2) ? -1 : 1;
-}
-
-function cmp_score($a, $b)
 {
 	$s1 = $a['score'];
 	$p1 = $a['panel'];
@@ -95,181 +27,6 @@ function cmp_score($a, $b)
 		return ($g1 < $g2) ? -1 : 1;
 
 	return ($c1 < $c2) ? -1 : 1;
-}
-
-function cmp_type($a, $b)
-{
-	$t1 = $a['climb_type'];
-	$p1 = $a['panel'];
-	$g1 = $a['grade_seq'];
-	$c1 = $a['colour'];
-
-	$t2 = $b['climb_type'];
-	$p2 = $b['panel'];
-	$g2 = $b['grade_seq'];
-	$c2 = $b['colour'];
-
-	if ($t1 != $t2)
-		return ($t1 < $t2) ? -1 : 1;
-
-	if ($p1 != $p2)
-		return ($p1 < $p2) ? -1 : 1;
-
-	if ($g1 != $g2)
-		return ($g1 < $g2) ? -1 : 1;
-
-	return ($c1 < $c2) ? -1 : 1;
-}
-
-
-function work_priority(&$list, $pri)
-{
-	foreach ($list as $index => $row) {
-		$list[$index]['priority'] = $pri;
-	}
-}
-
-function work_todo()
-{
-	include 'db_names.php';
-
-	$climber_id = 1;
-
-	$table   = $DB_ROUTE .
-			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
-			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
-			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
-			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
-			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
-			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
-			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
-			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
-			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
-
-	$columns = array (
-			  "$DB_ROUTE.id               as route_id",
-			  "$DB_PANEL.name             as panel",
-			  "$DB_COLOUR.colour          as colour",
-			  "$DB_GRADE.grade            as grade",
-			  "$DB_GRADE.sequence         as grade_seq",
-			  "climb_type",
-			  "date_climbed",
-			  "success_id",
-			  "$DB_SUCCESS.outcome        as success",
-			  "nice                       as n",
-			  "$DB_DIFFICULTY.description as diff",
-			  "notes");
-
-	$where   = array ('date_end is null', '((success_id < 3) OR (success_id is null))', "$DB_GRADE.sequence < 600");
-
-	$list = db_select2($table, $columns, $where);
-
-	work_priority ($list, 'T');
-	return $list;
-}
-
-function work_downclimb()
-{
-	include 'db_names.php';
-
-	$climber_id = 1;
-
-	$table   = $DB_ROUTE .
-			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
-			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
-			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
-			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
-			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
-			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
-			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
-			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
-			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
-
-	$columns = array (
-			  "$DB_ROUTE.id               as route_id",
-			  "$DB_PANEL.name             as panel",
-			  "$DB_COLOUR.colour          as colour",
-			  "$DB_GRADE.grade            as grade",
-			  "$DB_GRADE.sequence         as grade_seq",
-			  "climb_type",
-			  "date_climbed",
-			  "success_id",
-			  "$DB_SUCCESS.outcome        as success",
-			  "nice                       as n",
-			  "$DB_DIFFICULTY.description as diff",
-			  "notes");
-
-	$where   = array ('date_end is null', 'success_id <> 4', "$DB_GRADE.sequence < 400");
-
-	$list = db_select2($table, $columns, $where);
-
-	work_priority ($list, 'D');
-	return $list;
-}
-
-function work_seldom_range ($m_start, $m_finish)
-{
-	include 'db_names.php';
-
-	$when_start  = db_date ("$m_start months ago");
-
-	$climber_id = 1;
-
-	$table   = $DB_ROUTE .
-			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
-			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
-			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
-			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
-			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
-			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
-			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
-			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
-			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
-
-	$columns = array (
-			  "$DB_ROUTE.id               as route_id",
-			  "$DB_PANEL.name             as panel",
-			  "$DB_COLOUR.colour          as colour",
-			  "$DB_GRADE.grade            as grade",
-			  "$DB_GRADE.sequence         as grade_seq",
-			  "climb_type",
-			  "date_climbed",
-			  "success_id",
-			  "$DB_SUCCESS.outcome        as success",
-			  "nice                       as n",
-			  "$DB_DIFFICULTY.description as diff",
-			  "notes");
-
-	$where   = array ('date_end is null', "$DB_GRADE.sequence < 600", "date_climbed < '$when_start'");
-
-	if (isset ($m_finish)) {
-		$when_finish = db_date ("$m_finish months ago");
-		array_push ($where, "date_climbed > '$when_finish'");
-	}
-
-	$list = db_select2($table, $columns, $where);
-
-	return $list;
-}
-
-function work_seldom()
-{
-	$output = array();
-	$ranges = array (6, 4, 3, 2);
-
-	$start  = null;
-	$finish = null;
-	foreach ($ranges as $num) {
-		$finish = $start;
-		$start  = $num;
-
-		$list = work_seldom_range ($start, $finish);
-		work_priority ($list, $start);
-
-		$output = array_merge ($output, $list);
-	}
-
-	return $output;
 }
 
 function work_score (&$list)
@@ -304,39 +61,121 @@ function work_score (&$list)
 	return $total;
 }
 
-function work_flatten ($list)
-{
-	$output = array();
 
-	$old = null;
+function process_best ($list)
+{
+	$result = array();
+
+	$id = 0;
 	foreach ($list as $row) {
-		$new = $row['panel'] . $row['colour'] . $row['grade'];
-		if ($new != $old) {
-			$output[] = $row;
-			$old = $new;
+		if ($row['route_id'] == $id) {
+			// duplicate
+			$d1 = $result[$id]['date_climbed'];
+			$d2 = $row['date_climbed'];
+			if ($d2 > $d1) {
+				$result[$id]['date_climbed'] = $d2;
+			}
+
+			$s1 = intval ($result[$id]['success_id']);
+			$s2 = intval ($row['success_id']);
+			if ($s2 > $s1) {
+				$result[$id]['success_id'] = $s2;
+				$result[$id]['success'] = $row['success'];
+			}
+
+			if ($row['notes'])
+				$results[$id]['notes'] = $row['notes'];
+		} else {
+			// copy the whole row
+			$id = $row['route_id'];
+			$result[$id] = $row;
+			$result[$id]['o'] = ($row['success_id'] > 2);	// Generate the onsight column
 		}
 	}
 
-	return $output;
+	return $result;
+}
+
+function work_all_climbs ($climber_id)
+{
+	include 'db_names.php';
+
+	$table = $DB_ROUTE .
+			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
+			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
+			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
+			" left join $DB_GRADE      on ($DB_ROUTE.grade_id       = $DB_GRADE.id)" .
+			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
+			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
+			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
+			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
+			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
+
+	$columns = array ("$DB_ROUTE.id               as route_id",
+			  "$DB_PANEL.name             as panel",
+			  "$DB_COLOUR.colour          as colour",
+			  "$DB_GRADE.grade            as grade",
+			  "$DB_GRADE.sequence         as grade_seq",
+			  "climb_type",
+			  "date_climbed",
+			  "success_id",
+			  "$DB_SUCCESS.outcome        as success",
+			  "nice                       as n",
+			  "$DB_DIFFICULTY.description as diff",
+			  "notes");
+
+	$where   = array ('date_end is null');
+
+	$list = db_select2($table, $columns, $where);
+	$list = process_best ($list);
+
+	$today = strtotime('today');
+	foreach ($list as $index => &$row) {
+		$s = $row['success_id'];
+		$g = $row['grade_seq'];
+
+		$d = $row['date_climbed'];
+		if (empty ($d) || ($d == '0000-00-00')) {
+			$m = '999';
+		} else {
+			$a = floor (($today - strtotime($d)) / 86400);
+			$m = sprintf ('%.1f', $a / 30.44);
+		}
+
+		if ((($s < 3) || empty ($s)) && ($g < 600)) {
+			$row['priority'] = 'T';			// to do
+		} else if (($s != 4) && ($g < 400)) {
+			$row['priority'] = 'D';			// downclimb
+		} else if ($g < 600) {
+			if ($m >= 6)
+				$row['priority'] = '6';		// 6 months
+			else if ($m >= 4)
+				$row['priority'] = '4';		// 4 months
+			else if ($m >= 3)
+				$row['priority'] = '3';		// 3 months
+			else if ($m >= 2)
+				$row['priority'] = '2';		// 2 months
+		}
+		if (!array_key_exists ('priority', $row)) {
+			unset ($list[$index]);
+		}
+	}
+
+	return $list;
 }
 
 
-function work_main ($options)
+function work_main ($options, $climber_id)
 {
-	$list_todo = work_todo();
-	$list_down = work_downclimb();
-	$list_seld = work_seldom();
-
-	$all = array_merge ($list_todo, $list_down, $list_seld);
-	usort ($all, 'cmp_panel2');
-	$all = work_flatten ($all);
+	$all = work_all_climbs ($climber_id);
 	$score = work_score ($all);
 
 	$cmp = 'cmp_panel2';
 	usort ($all, $cmp);
 
 	process_type ($all);
-	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'priority', 'score');
+
+	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'notes', 'priority', 'score');
 	$widths = column_widths ($all, $columns, true);
 	fix_justification ($widths);
 
@@ -361,7 +200,7 @@ function work_main ($options)
 			$output .= '</div>';
 
 			$output .= "<h2>Work <span>($count climbs)</span><span> (Score = $score)</span></h2>\n";
-			$output .= list_render_html ($all, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
+			$output .= list_render_html ($all, $columns, $widths, '{sortlist: [[7,1],[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
 			$output .= get_errors();
 			$output .= '</body>';
@@ -409,5 +248,6 @@ if (isset ($argc)) {
 	$options['format'] = $f;
 }
 
-echo work_main($options);
+$climber_id = 1;
+echo work_main($options, $climber_id);
 

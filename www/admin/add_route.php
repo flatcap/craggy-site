@@ -8,21 +8,15 @@ include 'utils.php';
 function add_main()
 {
 	$output = '';
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$output .= html_header ('Add Routes', '../');
 	$output .= '<body>';
-
-	/*
-	$output .= "<div class='header'>";
-	$output .= "<img alt='craggy logo' src='../img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
-	$output .= "Add Routes <span>(Last updated: $last_update)</span>";
-	$output .= "</div>";
 	$output .= html_menu('../');
-	*/
 
 	$output .= "<div class='content'>";
-	$output .= '<h2>Add Routes</h2>';
+	$output .= "<div class='title'>";
+	$output .= "<h1>Add Routes</h1>";
+	$output .= "</div>";
 
 	$output .= "<div id='entry_area'>";
 

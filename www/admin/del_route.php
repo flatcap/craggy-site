@@ -8,19 +8,15 @@ include 'utils.php';
 function route_main()
 {
 	$output = '';
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$output .= html_header ('Delete Routes', '../');
 	$output .= '<body>';
-
-	$output .= "<div class='header'>";
-	$output .= "<img alt='craggy logo' src='../img/craggy2.png'>&nbsp;&nbsp;&nbsp;&nbsp;";
-	$output .= "Delete Routes <span>(Last updated: $last_update)</span>";
-	$output .= "</div>";
 	$output .= html_menu('../');
 
-	$output .= "<div class='content'>CONTENT";
-	$output .= '<h2>Delete Routes</h2>';
+	$output .= "<div class='content'>";
+	$output .= "<div class='title'>";
+	$output .= "<h1>Delete Routes</h1>";
+	$output .= "</div>";
 
 	$output .= "<div id='entry_area'>ENTRY";
 	$output .= "<input id='entry' type='text' size='30' value='42-45'>";		// FOCUS

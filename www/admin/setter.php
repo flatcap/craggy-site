@@ -8,16 +8,15 @@ include 'utils.php';
 function setter_main()
 {
 	$output = '';
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
 
 	$output .= html_header ('Setter', '../');
 	$output .= '<body>';
-
-	$output .= "<div class='header'>Setters <span>(Last updated: $last_update)</span></div>";
 	$output .= html_menu('../');
 
 	$output .= "<div class='content'>";
-	$output .= '<h2>Setters</h2>';
+	$output .= "<div class='title'>";
+	$output .= '<h1>Setters</h1>';
+	$output .= '</div>';
 
 	$output .= "<div id='list_area'>";
 	$output .= "<div id='setter_table'>";

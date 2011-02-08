@@ -12,7 +12,7 @@ $g_colours = null;
 
 if (!isset ($_GET))
 	return;
-	
+
 if (!array_key_exists ('q', $_GET))
 	return;
 

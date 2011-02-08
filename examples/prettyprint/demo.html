@@ -12,13 +12,13 @@
             </style>
     </head>
     <body>
-        
+
         <!-- prettyPrint demo -->
         <div id="debug"></div>
-        
+
         <script src="prettyprint.js"></script>
         <script>
-        
+
             var randomObject = {
                 someNumber: 99283,
                 someRegexyThing: new RegExp('a'),
@@ -34,16 +34,16 @@
                 },
                 domThing: document.body.firstChild
             };
-            
+
             randomObject.circularRef = randomObject;
-            
-            
+
+
             var ppTable = prettyPrint(randomObject);
 
             document.getElementById('debug').appendChild(ppTable);
-            
+
         </script>
-        
+
     </body>
 </html>
 

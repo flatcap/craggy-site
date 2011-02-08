@@ -11,7 +11,7 @@ Example:
 		No hands on aretes
 		Hands allowed on volumes
 		Feet allowed on volumes
-	
+
 	Route 40 Orange
 	Panel 40 tags: slab, arete
 	=> notes:
@@ -21,7 +21,7 @@ Example:
 	Panel 51 tags: wall
 	=> notes:
 		<none>
-	
+
 
 Each route note needs to link to its opposite
 	No hands on arete <--> Hands allowed on arete

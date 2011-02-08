@@ -8,7 +8,7 @@ include 'db_names.php';
 
 #if (!isset ($_GET))
 #	return;
-#	
+#
 #if (!array_key_exists ('q', $_GET))
 #	return;
 #
@@ -24,7 +24,7 @@ header('Content-Type: application/xml; charset=ISO-8859-1');
 
 $table   = $DB_CLIMB;
 $columns = array ('id', 'route_id', 'date_climbed', 'success_id');
-$where   = array ('climber_id = 1', 'active = 1'); 
+$where   = array ('climber_id = 1', 'active = 1');
 $order   = null;
 
 $climb_list = db_select($table, $columns, $where, $order);

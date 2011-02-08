@@ -15,7 +15,7 @@ while($array = mysql_fetch_array($result)) {
 	$title = $array['title'];
 	$firstname = $array['firstname'];
 	$surname = $array['surname'];
-	
+
 	$xml .= "\t\t<person>\n";
 	$xml .= "\t\t\t<firstname title=\"$title\">$firstname</firstname>\n";
 	$xml .= "\t\t\t<surname>$surname</surname>\n";

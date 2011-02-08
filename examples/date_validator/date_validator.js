@@ -45,7 +45,7 @@ function date_callback()
 function date_onblur()
 {
 	str = date_entry.value;
-	if (str.length == 0) { 
+	if (str.length == 0) {
 		date_entry.value = date_default;
 		str = date_default;
 	}

@@ -318,7 +318,7 @@ is this a rich or not?
 		rich menu
 		google analytics
 		validation box
-	
+
 similar check: is_this_live_site()
 	disable debugging, etc
 

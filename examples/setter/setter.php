@@ -7,7 +7,7 @@ include 'db_names.php';
 
 if (!isset ($_GET))
 	return;
-	
+
 if (!array_key_exists ('q', $_GET))
 	return;
 
@@ -17,7 +17,7 @@ header('Content-Type: application/xml; charset=ISO-8859-1');
 
 $table   = $DB_SETTER;
 $columns = array ('id', 'initials', 'first_name', 'surname');
-$where   = array ("initials like '%{$q}%' or first_name like '%{$q}%' or surname like '%{$q}%'"); 
+$where   = array ("initials like '%{$q}%' or first_name like '%{$q}%' or surname like '%{$q}%'");
 $order   = null;
 
 $setter_list = db_select($table, $columns, $where, $order);

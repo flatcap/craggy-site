@@ -34,7 +34,7 @@ function callback_keypress (e)
 		}
 		return false;
 	} else {
-		results.innerHTML = 
+		results.innerHTML =
 			'keyCode  = ' + e.keyCode  + '<br />' +
 			'charCode = ' + e.charCode + '<br />' +
 			'shiftKey = ' + e.shiftKey + '<br />' +		// Shift key

@@ -10,4 +10,4 @@ SET GLOBAL general_log = 'ON';
 This method works on any platform and does not require a server restart.
 
 The session sql_log_off variable can be set to ON or OFF to disable or enable
-general query logging for the current connection. 
+general query logging for the current connection.

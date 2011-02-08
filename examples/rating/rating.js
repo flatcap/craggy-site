@@ -26,7 +26,7 @@ function rating_initialise (div_name, status, desc, ids, texts, css)
 		link.onclick     = rating_click;
 		link.onmouseover = rating_mouseover;
 		link.onmouseout  = rating_mouseout;
-		div.appendChild (link); 
+		div.appendChild (link);
 	}
 
 	rating_status (index, desc);

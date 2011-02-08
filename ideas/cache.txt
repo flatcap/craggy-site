@@ -4,7 +4,7 @@ use ttl+creation_time
 hit works - use it for cache stats?
 
 
-10 => 
+10 =>
 	array
 		info          => 6a_expiry
 		ttl           => 0
@@ -16,7 +16,7 @@ hit works - use it for cache stats?
 		access_time   => 1294759848
 		ref_count     => 0
 		mem_size      => 648
-11 => 
+11 =>
 	array
 		info          => 6a_list
 		ttl           => 20
@@ -30,7 +30,7 @@ hit works - use it for cache stats?
 		mem_size      => 27304
 
 
-10 => 
+10 =>
 	array
 		info          => 6a_expiry
 		ttl           => 0
@@ -42,7 +42,7 @@ hit works - use it for cache stats?
 		access_time   => 1294759953
 		ref_count     => 0
 		mem_size      => 648
-11 => 
+11 =>
 	array
 		info          => 6a_list
 		ttl           => 0

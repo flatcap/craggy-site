@@ -111,7 +111,7 @@ function click_add()
 		xmlhttp_add = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_add.onreadystatechange = callback_add;
-	xmlhttp_add.open ("GET", "add_work.php?action=add&data=" + encodeURIComponent (entry_panel.value));
+	xmlhttp_add.open ("GET", "add_route_work.php?action=add&data=" + encodeURIComponent (entry_panel.value));
 	xmlhttp_add.send();
 }
 
@@ -158,7 +158,7 @@ function click_save()
 		xmlhttp_save = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	xmlhttp_save.onreadystatechange = callback_save;
-	xmlhttp_save.open ("GET", "add_work.php?action=save&data=" + xml);
+	xmlhttp_save.open ("GET", "add_route_work.php?action=save&data=" + xml);
 	xmlhttp_save.setRequestHeader ("Content-Type", "text/plain");
 	xmlhttp_save.send();
 }

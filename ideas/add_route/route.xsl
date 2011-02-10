@@ -5,6 +5,10 @@
 	<xsl:variable name="route_id_exists" select="//route_id[1]" />
 	<xsl:variable name="id_exists" select="//id[1]" />
 	<xsl:variable name="message_exists" select="//message[1]" />
+	<xsl:variable name="climb_type_exists" select="//climb_type[1]" />
+	<xsl:variable name="success_exists" select="//success[1]" />
+	<xsl:variable name="difficulty_exists" select="//difficulty[1]" />
+	<xsl:variable name="nice_exists" select="//nice[1]" />
 	<xsl:variable name="setter_exists" select="//setter[1]" />
 	<xsl:variable name="date_exists" select="//date[1]" />
 	<xsl:variable name="notes_exists" select="//notes[1]" />
@@ -31,8 +35,20 @@
 			<th>Panel</th>
 			<th>Colour</th>
 			<th>Grade</th>
+			<xsl:if test="$climb_type_exists">
+			<th>Type</th>
+			</xsl:if>
 			<xsl:if test="$setter_exists">
 			<th>Setter</th>
+			</xsl:if>
+			<xsl:if test="$success_exists">
+			<th>Success</th>
+			</xsl:if>
+			<xsl:if test="$difficulty_exists">
+			<th>Difficulty</th>
+			</xsl:if>
+			<xsl:if test="$nice_exists">
+			<th>Nice</th>
 			</xsl:if>
 			<xsl:if test="$date_exists">
 			<th>Date</th>
@@ -58,8 +74,20 @@
 				<td><xsl:value-of select="panel"/></td>
 				<td><xsl:value-of select="colour"/></td>
 				<td><xsl:value-of select="grade"/></td>
+				<xsl:if test="$climb_type_exists">
+				<td><xsl:value-of select="climb_type"/></td>
+				</xsl:if>
 				<xsl:if test="$setter_exists">
 				<td><xsl:value-of select="setter"/></td>
+				</xsl:if>
+				<xsl:if test="$success_exists">
+				<td><xsl:value-of select="success"/></td>
+				</xsl:if>
+				<xsl:if test="$difficulty_exists">
+				<td><xsl:value-of select="difficulty"/></td>
+				</xsl:if>
+				<xsl:if test="$nice_exists">
+				<td><xsl:value-of select="nice"/></td>
 				</xsl:if>
 				<xsl:if test="$date_exists">
 				<td><xsl:value-of select="date"/></td>

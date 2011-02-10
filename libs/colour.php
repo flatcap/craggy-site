@@ -1,7 +1,5 @@
 <?php
 
-set_include_path ('../../libs');
-
 $g_lookup  = null;
 
 function colour_initialise()

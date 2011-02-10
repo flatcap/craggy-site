@@ -9,6 +9,7 @@
 	<xsl:variable name="success_exists" select="//success[1]" />
 	<xsl:variable name="difficulty_exists" select="//difficulty[1]" />
 	<xsl:variable name="nice_exists" select="//nice[1]" />
+	<xsl:variable name="onsight_exists" select="//onsight[1]" />
 	<xsl:variable name="setter_exists" select="//setter[1]" />
 	<xsl:variable name="date_exists" select="//date[1]" />
 	<xsl:variable name="notes_exists" select="//notes[1]" />
@@ -50,6 +51,9 @@
 			<xsl:if test="$nice_exists">
 			<th>Nice</th>
 			</xsl:if>
+			<xsl:if test="$onsight_exists">
+			<th>Onsight</th>
+			</xsl:if>
 			<xsl:if test="$date_exists">
 			<th>Date</th>
 			</xsl:if>
@@ -88,6 +92,9 @@
 				</xsl:if>
 				<xsl:if test="$nice_exists">
 				<td><xsl:value-of select="nice"/></td>
+				</xsl:if>
+				<xsl:if test="$onsight_exists">
+				<td><xsl:value-of select="onsight"/></td>
 				</xsl:if>
 				<xsl:if test="$date_exists">
 				<td><xsl:value-of select="date"/></td>

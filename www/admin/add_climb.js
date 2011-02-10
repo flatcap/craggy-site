@@ -7,6 +7,8 @@ var entry_date;
 var xmlhttp_add;
 var xmlhttp_save;
 
+var climb_data;
+
 initialise_buttons();
 
 function initialise_buttons()
@@ -97,77 +99,104 @@ function click_save()
 }
 
 
+function climb_get_node (node, name)
+{
+	try {
+		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
+	} catch (er) {
+	}
+
+	return "";
+}
+
+function table_create (columns, ticklist)
+{
+	var t  = document.createElement ('table');
+	var th = document.createElement ('thead');
+	var tb = document.createElement ('tbody');
+
+	t.border      = 1;
+	t.cellspacing = 0;
+
+	t.appendChild (th);
+	t.appendChild (tb);
+
+	var r = t.insertRow (0)
+
+	if (ticklist) {
+		var c = document.createElement ('th');
+		var i = document.createElement ('input');
+
+		i.id   = 'tick_master';
+		i.type = 'checkbox';
+		c.appendChild (i);
+		r.appendChild (c);
+	}
+
+	var name;
+	for (name in columns) {
+		var c = document.createElement ('th');
+		c.innerHTML = columns[name];
+		r.appendChild (c);
+	}
+
+	return t;
+}
+
+function table_add_row (table, columns, data, tick)
+{
+	if (!table || !columns || !data)
+		return;
+	
+	var r = table.insertRow (-1);
+	var c = r.insertCell (-1)
+	var i = document.createElement ('input');
+
+	i.id   = 'tick_master';
+	i.type = 'checkbox';
+	c.appendChild (i);
+	r.appendChild (c);
+
+	for (name in columns) {
+		c = r.insertCell (-1)
+		c.innerHTML = climb_get_node (data, columns[name]);
+	}
+}
+
+
 function callback_add()
 {
 	if ((xmlhttp_add.readyState != 4) || (xmlhttp_add.status != 200))
 		return;
 
-	alert (xmlhttp_add.responseText);
-	return;
-	var txt = "<table cellspacing=0 border=1>" +
-		"<thead>" +
-		"<tr>" +
-		"<th><input type='checkbox' id='tick_master'></th>" +
-		"<th>ID</th>" +
-		"<th>Panel</th>" +
-		"<th>Colour</th>" +
-		"<th>Grade</th>" +
-		"<th>Setter</th>" +
-		"<th>Date</th>" +
-		"<th>Notes</th>" +
-		"</tr>" +
-		"</thead>" +
-		"<tbody>";
+	var list = document.getElementById ('climb_list');
+	if (!list)
+		return;
 
-	var setter = entry_setter.value;
-	var date   = entry_date.value;
+	if (list.children.length === 0) {
+		var columns = new Array ("ID", "Panel", "Colour", "Grade", "Setter", "Date", "Notes");
+		var t = table_create (columns, true);
+		list.appendChild (t);
+	}
+
+	var table = list.getElementsByTagName ('table');
+
+	var date = entry_date.value;
 
 	if (!climb_data)
 		climb_data = new Array();
+
 	var i;
 	var id_base = climb_data.length;
-	x = xmlhttp_add.responseXML.documentElement.getElementsByTagName("climb");
+	x = xmlhttp_add.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		var climb = new Object();
-		id = id_base + i;
-		climb.id       = id;
-		climb.panel    = climb_get_node (x[i], "panel");
-		climb.colour   = climb_get_node (x[i], "colour");
-		climb.grade    = climb_get_node (x[i], "grade");
-		climb.date     = date;
-		climb.setter   = setter;
-		climb_data[id] = climb;
+		var columns = new Array ("id", "panel", "colour", "grade", "setter", "date", "notes");
+		table_add_row (table[0], columns, x[i], true);
 	}
 
-	for (i = 0; i < climb_data.length; i++) {
-		id     = climb_data[i].id;
-		panel  = climb_data[i].panel;
-		colour = climb_data[i].colour;
-		grade  = climb_data[i].grade;
-		date   = climb_data[i].date;
-		setter = climb_data[i].setter;
-
-		txt += "<tr>";
-		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";
-		txt += "<td>" + id + "</td>";
-		txt += "<td>" + panel + "</td>";
-		txt += "<td>" + colour + "</td>";
-		txt += "<td>" + grade + "</td>";
-		txt += "<td>" + setter + "</td>";
-		txt += "<td>" + date + "</td>";
-		txt += "<td>" + '' + "</td>";
-		txt += "</tr>";
-	}
-
-	txt += "</tbody>" +
-	       "</table>";
-
-	var table = document.getElementById ('climb_list');
-	table.innerHTML = txt;
-
-	initialise_ticks();
-	initialise_rows();
-	buttons_update();
+	//initialise_ticks();
+	//initialise_rows();
+	//buttons_update();
 
 	// empty climb entry
 	// set focus

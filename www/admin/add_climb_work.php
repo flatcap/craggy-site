@@ -2,12 +2,10 @@
 
 set_include_path ('../../libs');
 
-//include 'db.php';
-//include 'utils.php';
 include 'colour.php';
 
 //$_GET['data'] = "46 pw, blu, bg";
-$_GET['data'] = "34 rd,gn,fp";
+//$_GET['data'] = "34 rd,gn,fp";
 
 if (!isset ($_GET)) {
 	echo "no get";
@@ -40,7 +38,7 @@ if (!is_numeric ($panel)) {
 	return;
 }
 
-$list = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?><list />");
+$list = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?"."><list />");
 $list->addAttribute ('type', 'climb');
 
 foreach ($parts as $colour) {
@@ -62,6 +60,7 @@ foreach ($parts as $colour) {
 	$climb->addChild ('difficulty', 'medium');		// difficulty
 	$climb->addChild ('climb_type', 'Top Rope');		// type
 	$climb->addChild ('nice', 'N');				// nice
+	$climb->addChild ('onsight', 'O');			// onsight
 	$climb->addChild ('date', '2011-02-05');		// date_climbed
 	$climb->addChild ('climb_notes', 'tricky');		// notes - climb_notes
 	//$climb->addChild ('errors', 'x is not y');		// notes - error messages

@@ -4,8 +4,6 @@ var button_delete;
 var entry_climb;
 var entry_date;
 
-var climb_data;
-
 initialise_buttons();
 
 function initialise_buttons()
@@ -71,6 +69,7 @@ function click_delete()
 	var body = table.getElementsByTagName('tbody');
 	var trs = body[0].childNodes;
 
+	var climb_data;
 	ticks.reverse();
 	for (var i = 0; i < count; i++) {
 		var index = ticks[i];
@@ -83,17 +82,32 @@ function click_save()
 {
 	notify_close();
 
+	var list = document.getElementById ('climb_list');
+	if (!list)
+		return;
+
+	var tb = document.getElementsByTagName ('tbody');
+	if (!tb)
+		return;
+	var rows = tb[0].children;
+
+	for (var i = 0; i < rows.length; i++) {
+		alert ("hello");
+	}
+
+	return;
+
+	/*
 	var ticks = get_ticks();
 	var count = ticks.length;
 	if (count === 0) {
 		buttons_update();	// Shouldn't happen
 		return;
 	}
-
-	var xml = render_xml (climb_data);
-	xml = encodeURIComponent (xml);
+	*/
 
 	var x;
+	var xml = "hello";
 	if (window.XMLHttpRequest) {
 		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
@@ -155,7 +169,9 @@ function table_add_row (table, columns, data, tick)
 	if (!table || !columns || !data)
 		return;
 	
-	var r = table.insertRow (-1);
+	var tb = table.getElementsByTagName ('tbody');
+	var r = document.createElement ('tr');
+	tb[0].appendChild (r);
 	var c = r.insertCell (-1)
 	var i = document.createElement ('input');
 
@@ -171,6 +187,26 @@ function table_add_row (table, columns, data, tick)
 }
 
 
+function display_errors (xml)
+{
+	var x = xml.responseXML.documentElement.getElementsByTagName("error");
+	var errstr = "";
+	for (i = 0; i < x.length; i++) {
+		var e = x[i];
+		if (e && e.childNodes) {
+			errstr += e.childNodes[0].nodeValue + "<br>";
+		}
+	}
+
+	if (errstr.length > 0) {
+		notify_message (errstr);
+		return true;
+	}
+
+	return false;
+}
+
+
 function callback_add()
 {
 	if ((this.readyState != 4) || (this.status != 200))
@@ -182,24 +218,12 @@ function callback_add()
 	if (!list)
 		return;
 
-	var x = this.responseXML.documentElement.getElementsByTagName("error");
-	var errstr = "";
-	for (i = 0; i < x.length; i++) {
-		var e = x[i];
-		if (e && e.childNodes) {
-			errstr += e.childNodes[0].nodeValue + "<br>";
-		}
-	}
-
-	// if error, display it and quit
-	if (errstr.length > 0) {
-		notify_message (errstr);
+	if (display_errors(this))
 		return;
-	}
 
 	if (list.children.length === 0) {
 		//var columns = new Array ("ID", "Panel", "Colour", "Grade", "Type", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
-		var columns = new Array ("", "", "", "", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
+		var columns = new Array ("", "", "", "", "Date", "Success", "Diff", "Nice", "Notes");
 		var t = table_create (columns, true);
 		list.appendChild (t);
 	}
@@ -208,14 +232,10 @@ function callback_add()
 
 	var date = entry_date.value;
 
-	if (!climb_data)
-		climb_data = new Array();
-
 	var i;
-	var id_base = climb_data.length;
 	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		var columns = new Array ("panel", "colour", "grade", "climb_type", "date", "success", "difficulty", "nice", "notes", "error");
+		var columns = new Array ("panel", "colour", "grade", "climb_type", "date", "success", "difficulty", "nice", "notes");
 		table_add_row (table[0], columns, x[i], true);
 	}
 
@@ -232,8 +252,11 @@ function callback_save()
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	x = this.responseText;
-	notify_message (x);
+	if (display_errors(this))
+		return;
+
+	//x = this.responseText;
+	//notify_message (x);
 }
 
 function callback_catch_enter (e)

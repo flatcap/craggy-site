@@ -260,6 +260,11 @@ function climb_parse_climb (&$xml, $text)
 	return $result;
 }
 
+
+function climb_add_climb()
+{
+}
+
 function climb_main (&$xml)
 {
 	global $_GET;
@@ -354,7 +359,14 @@ function climb_main (&$xml)
 
 		$id = $c['id'];
 		if (array_key_exists ($id, $notes)) {
-			$c['notes']      = $notes[$id]['notes'];
+			$n1 = $notes[$id]['notes'];
+			$n2 = $c['notes'];
+			if (!empty ($n1) && !empty ($n2)) {
+				$n1 = "$n1; $n2";
+			} else {
+				$n1 = trim ("$n1 $n2");
+			}
+			$c['notes']      = $n1;
 			$c['difficulty'] = $notes[$id]['difficulty'];
 			if (($c['nice'] === true) || ($notes[$id]['nice'] == '1'))
 				$c['nice'] = 'nice';

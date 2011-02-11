@@ -1,7 +1,7 @@
 var button_add;
 var button_save;
 var button_delete;
-var entry_panel;
+var entry_climb;
 var entry_date;
 
 var climb_data;
@@ -18,9 +18,9 @@ function initialise_buttons()
 	button_save.onclick   = click_save;
 	button_delete.onclick = click_delete;
 
-	entry_panel = document.getElementById ('entry');
-	entry_panel.onkeypress = callback_catch_enter;
-	entry_panel.focus();
+	entry_climb = document.getElementById ('entry');
+	entry_climb.onkeypress = callback_catch_enter;
+	entry_climb.focus();
 
 	entry_date    = document.getElementById ('date');
 	entry_climber = document.getElementById ('climber');
@@ -34,7 +34,9 @@ function initialise_buttons()
 function click_add()
 {
 	notify_close();
-	var str = entry_panel.value;
+	var str = entry_climb.value;
+	if (str.length === 0)
+		return;
 	str = encodeURI(str);
 
 	var x;
@@ -46,7 +48,7 @@ function click_add()
 
 	str  = "add_climb_work.php?";
 	str += "action=add";
-	str += "&data=" + encodeURIComponent (entry_panel.value);
+	str += "&climbs=" + encodeURIComponent (entry_climb.value);
 	str += "&date=" + encodeURIComponent (entry_date.value);
 	str += "&climber=" + encodeURIComponent (entry_climber.value);
 	x.onreadystatechange = callback_add;
@@ -174,14 +176,30 @@ function callback_add()
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	alert (this.responseText);
-	return;
+	//var x = this.responseText; notify_message (x); return;
+
 	var list = document.getElementById ('climb_list');
 	if (!list)
 		return;
 
+	var x = this.responseXML.documentElement.getElementsByTagName("error");
+	var errstr = "";
+	for (i = 0; i < x.length; i++) {
+		var e = x[i];
+		if (e && e.childNodes) {
+			errstr += e.childNodes[0].nodeValue + "<br>";
+		}
+	}
+
+	// if error, display it and quit
+	if (errstr.length > 0) {
+		notify_message (errstr);
+		return;
+	}
+
 	if (list.children.length === 0) {
-		var columns = new Array ("ID", "Panel", "Colour", "Grade", "Setter", "Date", "Notes");
+		//var columns = new Array ("ID", "Panel", "Colour", "Grade", "Type", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
+		var columns = new Array ("", "", "", "", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
 		var t = table_create (columns, true);
 		list.appendChild (t);
 	}
@@ -195,9 +213,9 @@ function callback_add()
 
 	var i;
 	var id_base = climb_data.length;
-	x = this.responseXML.documentElement.getElementsByTagName("route");
+	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		var columns = new Array ("id", "panel", "colour", "grade", "setter", "date", "notes");
+		var columns = new Array ("panel", "colour", "grade", "climb_type", "date", "success", "difficulty", "nice", "notes", "error");
 		table_add_row (table[0], columns, x[i], true);
 	}
 
@@ -205,7 +223,7 @@ function callback_add()
 	//initialise_rows();
 	//buttons_update();
 
-	// empty climb entry
+	entry_climb.value = "";
 	// set focus
 }
 

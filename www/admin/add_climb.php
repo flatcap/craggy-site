@@ -27,7 +27,8 @@ function add_main()
 	$output .= "<input id='date' type='text' size='30' value='today'><br>";
 
 	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
-	$output .= "<input id='entry' type='text' size='30' value='46 pw, blu, bg'>";	// FOCUS
+	//$output .= "<input id='entry' type='text' size='30' value='46 pw, blu, bg'>";
+	$output .= "<input id='entry' type='text' size='30' value='71 all'>";
 	//$output .= "<input id='entry' type='text' size='30' value=''>";
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	//$output .= "<div id='matches'>46 Purple/White 5, Blue 6a+, Beige 6b, Features 7b+</div>";
@@ -38,7 +39,6 @@ function add_main()
 	$output .= "<div id='notify_area'></div>";
 	$output .= "<div id='list_area'>";
 	$output .= "<div id='climb_list'>";
-	$output .= "row, route_id, panel, colour, grade, type, date_climbed, success, nice, diff, notes, messages";
 	$output .= "</div>";
 
 	$output .= '<br>';

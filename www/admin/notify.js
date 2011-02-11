@@ -20,6 +20,11 @@ function notify_message (message, background, colour)
 		return;
 	}
 
+	if (message.length == 0) {
+		notify_close();
+		return;
+	}
+
 	if (!background) {
 		background = 'orange';
 	}

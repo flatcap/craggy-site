@@ -3,47 +3,118 @@
 set_include_path ('../../libs');
 
 include 'colour.php';
+include 'db.php';
+include 'db_names.php';
 
 date_default_timezone_set('UTC');
 
-function add_error ($xml, $message)
+global $g_climbers;
+global $g_panels;
+
+function climb_add_error (&$xml, $message)
 {
 	$xml->addChild ('error', $message);
 }
 
-function valid_command ($xml)
+
+function climb_get_climbers()
+{
+	global $DB_CLIMBER;
+	global $g_climbers;
+
+	$table   = $DB_CLIMBER;
+	$columns = array ('id', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
+
+	$g_climbers = db_select ($table, $columns);
+}
+
+function climb_get_panels()
+{
+	global $DB_V_ROUTE;
+	global $g_panels;
+
+	$table   = $DB_V_ROUTE;
+	$columns = array ('id', 'panel', 'colour', 'grade', 'climb_type');
+	$where   = null;
+	$order   = "panel_seq, grade_seq, colour";
+
+	$g_panels = db_select ($table, $columns, $where, $order);
+}
+
+function climb_get_all_panel ($name)
+{
+	global $g_panels;
+
+	$results = array();
+	foreach ($g_panels as $p) {
+		if ($p['panel'] == $name) {
+			$results[] = $p;
+		}
+	}
+
+	return $results;
+}
+
+function climb_get_notes ($panel)
+{
+	global $DB_CLIMB_NOTE;
+	global $DB_DIFFICULTY;
+	global $DB_PANEL;
+	global $DB_RATING;
+	global $DB_ROUTE;
+
+	$table   = $DB_PANEL .
+			" left join $DB_ROUTE      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
+			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
+			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
+			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
+
+	$columns = array ("$DB_ROUTE.id               as id",
+			  "$DB_PANEL.name             as panel",
+			  "$DB_DIFFICULTY.description as difficulty",
+			  "$DB_CLIMB_NOTE.notes       as notes");
+
+	$where   = array ("$DB_PANEL.name = '$panel'");
+
+	$list = db_select($table, $columns, $where);
+
+	return $list;
+}
+
+
+function climb_valid_command (&$xml)
 {
 	global $_GET;
 
 	$success = true;
 
 	if (!isset ($_GET)) {
-		add_error ($xml, "No get");
+		climb_add_error ($xml, "No get");
 		$success = false;
 	} else {
 		if (!array_key_exists ('action', $_GET)) {
-			add_error ($xml, "No action");
+			climb_add_error ($xml, "No action");
 			$success = false;
 		}
 
 		if (!array_key_exists ('climbs', $_GET)) {
-			add_error ($xml, "No climbs");
+			climb_add_error ($xml, "No climbs");
 			$success = false;
-		}
-
-		$climbs = trim ($_GET['climbs']);
-		if (empty ($climbs)) {
-			add_error ($xml, "Empty climbs");
-			$success = false;
+		} else {
+			$climbs = trim ($_GET['climbs']);
+			if (empty ($climbs)) {
+				climb_add_error ($xml, "Empty climbs");
+				$success = false;
+			}
 		}
 
 		if (!array_key_exists ('date', $_GET)) {
-			add_error ($xml, "No date");
+			climb_add_error ($xml, "No date");
 			$success = false;
 		}
 
 		if (!array_key_exists ('climber', $_GET)) {
-			add_error ($xml, "No climber");
+			climb_add_error ($xml, "No climber");
 			$success = false;
 		}
 	}
@@ -51,7 +122,36 @@ function valid_command ($xml)
 	return $success;
 }
 
-function parse_climb ($xml, $text)
+function climb_valid_climber (&$xml, $name)
+{
+	global $g_climbers;
+
+	foreach ($g_climbers as $c) {
+		if (strcasecmp ($c['name'], $name) == 0) {
+			return $c['id'];
+		}
+	}
+
+	climb_add_error ($xml, sprintf ("'%s' is not a valid climber", $name));
+	return null;
+}
+
+function climb_valid_panel (&$xml, $name)
+{
+	global $g_panels;
+
+	foreach ($g_panels as $p) {
+		if (strcasecmp ($p['panel'], $name) == 0) {
+			return $p['id'];
+		}
+	}
+
+	climb_add_error ($xml, sprintf ("'%s' is not a valid panel name", $name));
+	return null;
+}
+
+
+function climb_parse_climb (&$xml, $text)
 {
 	//      clean
 	// (c)  clean
@@ -73,20 +173,23 @@ function parse_climb ($xml, $text)
 		}
 	}
 
-	$colour = $parts[0];
+	$colour = strtolower ($parts[0]);
 	if (array_key_exists (1, $parts))
 		$note = strtolower ($parts[1]);
 	else
 		$note = "";
 
-	$c = colour_match ($colour);
-	if ($c === null) {
-		printf ("'%s' is not a valid colour\n", $colour);
-		return null;
+	if ($colour == 'all') {
+		// We'll deal with this later
+		$result['colour'] = $colour;
+	} else {
+		$c = colour_match ($colour);
+		if ($c === null) {
+			climb_add_error ($xml, sprintf ("'%s' is not a valid colour\n", $colour));
+			return null;
+		}
+		$result['colour'] = $c['colour'];
 	}
-
-	$result['colour'] = $c['colour'];
-	//printf ("colour = %s\n", $colour);
 
 	// 1: strip out nice [n]
 	$pos = strpos ($note, 'n');
@@ -111,7 +214,7 @@ function parse_climb ($xml, $text)
 		}
 
 		if ($count === 0) {
-			printf ("Bad multiple: %s\n", $n);
+			climb_add_error ($xml, sprintf ("Bad multiple: %s\n", $n));
 			return null;
 		}
 
@@ -120,7 +223,7 @@ function parse_climb ($xml, $text)
 		} else if ($note == 'r') {
 			$type = "rest";
 		} else {
-			printf ("Unknown type: %s\n", $note);
+			climb_add_error ($xml, sprintf ("Unknown type: %s\n", $note));
 			return null;
 		}
 
@@ -156,7 +259,7 @@ function parse_climb ($xml, $text)
 	return $result;
 }
 
-function climb_main ($xml)
+function climb_main (&$xml)
 {
 	global $_GET;
 
@@ -166,26 +269,27 @@ function climb_main ($xml)
 	$climber = $_GET['climber'];
 
 	if ($action != "add") {
-		add_error ($xml, sprintf ("'%s' is not a valid action", $action));
+		climb_add_error ($xml, sprintf ("'%s' is not a valid action", $action));
 		return;
 	}
 
 	$t = strtotime ('today');
 	$d = strtotime ($date);
 	if ($d === false) {
-		add_error ($xml, sprintf ("'%s' is not a valid date", $date));
+		climb_add_error ($xml, sprintf ("'%s' is not a valid date", $date));
 		return;
 	}
 
 	if ($d > $t) {
-		add_error ($xml, sprintf ("'%s': Date cannot be in the future", $date));
+		climb_add_error ($xml, sprintf ("'%s': Date cannot be in the future", $date));
 		return;
 	}
 
 	$date = strftime('%Y-%m-%d', $d);
 
-	if ($climber != "Rich Russon") {
-		add_error ($xml, sprintf ("'%s' is not a valid climber", $climber));
+	climb_get_climbers();
+	$climber_id = climb_valid_climber ($xml, $climber);
+	if ($climber_id === null) {
 		return;
 	}
 
@@ -197,65 +301,97 @@ function climb_main ($xml)
 		}
 	}
 
-	if (!is_numeric ($panel)) {
-		// Craggy specific - need to compare against panel name
-		add_error ($xml, sprintf ("'%s' is not a valid panel name", $panel));
+	climb_get_panels();
+	$panel_id = climb_valid_panel ($xml, $panel);
+	if ($panel_id === null) {
 		return;
 	}
 
+	$climbs = array();
+	$errors = 0;
+	$all = climb_get_all_panel ($panel);
 	foreach ($parts as $colour) {
-		$p = parse_climb ($xml, $colour);
-
-		$colour = $p['colour'];
-
-		$climb = $xml->addChild ('route');
-		$climb->addChild ('panel', $panel);
-
-		$c = colour_match ($colour);
-		if ($c !== null) {
-			$climb->addAttribute ('result', 'valid');
-			$climb->addChild ('colour', $c['colour']);
-		} else {
-			$climb->addAttribute ('result', 'invalid');
-			$climb->addChild ('colour', $colour);
-			add_error ($climb, sprintf ("%s is not a valid colour", $colour));
+		$p = climb_parse_climb ($xml, $colour);
+		if ($p === null) {
+			$errors++;
+			continue;
 		}
 
-		$climb->addChild ('grade', '6a+');			// grade
-		$climb->addChild ('success', $p['success']);		// success
-		$climb->addChild ('difficulty', 'medium');		// difficulty
-		$climb->addChild ('climb_type', 'Top Rope');		// type
-		$climb->addChild ('nice', $p['nice']);			// nice
-		$climb->addChild ('onsight', 'O');			// onsight
-		$climb->addChild ('date', $date);			// date_climbed
-		$climb->addChild ('notes', $p['notes']);		// notes - climb_notes
+		if ($p['colour'] == 'all') {
+			foreach ($all as $a) {
+				$p['colour'] = $a['colour'];
+				$climbs[] = array_merge ($a, $p);
+			}
+			continue;
+		}
 
+		// check that the colours actually exist
+		foreach ($all as $a) {
+			if (strcasecmp ($p['colour'], $a['colour']) == 0) {
+				$climbs[] = array_merge ($a, $p);
+				continue 2;
+			}
+		}
+
+		climb_add_error ($xml, sprintf ("Panel '%s' doesn't have a '%s' route", $panel, $p['colour']));
+		$errors++;
+	}
+
+	if ($errors > 0)
+		return;
+
+	$notes = climb_get_notes ($panel);
+
+	//var_dump ($climbs); exit (1);
+	foreach ($climbs as $c) {
+		$climb = $xml->addChild ('route');
+		$climb->addChild ('panel', $c['panel']);
+		$climb->addChild ('id', $c['id']);
+		$climb->addChild ('colour', $c['colour']);
+		$climb->addChild ('climb_type', $c['climb_type']);
+		$climb->addChild ('grade', $c['grade']);
+		$climb->addChild ('date', $date);
+
+		$id = $c['id'];
+		if (array_key_exists ($id, $notes)) {
+			$c['notes']      = $notes[$id]['notes'];
+			$c['difficulty'] = $notes[$id]['difficulty'];
+		}
+
+		$climb->addChild ('success', $c['success']);
+		$climb->addChild ('nice', $c['nice']);
+		$climb->addChild ('notes', $c['notes']);
+		$climb->addChild ('difficulty', $c['difficulty']);
 	}
 }
 
 
-$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
-$_GET['action']  = "add";
-$_GET['climber'] = "Rich Russon";
-$_GET['date']    = '2 days ago';
+if (0) {
+	//$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
+	//$_GET['climbs']  = "32 all(d)";
+	$_GET['climbs']  = "71 all";
+	$_GET['action']  = "add";
+	$_GET['climber'] = "Rich Russon";
+	$_GET['date']    = '2 days ago';
+}
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 $xml = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?"."><list />");
 $xml->addAttribute ('type', 'climb');
 
-if (valid_command ($xml)) {
+if (climb_valid_command ($xml)) {
 	climb_main ($xml);
 }
 
 echo $xml->asXML();
 
 /*
-$c = array ("pw", "rd (c)", "ti (s) ", "f(f) ", "tq (d)", "gray ( 1r)", "pk ( 1f  )", "r/w ( n)", "y ( mf  ) "); 
+$c = array ("pw", "rd (c)", "ti (s) ", "f(f) ", "tq (d)", "gray ( 1r)", "pk ( 1f  )", "r/w ( n)", "y ( mf  ) ", "all", "all(d)");
 
 printf ("abbr        colour        success     nice    notes\n");
 foreach ($c as $climb) {
-	$p = parse_climb ($xml, $climb);
+	$p = climb_parse_climb ($xml, $climb);
 	printf ("%-12s%-14s%-12s%-8s%s\n", $climb, $p['colour'], $p['success'], $p['nice'], $p['notes']);
 }
-*/
 
+*/

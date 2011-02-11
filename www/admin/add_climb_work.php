@@ -204,7 +204,10 @@ function climb_main ($xml)
 	}
 
 	foreach ($parts as $colour) {
-		printf ("colour = %s\n", $colour);
+		$p = parse_climb ($xml, $colour);
+
+		$colour = $p['colour'];
+
 		$climb = $xml->addChild ('route');
 		$climb->addChild ('panel', $panel);
 
@@ -219,21 +222,19 @@ function climb_main ($xml)
 		}
 
 		$climb->addChild ('grade', '6a+');			// grade
-		$climb->addChild ('success', 'clean');			// success
+		$climb->addChild ('success', $p['success']);		// success
 		$climb->addChild ('difficulty', 'medium');		// difficulty
 		$climb->addChild ('climb_type', 'Top Rope');		// type
-		$climb->addChild ('nice', 'N');				// nice
+		$climb->addChild ('nice', $p['nice']);			// nice
 		$climb->addChild ('onsight', 'O');			// onsight
 		$climb->addChild ('date', $date);			// date_climbed
-		$climb->addChild ('notes', 'tricky');			// notes - climb_notes
+		$climb->addChild ('notes', $p['notes']);		// notes - climb_notes
 
 	}
-	exit (1);
-
 }
 
 
-$_GET['climbs']  = "46 pw(d), blu, bg(s), fe(f)";
+$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
 $_GET['action']  = "add";
 $_GET['climber'] = "Rich Russon";
 $_GET['date']    = '2 days ago';
@@ -242,14 +243,13 @@ header('Content-Type: application/xml; charset=ISO-8859-1');
 $xml = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?"."><list />");
 $xml->addAttribute ('type', 'climb');
 
-/*
 if (valid_command ($xml)) {
 	climb_main ($xml);
 }
 
 echo $xml->asXML();
-*/
 
+/*
 $c = array ("pw", "rd (c)", "ti (s) ", "f(f) ", "tq (d)", "gray ( 1r)", "pk ( 1f  )", "r/w ( n)", "y ( mf  ) "); 
 
 printf ("abbr        colour        success     nice    notes\n");
@@ -257,4 +257,5 @@ foreach ($c as $climb) {
 	$p = parse_climb ($xml, $climb);
 	printf ("%-12s%-14s%-12s%-8s%s\n", $climb, $p['colour'], $p['success'], $p['nice'], $p['notes']);
 }
+*/
 

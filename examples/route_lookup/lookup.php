@@ -5,6 +5,7 @@ set_include_path ('../../libs');
 include 'db.php';
 include 'db_names.php';
 include 'utils.php';
+include 'colour.php';
 
 $g_routes  = null;
 $g_panels  = null;
@@ -78,69 +79,11 @@ foreach ($matches as $m) {
 	$list[] = $g_colours[$m['colour_id']]['colour'] . ' ' . $m['grade'];
 }
 
-function colours_process ($colours)
-{
-	$lookup = array();
-
-	foreach ($colours as $ckey => $c) {
-		$lookup[strtolower ($c['colour'])] = &$colours[$ckey];
-		$abbr = explode (',', $c['abbr']);
-		foreach ($abbr as $a) {
-			$lookup[$a] = &$colours[$ckey];
-		}
-	}
-
-	return $lookup;
-}
-
-function colours_match_single ($lookup, $test)
-{
-	if (!$test)
-		return null;
-
-	if (array_key_exists ($test, $lookup))
-		return $lookup[$test]['id'];
-	else
-		return null;
-}
-
-function colours_match ($lookup, $test)
-{
-	global $g_colours;
-
-	$test = strtolower ($test);
-
-	$id = colours_match_single ($lookup, $test);
-	if ($id !== null)
-		return $id;
-
-	$pos = strpos ($test, '/');
-	if ($pos === false)
-		return $id;
-
-	$id1 = colours_match_single ($lookup, substr($test, 0, $pos));
-	$id2 = colours_match_single ($lookup, substr($test, $pos+1));
-
-	if (($id1 === null) || ($id2 === null))
-		return null;
-
-	$col1 = $g_colours[$id1]['colour'];
-	$col2 = $g_colours[$id2]['colour'];
-
-	$test = strtolower ($col1.'/'.$col2);
-	$id = colours_match_single ($lookup, $test);
-
-	return $id;
-}
-
-
-$lookup = colours_process ($g_colours);
-
 if ($trail_space) {
 	foreach ($parts as &$p) {
-		$id = colours_match ($lookup, $p);
-		if ($id !== null) {
-			$p = $g_colours[$id]['colour'];
+		$col = colour_match ($p);
+		if ($col !== null) {
+			$p = $col['colour'];
 		}
 	}
 }

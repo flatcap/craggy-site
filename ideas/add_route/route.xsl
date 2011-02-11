@@ -2,9 +2,10 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <xsl:template match="/">
+	<xsl:variable name="route_exists" select="//route[1]" />
 	<xsl:variable name="route_id_exists" select="//route_id[1]" />
 	<xsl:variable name="id_exists" select="//id[1]" />
-	<xsl:variable name="message_exists" select="//message[1]" />
+	<xsl:variable name="error_exists" select="//error[1]" />
 	<xsl:variable name="climb_type_exists" select="//climb_type[1]" />
 	<xsl:variable name="success_exists" select="//success[1]" />
 	<xsl:variable name="difficulty_exists" select="//difficulty[1]" />
@@ -12,8 +13,8 @@
 	<xsl:variable name="onsight_exists" select="//onsight[1]" />
 	<xsl:variable name="setter_exists" select="//setter[1]" />
 	<xsl:variable name="date_exists" select="//date[1]" />
-	<xsl:variable name="notes_exists" select="//notes[1]" />
-	<xsl:variable name="error_exists" select="//error[1]" />
+	<xsl:variable name="note_exists" select="//notes[1]" />
+	<xsl:variable name="global_error_exists" select="/list/error[1]" />
 	<html>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>List of <xsl:value-of select="/list/@type"/>s</title>
@@ -27,6 +28,7 @@
 	<head>
 	</head>
 	<body>
+	<xsl:if test="$route_exists">
 	<h1>List of <xsl:value-of select="/list/@type"/>s:</h1>
 	<table border="1" cellspacing="0" cellpadding="3">
 		<tr>
@@ -60,11 +62,11 @@
 			<xsl:if test="$date_exists">
 			<th>Date</th>
 			</xsl:if>
-			<xsl:if test="$notes_exists">
+			<xsl:if test="$note_exists">
 			<th>Notes</th>
 			</xsl:if>
-			<xsl:if test="$message_exists">
-			<th>Message</th>
+			<xsl:if test="$error_exists">
+			<th>Errors</th>
 			</xsl:if>
 		</tr>
 		<xsl:for-each select="//route">
@@ -102,12 +104,12 @@
 				<xsl:if test="$date_exists">
 				<td><xsl:value-of select="date"/></td>
 				</xsl:if>
-				<xsl:if test="$notes_exists">
+				<xsl:if test="$note_exists">
 				<td><xsl:value-of select="notes"/></td>
 				</xsl:if>
-				<xsl:if test="$message_exists">
+				<xsl:if test="$error_exists">
 				<td>
-				<xsl:for-each select="message">
+				<xsl:for-each select="error">
 				<xsl:value-of select="."/><xsl:element name="br"/>
 				</xsl:for-each>
 				</td>
@@ -115,11 +117,12 @@
 			</xsl:element>
 		</xsl:for-each>
 	</table>
-	<xsl:if test="$error_exists">
+	</xsl:if>
+	<xsl:if test="$global_error_exists">
 	<xsl:element name="br" />
 	<div class="error">
 	<h1>Errors:</h1>
-	<xsl:for-each select="//error">
+	<xsl:for-each select="/list/error">
 	<xsl:value-of select="."/><xsl:element name="br" />
 	</xsl:for-each>
 	</div>

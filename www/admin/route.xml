@@ -18,6 +18,8 @@
 		<setter>mc</setter>
 		<date>next tuesday</date>
 		<notes>Hands and feet allowed on the volume</notes>
+		<error>'Blug' is not a valid colour</error>
+		<error>Date cannot be in the future</error>
 	</route>
 	<route result='valid'>
 		<id>2</id>
@@ -28,6 +30,6 @@
 		<date>2011-01-06</date>
 		<notes></notes>
 	</route>
-	<error severity="error">Cannot do something</error>
-	<error severity="error">Failed to blah blah</error>
+	<error>Cannot do something</error>
+	<error>Failed to blah blah</error>
 </list>

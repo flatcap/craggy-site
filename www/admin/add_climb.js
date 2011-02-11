@@ -22,8 +22,8 @@ function initialise_buttons()
 	entry_panel.onkeypress = callback_catch_enter;
 	entry_panel.focus();
 
-	entry_date   = document.getElementById ('date');
-	entry_setter = document.getElementById ('setter');
+	entry_date    = document.getElementById ('date');
+	entry_climber = document.getElementById ('climber');
 
 	notify_initialise ('notify_area');
 
@@ -43,8 +43,14 @@ function click_add()
 	} else {
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
+
+	str  = "add_climb_work.php?";
+	str += "action=add";
+	str += "&data=" + encodeURIComponent (entry_panel.value);
+	str += "&date=" + encodeURIComponent (entry_date.value);
+	str += "&climber=" + encodeURIComponent (entry_climber.value);
 	x.onreadystatechange = callback_add;
-	x.open ("GET", "add_climb_work.php?action=add&data=" + encodeURIComponent (entry_panel.value));
+	x.open ("GET", str);
 	x.send();
 }
 
@@ -168,6 +174,8 @@ function callback_add()
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
+	alert (this.responseText);
+	return;
 	var list = document.getElementById ('climb_list');
 	if (!list)
 		return;

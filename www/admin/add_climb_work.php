@@ -72,6 +72,7 @@ function climb_get_notes ($panel)
 	$columns = array ("$DB_ROUTE.id               as id",
 			  "$DB_PANEL.name             as panel",
 			  "$DB_DIFFICULTY.description as difficulty",
+			  "$DB_RATING.nice            as nice",
 			  "$DB_CLIMB_NOTE.notes       as notes");
 
 	$where   = array ("$DB_PANEL.name = '$panel'");
@@ -342,7 +343,6 @@ function climb_main (&$xml)
 
 	$notes = climb_get_notes ($panel);
 
-	//var_dump ($climbs); exit (1);
 	foreach ($climbs as $c) {
 		$climb = $xml->addChild ('route');
 		$climb->addChild ('panel', $c['panel']);
@@ -356,6 +356,8 @@ function climb_main (&$xml)
 		if (array_key_exists ($id, $notes)) {
 			$c['notes']      = $notes[$id]['notes'];
 			$c['difficulty'] = $notes[$id]['difficulty'];
+			if (($c['nice'] === true) || ($notes[$id]['nice'] == '1'))
+				$c['nice'] = 'nice';
 		}
 
 		$climb->addChild ('success', $c['success']);
@@ -368,8 +370,8 @@ function climb_main (&$xml)
 
 if (0) {
 	//$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
-	//$_GET['climbs']  = "32 all(d)";
-	$_GET['climbs']  = "71 all";
+	$_GET['climbs']  = "32 all(d)";
+	//$_GET['climbs']  = "71 all";
 	$_GET['action']  = "add";
 	$_GET['climber'] = "Rich Russon";
 	$_GET['date']    = '2 days ago';

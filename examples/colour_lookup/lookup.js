@@ -39,15 +39,15 @@ function colour_validate()
 		return;
 	}
 
-	var xmlhttp;
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp.onreadystatechange = colour_callback;
-	xmlhttp.open ("GET", "lookup.php?q=" + encodeURI(str) + '&id=' + this.id, true);
-	xmlhttp.send();
+	x.onreadystatechange = colour_callback;
+	x.open ("GET", "lookup.php?q=" + encodeURI(str) + '&id=' + this.id, true);
+	x.send();
 }
 
 function colour_onkeypress (e)

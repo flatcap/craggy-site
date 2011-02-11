@@ -1,7 +1,6 @@
-var xmlhttp;
-
 function loadxmldoc()
 {
+	var xmlhttp;
 	if (window.XMLHttpRequest) {
 		xmlhttp = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
@@ -27,10 +26,10 @@ function loadxmldoc()
 
 function buildxmlresults()
 {
-	if ((xmlhttp.readyState != 4) || (xmlhttp.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var strtext = xmlhttp.responseText;
+	var strtext = this.responseText;
 
 	document.getElementById ("spanout").innerHTML = strtext;
 }

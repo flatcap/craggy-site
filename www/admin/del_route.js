@@ -6,9 +6,6 @@ var entry_panel;
 var list_ticks;
 var route_data;
 
-var xmlhttp_list;
-var xmlhttp_del;
-
 //initialise_ticks();
 //initialise_rows();
 initialise_buttons();
@@ -67,14 +64,15 @@ function click_list()
 	var str = entry_panel.value;
 	str = encodeURI(str);
 
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp_list = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp_list = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp_list.onreadystatechange = callback_list;
-	xmlhttp_list.open ("GET", "del_route_work.php?action=list&data=" + encodeURI (entry_panel.value));
-	xmlhttp_list.send();
+	x.onreadystatechange = callback_list;
+	x.open ("GET", "del_route_work.php?action=list&data=" + encodeURI (entry_panel.value));
+	x.send();
 }
 
 function click_delete()
@@ -97,14 +95,15 @@ function click_delete()
 	}
 
 	var str = ids.join(',');
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp_del = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp_del = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp_del.onreadystatechange = callback_delete;
-	xmlhttp_del.open ("GET", "del_route_work.php?action=delete&data=" + str, true);
-	xmlhttp_del.send();
+	x.onreadystatechange = callback_delete;
+	x.open ("GET", "del_route_work.php?action=delete&data=" + str, true);
+	x.send();
 }
 
 
@@ -136,7 +135,7 @@ function callback_keypress (e)
 
 function callback_list()
 {
-	if ((xmlhttp_list.readyState != 4) || (xmlhttp_list.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
 	var txt = "<table cellspacing=0 border=1>" +
@@ -152,7 +151,7 @@ function callback_list()
 		"<tbody>";
 
 
-	x = xmlhttp_list.responseXML.documentElement.getElementsByTagName("route");
+	x = this.responseXML.documentElement.getElementsByTagName("route");
 	route_data = new Array();
 	for (i = 0; i < x.length; i++) {
 		var route = new Array();
@@ -192,10 +191,10 @@ function callback_list()
 
 function callback_delete()
 {
-	if ((xmlhttp_del.readyState != 4) || (xmlhttp_del.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var response = xmlhttp_del.responseText;
+	var response = this.responseText;
 	if (response.length === 0)
 		return;
 

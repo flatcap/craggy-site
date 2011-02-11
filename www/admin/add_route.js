@@ -8,9 +8,6 @@ var entry_setter;
 var list_ticks;
 var route_data;
 
-var xmlhttp_add;
-var xmlhttp_save;
-
 //initialise_ticks();
 //initialise_rows();
 initialise_buttons();
@@ -105,14 +102,15 @@ function click_add()
 	var str = entry_panel.value;
 	str = encodeURI(str);
 
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp_add = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp_add = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp_add.onreadystatechange = callback_add;
-	xmlhttp_add.open ("GET", "add_route_work.php?action=add&data=" + encodeURIComponent (entry_panel.value));
-	xmlhttp_add.send();
+	x.onreadystatechange = callback_add;
+	x.open ("GET", "add_route_work.php?action=add&data=" + encodeURIComponent (entry_panel.value));
+	x.send();
 }
 
 function click_delete()
@@ -152,15 +150,16 @@ function click_save()
 	var xml = render_xml (route_data);
 	xml = encodeURIComponent (xml);
 
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp_save = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp_save = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp_save.onreadystatechange = callback_save;
-	xmlhttp_save.open ("GET", "add_route_work.php?action=save&data=" + xml);
-	xmlhttp_save.setRequestHeader ("Content-Type", "text/plain");
-	xmlhttp_save.send();
+	x.onreadystatechange = callback_save;
+	x.open ("GET", "add_route_work.php?action=save&data=" + xml);
+	x.setRequestHeader ("Content-Type", "text/plain");
+	x.send();
 }
 
 
@@ -177,7 +176,7 @@ function route_get_node (node, name)
 
 function callback_add()
 {
-	if ((xmlhttp_add.readyState != 4) || (xmlhttp_add.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
 	var txt = "<table cellspacing=0 border=1>" +
@@ -202,7 +201,7 @@ function callback_add()
 		route_data = new Array();
 	var i;
 	var id_base = route_data.length;
-	x = xmlhttp_add.responseXML.documentElement.getElementsByTagName("route");
+	x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
 		var route = new Object();
 		id = id_base + i;
@@ -251,10 +250,10 @@ function callback_add()
 
 function callback_save()
 {
-	if ((xmlhttp_save.readyState != 4) || (xmlhttp_save.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	x = xmlhttp_save.responseText;
+	x = this.responseText;
 	notify_message (x);
 }
 

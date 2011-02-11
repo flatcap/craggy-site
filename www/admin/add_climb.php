@@ -20,6 +20,9 @@ function add_main()
 
 	$output .= "<div id='entry_area'>";
 
+	$output .= "<label for='climber' accesskey='c'><u>C</u>limber</label>";
+	$output .= "<input id='climber' type='text' size='30' value='Rich Russon'><br>";
+
 	$output .= "<label for='date' accesskey='d'><u>D</u>ate</label>";
 	$output .= "<input id='date' type='text' size='30' value='today'><br>";
 
@@ -28,6 +31,8 @@ function add_main()
 	//$output .= "<input id='entry' type='text' size='30' value=''>";
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	//$output .= "<div id='matches'>46 Purple/White 5, Blue 6a+, Beige 6b, Features 7b+</div>";
+
+
 	$output .= "</div>";
 
 	$output .= "<div id='notify_area'></div>";

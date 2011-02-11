@@ -40,10 +40,6 @@ var button_cancel;
 var list_ticks;
 var setter_data;
 
-var xmlhttp_delq;
-var xmlhttp_del;
-var xmlhttp_list;
-
 //initialise_ticks();
 //initialise_rows();
 initialise_buttons();
@@ -157,26 +153,28 @@ function click_delete()
 	}
 
 	var str = ids.join(',');
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp_delq = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp_delq = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp_delq.onreadystatechange = callback_delete_query;
-	xmlhttp_delq.open ("GET", "setter_work.php?action=delete_query&data=" + str, true);
-	xmlhttp_delq.send();
+	x.onreadystatechange = callback_delete_query;
+	x.open ("GET", "setter_work.php?action=delete_query&data=" + str, true);
+	x.send();
 }
 
 function click_list()
 {
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp_list = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp_list = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp_list.onreadystatechange = callback_list;
-	xmlhttp_list.open ("GET", "setter_work.php?action=list");
-	xmlhttp_list.send();
+	x.onreadystatechange = callback_list;
+	x.open ("GET", "setter_work.php?action=list");
+	x.send();
 }
 
 
@@ -202,10 +200,10 @@ function route_get_node (node, name)
 
 function callback_delete_query()
 {
-	if ((xmlhttp_delq.readyState != 4) || (xmlhttp_delq.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var response = xmlhttp_delq.responseText;
+	var response = this.responseText;
 	if (response.length == 0)
 		return;
 
@@ -221,22 +219,23 @@ function callback_delete_query()
 
 	var str = ids.join(',');
 
+	var x;
 	if (window.XMLHttpRequest) {
-		xmlhttp_del = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
+		x = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
-		xmlhttp_del = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	xmlhttp_del.onreadystatechange = callback_delete;
-	xmlhttp_del.open ("GET", "setter_work.php?action=delete&data=" + str, true);
-	xmlhttp_del.send();
+	x.onreadystatechange = callback_delete;
+	x.open ("GET", "setter_work.php?action=delete&data=" + str, true);
+	x.send();
 }
 
 function callback_delete()
 {
-	if ((xmlhttp_del.readyState != 4) || (xmlhttp_del.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var response = xmlhttp_del.responseText;
+	var response = this.responseText;
 	if (response.length == 0)
 		return;
 
@@ -246,7 +245,7 @@ function callback_delete()
 
 function callback_list()
 {
-	if ((xmlhttp_list.readyState != 4) || (xmlhttp_list.status != 200))
+	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
 	var txt = "<table cellspacing=0 border=1>" +
@@ -263,7 +262,7 @@ function callback_list()
 		"<tbody>";
 
 
-	x = xmlhttp_list.responseXML.documentElement.getElementsByTagName("setter");
+	x = this.responseXML.documentElement.getElementsByTagName("setter");
 	setter_data = new Array();
 	for (i = 0; i < x.length; i++) {
 		var setter = new Array();

@@ -13,6 +13,7 @@
 	<xsl:variable name="setter_exists" select="//setter[1]" />
 	<xsl:variable name="date_exists" select="//date[1]" />
 	<xsl:variable name="notes_exists" select="//notes[1]" />
+	<xsl:variable name="error_exists" select="//error[1]" />
 	<html>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>List of <xsl:value-of select="/list/@type"/>s</title>
@@ -20,11 +21,13 @@
 			th { background: #ddd; }
 			tr.valid { background: #cfc; }
 			tr.invalid { background: #fcc; }
+			h1 { margin: 0; font-size: 120%; margin: 0.5em 0 0.5 0; }
+			div.error { background: orange; padding: 0.5em; }
 		</style>
 	<head>
 	</head>
 	<body>
-	<h2>List of <xsl:value-of select="/list/@type"/>s:</h2>
+	<h1>List of <xsl:value-of select="/list/@type"/>s:</h1>
 	<table border="1" cellspacing="0" cellpadding="3">
 		<tr>
 			<xsl:if test="$route_id_exists">
@@ -112,6 +115,15 @@
 			</xsl:element>
 		</xsl:for-each>
 	</table>
+	<xsl:if test="$error_exists">
+	<xsl:element name="br" />
+	<div class="error">
+	<h1>Errors:</h1>
+	<xsl:for-each select="//error">
+	<xsl:value-of select="."/><xsl:element name="br" />
+	</xsl:for-each>
+	</div>
+	</xsl:if>
 	</body>
 	</html>
 </xsl:template>

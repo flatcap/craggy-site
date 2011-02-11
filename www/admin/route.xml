@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="route.xsl"?>
 <list type="route">
-	<route>
+	<route result='valid'>
 		<id>0</id>
 		<panel>45</panel>
 		<colour>rd</colour>
@@ -10,7 +10,7 @@
 		<date>a week ago</date>
 		<notes>No arete</notes>
 	</route>
-	<route>
+	<route result='invalid'>
 		<id>1</id>
 		<panel>45</panel>
 		<colour>Blug</colour>
@@ -19,7 +19,7 @@
 		<date>next tuesday</date>
 		<notes>Hands and feet allowed on the volume</notes>
 	</route>
-	<route>
+	<route result='valid'>
 		<id>2</id>
 		<panel>45</panel>
 		<colour>Green</colour>
@@ -28,4 +28,6 @@
 		<date>2011-01-06</date>
 		<notes></notes>
 	</route>
+	<error severity="error">Cannot do something</error>
+	<error severity="error">Failed to blah blah</error>
 </list>

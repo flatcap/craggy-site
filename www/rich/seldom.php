@@ -118,7 +118,6 @@ function seldom_main ($options, $climber_id)
 			$output .= "<a href='?format=csv'><img alt='seldom list as a csv document' width='32' height='32' src='../img/ss.png'></a>";
 			$output .= '</span>';
 			$output .= '</div>';
-
 			break;
 
 		case 'csv':
@@ -137,7 +136,9 @@ function seldom_main ($options, $climber_id)
 
 	$total = 0;
 	foreach ($ranges as $lower) {
-		$l= $list[$lower];
+		if (!array_key_exists ($lower, $list))
+			continue;
+		$l = $list[$lower];
 		$count = count ($l);
 		if ($count == 0)
 			continue;

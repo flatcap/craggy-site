@@ -95,7 +95,7 @@ function climbs_main ($options, $climber_id)
 	process_date ($list, 'date_climbed', true);
 	process_type ($list);
 
-	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'date_climbed', 'success', 'n', 'o', 'diff', 'notes');
+	$columns = array ('panel', 'colour', 'grade', 'climb_type', 'success', 'n', 'o', 'diff', 'notes', 'date_climbed', 'months');
 
 	// calculate widths (include headers?)
 	$widths = column_widths ($list, $columns, true);

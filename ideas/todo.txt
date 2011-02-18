@@ -465,3 +465,6 @@ read values from config file?
 cursor: text;
 cursor: default;
 cursor: pointer;
+
+climb count on "add climbs"
+include downclimbs

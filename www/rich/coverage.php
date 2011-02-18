@@ -52,11 +52,13 @@ function coverage_get_data ($climber_id)
 	$num_routes  = count ($climbs);
 	//printf ("count = %d\n", $num_routes);
 	$num_tried   = 0;
+	$num_success = 0;
 	$num_clean   = 0;
 	$num_onsight = 0;
 	$num_down    = 0;
 
 	$t = 0;			// Tried
+	$s = 0;			// Success
 	$c = 0;			// Clean
 	$o = 0;			// Onsight
 	$d = 0;			// Downclimbed
@@ -67,6 +69,7 @@ function coverage_get_data ($climber_id)
 		$r = $climb['route_id'];
 		if ($r != $route) {
 			if ($t > 0) { $num_tried++;   $t = 0; }
+			if ($s > 0) { $num_success++; $s = 0; }
 			if ($c > 0) { $num_clean++;   $c = 0; }
 			if ($o > 0) { $num_onsight++; $o = 0; }
 			if ($d > 0) { $num_down++;    $d = 0; }
@@ -74,27 +77,32 @@ function coverage_get_data ($climber_id)
 		}
 
 		if (!empty ($climb['success_id'])) $t++;
+		if ($climb['success_id'] >= 2)     $s++;
 		if ($climb['success_id'] >= 3)     $c++;
 		if ($climb['onsight']    == 1)     $o++;
 		if ($climb['success_id'] == 4)     $d++;
 	}
 
 	if ($t > 0) $num_tried++;
+	if ($s > 0) $num_success++;
 	if ($c > 0) $num_clean++;
 	if ($o > 0) $num_onsight++;
 	if ($d > 0) $num_down++;
 
 	$f_tried   = sprintf ('%1.1F%%', $num_tried   / $num_routes * 100);
+	$f_success = sprintf ('%1.1F%%', $num_success / $num_routes * 100);
 	$f_clean   = sprintf ('%1.1F%%', $num_clean   / $num_routes * 100);
 	$f_onsight = sprintf ('%1.1F%%', $num_onsight / $num_routes * 100);
 	$f_down    = sprintf ('%1.1F%%', $num_down    / $num_routes * 100);
 
 	$p_tried   = 95;
+	$p_success = 90;
 	$p_clean   = 85;
 	$p_onsight = 70;
 	$p_down    = 65;
 
 	$t_tried   = ceil ($num_routes * $p_tried   / 100) - $num_tried;
+	$t_success = ceil ($num_routes * $p_success / 100) - $num_success;
 	$t_clean   = ceil ($num_routes * $p_clean   / 100) - $num_clean;
 	$t_onsight = ceil ($num_routes * $p_onsight / 100) - $num_onsight;
 	$t_down    = ceil ($num_routes * $p_down    / 100) - $num_down;
@@ -104,6 +112,7 @@ function coverage_get_data ($climber_id)
 	$c = array ('Routes', $num_routes, 'Done', 'Target', 'To Do');
 
 	array_push ($output, array ($c[0] => 'Tried',   $c[1] => $num_tried,   $c[2] => $f_tried,   $c[3] => "$p_tried%",   $c[4] => $t_tried));
+	array_push ($output, array ($c[0] => 'Success', $c[1] => $num_success, $c[2] => $f_success, $c[3] => "$p_success%", $c[4] => $t_success));
 	array_push ($output, array ($c[0] => 'Clean',   $c[1] => $num_clean,   $c[2] => $f_clean,   $c[3] => "$p_clean%",   $c[4] => $t_clean));
 	array_push ($output, array ($c[0] => 'Onsight', $c[1] => $num_onsight, $c[2] => $f_onsight, $c[3] => "$p_onsight%", $c[4] => $t_onsight));
 	array_push ($output, array ($c[0] => 'Down',    $c[1] => $num_down,    $c[2] => $f_down,    $c[3] => "$p_down%",    $c[4] => $t_down));

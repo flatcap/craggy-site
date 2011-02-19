@@ -137,7 +137,7 @@ function click_save()
 
 	var xml = '<list type="climb">';
 	//var columns = new Array ("tick", "panel", "colour", "grade", "type", "date", "success", "diff", "nice", "notes");
-	var columns = new Array (null, "panel", "colour", null, null, "date", "success", "diff", "nice", "notes");
+	var columns = new Array (null, "panel", "colour", null, null, "date", "success", "difficulty", "nice", "notes");
 	for (var i = 0; i < rows.length; i++) {
 		var r = get_row (rows[i], columns);
 		xml += obj_to_xml ('climb', r);

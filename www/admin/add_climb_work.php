@@ -10,6 +10,8 @@ date_default_timezone_set('UTC');
 
 global $g_climbers;
 global $g_panels;
+global $g_success;
+global $g_difficulty;
 
 function climb_add_error (&$xml, $message)
 {
@@ -80,6 +82,77 @@ function climb_get_notes ($panel)
 	$list = db_select($table, $columns, $where);
 
 	return $list;
+}
+
+function climb_get_routes()
+{
+	global $g_panels;
+
+	$routes = array();
+	foreach ($g_panels as $p) {
+		$key = $p['panel'] . '_' . $p['colour'];
+		$routes[$key] = $p['id'];
+	}
+
+	return $routes;
+}
+
+
+function climb_get_success()
+{
+	global $g_success;
+
+	if (!$g_success) {
+		global $DB_SUCCESS;
+
+		$table   = $DB_SUCCESS;
+		$columns = array ('id', 'outcome');
+
+		$g_success = db_select ($table, $columns);
+	}
+
+	return $g_success;
+}
+
+function climb_lookup_success ($text)
+{
+	global $g_success;
+
+	foreach ($g_success as $s) {
+		if ($s['outcome'] == $text)
+			return $s['id'];
+	}
+
+	return null;
+}
+
+
+function climb_get_difficulty()
+{
+	global $g_difficulty;
+
+	if (!$g_difficulty) {
+		global $DB_DIFFICULTY;
+
+		$table   = $DB_DIFFICULTY;
+		$columns = array ('id', 'description');
+
+		$g_difficulty = db_select ($table, $columns);
+	}
+
+	return $g_difficulty;
+}
+
+function climb_lookup_difficulty ($text)
+{
+	global $g_difficulty;
+
+	foreach ($g_difficulty as $s) {
+		if ($s['description'] == $text)
+			return $s['id'];
+	}
+
+	return null;
 }
 
 
@@ -367,6 +440,9 @@ function climb_do_add (&$xml)
 				$c['nice'] = 'nice';
 		}
 
+		$c['difficulty'] = 'hard';
+		$c['nice'] = 'nice';
+		$c['notes'] = 'some notes';
 		$climb->addChild ('success', $c['success']);
 		$climb->addChild ('nice', $c['nice']);
 		$climb->addChild ('notes', $c['notes']);
@@ -381,30 +457,44 @@ function climb_do_save (&$xml)
 
 	$cxml = simplexml_load_string ($climbs);
 
-	$count = $cxml->count();
-	climb_add_error ($xml, sprintf ("all ok, %d children", $count));
-	//climb_add_error ($xml, $cxml->asXML());
+	climb_get_panels();
+	$routes = climb_get_routes();
+	climb_get_success();
+	climb_get_difficulty();
 
 	for ($i = 0; $i < $cxml->count(); $i++) {
 		$a = $cxml->climb[$i];
-		climb_add_error ($xml, sprintf ("child: %s", $a->colour));
-		climb_add_error ($xml, sprintf ("child: %s", urldecode ($a->type)));
-		//climb_add_error ($xml, sprintf ("child: %s", $climbs));
+		$key = $a->panel . '_' . $a->colour;
+		$route_id = $routes[$key];
+		$date_climbed = $a->date;
+		$success_id = climb_lookup_success ($a->success);
+		$difficulty_id = climb_lookup_difficulty ($a->difficulty);
+		$nice = $a->nice;
+		$notes = $a->notes;
+
+		/*
+		climb_add_error ($xml, sprintf ("route_id: %s", $route_id));
+		climb_add_error ($xml, sprintf ("success_id: %s", $success_id));
+		climb_add_error ($xml, sprintf ("difficulty_id: %s", $difficulty_id));
+		climb_add_error ($xml, sprintf ("date_climbed: %s", $date_climbed));
+		climb_add_error ($xml, sprintf ("nice: %s", $nice));
+		climb_add_error ($xml, sprintf ("notes: %s", $notes));
+		*/
 	}
 
-	// for each climb
-	//	convert <panel> <colour>		route_id
-	//	parse and validate <date>		date
-	//	parse and validate <success>		success_id
-	//	parse and validate <difficulty>		difficulty_id
-	//	parse and validate <nice>		nice
-	//	parse the <notes>			notes
+	// for each <climb>
+	//	lookup <panel> <colour>		[route_id]
+	//	validate <date>			[date_climbed]
+	//	validate <success>		[success_id]
+	//	validate <difficulty>		[difficulty_id]
+	//	validate <nice>			[nice]
+	//	parse the <notes>		[notes]
 
-	// Add climb  using: climber_id, route_id, success_id, date_climbed
+	// Add climb using: climber_id, route_id, success_id, date_climbed
 
-	// Does rating exist?
+	// Does rating for <route_id> exist?
 	// Yes:
-	//	Does rating have a climb_note?
+	//	Does rating have a <climb_note_id>?
 	//	Yes:
 	//		Is the climb_note unique to this rating?
 	//		Yes:
@@ -413,8 +503,9 @@ function climb_do_save (&$xml)
 	//			COW, create a new note using: notes
 	//	No:
 	//		Create a new note using: notes
+	//	Update rating using: climber_id, route_id, difficulty_id, climb_note_id, nice
 	// No:
-	//	Does note already exist?
+	//	Does <notes> already exist in climb_note?
 	//	Yes:
 	//		Use existing note
 	//	No:
@@ -442,8 +533,10 @@ function climb_main (&$xml)
 	}
 }
 
+function test_data()
+{
+	global $_GET;
 
-if (0) {
 	//$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
 	//$_GET['climbs']  = "32 all(d)";
 	$_GET['climbs']  = '<list type="climb"><climb><tick>false</tick><panel>3</panel><colour>Orange</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Purple/White</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Blue</colour><grade>6b+</grade><type>Top Rope</type><date>2011-02-19</date><success>failed</success></climb></list>';
@@ -454,21 +547,24 @@ if (0) {
 	//$_GET['date']    = '2 days ago';
 }
 
+function test_parse()
+{
+	$c = array ("pw", "rd (c)", "ti (s) ", "f(f) ", "tq (d)", "gray ( 1r)", "pk ( 1f  )", "r/w ( n)", "y ( mf  ) ", "all", "all(d)");
+
+	printf ("abbr        colour        success     nice    notes\n");
+	foreach ($c as $climb) {
+		$p = climb_parse_climb ($xml, $climb);
+		printf ("%-12s%-14s%-12s%-8s%s\n", $climb, $p['colour'], $p['success'], $p['nice'], $p['notes']);
+	}
+}
+
+
 header('Content-Type: application/xml; charset=ISO-8859-1');
 $xml = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?"."><list />");
 $xml->addAttribute ('type', 'climb');
 
+//test_data();
 climb_main ($xml);
 
 echo $xml->asXML();
 
-/*
-$c = array ("pw", "rd (c)", "ti (s) ", "f(f) ", "tq (d)", "gray ( 1r)", "pk ( 1f  )", "r/w ( n)", "y ( mf  ) ", "all", "all(d)");
-
-printf ("abbr        colour        success     nice    notes\n");
-foreach ($c as $climb) {
-	$p = climb_parse_climb ($xml, $climb);
-	printf ("%-12s%-14s%-12s%-8s%s\n", $climb, $p['colour'], $p['success'], $p['nice'], $p['notes']);
-}
-
-*/

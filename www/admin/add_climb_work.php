@@ -109,10 +109,12 @@ function climb_valid_command (&$xml)
 			}
 		}
 
+		/*
 		if (!array_key_exists ('date', $_GET)) {
 			climb_add_error ($xml, "No date");
 			$success = false;
 		}
+		*/
 
 		if (!array_key_exists ('climber', $_GET)) {
 			climb_add_error ($xml, "No climber");
@@ -265,19 +267,12 @@ function climb_add_climb()
 {
 }
 
-function climb_main (&$xml)
-{
-	global $_GET;
 
-	$action  = $_GET['action'];
+function climb_do_add (&$xml)
+{
 	$climbs  = $_GET['climbs'];
 	$date    = $_GET['date'];
 	$climber = $_GET['climber'];
-
-	if ($action != "add") {
-		climb_add_error ($xml, sprintf ("'%s' is not a valid action", $action));
-		return;
-	}
 
 	$t = strtotime ('today');
 	$d = strtotime ($date);
@@ -379,23 +374,91 @@ function climb_main (&$xml)
 	}
 }
 
+function climb_do_save (&$xml)
+{
+	$climbs  = $_GET['climbs'];
+	$climber = $_GET['climber'];
+
+	$cxml = simplexml_load_string ($climbs);
+
+	$count = $cxml->count();
+	climb_add_error ($xml, sprintf ("all ok, %d children", $count));
+	//climb_add_error ($xml, $cxml->asXML());
+
+	for ($i = 0; $i < $cxml->count(); $i++) {
+		$a = $cxml->climb[$i];
+		climb_add_error ($xml, sprintf ("child: %s", $a->colour));
+		climb_add_error ($xml, sprintf ("child: %s", urldecode ($a->type)));
+		//climb_add_error ($xml, sprintf ("child: %s", $climbs));
+	}
+
+	// for each climb
+	//	convert <panel> <colour>		route_id
+	//	parse and validate <date>		date
+	//	parse and validate <success>		success_id
+	//	parse and validate <difficulty>		difficulty_id
+	//	parse and validate <nice>		nice
+	//	parse the <notes>			notes
+
+	// Add climb  using: climber_id, route_id, success_id, date_climbed
+
+	// Does rating exist?
+	// Yes:
+	//	Does rating have a climb_note?
+	//	Yes:
+	//		Is the climb_note unique to this rating?
+	//		Yes:
+	//			Update note using: notes
+	//		No:
+	//			COW, create a new note using: notes
+	//	No:
+	//		Create a new note using: notes
+	// No:
+	//	Does note already exist?
+	//	Yes:
+	//		Use existing note
+	//	No:
+	//		Create new note using: notes
+	//	Create new rating using: climber_id, route_id, difficulty_id, climb_note_id, nice
+}
+
+
+function climb_main (&$xml)
+{
+	global $_GET;
+
+	$action  = $_GET['action'];
+
+	switch ($action) {
+	case 'add':
+		climb_do_add ($xml);
+		break;
+	case 'save':
+		climb_do_save ($xml);
+		break;
+	default:
+		climb_add_error ($xml, sprintf ("'%s' is not a valid action", $action));
+		break;
+	}
+}
+
 
 if (0) {
 	//$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
-	$_GET['climbs']  = "32 all(d)";
+	//$_GET['climbs']  = "32 all(d)";
+	$_GET['climbs']  = '<list type="climb"><climb><tick>false</tick><panel>3</panel><colour>Orange</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Purple/White</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Blue</colour><grade>6b+</grade><type>Top Rope</type><date>2011-02-19</date><success>failed</success></climb></list>';
 	//$_GET['climbs']  = "71 all";
-	$_GET['action']  = "add";
+	//$_GET['action']  = "add";
+	$_GET['action']  = "save";
 	$_GET['climber'] = "Rich Russon";
-	$_GET['date']    = '2 days ago';
+	//$_GET['date']    = '2 days ago';
 }
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 $xml = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?"."><list />");
 $xml->addAttribute ('type', 'climb');
 
-if (climb_valid_command ($xml)) {
-	climb_main ($xml);
-}
+climb_main ($xml);
 
 echo $xml->asXML();
 

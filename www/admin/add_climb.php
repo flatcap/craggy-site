@@ -28,7 +28,7 @@ function add_main()
 
 	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
 	//$output .= "<input id='entry' type='text' size='30' value='46 pw, blu, bg'>";
-	$output .= "<input id='entry' type='text' size='30' value='39 pur(d) blu(1r), y(2f)'>";
+	$output .= "<input id='entry' type='text' size='30' value='3 or(d) p/w(d), blu(f)'>";
 	//$output .= "<input id='entry' type='text' size='30' value=''>";
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
 	//$output .= "<div id='matches'>46 Purple/White 5, Blue 6a+, Beige 6b, Features 7b+</div>";

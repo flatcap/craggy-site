@@ -29,6 +29,50 @@ function initialise_buttons()
 }
 
 
+function get_row (row, columns)
+{
+	var obj = new Object();
+
+	var children = row.children;
+	if (!children)
+		return null;
+
+	if (children.length != columns.length)
+		return null;
+
+	for (var i = 0; i < children.length; i++) {
+		if (columns[i] === null)
+			continue;
+
+		if (children[i].childElementCount === 0) {
+			obj[columns[i]] = children[i].innerHTML;		// Just text
+		} else {
+			var f = children[i].firstChild;
+			if ((f.nodeName.toLowerCase() == 'input') && (f.type.toLowerCase() == 'checkbox')) {
+				obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
+			}
+		}
+	}
+
+	return obj;
+}
+
+function obj_to_xml (name, obj)
+{
+	var xml = '<' + name + '>';
+
+	for (o in obj) {
+		if (obj[o].length === 0)
+			continue;
+		xml += '<' + o + '>' + escape (obj[o]) + '</' + o + '>';
+	}
+
+	xml += '</' + name + '>';
+
+	return xml;
+}
+
+
 function click_add()
 {
 	notify_close();
@@ -91,32 +135,31 @@ function click_save()
 		return;
 	var rows = tb[0].children;
 
+	var xml = '<list type="climb">';
+	//var columns = new Array ("tick", "panel", "colour", "grade", "type", "date", "success", "diff", "nice", "notes");
+	var columns = new Array (null, "panel", "colour", null, null, "date", "success", "diff", "nice", "notes");
 	for (var i = 0; i < rows.length; i++) {
-		alert ("hello");
+		var r = get_row (rows[i], columns);
+		xml += obj_to_xml ('climb', r);
 	}
-
-	return;
-
-	/*
-	var ticks = get_ticks();
-	var count = ticks.length;
-	if (count === 0) {
-		buttons_update();	// Shouldn't happen
-		return;
-	}
-	*/
+	xml += '</list>';
 
 	var x;
-	var xml = "hello";
 	if (window.XMLHttpRequest) {
 		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
 	} else {
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
+
+	var str  = "add_climb_work.php?";
+	str += "action=save";
+	str += "&climbs=" + encodeURIComponent (xml);
+	str += "&climber=" + encodeURIComponent (entry_climber.value);
+	x.open ("GET", str);
 	x.onreadystatechange = callback_save;
-	x.open ("GET", "add_climb_work.php?action=save&data=" + xml);
 	x.setRequestHeader ("Content-Type", "text/plain");
 	x.send();
+
 }
 
 
@@ -255,8 +298,8 @@ function callback_save()
 	if (display_errors(this))
 		return;
 
-	//x = this.responseText;
-	//notify_message (x);
+	x = this.responseText;
+	notify_message (x);
 }
 
 function callback_catch_enter (e)

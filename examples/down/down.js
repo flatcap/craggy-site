@@ -13,10 +13,11 @@ entry3.onkeypress = callback_keypress;
 
 function callback_keypress (e)
 {
+	var item;
 	if (e.keyCode == 38) {
 		// move up
-		var item = this;
-		while (item = item.previousSibling) {
+		item = this;
+		while ((item = item.previousSibling)) {
 			if (item.localName == 'input') {
 				item.focus();
 				break;
@@ -25,8 +26,8 @@ function callback_keypress (e)
 		return false;
 	} else if (e.keyCode == 40) {
 		// move down
-		var item = this;
-		while (item = item.nextSibling) {
+		item = this;
+		while ((item = item.nextSibling)) {
 			if (item.localName == 'input') {
 				item.focus();
 				break;

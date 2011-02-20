@@ -9,7 +9,7 @@ function init() {
     for (var i=0; i < tablerows.length; i++) {
         var currow = tablerows[i];
 
-        if (i == 0) {
+        if (i === 0) {
             currow.className += " row_header";
         } else if (i == 1) {
             currow.className += " row_parentdir";
@@ -17,7 +17,7 @@ function init() {
             currow.className += " row_normal";
         }
 
-        var rowcells = currow.getElementsByTagName((i == 0 ? "th" : "td"));
+        var rowcells = currow.getElementsByTagName((i === 0 ? "th" : "td"));
         rowcells[0].className += " col_icon";
         rowcells[1].className += " col_name";
         rowcells[2].className += " col_date";
@@ -46,7 +46,7 @@ function init() {
             var curcell = rowcells[j];
 
             // the "parent directory" row
-            if (i == 0) {
+            if (i === 0) {
                 curcell.className += " cell_header";
             } else if (i == 1) {
                 curcell.className += " cell_parentdir";

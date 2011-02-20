@@ -204,7 +204,7 @@ function callback_delete_query()
 		return;
 
 	var response = this.responseText;
-	if (response.length == 0)
+	if (response.length === 0)
 		return;
 
 	if (!confirm (response))
@@ -236,7 +236,7 @@ function callback_delete()
 		return;
 
 	var response = this.responseText;
-	if (response.length == 0)
+	if (response.length === 0)
 		return;
 
 	alert (response);

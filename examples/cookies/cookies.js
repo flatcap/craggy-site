@@ -1,11 +1,12 @@
 function cookie_create (name, value, days)
 {
+	var expires;
 	if (days) {
 		var date = new Date();
 		date.setDate (date.getDate() + days);
-		var expires = "; expires=" + date.toUTCString();
+		expires = "; expires=" + date.toUTCString();
 	} else {
-		var expires = "";
+		expires = "";
 	}
 	document.cookie = name + "=" + escape (value) + expires + "; path=/";
 }
@@ -34,11 +35,11 @@ function cookie_erase (name)
 function hello()
 {
 	username = cookie_read ('username');
-	if ((username != null) && (username != "")) {
+	if ((username !== null) && (username !== "")) {
 		alert ('Welcome again ' + username + '!');
 	} else {
 		username = prompt ('Please enter your name:', "");
-		if ((username != null) && (username != "")) {
+		if ((username !== null) && (username !== "")) {
 			cookie_create ('username', username, 7);
 		}
 	}

@@ -58,7 +58,7 @@ function setter_callback()
 function setter_onkeyup()
 {
 	str = setter_entry.value;
-	if (str.length == 0) {
+	if (str.length === 0) {
 		setter_matches.innerHTML = "";
 		return;
 	}

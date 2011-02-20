@@ -31,7 +31,7 @@ function route_callback()
 function route_onkeyup()
 {
 	str = route_entry.value;
-	if (str.length == 0) {
+	if (str.length === 0) {
 		route_matches.innerHTML = "";
 		return;
 	}

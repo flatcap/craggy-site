@@ -453,6 +453,17 @@ function get_stats()
 	return $output;
 }
 
+function partial_match ($partial, $whole)
+{
+	$lp = strlen ($partial);
+	$lw = strlen ($whole);
+
+	if (($lp == 0) || ($lp > $lw))	// partial is empty, or too long
+		return false;
+
+	return (strncasecmp ($partial, $whole, $lp) === 0);
+}
+
 
 function list_render_html (&$list, &$columns, &$widths, $ts_metadata = null)
 {

@@ -12,6 +12,9 @@ div#notify_area {
 	background: #f90 url(../style/icon_close.png) no-repeat right top;
 	margin: 1em;
 	display: none;
+	font-family: monospace;
+	white-space: pre;
+	font-size: 75%;
 }
 
 div.grade {

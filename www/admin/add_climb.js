@@ -153,7 +153,7 @@ function click_save()
 
 	var str  = "add_climb_work.php?";
 	str += "action=save";
-	str += "&climbs=" + encodeURIComponent (xml);
+	str += "&climb_xml=" + encodeURIComponent (xml);
 	str += "&climber=" + encodeURIComponent (entry_climber.value);
 	x.open ("GET", str);
 	x.onreadystatechange = callback_save;

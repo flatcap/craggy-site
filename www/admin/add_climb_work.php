@@ -19,17 +19,6 @@ function climb_add_error (&$xml, $message)
 }
 
 
-function climb_get_climbers()
-{
-	global $DB_CLIMBER;
-	global $g_climbers;
-
-	$table   = $DB_CLIMBER;
-	$columns = array ('id', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
-
-	$g_climbers = db_select ($table, $columns);
-}
-
 function climb_get_panels()
 {
 	global $DB_V_ROUTE;
@@ -97,7 +86,6 @@ function climb_get_routes()
 	return $routes;
 }
 
-
 function climb_get_success()
 {
 	global $g_success;
@@ -125,7 +113,6 @@ function climb_lookup_success ($text)
 
 	return null;
 }
-
 
 function climb_get_difficulty()
 {
@@ -182,13 +169,6 @@ function climb_valid_command (&$xml)
 			}
 		}
 
-		/*
-		if (!array_key_exists ('date', $_GET)) {
-			climb_add_error ($xml, "No date");
-			$success = false;
-		}
-		*/
-
 		if (!array_key_exists ('climber', $_GET)) {
 			climb_add_error ($xml, "No climber");
 			$success = false;
@@ -198,9 +178,17 @@ function climb_valid_command (&$xml)
 	return $success;
 }
 
-function climb_valid_climber (&$xml, $name)
+function climb_lookup_climber (&$xml, $name)
 {
-	global $g_climbers;
+	static $g_climbers = null;
+	global $DB_CLIMBER;
+
+	if ($g_climbers === null) {
+		$columns = array ('id', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
+		$g_climbers = db_select ($DB_CLIMBER, $columns);
+		if ($g_climbers === null)
+			return null;
+	}
 
 	foreach ($g_climbers as $c) {
 		if (strcasecmp ($c['name'], $name) == 0) {
@@ -224,6 +212,23 @@ function climb_valid_panel (&$xml, $name)
 
 	climb_add_error ($xml, sprintf ("'%s' is not a valid panel name", $name));
 	return null;
+}
+
+function climb_valid_date (&$xml, $date)
+{
+	$t = strtotime ('today');
+	$d = strtotime ($date);
+	if ($d === false) {
+		climb_add_error ($xml, sprintf ("'%s' is not a valid date", $date));
+		return null;
+	}
+
+	if ($d > $t) {
+		climb_add_error ($xml, sprintf ("'%s': Date cannot be in the future", $date));
+		return null;
+	}
+
+	return strftime('%Y-%m-%d', $d);
 }
 
 
@@ -340,32 +345,99 @@ function climb_add_climb()
 {
 }
 
+function climb_commit_climb (&$xml, $climbs)
+{
+	$query  = "insert into climb (climber_id, route_id, success_id, date_climbed) values ";
+	$values = array();
+
+	foreach ($climbs as $c) {
+		$values[] = '(' .
+				$c['climber_id']   . ',' .
+				$c['route_id']     . ',' .
+				$c['success_id']   . ',' .
+			"'" .	$c['date_climbed'] . "'" .
+			')';
+	}
+
+	$query .= implode (',', $values);
+
+	$result = mysql_query($query);
+	if ($result === true) {
+		climb_add_error ($xml, sprintf ("Created %s climbs", mysql_affected_rows()));
+		return mysql_affected_rows();
+	} else {
+		return -1;
+	}
+}
+
+function climb_commit_rating (&$xml, $ratings)
+{
+	$query  = "insert into rating (climber_id, route_id, difficulty_id, climb_note_id, nice) values ";
+	$values = array();
+
+	foreach ($ratings as $r) {
+		if ($r['nice'] == 'nice')
+			$r['nice'] = 1;
+
+		$values[] = '(' .
+				$r['climber_id']    . ',' .
+				$r['route_id']      . ',' .
+				$r['difficulty_id'] . ',' .
+				$r['climb_note_id'] . ',' .
+			 	$r['nice']          .
+			')';
+	}
+
+	$query .= implode (',', $values);
+
+	$result = mysql_query($query);
+	if ($result === true) {
+		climb_add_error ($xml, sprintf ("Created %s ratings", mysql_affected_rows()));
+		return mysql_affected_rows();
+	} else {
+		return -1;
+	}
+}
+
+function climb_commit_notes (&$xml, &$ratings)
+{
+	$count = 0;
+	foreach ($ratings as &$r) {
+		$n = trim ($r['notes']);
+		if (empty ($n)) {
+			$r['climb_note_id'] = null;
+			continue;
+		}
+
+		$query = "insert into climb_note set notes = '$n'";
+		$result = mysql_query($query);
+		if ($result === true) {
+			$r['climb_note_id'] = mysql_insert_id();
+			$count++;
+		} else {
+			climb_add_error ($xml, "add note failed");
+			$r['climb_note_id'] = null;
+		}
+	}
+	if ($count > 0)
+		climb_add_error ($xml, sprintf ("Created %d notes", $count));
+
+	return $count;
+}
+
 
 function climb_do_add (&$xml)
 {
+	if (!array_key_exists ('date', $_GET)) {
+		climb_add_error ($xml, "No date");
+		return;
+	}
+
+	$date = climb_valid_date ($xml, $_GET['date']);
+	if ($date === null)
+		return;
+
 	$climbs  = $_GET['climbs'];
-	$date    = $_GET['date'];
-	$climber = $_GET['climber'];
-
-	$t = strtotime ('today');
-	$d = strtotime ($date);
-	if ($d === false) {
-		climb_add_error ($xml, sprintf ("'%s' is not a valid date", $date));
-		return;
-	}
-
-	if ($d > $t) {
-		climb_add_error ($xml, sprintf ("'%s': Date cannot be in the future", $date));
-		return;
-	}
-
-	$date = strftime('%Y-%m-%d', $d);
-
-	climb_get_climbers();
-	$climber_id = climb_valid_climber ($xml, $climber);
-	if ($climber_id === null) {
-		return;
-	}
 
 	$parts = preg_split('/[\s,]+/', $climbs);
 	$panel = array_shift ($parts);
@@ -452,8 +524,26 @@ function climb_do_add (&$xml)
 
 function climb_do_save (&$xml)
 {
-	$climbs  = $_GET['climbs'];
-	$climber = $_GET['climber'];
+	global $_GET;
+
+	if (!array_key_exists ('climb_xml', $_GET)) {
+		climb_add_error ($xml, "No climb_xml");
+		return;
+	} else {
+		$climbs = trim ($_GET['climb_xml']);
+		if (empty ($climbs)) {
+			climb_add_error ($xml, "Empty climbs");
+			return;
+		}
+	}
+
+	if (!array_key_exists ('climber', $_GET)) {
+		climb_add_error ($xml, "No climber");
+		return;
+	}
+	$climber_id = climb_lookup_climber ($xml, $_GET['climber']);
+	if ($climber_id === null)
+		return;
 
 	$cxml = simplexml_load_string ($climbs);
 
@@ -462,15 +552,36 @@ function climb_do_save (&$xml)
 	climb_get_success();
 	climb_get_difficulty();
 
+	$commit_climb = array();
+	$commit_rating = array();
 	for ($i = 0; $i < $cxml->count(); $i++) {
 		$a = $cxml->climb[$i];
 		$key = $a->panel . '_' . $a->colour;
 		$route_id = $routes[$key];
-		$date_climbed = $a->date;
+		$date_climbed = climb_valid_date ($xml, $a->date);
 		$success_id = climb_lookup_success ($a->success);
 		$difficulty_id = climb_lookup_difficulty ($a->difficulty);
 		$nice = $a->nice;
 		$notes = $a->notes;
+
+		// Validate add_climb
+		// Add climb using: climber_id, route_id, success_id, date_climbed
+		$c = array();
+		$c['climber_id']   = $climber_id;
+		$c['route_id']     = $route_id;
+		$c['success_id']   = $success_id;
+		$c['date_climbed'] = $date_climbed;
+		$commit_climb[] = $c;
+
+		// Validate add rating
+		// Create new rating using: climber_id, route_id, difficulty_id, climb_note_id, nice
+		$r = array();
+		$r['climber_id']    = $climber_id;
+		$r['route_id']      = $route_id;
+		$r['difficulty_id'] = $difficulty_id;
+		$r['nice']          = $nice;
+		$r['notes']         = $notes;
+		$commit_rating[] = $r;
 
 		/*
 		climb_add_error ($xml, sprintf ("route_id: %s", $route_id));
@@ -481,6 +592,11 @@ function climb_do_save (&$xml)
 		climb_add_error ($xml, sprintf ("notes: %s", $notes));
 		*/
 	}
+
+	//climb_add_error ($xml, print_r ($commit_climb, true));
+	climb_commit_climb ($xml, $commit_climb);
+	climb_commit_notes ($xml, $commit_rating);
+	climb_commit_rating ($xml, $commit_rating);
 
 	// for each <climb>
 	//	lookup <panel> <colour>		[route_id]
@@ -539,7 +655,7 @@ function test_data()
 
 	//$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
 	//$_GET['climbs']  = "32 all(d)";
-	$_GET['climbs']  = '<list type="climb"><climb><tick>false</tick><panel>3</panel><colour>Orange</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Purple/White</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Blue</colour><grade>6b+</grade><type>Top Rope</type><date>2011-02-19</date><success>failed</success></climb></list>';
+	$_GET['climb_xml']  = '<list type="climb"><climb><tick>false</tick><panel>3</panel><colour>Orange</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Purple/White</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Blue</colour><grade>6b+</grade><type>Top Rope</type><date>2011-02-19</date><success>failed</success></climb></list>';
 	//$_GET['climbs']  = "71 all";
 	//$_GET['action']  = "add";
 	$_GET['action']  = "save";

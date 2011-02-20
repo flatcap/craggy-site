@@ -185,10 +185,11 @@ function table_create (columns, ticklist)
 	t.appendChild (th);
 	t.appendChild (tb);
 
-	var r = t.insertRow (0)
+	var r = t.insertRow (0);
 
+	var c;
 	if (ticklist) {
-		var c = document.createElement ('th');
+		c = document.createElement ('th');
 		var i = document.createElement ('input');
 
 		i.id   = 'tick_master';
@@ -199,7 +200,7 @@ function table_create (columns, ticklist)
 
 	var name;
 	for (name in columns) {
-		var c = document.createElement ('th');
+		c = document.createElement ('th');
 		c.innerHTML = columns[name];
 		r.appendChild (c);
 	}
@@ -215,7 +216,7 @@ function table_add_row (table, columns, data, tick)
 	var tb = table.getElementsByTagName ('tbody');
 	var r = document.createElement ('tr');
 	tb[0].appendChild (r);
-	var c = r.insertCell (-1)
+	var c = r.insertCell (-1);
 	var i = document.createElement ('input');
 
 	i.id   = 'tick_master';
@@ -224,7 +225,7 @@ function table_add_row (table, columns, data, tick)
 	r.appendChild (c);
 
 	for (name in columns) {
-		c = r.insertCell (-1)
+		c = r.insertCell (-1);
 		c.innerHTML = climb_get_node (data, columns[name]);
 	}
 }
@@ -264,9 +265,10 @@ function callback_add()
 	if (display_errors(this))
 		return;
 
+	var columns;
 	if (list.children.length === 0) {
-		//var columns = new Array ("ID", "Panel", "Colour", "Grade", "Type", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
-		var columns = new Array ("", "", "", "", "Date", "Success", "Diff", "Nice", "Notes");
+		//columns = new Array ("ID", "Panel", "Colour", "Grade", "Type", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
+		columns = new Array ("", "", "", "", "Date", "Success", "Diff", "Nice", "Notes");
 		var t = table_create (columns, true);
 		list.appendChild (t);
 	}
@@ -278,9 +280,51 @@ function callback_add()
 	var i;
 	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		var columns = new Array ("panel", "colour", "grade", "climb_type", "date", "success", "difficulty", "nice", "notes");
+		columns = new Array ("panel", "colour", "grade", "climb_type", "date", "success", "difficulty", "nice", "notes");
 		table_add_row (table[0], columns, x[i], true);
 	}
+
+	var tb = list.getElementsByTagName ('tbody');
+	var tbc = tb[0].children;
+
+	for (i = 0; i < tbc.length; i++) {	// number of <tr>
+		tbcc = tbc[i].children;
+		var c = tbcc.length;
+		var val = tbcc[6].innerHTML;
+		tbcc[6].innerHTML = "";
+		var inp  = document.createElement ('input');
+		inp.type = "text";
+		tbcc[6].appendChild (inp);
+		inp.value = val;
+		inp.id = "success" + i;
+		inp.height = 22;
+		input_initialise (inp.id, "lookup_success.php", false);
+
+		val = tbcc[7].innerHTML;
+		tbcc[7].innerHTML = "";
+		inp  = document.createElement ('input');
+		inp.type = "text";
+		tbcc[7].appendChild (inp);
+		inp.value = val;
+		inp.id = "difficulty" + i;
+		inp.height = 22;
+		input_initialise (inp.id, "lookup_difficulty.php", false);
+
+		val = tbcc[2].innerHTML;
+		tbcc[2].innerHTML = "";
+		inp  = document.createElement ('input');
+		inp.type = "text";
+		tbcc[2].appendChild (inp);
+		inp.value = val;
+		inp.id = "colour" + i;
+		inp.height = 22;
+		input_initialise (inp.id, "lookup_colour.php", false);
+
+		//inp.onkeypress = inp_keypress;
+		//inp.onblur     = inp_blur;
+		var z = 1;
+	}
+
 
 	//initialise_ticks();
 	//initialise_rows();
@@ -310,5 +354,21 @@ function callback_catch_enter (e)
 	}
 
 	return true;
+}
+
+
+function inp_keypress (e)
+{
+	if (e.keyCode == 13) {
+		//alert ("enter pressed");
+		return false;
+	}
+
+	return true;
+}
+
+function inp_blur()
+{
+	//alert ("blur");
 }
 

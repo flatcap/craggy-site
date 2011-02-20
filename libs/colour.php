@@ -1,54 +1,67 @@
 <?php
 
-$g_lookup  = null;
+set_include_path ('../../libs');
 
-function colour_initialise()
+include 'utils.php';
+
+function colour_get()
 {
-	include 'db.php';
-	include 'db_names.php';
+	static $colours = null;
 
-	global $g_lookup;
-
-	$colours = db_select($DB_COLOUR);
-
-	$g_lookup = array();
-
-	foreach ($colours as $ckey => $c) {
-		$g_lookup[strtolower ($c['colour'])] = &$colours[$ckey];
-		$abbr = explode (',', $c['abbr']);
-		foreach ($abbr as $a) {
-			$g_lookup[$a] = &$colours[$ckey];
-		}
+	if ($colours === null) {
+		include 'db.php';
+		include 'db_names.php';
+		$colours = db_select($DB_COLOUR);
 	}
+
+	return $colours;
 }
 
 function colour_match_single ($test)
 {
-	global $g_lookup;
+	$colours = colour_get();
+	if (!$colours)
+		return nulll;
 
-	if (!$g_lookup)
-		colour_initialise();
-
+	$test = trim ($test);
 	if (!$test)
 		return null;
 
-	if (array_key_exists ($test, $g_lookup))
-		return $g_lookup[$test];
-	else
+	$count = 0;
+	$match = null;
+	foreach ($colours as $key => $c) {
+		$p1 = strpos ($test, '/');
+		$p2 = strpos ($c['colour'], '/');
+		if ((partial_match ($test, $c['colour']) &&
+		    ($p1 === $p2))) {
+			$match = &$colours[$key];
+			$count++;
+			continue;
+		}
+		$abbr = explode (',', $c['abbr']);
+		foreach ($abbr as $a) {
+			if (strcasecmp ($test, $a) === 0) {
+				return $colours[$key];
+			}
+		}
+	}
+
+	if ($count == 1) {
+		return $match;
+	} else {
 		return null;
+	}
 }
 
 function colour_match ($test)
 {
-	$test = strtolower ($test);
-
-	$id = colour_match_single ($test);
-	if ($id !== null)
-		return $id;
+	$col1 = colour_match_single ($test);
+	if ($col1 !== null)
+		return $col1;
 
 	$pos = strpos ($test, '/');
 	if ($pos === false)
-		return $id;
+		return null;
 
 	$col1 = colour_match_single (substr($test, 0, $pos));
 	$col2 = colour_match_single (substr($test, $pos+1));
@@ -56,11 +69,6 @@ function colour_match ($test)
 	if (($col1 === null) || ($col2 === null))
 		return null;
 
-	$col1 = $col1['colour'];
-	$col2 = $col2['colour'];
-
-	$test = strtolower ($col1.'/'.$col2);
-
-	return colour_match_single ($test);
+	return colour_match_single ($col1['colour'].'/'.$col2['colour']);
 }
 

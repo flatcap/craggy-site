@@ -1,0 +1,8 @@
+function input_initialise (entry_id, lookup, focus)
+
+entry_id	unique identifier for the input field
+lookup		a php program to do the work
+focus		should we set focus to this item		do we want/need this?
+
+default		put this text into the field, if it's left empty
+

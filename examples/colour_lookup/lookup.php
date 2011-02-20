@@ -16,8 +16,9 @@ $q = trim ($q);
 if (empty ($q))
 	return;
 
+//sleep (2);
 $col = colour_match ($q);
 if ($col !== null) {
-	printf ('%s,%s', $col['colour'], $_GET['id']);
+	echo $col['colour'];
 }
 

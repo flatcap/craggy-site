@@ -6,28 +6,29 @@
 	<title>Colour Lookup</title>
 </head>
 <body>
-	<input type="text" size=40 id="entry1"><br>
-	<input type="text" size=40 id="entry2"><br>
-	<input type="text" size=40 id="entry3"><br>
-	<input type="text" size=40 id="entry4"><br>
-	<input type="text" size=40 id="entry5"><br>
-	<input type="text" size=40 id="entry6"><br>
-	<input type="text" size=40 id="entry7"><br>
-	<input type="text" size=40 id="entry8"><br>
-	<input type="text" size=40 id="entry9"><br>
-	<input type="text" size=40 id="entry10"><br>
+	<input type="text" size=40 id="entry1"  value="rd">   <br>
+	<input type="text" size=40 id="entry2"  value="gn">   <br>
+	<input type="text" size=40 id="entry3"  value="blu">  <br>
+	<input type="text" size=40 id="entry4"  value="gray"> <br>
+	<input type="text" size=40 id="entry5"  value="ti">   <br>
+	<input type="text" size=40 id="entry6"  value="tq">   <br>
+	<input type="text" size=40 id="entry7"  value="y">    <br>
+	<input type="text" size=40 id="entry8"  value="w">    <br>
+	<input type="text" size=40 id="entry9"  value="rw">   <br>
+	<input type="text" size=40 id="entry10" value="p/w">  <br>
 </body>
 <script type='text/javascript'>
-	colour_initialise ("entry1", true);
-	colour_initialise ("entry2");
-	colour_initialise ("entry3");
-	colour_initialise ("entry4");
-	colour_initialise ("entry5");
-	colour_initialise ("entry6");
-	colour_initialise ("entry7");
-	colour_initialise ("entry8");
-	colour_initialise ("entry9");
-	colour_initialise ("entry10");
+	var l = "lookup.php"
+	input_initialise ("entry1", l, true);
+	input_initialise ("entry2", l);
+	input_initialise ("entry3", l);
+	input_initialise ("entry4", l);
+	input_initialise ("entry5", l);
+	input_initialise ("entry6", l);
+	input_initialise ("entry7", l);
+	input_initialise ("entry8", l);
+	input_initialise ("entry9", l);
+	input_initialise ("entry10",l);
 </script>
 </html>
 

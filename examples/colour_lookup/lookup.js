@@ -1,38 +1,31 @@
-function colour_initialise (entry_id, focus)
+function input_initialise (entry_id, lookup, focus)
 {
-	var colour_entry = document.getElementById (entry_id);
+	var entry = document.getElementById (entry_id);
 
-	colour_entry.onblur     = colour_validate;
-	colour_entry.onkeypress = colour_onkeypress;
+	entry.onblur     = input_validate;
+	entry.onkeypress = input_onkeypress;
+	entry.lookup     = lookup;
 
 	if (focus)
-		colour_entry.focus();
+		entry.focus();
 }
 
-function colour_callback()
+function input_callback()
 {
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var response = this.responseText;
-	if (response.length === 0)
+	if (this.responseText.length === 0)
 		return;
 
-	var split = response.indexOf (",");
-	if (split < 0)
-		return;
-
-	var colour  = response.substring (0, split);
-	var entryid = response.substring (split+1);
-
-	var entry = document.getElementById (entryid);
+	var entry = document.getElementById (this.lookup);
 	if (!entry)
 		return;
 
-	entry.value = colour;
+	entry.value = this.responseText;
 }
 
-function colour_validate()
+function input_validate()
 {
 	var str = this.value;
 	if (str.length === 0) {
@@ -45,16 +38,19 @@ function colour_validate()
 	} else {
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
-	x.onreadystatechange = colour_callback;
-	x.open ("GET", "lookup.php?q=" + encodeURI(str) + '&id=' + this.id, true);
+
+	str = this.lookup + "?q=" + encodeURI(str);
+	x.lookup = this.id;
+	x.onreadystatechange = input_callback;
+	x.open ("GET", str, true);
 	x.send();
 }
 
-function colour_onkeypress (e)
+function input_onkeypress (e)
 {
 	// Validate on enter, space or comma
 	if ((e.keyCode == 13) || (e.charCode == 32) || (e.charCode == 44)) {
-		colour_validate();
+		input_validate();
 		return false;
 	}
 

@@ -363,7 +363,8 @@ function climb_commit_climb (&$xml, $climbs)
 
 	$result = mysql_query($query);
 	if ($result === true) {
-		climb_add_error ($xml, sprintf ("Created %s climbs", mysql_affected_rows()));
+		climb_add_error ($xml, sprintf ("Created %d climbs", mysql_affected_rows()));
+		printf ("Created %d climbs\n\n", mysql_affected_rows());
 		return mysql_affected_rows();
 	} else {
 		return -1;
@@ -384,7 +385,7 @@ function climb_commit_rating (&$xml, $ratings)
 				$r['route_id']      . ',' .
 				$r['difficulty_id'] . ',' .
 				$r['climb_note_id'] . ',' .
-			 	$r['nice']          .
+				$r['nice']          .
 			')';
 	}
 
@@ -401,6 +402,42 @@ function climb_commit_rating (&$xml, $ratings)
 
 function climb_commit_notes (&$xml, &$ratings)
 {
+	/*
+		Original	New
+		Rating		Rating		To do
+	   ---------------------------------------------
+		   --		   --		nothing
+
+		   --		NEW UNIQ	create note
+						add id to rating
+
+		   --		NEW SHARED	use existing id
+						add id to rating
+
+		OLD UNIQ	   --		delete note
+						add null to rating
+
+		OLD SHARED	   --		do nothing
+						add null to rating
+
+		OLD UNIQ	OLD UNIQ	do nothing
+
+		OLD SHARED	OLD SHARED	do nothing
+
+		OLD UNIQ	NEW UNIQ	overwrite note
+						add id to rating
+
+		OLD UNIQ	NEW SHARED	delete note
+						add id to rating
+
+		OLD SHARED	NEW UNIQ	create note
+						add id to rating
+
+		OLD SHARED	NEW SHARED	use existing id
+						add id to rating
+
+	*/
+
 	$count = 0;
 	foreach ($ratings as &$r) {
 		$n = trim ($r['notes']);
@@ -419,10 +456,16 @@ function climb_commit_notes (&$xml, &$ratings)
 			$r['climb_note_id'] = null;
 		}
 	}
-	if ($count > 0)
+	if ($count > 0) {
 		climb_add_error ($xml, sprintf ("Created %d notes", $count));
+		printf ("Created %d notes\n\n", $count);
+	}
 
 	return $count;
+}
+
+function climb_get_notes2 (&$xml, &$commit_rating)
+{
 }
 
 
@@ -547,6 +590,8 @@ function climb_do_save (&$xml)
 
 	$cxml = simplexml_load_string ($climbs);
 
+	printf ("committing %d climbs for %s\n", $cxml->count(), $_GET['climber']);
+
 	climb_get_panels();
 	$routes = climb_get_routes();
 	climb_get_success();
@@ -554,6 +599,8 @@ function climb_do_save (&$xml)
 
 	$commit_climb = array();
 	$commit_rating = array();
+	printf ("\n");
+	printf ("rid   Panel Colour         Date         Success     Diff       Nice   Notes\n");
 	for ($i = 0; $i < $cxml->count(); $i++) {
 		$a = $cxml->climb[$i];
 		$key = $a->panel . '_' . $a->colour;
@@ -563,6 +610,13 @@ function climb_do_save (&$xml)
 		$difficulty_id = climb_lookup_difficulty ($a->difficulty);
 		$nice = $a->nice;
 		$notes = $a->notes;
+
+		printf ("%-5s %-5s %-14s %-12s %-11s %-10s %-6s %s\n", $route_id, $a->panel, $a->colour, $a->date, $a->success, $a->difficulty, $a->nice, $a->notes);
+
+		// need to find any associated notes
+		// notes from user entry [notes]
+		// note_id from db [climb_note_id]
+		// notes from db  [climb_notes]
 
 		// Validate add_climb
 		// Add climb using: climber_id, route_id, success_id, date_climbed
@@ -592,8 +646,11 @@ function climb_do_save (&$xml)
 		climb_add_error ($xml, sprintf ("notes: %s", $notes));
 		*/
 	}
+	printf ("\n");
 
 	//climb_add_error ($xml, print_r ($commit_climb, true));
+	//climb_get_notes ($xml, $commit_rating);
+
 	climb_commit_climb ($xml, $commit_climb);
 	climb_commit_notes ($xml, $commit_rating);
 	climb_commit_rating ($xml, $commit_rating);
@@ -649,13 +706,57 @@ function climb_main (&$xml)
 	}
 }
 
+function get_random_climbs()
+{
+	$nice1 = (rand (0,3) == 0) ? "nice" : "";
+	$nice2 = (rand (0,6) == 0) ? "nice" : "";
+	$nice3 = (rand (0,9) == 0) ? "nice" : "";
+
+	$diffs = array ('very easy', 'easy', 'medium', 'hard', 'very hard');
+
+	$diff1 = $diffs[rand(0,4)];
+	$diff2 = $diffs[rand(0,4)];
+	$diff3 = $diffs[rand(0,4)];
+
+	$notes1 = sprintf ("notes %d blah", rand (0,9));
+	$notes2 = sprintf ("notes %d blah", rand (0,9));
+	$notes3 = sprintf ("notes %d blah", rand (0,9));
+
+	$date_base = strtotime ("2007-01-01");
+	$date_ref  = strtotime ("2011-02-21");
+	$date_now  = strtotime ("now");
+
+	$date = $date_base + (($date_now - $date_ref) * 1440);	// 1 day per minute after ref
+	$datestr = strftime('%Y-%m-%d', $date);
+
+	$successes = array ("failed", "success", "clean", "downclimb");
+
+	$succ1 = $successes[rand (0,3)];
+	$succ2 = $successes[rand (0,3)];
+	$succ3 = $successes[rand (0,3)];
+
+	$xml = "<list type='climb'>";
+
+	$xml .= sprintf ("<climb><panel>3</panel><colour>Orange</colour><date>%s</date><success>%s</success><difficulty>%s</difficulty><nice>%s</nice><notes>%s</notes></climb>",
+		$datestr, $succ1, $diff1, $nice1, $notes1);
+	$xml .= sprintf ("<climb><panel>3</panel><colour>Purple/White</colour><date>%s</date><success>%s</success><difficulty>%s</difficulty><nice>%s</nice><notes>%s</notes></climb>",
+		$datestr, $succ2, $diff2, $nice2, $notes2);
+	$xml .= sprintf ("<climb><panel>3</panel><colour>Blue</colour><date>%s</date><success>%s</success><difficulty>%s</difficulty><nice>%s</nice><notes>%s</notes></climb>",
+		$datestr, $succ3, $diff3, $nice3, $notes3);
+
+	$xml .= "</list>";
+
+	return $xml;
+}
+
 function test_data()
 {
 	global $_GET;
 
+	$_GET['climb_xml']  = get_random_climbs();
+
 	//$_GET['climbs']  = "46 pw(d), blu, bg(2f), fe(f)";
 	//$_GET['climbs']  = "32 all(d)";
-	$_GET['climb_xml']  = '<list type="climb"><climb><tick>false</tick><panel>3</panel><colour>Orange</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Purple/White</colour><grade>5+</grade><type>Top Rope</type><date>2011-02-19</date><success>downclimb</success></climb><climb><tick>false</tick><panel>3</panel><colour>Blue</colour><grade>6b+</grade><type>Top Rope</type><date>2011-02-19</date><success>failed</success></climb></list>';
 	//$_GET['climbs']  = "71 all";
 	//$_GET['action']  = "add";
 	$_GET['action']  = "save";
@@ -679,8 +780,8 @@ header('Content-Type: application/xml; charset=ISO-8859-1');
 $xml = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?"."><list />");
 $xml->addAttribute ('type', 'climb');
 
-//test_data();
+test_data();
 climb_main ($xml);
 
-echo $xml->asXML();
+//echo $xml->asXML();
 

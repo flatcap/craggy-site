@@ -212,7 +212,7 @@ function table_add_row (table, columns, data, tick)
 {
 	if (!table || !columns || !data)
 		return;
-	
+
 	var tb = table.getElementsByTagName ('tbody');
 	var r = document.createElement ('tr');
 	tb[0].appendChild (r);
@@ -284,6 +284,7 @@ function callback_add()
 		table_add_row (table[0], columns, x[i], true);
 	}
 
+	/* messing about with auto-complete
 	var tb = list.getElementsByTagName ('tbody');
 	var tbc = tb[0].children;
 
@@ -324,7 +325,7 @@ function callback_add()
 		//inp.onblur     = inp_blur;
 		var z = 1;
 	}
-
+	*/
 
 	//initialise_ticks();
 	//initialise_rows();

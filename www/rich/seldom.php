@@ -51,8 +51,7 @@ function seldom_climbs ($ranges, $climber_id)
 			" left join $DB_CLIMB_TYPE on ($DB_PANEL.climb_type_id  = $DB_CLIMB_TYPE.id)" .
 			" left join $DB_SUCCESS    on ($DB_CLIMB.success_id     = $DB_SUCCESS.id)" .
 			" left join $DB_RATING     on ($DB_RATING.route_id      = $DB_ROUTE.id)" .
-			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)" .
-			" left join $DB_CLIMB_NOTE on ($DB_RATING.climb_note_id = $DB_CLIMB_NOTE.id)";
+			" left join $DB_DIFFICULTY on ($DB_RATING.difficulty_id = $DB_DIFFICULTY.id)";
 
 	$columns = array (
 			  "$DB_ROUTE.id               as route_id",
@@ -65,7 +64,7 @@ function seldom_climbs ($ranges, $climber_id)
 			  "$DB_SUCCESS.outcome        as success",
 			  "nice                       as n",
 			  "$DB_DIFFICULTY.description as diff",
-			  "notes");
+			  "$DB_RATING.notes           as notes");
 
 	$where   = array ('date_end is null', "$DB_GRADE.sequence < 600");
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";

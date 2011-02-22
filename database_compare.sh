@@ -7,7 +7,7 @@
 OPTS="--skip-extended-insert --add-drop-database --skip-dump-date --single-transaction"
 
 DATABASE="craggy"
-TABLES=(climb climb_note climb_type climber colour data difficulty grade panel rating route route_note setter success v_route)
+TABLES=(climb climb_type climber colour data difficulty grade panel rating route setter success v_route)
 
 if [ ! -f craggy_russon.sql ]; then
 	mysqldump $OPTS -h127.0.0.1 -P3307 -ubackup -pphokio10 $DATABASE ${TABLES[*]} \

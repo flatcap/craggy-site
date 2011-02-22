@@ -477,7 +477,6 @@ function climb_commit_notes (&$xml, &$ratings)
 function climb_get_rating_notes (&$xml, &$commit_rating)
 {
 	global $DB_RATING;
-	global $DB_CLIMB_NOTE;
 
 	// for each climb, lookup the rating and notes/note_id
 	$ids = array();
@@ -485,8 +484,8 @@ function climb_get_rating_notes (&$xml, &$commit_rating)
 		$ids[] = $r['route_id'];
 	}
 
-	$table = "$DB_RATING left join $DB_CLIMB_NOTE on (climb_note_id = $DB_CLIMB_NOTE.id)";
-	$columns = array ("route_id as id", "$DB_CLIMB_NOTE.id as climb_note_id", "notes");
+	$table = $DB_RATING;
+	$columns = array ("route_id as id", "notes");
 	$where = "route_id in (" . implode (',', $ids) . ')';
 
 	$notes = db_select ($table, $columns, $where);

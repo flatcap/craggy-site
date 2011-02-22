@@ -400,8 +400,18 @@ function climb_commit_rating (&$xml, $ratings)
 	}
 }
 
+
 function climb_commit_notes (&$xml, &$ratings)
 {
+	foreach ($ratings as $r) {
+		printf ("%-5s %-40s %-20s\n", $r['climb_note_id'], $r['climb_note'], $r['notes']);
+	}
+
+	//var_dump ($ratings);
+	exit (1);
+
+	// Have route id, notes
+	//
 	/*
 		Original	New
 		Rating		Rating		To do
@@ -464,8 +474,30 @@ function climb_commit_notes (&$xml, &$ratings)
 	return $count;
 }
 
-function climb_get_notes2 (&$xml, &$commit_rating)
+function climb_get_rating_notes (&$xml, &$commit_rating)
 {
+	global $DB_RATING;
+	global $DB_CLIMB_NOTE;
+
+	// for each climb, lookup the rating and notes/note_id
+	$ids = array();
+	foreach ($commit_rating as $r) {
+		$ids[] = $r['route_id'];
+	}
+
+	$table = "$DB_RATING left join $DB_CLIMB_NOTE on (climb_note_id = $DB_CLIMB_NOTE.id)";
+	$columns = array ("route_id as id", "$DB_CLIMB_NOTE.id as climb_note_id", "notes");
+	$where = "route_id in (" . implode (',', $ids) . ')';
+
+	$notes = db_select ($table, $columns, $where);
+
+	foreach ($commit_rating as &$r) {
+		$rid = $r['route_id'];
+		if (array_key_exists ($rid, $notes)) {
+			$r['climb_note_id'] = $notes[$rid]['climb_note_id'];
+			$r['climb_note']    = $notes[$rid]['notes'];
+		}
+	}
 }
 
 
@@ -608,8 +640,8 @@ function climb_do_save (&$xml)
 		$date_climbed = climb_valid_date ($xml, $a->date);
 		$success_id = climb_lookup_success ($a->success);
 		$difficulty_id = climb_lookup_difficulty ($a->difficulty);
-		$nice = $a->nice;
-		$notes = $a->notes;
+		$nice = (string) $a->nice;
+		$notes = (string) $a->notes;
 
 		printf ("%-5s %-5s %-14s %-12s %-11s %-10s %-6s %s\n", $route_id, $a->panel, $a->colour, $a->date, $a->success, $a->difficulty, $a->nice, $a->notes);
 
@@ -649,7 +681,8 @@ function climb_do_save (&$xml)
 	printf ("\n");
 
 	//climb_add_error ($xml, print_r ($commit_climb, true));
-	//climb_get_notes ($xml, $commit_rating);
+
+	climb_get_rating_notes ($xml, $commit_rating);
 
 	climb_commit_climb ($xml, $commit_climb);
 	climb_commit_notes ($xml, $commit_rating);
@@ -721,6 +754,10 @@ function get_random_climbs()
 	$notes1 = sprintf ("notes %d blah", rand (0,9));
 	$notes2 = sprintf ("notes %d blah", rand (0,9));
 	$notes3 = sprintf ("notes %d blah", rand (0,9));
+
+	if (rand (0,3) == 0) $notes1 = null;
+	if (rand (0,5) == 0) $notes2 = null;
+	if (rand (0,7) == 0) $notes3 = null;
 
 	$date_base = strtotime ("2007-01-01");
 	$date_ref  = strtotime ("2011-02-21");

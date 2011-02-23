@@ -374,6 +374,16 @@ function climb_commit_rating (&$xml, $ratings)
 		else
 			$r['nice'] = 0;
 
+		if (empty ($r['difficulty'])) {
+			$r['difficulty'] = 'null';
+		}
+
+		if (empty ($r['notes'])) {
+			$r['notes'] = 'null';
+		} else {
+			$r['notes'] = "'" . str_replace ("'", "''", $r['notes']) . "'";
+		}
+
 		$route_id = $r['route_id'];
 		if (array_key_exists ($route_id, $rating_ids)) {
 			$r['rating_id'] = $rating_ids[$route_id]['rating_id'];
@@ -383,6 +393,7 @@ function climb_commit_rating (&$xml, $ratings)
 		}
 	}
 
+	//climb_add_error ($xml, print_r ($values_insert, true));
 	if (count ($values_insert) > 0) {
 		$query  = "insert into rating (climber_id, route_id, difficulty_id, notes, nice) values ";
 		$values = array();
@@ -390,7 +401,7 @@ function climb_commit_rating (&$xml, $ratings)
 			$values[] = '(' .
 					$r['climber_id']    . ',' .
 					$r['route_id']      . ',' .
-					$r['difficulty_id'] . ',' .
+					$r['difficulty']    . ',' .
 				"'" .	$r['notes'] . "'"   . ',' .
 					$r['nice']          .
 				')';
@@ -401,6 +412,8 @@ function climb_commit_rating (&$xml, $ratings)
 		$result = mysql_query($query);
 		if ($result === true) {
 			climb_add_error ($xml, sprintf ("Created %s new ratings", mysql_affected_rows()));
+		} else {
+			climb_add_error ($xml, "Rating insert failed");
 		}
 	}
 

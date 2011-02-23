@@ -354,11 +354,11 @@ function climb_commit_rating (&$xml, $ratings)
 	if (count ($values_update) > 0) {
 		foreach ($values_update as $r) {
 			$query = "update rating set ";
-			$query .= "climber_id    = " . $r['climber_id']    . ',';
-			$query .= "route_id      = " . $r['route_id']      . ',';
-			$query .= "difficulty_id = " . $r['difficulty_id'] . ',';
-			$query .= "nice          = " . $r['nice']          . ',';
-			$query .= "notes         = '" . $r['notes']        . "' ";
+			$query .= "climber_id    = " . $r['climber_id'] . ',';
+			$query .= "route_id      = " . $r['route_id']   . ',';
+			$query .= "difficulty_id = " . $r['difficulty'] . ',';
+			$query .= "nice          = " . $r['nice']       . ',';
+			$query .= "notes         = " . $r['notes']      . ' ';
 
 			$query .= "where id = " . $r['rating_id'];
 

@@ -308,8 +308,8 @@ function climb_commit_rating (&$xml, $ratings)
 		else
 			$r['nice'] = 0;
 
-		if (empty ($r['difficulty'])) {
-			$r['difficulty'] = 'null';
+		if (empty ($r['difficulty_id'])) {
+			$r['difficulty_id'] = 'null';
 		}
 
 		if (empty ($r['notes'])) {
@@ -335,8 +335,8 @@ function climb_commit_rating (&$xml, $ratings)
 			$values[] = '(' .
 					$r['climber_id']    . ',' .
 					$r['route_id']      . ',' .
-					$r['difficulty']    . ',' .
-				"'" .	$r['notes'] . "'"   . ',' .
+					$r['difficulty_id'] . ',' .
+					$r['notes']         . ',' .
 					$r['nice']          .
 				')';
 		}
@@ -354,11 +354,11 @@ function climb_commit_rating (&$xml, $ratings)
 	if (count ($values_update) > 0) {
 		foreach ($values_update as $r) {
 			$query = "update rating set ";
-			$query .= "climber_id    = " . $r['climber_id'] . ',';
-			$query .= "route_id      = " . $r['route_id']   . ',';
-			$query .= "difficulty_id = " . $r['difficulty'] . ',';
-			$query .= "nice          = " . $r['nice']       . ',';
-			$query .= "notes         = " . $r['notes']      . ' ';
+			$query .= "climber_id    = " . $r['climber_id']    . ',';
+			$query .= "route_id      = " . $r['route_id']      . ',';
+			$query .= "difficulty_id = " . $r['difficulty_id'] . ',';
+			$query .= "nice          = " . $r['nice']          . ',';
+			$query .= "notes         = " . $r['notes']         . ' ';
 
 			$query .= "where id = " . $r['rating_id'];
 
@@ -578,7 +578,7 @@ function climb_do_save (&$xml)
 		$r['route_id']      = $route_id;
 		$r['difficulty_id'] = $difficulty_id;
 		$r['nice']          = $nice;
-		$r['notes']         = $notes;
+		$r['notes']         = htmlentities (urldecode ($notes));
 		$commit_rating[] = $r;
 	}
 	//printf ("\n");

@@ -48,8 +48,12 @@ function get_row (row, columns)
 			obj[columns[i]] = children[i].innerHTML;		// Just text
 		} else {
 			var f = children[i].firstChild;
-			if ((f.nodeName.toLowerCase() == 'input') && (f.type.toLowerCase() == 'checkbox')) {
-				obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
+			if (f.nodeName.toLowerCase() == 'input') {
+				if (f.type.toLowerCase() == 'checkbox') {
+					obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
+				} else if (f.type.toLowerCase() == 'text') {
+					obj[columns[i]] = children[i].firstChild.value;		// A textbox
+				}
 			}
 		}
 	}
@@ -284,7 +288,7 @@ function callback_add()
 		table_add_row (table[0], columns, x[i], true);
 	}
 
-	/* messing about with auto-complete
+	/* messing about with auto-complete */
 	var tb = list.getElementsByTagName ('tbody');
 	var tbc = tb[0].children;
 
@@ -297,9 +301,31 @@ function callback_add()
 		inp.type = "text";
 		tbcc[6].appendChild (inp);
 		inp.value = val;
+		inp.size = 10;
 		inp.id = "success" + i;
-		inp.height = 22;
+		//inp.height = 22;
 		input_initialise (inp.id, "lookup_success.php", false);
+
+		val = tbcc[9].innerHTML;
+		tbcc[9].innerHTML = "";
+		inp  = document.createElement ('input');
+		inp.type = "text";
+		tbcc[9].appendChild (inp);
+		inp.value = val;
+		inp.size = 20;
+		inp.id = "nice" + i;
+		//inp.height = 22;
+
+		val = tbcc[8].innerHTML;
+		tbcc[8].innerHTML = "";
+		inp  = document.createElement ('input');
+		inp.type = "text";
+		tbcc[8].appendChild (inp);
+		inp.value = val;
+		inp.size = 6;
+		inp.id = "nice" + i;
+		//inp.height = 22;
+		input_initialise (inp.id, "lookup_nice.php", false);
 
 		val = tbcc[7].innerHTML;
 		tbcc[7].innerHTML = "";
@@ -307,8 +333,9 @@ function callback_add()
 		inp.type = "text";
 		tbcc[7].appendChild (inp);
 		inp.value = val;
+		inp.size = 10;
 		inp.id = "difficulty" + i;
-		inp.height = 22;
+		//inp.height = 22;
 		input_initialise (inp.id, "lookup_difficulty.php", false);
 
 		val = tbcc[2].innerHTML;
@@ -317,15 +344,16 @@ function callback_add()
 		inp.type = "text";
 		tbcc[2].appendChild (inp);
 		inp.value = val;
+		inp.size = 10;
 		inp.id = "colour" + i;
-		inp.height = 22;
+		//inp.height = 22;
 		input_initialise (inp.id, "lookup_colour.php", false);
 
 		//inp.onkeypress = inp_keypress;
 		//inp.onblur     = inp_blur;
 		var z = 1;
 	}
-	*/
+	/**/
 
 	//initialise_ticks();
 	//initialise_rows();

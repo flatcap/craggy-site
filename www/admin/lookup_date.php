@@ -19,7 +19,8 @@ if ($date == false)
 else if ($date > $now)
 	$result = 'Date cannot be in the future';
 else
-	$result = date ('D j M Y', $date);
+	$result = strftime('%Y-%m-%d', $date);
 
-printf ('%s (%s)', $q, $result);
+//printf ('%s (%s)', $q, $result);
+echo $result;
 

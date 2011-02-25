@@ -295,7 +295,20 @@ function callback_add()
 	for (i = 0; i < tbc.length; i++) {	// number of <tr>
 		tbcc = tbc[i].children;
 		var c = tbcc.length;
-		var val = tbcc[6].innerHTML;
+		var val;
+
+		val = tbcc[5].innerHTML;
+		tbcc[5].innerHTML = "";
+		var inp  = document.createElement ('input');
+		inp.type = "text";
+		tbcc[5].appendChild (inp);
+		inp.value = val;
+		inp.size = 10;
+		inp.id = "date" + i;
+		//inp.height = 22;
+		input_initialise (inp.id, "lookup_date.php", false);
+
+		val = tbcc[6].innerHTML;
 		tbcc[6].innerHTML = "";
 		var inp  = document.createElement ('input');
 		inp.type = "text";

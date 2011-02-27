@@ -468,3 +468,7 @@ cursor: pointer;
 
 climb count on "add climbs"
 include downclimbs
+
+foreach source file list which database tables it requires
+write a test rig to see if missing, or empty, tables cause problems
+

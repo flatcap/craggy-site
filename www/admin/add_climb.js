@@ -269,6 +269,13 @@ function callback_add()
 	if (display_errors(this))
 		return;
 
+	var columns3 = [
+		{ "name": "tick", "type": "checkbox" },
+		{ "name": "id", "type": "hidden" },
+		{ "name": "panel", "type": "text", "size": 3 },
+		{ "name": "colour", "type": "text", "size": 3, "validator": "lookup_colour.php" }
+	];
+
 	var columns;
 	if (list.children.length === 0) {
 		//columns = new Array ("ID", "Panel", "Colour", "Grade", "Type", "Date", "Success", "Diff", "Nice", "Notes", "Errors");

@@ -440,6 +440,7 @@ function climb_do_add (&$xml)
 	}
 
 	$climbs  = $_GET['climbs'];
+	//climb_add_error ($xml, sprintf ("climbs = %s", $climbs));
 
 	$parts = preg_split('/[\s,]+/', $climbs);
 	$panel_name = array_shift ($parts);

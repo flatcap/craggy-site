@@ -1,6 +1,7 @@
 var button_list;
 var button_delete;
 var button_cancel;
+var entry_date;
 var entry_panel;
 
 var list_ticks;
@@ -19,6 +20,9 @@ function initialise_buttons()
 	button_list.onclick = click_list;
 	button_delete.onclick = click_delete;
 	button_cancel.onclick = click_cancel;
+
+	entry_date = document.getElementById ('date');
+	input_initialise ('date', "lookup_date.php", false);
 
 	entry_panel = document.getElementById ('entry');
 	entry_panel.onkeypress = callback_keypress;
@@ -95,6 +99,7 @@ function click_delete()
 	}
 
 	var str = ids.join(',');
+	var date = entry_date.value;
 	var x;
 	if (window.XMLHttpRequest) {
 		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
@@ -102,7 +107,7 @@ function click_delete()
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 	x.onreadystatechange = callback_delete;
-	x.open ("GET", "del_route_work.php?action=delete&data=" + str, true);
+	x.open ("GET", "del_route_work.php?action=delete&date=" + date + "&data=" + str, true);
 	x.send();
 }
 

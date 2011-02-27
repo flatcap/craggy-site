@@ -68,7 +68,7 @@ function route_list($data)
 	return $output;
 }
 
-function route_delete ($data)
+function route_delete ($data, $date)
 {
 	$ids = array();
 	$range = parse_range ($data);
@@ -82,9 +82,9 @@ function route_delete ($data)
 		}
 	}
 
-	$results = db_route_delete2 ($ids);
+	$results = db_route_delete ($ids, $date);
 
-	return "deleted {$results['climbs']} climbs, {$results['ratings']} ratings, {$results['routes']} routes.";
+	return "deleted {$results['routes']} routes.";
 }
 
 function route_main()
@@ -108,6 +108,12 @@ function route_main()
 		$data = '';
 	}
 
+	if (array_key_exists ('date', $_GET)) {
+		$date = $_GET['date'];
+	} else {
+		$date = '';
+	}
+
 	// action: delete, list, update
 	switch ($action) {
 		case 'list':
@@ -115,7 +121,7 @@ function route_main()
 			$response = route_list($data);
 			break;
 		case 'delete':
-			$response = route_delete($data);
+			$response = route_delete($data, $date);
 			break;
 		default:
 			$response = "unknown action";

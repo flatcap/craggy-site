@@ -113,7 +113,7 @@ function db_date($date)
 	return $result;
 }
 
-function db_route_delete2($ids)
+function db_route_delete ($ids, $date)
 {
 	if (count ($ids) == 0)
 		return null;
@@ -123,23 +123,7 @@ function db_route_delete2($ids)
 	$db = db_get_database();
 	$id_list = implode (',', $ids);
 
-	$query = "update climb set active = 0 where route_id in ($id_list)";
-	$result = mysql_query($query);
-	if ($result === true) {
-		$retval['climbs'] = mysql_affected_rows();
-	} else {
-		$retval['climbs'] = -1;
-	}
-
-	$query = "update rating set active = 0 where route_id in ($id_list)";
-	$result = mysql_query($query);
-	if ($result === true) {
-		$retval['ratings'] = mysql_affected_rows();
-	} else {
-		$retval['ratings'] = -1;
-	}
-
-	$query = "update route set date_end = date(now()) where id in ($id_list)";	// date needs to be passed in
+	$query = "update route set date_end = '$date' where id in ($id_list)";	// date needs to be passed in
 	$result = mysql_query($query);
 	if ($result === true) {
 		$retval['routes'] = mysql_affected_rows();

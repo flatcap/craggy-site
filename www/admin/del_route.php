@@ -18,14 +18,18 @@ function route_main()
 	$output .= "<h1>Delete Routes</h1>";
 	$output .= "</div>";
 
-	$output .= "<div id='entry_area'>ENTRY";
-	$output .= "<input id='entry' type='text' size='30' value='42-45'>";		// FOCUS
+
+	$output .= "<div id='entry_area'>";
+	$output .= "<label for='date' accesskey='d'><u>D</u>ate</label>";
+	$output .= "<input id='date' type='text' size='30' value='today'><br>";
+	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
+	$output .= "<input id='entry' type='text' size='30' value=''>";
 	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
 	$output .= "</div>";
 
-	$output .= "<div id='notify_area'>NOTIFY</div>";
-	$output .= "<div id='list_area'>LIST";
-	$output .= "<div id='route_list'>ROUTE</div>";
+	$output .= "<div id='notify_area'></div>";
+	$output .= "<div id='list_area'>";
+	$output .= "<div id='route_list'></div>";
 
 	$output .= '<br>';
 	$output .= "<div class='buttons'>";
@@ -37,6 +41,8 @@ function route_main()
 
 	$output .= '</div>'; // content
 
+	$output .= "<script type='text/javascript' src='notify.js'></script>";
+	$output .= "<script type='text/javascript' src='input.js'></script>";
 	$output .= "<script type='text/javascript' src='del_route.js'></script>";
 
 	$output .= get_errors();

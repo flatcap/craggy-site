@@ -27,6 +27,8 @@ function initialise_buttons()
 	entry_panel.focus();
 
 	entry_date   = document.getElementById ('date');
+	input_initialise ('date', "lookup_date.php", false);
+
 	entry_setter = document.getElementById ('setter');
 
 	notify_initialise ('notify_area');

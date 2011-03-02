@@ -77,10 +77,10 @@ case $1 in
 	clean)
 		database_clean
 		;;
-	cmp|comp)
+	cmp|comp|c)
 		database_cmp
 		;;
-	pull)
+	pull|pul|p)
 		database_pull
 		;;
 	push)

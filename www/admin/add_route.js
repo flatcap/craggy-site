@@ -30,6 +30,7 @@ function initialise_buttons()
 	input_initialise ('date', "lookup_date.php", false);
 
 	entry_setter = document.getElementById ('setter');
+	input_initialise ('setter', "lookup_setter.php", false);
 
 	notify_initialise ('notify_area');
 

@@ -1,5 +1,6 @@
 #/bin/bash
 
+BASE_DIR="/home/flatcap/downloads/craggy"
 DB_HOST="127.0.0.1"
 DB_PORT="3307"
 DB_USER="backup"
@@ -23,43 +24,43 @@ usage()
 
 database_clean()
 {
-	rm -f "$DB_CMP_FILE_LOCAL"
-	rm -f "$DB_CMP_FILE_REMOTE"
-	rm -f "$DB_PULL_FILE_REMOTE"
+	rm -f "$BASE_DIR/$DB_CMP_FILE_LOCAL"
+	rm -f "$BASE_DIR/$DB_CMP_FILE_REMOTE"
+	rm -f "$BASE_DIR/$DB_PULL_FILE_REMOTE"
 }
 
 database_cmp()
 {
 	TABLES=(climb climb_type climber colour data difficulty grade panel rating route setter success)
 
-	if [ ! -f "$DB_CMP_FILE_REMOTE" ]; then
+	if [ ! -f "$BASE_DIR/$DB_CMP_FILE_REMOTE" ]; then
 		mysqldump $DB_CMP_OPTS -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASS $DB_DATABASE ${TABLES[*]}	\
 			| sed	-e '/^-- Server version/d'							\
 				-e 's/^-- Host: 127.0.0.1/-- Host: russon.org/'					\
 				-e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
-			> "$DB_CMP_FILE_REMOTE"
+			> "$BASE_DIR/$DB_CMP_FILE_REMOTE"
 	fi
 
-	mysqldump $DB_CMP_OPTS -h$DB_HOST -P$DB_LOCAL_PORT -u$DB_LOCAL_USER $DB_DATABASE ${TABLES[*]}		\
+	mysqldump $DB_CMP_OPTS -h$DB_HOST -P$DB_LOCAL_PORT -u$DB_LOCAL_USER $DB_DATABASE ${TABLES[*]}	\
 		| sed	-e '/^-- Server version/d'							\
 			-e 's/^-- Host: 127.0.0.1/-- Host: flatcap.org/'				\
 			-e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
-		> "$DB_CMP_FILE_LOCAL"
+		> "$BASE_DIR/$DB_CMP_FILE_LOCAL"
 
-	dwdiff -c -C 3 --color=red,yellow "$DB_CMP_FILE_REMOTE" "$DB_CMP_FILE_LOCAL" | less -E
+	dwdiff -c -C 3 --color=red,yellow "$BASE_DIR/$DB_CMP_FILE_REMOTE" "$BASE_DIR/$DB_CMP_FILE_LOCAL" | less -E
 }
 
 database_pull()
 {
-	if [ ! -f "$DB_PULL_FILE_REMOTE" ]; then
+	if [ ! -f "$BASE_DIR/$DB_PULL_FILE_REMOTE" ]; then
 		mysqldump $DB_PULL_OPTS -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASS --database $DB_DATABASE |	\
 			sed -e '/^-- Server version/d'								\
 			    -e 's/^-- Host: 127.0.0.1/-- Host: russon.org/'					\
 			    -e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
-			> "$DB_PULL_FILE_REMOTE"
+			> "$BASE_DIR/$DB_PULL_FILE_REMOTE"
 	fi
 
-	mysql < "$DB_PULL_FILE_REMOTE"
+	mysql < "$BASE_DIR/$DB_PULL_FILE_REMOTE"
 }
 
 database_push()

@@ -29,6 +29,11 @@ function difficulty_match ($test)
 	$count = 0;
 	$match = null;
 	foreach ($difficulty as $key => $s) {
+		if (strcasecmp ($test, $s['abbr']) == 0) {
+			$match = &$difficulty[$key];
+			$count++;
+			break;
+		}
 		if (partial_match ($test, $s['description'])) {
 			$match = &$difficulty[$key];
 			$count++;

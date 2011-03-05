@@ -21,14 +21,14 @@ function add_main()
 	$output .= "<div id='entry_area'>";
 
 	$output .= "<label for='date' accesskey='d'><u>D</u>ate</label>";
-	$output .= "<input id='date' type='text' size='30' value='today'><br>";
+	$output .= "<input id='date' type='text' size='30' value='today'>";
+	$output .= "<span id='date_error'> </span> <br>";
 
 	$output .= "<label for='setter' accesskey='s'><u>S</u>etter</label>";
 	$output .= "<input id='setter' type='text' size='30' value='mc'>";
 	$output .= "<span id='setter_error'></span><br>";
 
 	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
-	//$output .= "<input id='entry' type='text' size='30' value='36 blue 3, red 3+, red 4, red 4+, red 5'>";
 	$output .= "<input id='entry' type='text' size='30' value=''>";
 
 	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";

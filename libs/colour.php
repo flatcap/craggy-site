@@ -72,3 +72,13 @@ function colour_match ($test)
 	return colour_match_single ($col1['colour'].'/'.$col2['colour']);
 }
 
+function colour_match_xml (&$xml)
+{
+	$colour = colour_match ($xml->input);
+	if ($colour === null) {
+		$xml->addChild ('error', "no such colour");
+	} else {
+		$xml->addChild ('colour', $colour['colour']);
+	}
+}
+

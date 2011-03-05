@@ -8,6 +8,7 @@ function input_initialise (entry_id, lookup)
 	entry.error_id   = entry_id + "_error";
 }
 
+
 function route_get_node (node, name)
 {
 	try {
@@ -90,7 +91,7 @@ function input_callback()
 	// 	turn input white (! class='error')
 	// 	find error_box for this input
 	// 	clear error_box
-	var result = route_get_node (xml, 'setter');
+	var result = route_get_node (xml, type);
 	entry.value = result;
 	entry.className = "";
 	if (entry_err)

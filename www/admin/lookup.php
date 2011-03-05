@@ -2,93 +2,95 @@
 
 set_include_path ('../../libs');
 
-include 'setter2.php';
+include 'log.php';
+include 'xml.php';
 
-function log_var ($var)
+function lookup_main()
 {
-	trigger_error (sprintf ("%s", print_r ($var, true)));
-}
+	global $HTTP_RAW_POST_DATA;
 
-function get_attributes ($xml)
-{
-	$attrs = array();
-	foreach($xml->attributes() as $a => $b) {
-		    $attrs[$a] = (string) $b;
+	if (!isset ($HTTP_RAW_POST_DATA)) {
+		$xml = xml_new_string ('validation');
+		$xml->addAttribute ('type', 'unknown');
+		$msg = "no HTTP_RAW_POST_DATA";
+		log_string ($msg);
+		return $xml;
 	}
 
-	return $attrs;
+	$xml = simplexml_load_string ($HTTP_RAW_POST_DATA);
+	$errlist = libxml_get_errors();
+	if (count ($errlist)) {
+		$xml = xml_new_string ('validation');
+		$xml->addAttribute ('type', 'unknown');
+		foreach ($errlist as $error) {
+			$xml->addChild ('error', $error->message);
+			log_var ($error);
+		}
+		return $xml;
+	}
+
+	$attrs = xml_get_attributes ($xml[0]);
+	if (!array_key_exists ('type', $attrs)) {
+		$msg = "no type in xml";
+		log_string ($msg);
+		$xml->addChild ('error', $msg);
+		return $xml;
+	}
+
+	$type = $attrs['type'];
+	switch ($type) {
+		case 'colour':
+			include 'colour.php';
+			colour_match_xml ($xml);
+			break;
+		case 'date':
+			include 'date.php';
+			date_match_xml ($xml);
+			break;
+		case 'grade':
+			include 'grade.php';
+			grade_match_xml ($xml);
+			break;
+		case 'nice':
+			include 'nice.php';
+			nice_match_xml ($xml);
+			break;
+		case 'panel':
+			include 'panel.php';
+			panel_match_xml ($xml);
+			break;
+		case 'setter':
+			include 'setter.php';
+			setter_match_xml ($xml);
+			break;
+		case 'colour':
+			include 'colour.php';
+			colour_match_xml ($xml);
+			break;
+		case 'difficulty':
+			include 'difficulty.php';
+			difficulty_match_xml ($xml);
+			break;
+		case 'success':
+			include 'success.php';
+			success_match_xml ($xml);
+			break;
+		default:
+			$msg = "unknown type: $type";
+			log_string ($msg);
+			$xml->addChild ('error', $msg);
+	}
+
+	return $xml;
 }
 
 
-ini_set('error_log', '/dev/pts/8');
-ini_set('display_errors', 0);
-ini_set('log_errors', 1);
-libxml_use_internal_errors (true);
+log_init ('/dev/pts/8');
 
 // We're going to reply in xml, regardless of the input
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
-$xml_reply = new SimpleXMLElement ("<validation />");
-//$xml_reply->addAttribute ('type', 'setter');
+$xml = lookup_main();
 
-//$text = file_get_contents('php://input');
-//$text = file_get_contents('php://stdin');
-//log_var ($text);
+echo $xml->asXML();
 
-$xml_input = simplexml_load_string ($HTTP_RAW_POST_DATA);
-$errlist = libxml_get_errors();
-if (count ($errlist)) {
-	foreach ($errlist as $error) {
-		// handle errors here
-		$xml_reply->addChild ('error', $error->message);
-		log_var ($error);
-	}
-	echo htmlentities ($xml_reply->asXML());
-	exit (1);
-	//libxml_clear_errors();
-}
-
-$input  = (string) $xml_input->input;
-//log_var ($input);
-$attrs = get_attributes ($xml_input[0]);
-$type   = $attrs['type'];
-//log_var ($type);
-
-$xml_reply->addChild ('input', $input);
-
-$xml_reply->addAttribute ('type', $type);
-//echo htmlentities ($xml_reply->asXML());
-
-$setter = setter_match ($input);
-if ($setter === null) {
-	$xml_reply->addChild ('error', "no such setter");
-} else {
-	$name = trim ($setter['first_name'] . " " . $setter['surname']);
-	$xml_reply->addChild ('setter', $name);
-}
-
-//log_var ($HTTP_RAW_POST_DATA);
-//log_var ($xml_input);
-
-echo $xml_reply->asXML();
-log_var ($xml_reply->asXML());
-exit (1);
-
-$value = urldecode ($xml->text[0]);
-
-$reply = sprintf ("Reply: this is the original -->%s<!--", $value);
-$xml->text[0] = $reply;
-
-/*
-Input:
-<validation type='colour'>
-	<input>rd</input>
-</validation>
-
-Output:
-<validation type='colour'>
-	<colour>Red</colour>
-	<input>rd</input>
-	<error>Unknown colour</error>
-</validation>
-*/

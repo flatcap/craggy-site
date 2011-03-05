@@ -2,7 +2,7 @@
 <html>
 <head>
 	<link rel="stylesheet" href="lookup.css" type="text/css">
-	<script type="text/javascript" src="lookup.js"></script>
+	<script type="text/javascript" src="input.js"></script>
 	<title>Colour Lookup</title>
 </head>
 <body>
@@ -18,18 +18,10 @@
 	<input type="text" size=40 id="entry9" value="p/w">  <span id="entry9_error"> </span> <br>
 </body>
 <script type='text/javascript'>
-	var l = "lookup.php"
-	input_initialise ("entry0", l);
-	input_initialise ("entry1", l);
-	input_initialise ("entry2", l);
-	input_initialise ("entry3", l);
-	input_initialise ("entry4", l);
-	input_initialise ("entry5", l);
-	input_initialise ("entry6", l);
-	input_initialise ("entry7", l);
-	input_initialise ("entry8", l);
-	input_initialise ("entry9", l);
-	document.getElementById ("entry3").focus();
+	for (var i = 0; i < 10; i++) {
+		input_initialise ('entry' + i, 'colour');
+	}
+	document.getElementById ('entry3').focus();
 </script>
 </html>
 

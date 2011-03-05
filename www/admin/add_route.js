@@ -27,10 +27,11 @@ function initialise_buttons()
 	entry_panel.focus();
 
 	entry_date   = document.getElementById ('date');
-	input_initialise ('date', "lookup_date.php", false);
+	//input_initialise ('date', "lookup_date.php", false);
+	entry_date.focus(); //tmp
 
 	entry_setter = document.getElementById ('setter');
-	input_initialise ('setter', "lookup_setter.php", false);
+	input_initialise ('setter', "setter", false);
 
 	notify_initialise ('notify_area');
 

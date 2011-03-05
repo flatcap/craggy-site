@@ -25,6 +25,7 @@ options:
 validation:
 	input: text string - "input=red&option1=true&option2=false"
 	output: xml:
+		full
 		<validation type='colour'>
 			<colour>Red</colour>
 			<input>rd</input>
@@ -33,6 +34,12 @@ validation:
 			<match type='first'>Red</match>			or type='best'
 			<match>Red/White</match>
 			<error>More than one match</error>
+		</validation>
+
+		simple
+		<validation type='colour'>
+			<colour>Red</colour>
+			<input>rd</input>
 		</validation>
 libs/
 	validate_colour

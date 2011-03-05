@@ -206,3 +206,7 @@ h3 {
 	margin: 0;
 }
 
+input.error {
+	background: #f88;
+}
+

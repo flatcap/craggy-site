@@ -241,7 +241,6 @@ function click_go()
 	xmlhttp.open ("POST", "chars.php", true);
 	xmlhttp.setRequestHeader ("Content-Type", "text/plain");
 	xmlhttp.send (xmlstr);
-
 }
 
 function callback_go()

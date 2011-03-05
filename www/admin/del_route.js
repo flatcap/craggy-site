@@ -22,7 +22,7 @@ function initialise_buttons()
 	button_cancel.onclick = click_cancel;
 
 	entry_date = document.getElementById ('date');
-	input_initialise ('date', "lookup_date.php", false);
+	input_initialise ('date', "lookup_date.php");
 
 	entry_panel = document.getElementById ('entry');
 	entry_panel.onkeypress = callback_keypress;

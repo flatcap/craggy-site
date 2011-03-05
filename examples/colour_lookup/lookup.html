@@ -6,20 +6,21 @@
 	<title>Colour Lookup</title>
 </head>
 <body>
-	<input type="text" size=40 id="entry1"  value="rd">   <br>
-	<input type="text" size=40 id="entry2"  value="gn">   <br>
-	<input type="text" size=40 id="entry3"  value="blu">  <br>
-	<input type="text" size=40 id="entry4"  value="gray"> <br>
-	<input type="text" size=40 id="entry5"  value="ti">   <br>
-	<input type="text" size=40 id="entry6"  value="tq">   <br>
-	<input type="text" size=40 id="entry7"  value="y">    <br>
-	<input type="text" size=40 id="entry8"  value="w">    <br>
-	<input type="text" size=40 id="entry9"  value="rw">   <br>
-	<input type="text" size=40 id="entry10" value="p/w">  <br>
+	<input type="text" size=40 id="entry0" value="rd">   <span id="entry0_error"> </span> <br>
+	<input type="text" size=40 id="entry1" value="gn">   <span id="entry1_error"> </span> <br>
+	<input type="text" size=40 id="entry2" value="blu">  <span id="entry2_error"> </span> <br>
+	<input type="text" size=40 id="entry3" value="gray"> <span id="entry3_error"> </span> <br>
+	<input type="text" size=40 id="entry4" value="ti">   <span id="entry4_error"> </span> <br>
+	<input type="text" size=40 id="entry5" value="tq">   <span id="entry5_error"> </span> <br>
+	<input type="text" size=40 id="entry6" value="y">    <span id="entry6_error"> </span> <br>
+	<input type="text" size=40 id="entry7" value="w">    <span id="entry7_error"> </span> <br>
+	<input type="text" size=40 id="entry8" value="rw">   <span id="entry8_error"> </span> <br>
+	<input type="text" size=40 id="entry9" value="p/w">  <span id="entry9_error"> </span> <br>
 </body>
 <script type='text/javascript'>
 	var l = "lookup.php"
-	input_initialise ("entry1", l, true);
+	input_initialise ("entry0", l);
+	input_initialise ("entry1", l);
 	input_initialise ("entry2", l);
 	input_initialise ("entry3", l);
 	input_initialise ("entry4", l);
@@ -28,7 +29,7 @@
 	input_initialise ("entry7", l);
 	input_initialise ("entry8", l);
 	input_initialise ("entry9", l);
-	input_initialise ("entry10",l);
+	document.getElementById ("entry3").focus();
 </script>
 </html>
 

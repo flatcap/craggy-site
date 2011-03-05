@@ -313,7 +313,7 @@ function callback_add()
 		inp.size = 10;
 		inp.id = "date" + i;
 		//inp.height = 22;
-		input_initialise (inp.id, "lookup_date.php", false);
+		input_initialise (inp.id, "lookup_date.php");
 
 		val = tbcc[6].innerHTML;
 		tbcc[6].innerHTML = "";
@@ -324,7 +324,7 @@ function callback_add()
 		inp.size = 10;
 		inp.id = "success" + i;
 		//inp.height = 22;
-		input_initialise (inp.id, "lookup_success.php", false);
+		input_initialise (inp.id, "lookup_success.php");
 
 		val = tbcc[9].innerHTML;
 		tbcc[9].innerHTML = "";
@@ -345,7 +345,7 @@ function callback_add()
 		inp.size = 6;
 		inp.id = "nice" + i;
 		//inp.height = 22;
-		input_initialise (inp.id, "lookup_nice.php", false);
+		input_initialise (inp.id, "lookup_nice.php");
 
 		val = tbcc[7].innerHTML;
 		tbcc[7].innerHTML = "";
@@ -356,7 +356,7 @@ function callback_add()
 		inp.size = 10;
 		inp.id = "difficulty" + i;
 		//inp.height = 22;
-		input_initialise (inp.id, "lookup_difficulty.php", false);
+		input_initialise (inp.id, "lookup_difficulty.php");
 
 		val = tbcc[2].innerHTML;
 		tbcc[2].innerHTML = "";
@@ -367,7 +367,7 @@ function callback_add()
 		inp.size = 10;
 		inp.id = "colour" + i;
 		//inp.height = 22;
-		input_initialise (inp.id, "lookup_colour.php", false);
+		input_initialise (inp.id, "lookup_colour.php");
 
 		//inp.onkeypress = inp_keypress;
 		//inp.onblur     = inp_blur;

@@ -1,4 +1,4 @@
-function input_initialise (entry_id, lookup, focus)
+function input_initialise (entry_id, lookup)
 {
 	var entry = document.getElementById (entry_id);
 
@@ -6,9 +6,6 @@ function input_initialise (entry_id, lookup, focus)
 	entry.onkeypress = input_onkeypress;
 	entry.lookup     = lookup;
 	entry.error_id   = entry_id + "_error";
-
-	if (focus)
-		entry.focus();
 }
 
 function route_get_node (node, name)

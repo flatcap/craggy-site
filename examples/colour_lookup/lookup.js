@@ -1,13 +1,10 @@
-function input_initialise (entry_id, lookup, focus)
+function input_initialise (entry_id, lookup)
 {
 	var entry = document.getElementById (entry_id);
 
 	entry.onblur     = input_validate;
 	entry.onkeypress = input_onkeypress;
 	entry.lookup     = lookup;
-
-	if (focus)
-		entry.focus();
 }
 
 function input_callback()

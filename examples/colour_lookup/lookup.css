@@ -2,3 +2,6 @@ input:focus {
 	border: 2px solid black;
 }
 
+input.error {
+	background: #f88;
+}

@@ -95,7 +95,7 @@ function climb_get_route_id ($xml, $panels, $name, $colour)
 			return $p['id'];
 		}
 	}
-	
+
 	return null;
 }
 

@@ -472,3 +472,5 @@ include downclimbs
 foreach source file list which database tables it requires
 write a test rig to see if missing, or empty, tables cause problems
 
+setter could also search for
+rrusson and richr

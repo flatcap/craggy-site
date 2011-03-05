@@ -2,7 +2,7 @@
 
 set_include_path ('../../libs');
 
-include "utils.php";
+include 'utils.php';
 
 function setter_get()
 {
@@ -46,6 +46,17 @@ function setter_match ($str)
 		return $match;
 	} else {
 		return null;
+	}
+}
+
+function setter_match_xml (&$xml)
+{
+	$setter = setter_match ($xml->input);
+	if ($setter === null) {
+		$xml->addChild ('error', "no such setter");
+	} else {
+		$name = trim ($setter['first_name'] . " " . $setter['surname']);
+		$xml->addChild ('setter', $name);
 	}
 }
 

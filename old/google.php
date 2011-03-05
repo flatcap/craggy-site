@@ -1,7 +1,8 @@
 <?php
 
-include '../db.php';
-include '../utils.php';
+set_include_path ('../libs');
+include 'db.php';
+include 'utils.php';
 
 function login()
 {

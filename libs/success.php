@@ -42,3 +42,13 @@ function success_match ($test)
 	}
 }
 
+function success_match_xml (&$xml)
+{
+	$success = success_match ($xml->input);
+	if ($success === null) {
+		$xml->addChild ('error', "no such success");
+	} else {
+		$xml->addChild ('success', $success['outcome']);
+	}
+}
+

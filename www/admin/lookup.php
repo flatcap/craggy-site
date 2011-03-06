@@ -93,4 +93,5 @@ header('Content-Type: application/xml; charset=ISO-8859-1');
 $xml = lookup_main();
 
 echo $xml->asXML();
+log_var ($xml);
 

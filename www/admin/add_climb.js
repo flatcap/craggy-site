@@ -304,71 +304,66 @@ function callback_add()
 		var c = tbcc.length;
 		var val;
 
-		val = tbcc[5].innerHTML;
-		tbcc[5].innerHTML = "";
-		var inp  = document.createElement ('input');
-		inp.type = "text";
-		tbcc[5].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "date" + i;
-		//inp.height = 22;
-		input_initialise (inp.id, "lookup_date.php");
-
-		val = tbcc[6].innerHTML;
-		tbcc[6].innerHTML = "";
-		var inp  = document.createElement ('input');
-		inp.type = "text";
-		tbcc[6].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "success" + i;
-		//inp.height = 22;
-		input_initialise (inp.id, "lookup_success.php");
-
-		val = tbcc[9].innerHTML;
-		tbcc[9].innerHTML = "";
-		inp  = document.createElement ('input');
-		inp.type = "text";
-		tbcc[9].appendChild (inp);
-		inp.value = val;
-		inp.size = 20;
-		inp.id = "nice" + i;
-		//inp.height = 22;
-
-		val = tbcc[8].innerHTML;
-		tbcc[8].innerHTML = "";
-		inp  = document.createElement ('input');
-		inp.type = "text";
-		tbcc[8].appendChild (inp);
-		inp.value = val;
-		inp.size = 6;
-		inp.id = "nice" + i;
-		//inp.height = 22;
-		input_initialise (inp.id, "lookup_nice.php");
-
-		val = tbcc[7].innerHTML;
-		tbcc[7].innerHTML = "";
-		inp  = document.createElement ('input');
-		inp.type = "text";
-		tbcc[7].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "difficulty" + i;
-		//inp.height = 22;
-		input_initialise (inp.id, "lookup_difficulty.php");
-
 		val = tbcc[2].innerHTML;
 		tbcc[2].innerHTML = "";
-		inp  = document.createElement ('input');
+		inp = document.createElement ('input');
 		inp.type = "text";
 		tbcc[2].appendChild (inp);
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "colour" + i;
-		//inp.height = 22;
-		input_initialise (inp.id, "lookup_colour.php");
+		input_initialise (inp.id, "colour");
 
+		val = tbcc[5].innerHTML;
+		tbcc[5].innerHTML = "";
+		var inp = document.createElement ('input');
+		inp.type = "text";
+		tbcc[5].appendChild (inp);
+		inp.value = val;
+		inp.size = 10;
+		inp.id = "date" + i;
+		input_initialise (inp.id, "date");
+
+		val = tbcc[6].innerHTML;
+		tbcc[6].innerHTML = "";
+		var inp = document.createElement ('input');
+		inp.type = "text";
+		tbcc[6].appendChild (inp);
+		inp.value = val;
+		inp.size = 10;
+		inp.id = "success" + i;
+		input_initialise (inp.id, "success");
+
+		val = tbcc[7].innerHTML;
+		tbcc[7].innerHTML = "";
+		inp = document.createElement ('input');
+		inp.type = "text";
+		tbcc[7].appendChild (inp);
+		inp.value = val;
+		inp.size = 10;
+		inp.id = "difficulty" + i;
+		input_initialise (inp.id, "difficulty");
+
+		val = tbcc[8].innerHTML;
+		tbcc[8].innerHTML = "";
+		inp = document.createElement ('input');
+		inp.type = "text";
+		tbcc[8].appendChild (inp);
+		inp.value = val;
+		inp.size = 6;
+		inp.id = "nice" + i;
+		input_initialise (inp.id, "nice");
+
+		val = tbcc[9].innerHTML;
+		tbcc[9].innerHTML = "";
+		inp = document.createElement ('input');
+		inp.type = "text";
+		tbcc[9].appendChild (inp);
+		inp.value = val;
+		inp.size = 20;
+		inp.id = "notes" + i;
+
+		//inp.height = 22;
 		//inp.onkeypress = inp_keypress;
 		//inp.onblur     = inp_blur;
 		var z = 1;

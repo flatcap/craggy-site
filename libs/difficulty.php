@@ -47,3 +47,13 @@ function difficulty_match ($test)
 	}
 }
 
+function difficulty_match_xml (&$xml)
+{
+	$difficulty = difficulty_match ($xml->input);
+	if ($difficulty === null) {
+		$xml->addChild ('error', "no such difficulty");
+	} else {
+		$xml->addChild ('difficulty', $difficulty['description']);
+	}
+}
+

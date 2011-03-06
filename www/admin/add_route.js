@@ -27,7 +27,7 @@ function initialise_buttons()
 	entry_panel.focus();
 
 	entry_date   = document.getElementById ('date');
-	input_initialise ('date', 'grade');
+	input_initialise ('date', 'date');
 	entry_date.focus(); //tmp
 
 	entry_setter = document.getElementById ('setter');

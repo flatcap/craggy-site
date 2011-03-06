@@ -292,30 +292,33 @@ function callback_list()
 		tbcc[1].innerHTML = "";
 		inp = document.createElement ('input');
 		inp.type = "text";
-		tbcc[1].appendChild (inp);
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "panel" + i;
+		inp.original = val;
+		tbcc[1].appendChild (inp);
 		input_initialise (inp.id, "panel");
 
 		val = tbcc[2].innerHTML;
 		tbcc[2].innerHTML = "";
 		var inp = document.createElement ('input');
 		inp.type = "text";
-		tbcc[2].appendChild (inp);
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "colour" + i;
+		inp.original = val;
+		tbcc[2].appendChild (inp);
 		input_initialise (inp.id, "colour");
 
 		val = tbcc[3].innerHTML;
 		tbcc[3].innerHTML = "";
 		var inp = document.createElement ('input');
 		inp.type = "text";
-		tbcc[3].appendChild (inp);
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "grade" + i;
+		inp.original = val;
+		tbcc[3].appendChild (inp);
 		input_initialise (inp.id, "grade");
 	}
 
@@ -323,7 +326,7 @@ function callback_list()
 	//initialise_rows();
 	//buttons_update();
 
-	entry_climb.value = "";
+	//entry_climb.value = "";
 	// set focus
 }
 
@@ -358,6 +361,7 @@ function button_set_state (button, enabled)
 
 function buttons_update()
 {
+	/*
 	var set = false;
 	for (i = 0; i < list_ticks.length; i++) {
 		if (list_ticks[i].checked) {
@@ -370,5 +374,7 @@ function buttons_update()
 	button_set_state (button_save, set);
 	button_set_state (button_reset, set);
 	button_set_state (button_cancel, set);
+	*/
 }
+
 

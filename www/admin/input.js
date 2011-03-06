@@ -2,7 +2,7 @@ function input_initialise (entry_id, lookup)
 {
 	var entry = document.getElementById (entry_id);
 
-	entry.onblur     = input_validate;
+	entry.onblur     = input_onblur;
 	entry.onkeypress = input_onkeypress;
 	entry.lookup     = lookup;
 	entry.error_id   = entry_id + "_error";
@@ -93,24 +93,40 @@ function input_callback()
 	// 	clear error_box
 	var result = route_get_node (xml, type);
 	entry.value = result;
-	entry.className = "";
+	if (entry.value == entry.original)
+		entry.className = "";
+	else
+		entry.className = "diff";
 	if (entry_err)
 		entry_err.innerHTML = "";
 
 	return;
 }
 
-function input_validate()
+function input_onblur()
 {
-	var val = this.value;
+	input_validate (this);
+}
+
+function input_validate (input)
+{
+	if (!input)
+		return;
+
+	var val = input.value;
 	if (val.length === 0) {
+		var orig = input.original;
+		if (orig) {
+			input.value     = orig;
+			input.className = "";
+		}
 		return;
 	}
 
 	var xmlstr;
 
 	xmlstr = "<?xml version='1.0' encoding='UTF-8'?>";
-	xmlstr += "<validation type='" + this.lookup + "'>";
+	xmlstr += "<validation type='" + input.lookup + "'>";
 	xmlstr += "<input>" + val + "</input>";
 	xmlstr += "</validation>";
 
@@ -121,7 +137,7 @@ function input_validate()
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 
-	x.lookup = this.id;
+	x.lookup = input.id;
 	x.onreadystatechange = input_callback;
 	x.open ("POST", "lookup.php", true);
 	x.setRequestHeader ("Content-Type", "text/plain");
@@ -132,7 +148,7 @@ function input_onkeypress (e)
 {
 	// Validate on enter, space or comma
 	if ((e.keyCode == 13) || (e.charCode == 32) || (e.charCode == 44)) {
-		input_validate();
+		input_validate (this);
 		return false;
 	}
 

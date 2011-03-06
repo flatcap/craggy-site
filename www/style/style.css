@@ -210,3 +210,7 @@ input.error {
 	background: #faa;
 }
 
+input.diff {
+	background: #ffa;
+}
+

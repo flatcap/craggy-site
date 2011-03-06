@@ -47,6 +47,10 @@ function lookup_main()
 			include 'date.php';
 			date_match_xml ($xml);
 			break;
+		case 'difficulty':
+			include 'difficulty.php';
+			difficulty_match_xml ($xml);
+			break;
 		case 'grade':
 			include 'grade.php';
 			grade_match_xml ($xml);
@@ -62,14 +66,6 @@ function lookup_main()
 		case 'setter':
 			include 'setter.php';
 			setter_match_xml ($xml);
-			break;
-		case 'colour':
-			include 'colour.php';
-			colour_match_xml ($xml);
-			break;
-		case 'difficulty':
-			include 'difficulty.php';
-			difficulty_match_xml ($xml);
 			break;
 		case 'success':
 			include 'success.php';

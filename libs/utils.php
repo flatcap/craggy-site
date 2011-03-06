@@ -88,6 +88,7 @@ function html_menu($reldir = '')
 		$output .= "    <li><a href='{$reldir}admin/del_route.php'>Del Route</a></li>";
 		$output .= "    <li><a href='{$reldir}admin/add_route.php'>Add Route</a></li>";
 		$output .= "    <li><a href='{$reldir}admin/add_climb.php'>Add Climb</a></li>";
+		$output .= "    <li><a href='{$reldir}admin/edit_route.php'>Edit Route</a></li>";
 		$output .= '  </ul>';
 	}
 
@@ -591,6 +592,19 @@ function list_render_xml2 ($object_name, &$list, &$columns)
 	$output .= "</list>\n";
 
 	return $output;
+}
+
+function list_render_xml3 (&$xml, $name, &$list, &$columns)
+{
+	// foreach row of list
+	foreach ($list as $row) {
+		$child = $xml->addChild ($name);
+
+		// foreach col of columns
+		foreach ($columns as $col) {
+			$child->addChild ($col, $row[$col]);
+		}
+	}
 }
 
 

@@ -15,4 +15,8 @@ function xml_get_attributes ($xml)
 	return $attrs;
 }
 
+function xml_add_error (&$xml, $message)
+{
+	$xml->addChild ('error', $message);
+}
 

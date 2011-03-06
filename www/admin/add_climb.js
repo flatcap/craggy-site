@@ -273,7 +273,7 @@ function callback_add()
 		{ "name": "tick", "type": "checkbox" },
 		{ "name": "id", "type": "hidden" },
 		{ "name": "panel", "type": "text", "size": 3 },
-		{ "name": "colour", "type": "text", "size": 3, "validator": "lookup_colour.php" }
+		{ "name": "colour", "type": "text", "size": 3, "validator": "colour" }
 	];
 
 	var columns;

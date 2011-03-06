@@ -188,7 +188,7 @@ function db_route_add ($route)
 	printf ("notes   = %s\n",      $route->notes);
 	*/
 
-	$query = "insert into route (panel_id,colour_id,grade_id,setter_id,note_id,date_set) values ";
+	$query = "insert into route (panel_id,colour_id,grade_id,setter_id,notes,date_set) values ";
 	$query .= "($route->panel_id, $route->colour_id, $route->grade_id, $route->setter_id, null, '$route->date')";
 	//echo $query . "\n";
 

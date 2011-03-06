@@ -46,46 +46,17 @@ function click_list()
 
 function click_save()
 {
+	alert ('save');
 }
 
 function click_reset()
 {
+	alert ('reset');
 }
 
 function click_cancel()
 {
-}
-
-function click_delete()
-{
-	var count = list_ticks.length;
-	if (count === 0) {
-		buttons_update();	// Shouldn't happen
-		return;
-	}
-
-	var ids = new Array();
-	for (i = 0; i < count; i++) {
-		if (list_ticks[i].checked) {
-			ids.push (list_ticks[i].id.substring(3));
-		}
-	}
-
-	if (!confirm ("About to delete " + count + " routes.\nAre you sure?")) {
-		return;
-	}
-
-	var str = ids.join(',');
-	var date = entry_date.value;
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	x.onreadystatechange = callback_delete;
-	x.open ("GET", "del_route_work.php?action=delete&date=" + date + "&data=" + str, true);
-	x.send();
+	alert ('cancel');
 }
 
 
@@ -142,13 +113,17 @@ function table_add_row (table, columns, data, tick)
 	var tb = table.getElementsByTagName ('tbody');
 	var r = document.createElement ('tr');
 	tb[0].appendChild (r);
-	var c = r.insertCell (-1);
-	var i = document.createElement ('input');
 
-	i.id   = 'tick_master';
-	i.type = 'checkbox';
-	c.appendChild (i);
-	r.appendChild (c);
+	var c;
+	if (tick) {
+		c = r.insertCell (-1);
+		var i = document.createElement ('input');
+
+		i.id   = 'tick_master';
+		i.type = 'checkbox';
+		c.appendChild (i);
+		r.appendChild (c);
+	}
 
 	for (name in columns) {
 		c = r.insertCell (-1);
@@ -232,10 +207,19 @@ function callback_list()
 		var c = tbcc.length;
 		var val;
 
-		/*
+		val = tbcc[1].innerHTML;
+		tbcc[1].innerHTML = "";
+		inp = document.createElement ('input');
+		inp.type = "text";
+		tbcc[1].appendChild (inp);
+		inp.value = val;
+		inp.size = 10;
+		inp.id = "panel" + i;
+		input_initialise (inp.id, "panel");
+
 		val = tbcc[2].innerHTML;
 		tbcc[2].innerHTML = "";
-		inp = document.createElement ('input');
+		var inp = document.createElement ('input');
 		inp.type = "text";
 		tbcc[2].appendChild (inp);
 		inp.value = val;
@@ -243,62 +227,16 @@ function callback_list()
 		inp.id = "colour" + i;
 		input_initialise (inp.id, "colour");
 
-		val = tbcc[5].innerHTML;
-		tbcc[5].innerHTML = "";
+		val = tbcc[3].innerHTML;
+		tbcc[3].innerHTML = "";
 		var inp = document.createElement ('input');
 		inp.type = "text";
-		tbcc[5].appendChild (inp);
+		tbcc[3].appendChild (inp);
 		inp.value = val;
 		inp.size = 10;
-		inp.id = "date" + i;
-		input_initialise (inp.id, "date");
-
-		val = tbcc[6].innerHTML;
-		tbcc[6].innerHTML = "";
-		var inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[6].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "success" + i;
-		input_initialise (inp.id, "success");
-
-		val = tbcc[7].innerHTML;
-		tbcc[7].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[7].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "difficulty" + i;
-		input_initialise (inp.id, "difficulty");
-
-		val = tbcc[8].innerHTML;
-		tbcc[8].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[8].appendChild (inp);
-		inp.value = val;
-		inp.size = 6;
-		inp.id = "nice" + i;
-		input_initialise (inp.id, "nice");
-
-		val = tbcc[9].innerHTML;
-		tbcc[9].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[9].appendChild (inp);
-		inp.value = val;
-		inp.size = 20;
-		inp.id = "notes" + i;
-		*/
-
-		//inp.height = 22;
-		//inp.onkeypress = inp_keypress;
-		//inp.onblur     = inp_blur;
-		var z = 1;
+		inp.id = "grade" + i;
+		input_initialise (inp.id, "grade");
 	}
-	/**/
 
 	//initialise_ticks();
 	//initialise_rows();
@@ -308,8 +246,7 @@ function callback_list()
 	// set focus
 }
 
-
-function callback_delete()
+function callback_save()
 {
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
@@ -319,15 +256,11 @@ function callback_delete()
 		return;
 
 	alert (response);
+	return;
 
 	var table = document.getElementById ('route_list');
 	table.innerHTML = "";
 	buttons_update();
-}
-
-function callback_cancel()
-{
-	alert ('cancel');
 }
 
 
@@ -353,7 +286,8 @@ function buttons_update()
 	}
 
 	button_set_state (button_list, true);
-	button_set_state (button_delete, set);
+	button_set_state (button_save, set);
+	button_set_state (button_reset, set);
 	button_set_state (button_cancel, set);
 }
 

@@ -79,6 +79,23 @@ function route_do_list (&$xml)
 
 function route_do_save (&$xml)
 {
+	global $_GET;
+
+	if (!array_key_exists ('route_xml', $_GET)) {
+		xml_add_error ($xml, "No route xml");
+		return;
+	} else {
+		$climbs = trim ($_GET['route_xml']);
+		if (empty ($climbs)) {
+			xml_add_error ($xml, "Empty climbs");
+			return;
+		}
+	}
+
+	$cxml = simplexml_load_string ($climbs);
+
+	echo htmlentities ($cxml->asXML());
+
 }
 
 

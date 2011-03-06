@@ -27,6 +27,54 @@ function initialise()
 }
 
 
+function get_row (row, columns)
+{
+	var obj = new Object();
+
+	var children = row.children;
+	if (!children)
+		return null;
+
+	if (children.length != columns.length)
+		return null;
+
+	for (var i = 0; i < children.length; i++) {
+		if (columns[i] === null)
+			continue;
+
+		if (children[i].childElementCount === 0) {
+			obj[columns[i]] = children[i].innerHTML;		// Just text
+		} else {
+			var f = children[i].firstChild;
+			if (f.nodeName.toLowerCase() == 'input') {
+				if (f.type.toLowerCase() == 'checkbox') {
+					obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
+				} else if (f.type.toLowerCase() == 'text') {
+					obj[columns[i]] = children[i].firstChild.value;		// A textbox
+				}
+			}
+		}
+	}
+
+	return obj;
+}
+
+function obj_to_xml (name, obj)
+{
+	var xml = '<' + name + '>';
+
+	for (o in obj) {
+		if (obj[o].length === 0)
+			continue;
+		xml += '<' + o + '>' + escape (obj[o]) + '</' + o + '>';
+	}
+
+	xml += '</' + name + '>';
+
+	return xml;
+}
+
+
 function click_list()
 {
 	var str = entry_panel.value;
@@ -46,7 +94,40 @@ function click_list()
 
 function click_save()
 {
-	alert ('save');
+	notify_close();
+
+	var list = document.getElementById ('route_list');
+	if (!list)
+		return;
+
+	var tb = document.getElementsByTagName ('tbody');
+	if (!tb)
+		return;
+	var rows = tb[0].children;
+
+	var xml = '<list type="route">';
+	//var columns = new Array ("tick", "panel", "colour", "grade", "type", "date", "success", "diff", "nice", "notes");
+	var columns = new Array ("id", "panel", "colour", "grade");
+	for (var i = 0; i < rows.length; i++) {
+		var r = get_row (rows[i], columns);
+		xml += obj_to_xml ('climb', r);
+	}
+	xml += '</list>';
+
+	var x;
+	if (window.XMLHttpRequest) {
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+	} else {
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+	}
+
+	var str  = "edit_route_work.php?";
+	str += "action=save";
+	str += "&route_xml=" + encodeURIComponent (xml);
+	x.open ("GET", str);
+	x.onreadystatechange = callback_save;
+	x.setRequestHeader ("Content-Type", "text/plain");
+	x.send();
 }
 
 function click_reset()
@@ -255,7 +336,7 @@ function callback_save()
 	if (response.length === 0)
 		return;
 
-	alert (response);
+	notify_message (response);
 	return;
 
 	var table = document.getElementById ('route_list');
@@ -290,5 +371,4 @@ function buttons_update()
 	button_set_state (button_reset, set);
 	button_set_state (button_cancel, set);
 }
-
 

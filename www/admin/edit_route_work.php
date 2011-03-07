@@ -6,6 +6,10 @@ include 'db.php';
 include 'db_names.php';
 include 'utils.php';
 include 'xml.php';
+include 'log.php';
+include 'colour.php';
+include 'grade.php';
+include 'panel.php';
 
 function parse_range ($string)
 {
@@ -37,6 +41,22 @@ function parse_range ($string)
     return $ranges;
 }
 
+
+function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id)
+{
+	$query  = "update route set " .
+		  "panel_id  = $panel_id, " .
+		  "colour_id = $colour_id, " .
+		  "grade_id  = $grade_id " .
+		  "where id = $id";
+
+	$result = mysql_query($query);
+	if ($result !== true) {
+		xml_add_error ($xml, sprintf ("Failed to update route_id %d", $id));
+	}
+
+	return $result;
+}
 
 function route_do_list (&$xml)
 {
@@ -74,36 +94,59 @@ function route_do_list (&$xml)
 	//print_r ($routes);
 
 	list_render_xml3 ($xml, 'route', $routes, $columns);
-	//print_r ($xml);
 }
 
-function route_do_save (&$xml)
+function route_do_save()
 {
 	global $_GET;
 
 	if (!array_key_exists ('route_xml', $_GET)) {
+		$xml = xml_new_string ("list");
+		$xml->addAttribute ('type', 'route');
 		xml_add_error ($xml, "No route xml");
-		return;
+		return $xml;
 	} else {
 		$climbs = trim ($_GET['route_xml']);
 		if (empty ($climbs)) {
+			$xml = xml_new_string ("list");
+			$xml->addAttribute ('type', 'route');
 			xml_add_error ($xml, "Empty climbs");
 			return;
 		}
 	}
 
-	$cxml = simplexml_load_string ($climbs);
+	$xml = simplexml_load_string ($climbs);
+	//print_r ($xml);
 
-	echo htmlentities ($cxml->asXML());
+	for ($i = 0; $i < $xml->count(); $i++) {
+		$a = $xml->route[$i];
 
+		$id     = $a->id;
+		$panel  = panel_match  ($a->panel);
+		$colour = colour_match ($a->colour);
+		$grade  = grade_match  ($a->grade);
+
+		/*
+		print_r ($id);
+		print_r ($panel);
+		print_r ($colour);
+		print_r ($grade);
+		*/
+
+		route_commit ($a, $id, $panel['id'], $colour['id'], $grade['id']);
+	}
+
+	return $xml;
 }
 
 
-function route_main (&$xml)
+function route_main()
 {
 	global $_GET;
 
 	if (!array_key_exists ('action', $_GET)) {
+		$xml = xml_new_string ("list");
+		$xml->addAttribute ('type', 'route');
 		xml_add_error ($xml, "No action");
 		return;
 	}
@@ -112,23 +155,28 @@ function route_main (&$xml)
 
 	switch ($action) {
 	case 'list':
+		$xml = xml_new_string ("list");
+		$xml->addAttribute ('type', 'route');
 		route_do_list ($xml);
 		break;
 	case 'save':
-		route_do_save ($xml);
+		$xml = route_do_save();
 		break;
 	default:
+		$xml = xml_new_string ("list");
+		$xml->addAttribute ('type', 'route');
 		xml_add_error ($xml, sprintf ("'%s' is not a valid action", $action));
 		break;
 	}
+
+	return $xml;
 }
 
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
-$xml = xml_new_string ("list");
-$xml->addAttribute ('type', 'route');
 
-route_main ($xml);
+$xml = route_main();
 
+//echo htmlentities ($xml->asXML());
 echo $xml->asXML();
 

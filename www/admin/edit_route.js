@@ -27,9 +27,11 @@ function initialise()
 }
 
 
-function get_row (row, columns)
+function get_row (row, columns, diff)
 {
 	var obj = new Object();
+
+	var changed = false;
 
 	var children = row.children;
 	if (!children)
@@ -47,16 +49,24 @@ function get_row (row, columns)
 		} else {
 			var f = children[i].firstChild;
 			if (f.nodeName.toLowerCase() == 'input') {
+				var orig = f.original;
 				if (f.type.toLowerCase() == 'checkbox') {
-					obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
+					obj[columns[i]] = f.checked;		// A tickbox
+					if (orig != f.checked)
+						changed = true;
 				} else if (f.type.toLowerCase() == 'text') {
-					obj[columns[i]] = children[i].firstChild.value;		// A textbox
+					obj[columns[i]] = f.value;		// A textbox
+					if (orig != f.value)
+						changed = true;
 				}
 			}
 		}
 	}
 
-	return obj;
+	if (diff && !changed)
+		return null
+	else
+		return obj;
 }
 
 function obj_to_xml (name, obj)
@@ -105,12 +115,18 @@ function click_save()
 		return;
 	var rows = tb[0].children;
 
-	var xml = '<list type="route">';
+	var xml;
+	xml  = "<?xml version='1.0'?>\n";
+	xml += "<?xml-stylesheet type='text/xsl' href='route.xsl'?>\n";
+	xml += "<list type='route'>";
 	//var columns = new Array ("tick", "panel", "colour", "grade", "type", "date", "success", "diff", "nice", "notes");
 	var columns = new Array ("id", "panel", "colour", "grade");
 	for (var i = 0; i < rows.length; i++) {
-		var r = get_row (rows[i], columns);
-		xml += obj_to_xml ('climb', r);
+		var r = get_row (rows[i], columns, true);
+		if (r) {
+			// only send the rows that have changed
+			xml += obj_to_xml ('route', r);
+		}
 	}
 	xml += '</list>';
 

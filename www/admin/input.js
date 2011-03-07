@@ -152,29 +152,26 @@ function input_onkeypress (e)
 		return false;
 	}
 
-	var item;
-	if (e.keyCode == 38) {
-		// move up
-		item = this;
-		while ((item = item.previousSibling)) {
-			if (item.localName == 'input') {
-				item.focus();
-				item.select();
+	var item = this;
+	var lookup = this.lookup;
+	var parent = this.parentNode;
+	var grandparent = parent.parentNode;
+	var sibling;
+	if (e.keyCode == 38) {			// move up
+		sibling = grandparent.previousSibling;
+	} else if (e.keyCode == 40) {		// move down
+		sibling = grandparent.nextSibling;
+	}
+
+	if (sibling) {
+		var c = sibling.children;
+		for (var i = 0; i < c.length; i++) {
+			var fc = c[i].firstChild;
+			if (fc.lookup == lookup) {
+				fc.focus();
 				break;
 			}
 		}
-		return false;
-	} else if (e.keyCode == 40) {
-		// move down
-		item = this;
-		while ((item = item.nextSibling)) {
-			if (item.localName == 'input') {
-				item.focus();
-				item.select();
-				break;
-			}
-		}
-		return false;
 	}
 
 	return true;

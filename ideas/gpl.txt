@@ -1,0 +1,2 @@
+as all the js is going to be public, should I GPL it?
+

@@ -1,3 +1,5 @@
+// rename to complete?
+
 function input_initialise (entry_id, lookup)
 {
 	var entry = document.getElementById (entry_id);
@@ -6,47 +8,6 @@ function input_initialise (entry_id, lookup)
 	entry.onkeypress = input_onkeypress;
 	entry.lookup     = lookup;
 	entry.error_id   = entry_id + "_error";
-}
-
-
-function route_get_node (node, name)
-{
-	try {
-		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
-	} catch (er) {
-	}
-
-	return "";
-}
-
-function route_get_attr (xml, attr_name)
-{
-	if (!xml || !attr_name)
-		return "";
-	var attrs = xml.attributes;
-	if (!attrs)
-		return "";
-
-	for (var i = 0; i < attrs.length; i++) {
-		if (attrs[i].nodeName == attr_name)
-			return attrs[i].nodeValue;
-	}
-
-	return "";
-}
-
-function route_get_errors (xml)
-{
-	var x = xml.getElementsByTagName("error");
-	var errstr = "";
-	for (i = 0; i < x.length; i++) {
-		var e = x[i];
-		if (e && e.childNodes) {
-			errstr += e.childNodes[0].nodeValue + " ";
-		}
-	}
-
-	return errstr;
 }
 
 
@@ -66,7 +27,7 @@ function input_callback()
 
 	// if wrong type (root.attr != entry.lookup)
 	//	internal error
-	var type = route_get_attr (xml, "type");
+	var type = xml_get_attr (xml, "type");
 	if (type != entry.lookup)
 		return;
 
@@ -77,7 +38,7 @@ function input_callback()
 	// 	turn input red (class='error')
 	// 	find error_box for this input
 	// 	display errors
-	var errstr = route_get_errors (xml);
+	var errstr = xml_get_errors (xml);
 	if (errstr.length > 0) {
 		entry.className = "error";
 		if (entry_err)
@@ -91,7 +52,7 @@ function input_callback()
 	// 	turn input white (! class='error')
 	// 	find error_box for this input
 	// 	clear error_box
-	var result = route_get_node (xml, type);
+	var result = xml_get_node (xml, type);
 	entry.value = result;
 	if ((entry.original == null) || (entry.value == entry.original))
 		entry.className = "";

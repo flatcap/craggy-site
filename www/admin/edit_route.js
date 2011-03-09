@@ -157,16 +157,6 @@ function click_cancel()
 }
 
 
-function climb_get_node (node, name)
-{
-	try {
-		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
-	} catch (er) {
-	}
-
-	return "";
-}
-
 function table_create (columns, ticklist)
 {
 	var t  = document.createElement ('table');
@@ -224,21 +214,13 @@ function table_add_row (table, columns, data, tick)
 
 	for (name in columns) {
 		c = r.insertCell (-1);
-		c.innerHTML = climb_get_node (data, columns[name]);
+		c.innerHTML = xml_get_node (data, columns[name]);
 	}
 }
 
 function display_errors (xml)
 {
-	var x = xml.responseXML.documentElement.getElementsByTagName("error");
-	var errstr = "";
-	for (i = 0; i < x.length; i++) {
-		var e = x[i];
-		if (e && e.childNodes) {
-			errstr += e.childNodes[0].nodeValue + "<br>";
-		}
-	}
-
+	var errstr = xml_get_errors (xml.responseXML.documentElement);
 	if (errstr.length > 0) {
 		notify_message (errstr);
 		return true;

@@ -167,17 +167,6 @@ function click_save()
 }
 
 
-function route_get_node (node, name)
-{
-	try {
-		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
-	} catch (er) {
-	}
-
-	return "";
-	//return "<td>" + txt + "</td>";
-}
-
 function callback_add()
 {
 	if ((this.readyState != 4) || (this.status != 200))
@@ -210,9 +199,9 @@ function callback_add()
 		var route = new Object();
 		id = id_base + i;
 		route.id       = id;
-		route.panel    = route_get_node (x[i], "panel");
-		route.colour   = route_get_node (x[i], "colour");
-		route.grade    = route_get_node (x[i], "grade");
+		route.panel    = xml_get_node (x[i], "panel");
+		route.colour   = xml_get_node (x[i], "colour");
+		route.grade    = xml_get_node (x[i], "grade");
 		route.date     = date;
 		route.setter   = setter;
 		route_data[id] = route;

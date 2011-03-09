@@ -42,6 +42,7 @@ function route_main()
 
 	$output .= "<script type='text/javascript' src='notify.js'></script>";
 	$output .= "<script type='text/javascript' src='input.js'></script>";
+	$output .= "<script type='text/javascript' src='xml.js'></script>";
 	$output .= "<script type='text/javascript' src='edit_route.js'></script>";
 
 	$output .= get_errors();

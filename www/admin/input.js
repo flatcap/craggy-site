@@ -93,7 +93,7 @@ function input_callback()
 	// 	clear error_box
 	var result = route_get_node (xml, type);
 	entry.value = result;
-	if (entry.value == entry.original)
+	if ((entry.original == null) || (entry.value == entry.original))
 		entry.className = "";
 	else
 		entry.className = "diff";
@@ -163,14 +163,19 @@ function input_onkeypress (e)
 		sibling = grandparent.nextSibling;
 	}
 
-	if (sibling) {
-		var c = sibling.children;
-		for (var i = 0; i < c.length; i++) {
-			var fc = c[i].firstChild;
-			if (fc.lookup == lookup) {
-				fc.focus();
-				break;
+	if ((e.keyCode == 38) || (e.keyCode == 40)) {
+		if (sibling) {
+			var c = sibling.children;
+			for (var i = 0; i < c.length; i++) {
+				var fc = c[i].firstChild;
+				if (fc.lookup == lookup) {
+					fc.focus();
+					fc.select();
+					break;
+				}
 			}
+		} else {
+			input_validate (this);
 		}
 	}
 

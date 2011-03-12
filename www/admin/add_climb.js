@@ -312,7 +312,7 @@ function callback_add()
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "colour" + i;
-		input_initialise (inp.id, "colour");
+		complete_initialise (inp.id, "colour");
 
 		val = tbcc[5].innerHTML;
 		tbcc[5].innerHTML = "";
@@ -322,7 +322,7 @@ function callback_add()
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "date" + i;
-		input_initialise (inp.id, "date");
+		complete_initialise (inp.id, "date");
 
 		val = tbcc[6].innerHTML;
 		tbcc[6].innerHTML = "";
@@ -332,7 +332,7 @@ function callback_add()
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "success" + i;
-		input_initialise (inp.id, "success");
+		complete_initialise (inp.id, "success");
 
 		val = tbcc[7].innerHTML;
 		tbcc[7].innerHTML = "";
@@ -342,7 +342,7 @@ function callback_add()
 		inp.value = val;
 		inp.size = 10;
 		inp.id = "difficulty" + i;
-		input_initialise (inp.id, "difficulty");
+		complete_initialise (inp.id, "difficulty");
 
 		val = tbcc[8].innerHTML;
 		tbcc[8].innerHTML = "";
@@ -352,7 +352,7 @@ function callback_add()
 		inp.value = val;
 		inp.size = 6;
 		inp.id = "nice" + i;
-		input_initialise (inp.id, "nice");
+		complete_initialise (inp.id, "nice");
 
 		val = tbcc[9].innerHTML;
 		tbcc[9].innerHTML = "";

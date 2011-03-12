@@ -40,7 +40,7 @@ function route_main()
 	$output .= '</div>'; // content
 
 	$output .= "<script type='text/javascript' src='notify.js'></script>";
-	$output .= "<script type='text/javascript' src='input.js'></script>";
+	$output .= "<script type='text/javascript' src='complete.js'></script>";
 	$output .= "<script type='text/javascript' src='xml.js'></script>";
 	$output .= "<script type='text/javascript' src='table.js'></script>";
 	$output .= "<script type='text/javascript' src='edit_route.js'></script>";

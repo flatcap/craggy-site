@@ -2,7 +2,8 @@
 <html>
 <head>
 	<link rel="stylesheet" href="lookup.css" type="text/css">
-	<script type="text/javascript" src="input.js"></script>
+	<script type="text/javascript" src="complete.js"></script>
+	<script type="text/javascript" src="xml.js"></script>
 	<title>Colour Lookup</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
 </body>
 <script type='text/javascript'>
 	for (var i = 0; i < 10; i++) {
-		input_initialise ('entry' + i, 'colour');
+		complete_initialise ('entry' + i, 'colour');
 	}
 	document.getElementById ('entry3').focus();
 </script>

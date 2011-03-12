@@ -124,7 +124,7 @@ function table_add_row (table, data)
 			input.value    = value;
 			input.size     = col_size;
 			input.original = value;
-			input_initialise2 (input, col_validator);
+			complete_initialise2 (input, col_validator);
 			cell.appendChild (input);
 			break;
 		case 'text':

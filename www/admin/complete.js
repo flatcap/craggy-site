@@ -1,30 +1,22 @@
-// rename to complete?
-
-function input_initialise (entry_id, lookup)
+function complete_initialise (entry_id, lookup)
 {
 	var entry = document.getElementById (entry_id);
-	if (!entry)
-		return;
-
-	entry.onblur     = input_onblur;
-	entry.onkeypress = input_onkeypress;
-	entry.lookup     = lookup;
-	entry.error_id   = entry_id + "_error";
+	complete_initialise2 (entry, lookup);
 }
 
-function input_initialise2 (entry, lookup)
+function complete_initialise2 (entry, lookup)
 {
 	if (!entry)
 		return;
 
-	entry.onblur     = input_onblur;
-	entry.onkeypress = input_onkeypress;
+	entry.onblur     = complete_onblur;
+	entry.onkeypress = complete_onkeypress;
 	entry.lookup     = lookup;
 	entry.error_id   = entry.id + "_error";
 }
 
 
-function input_callback()
+function complete_callback()
 {
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
@@ -77,12 +69,12 @@ function input_callback()
 	return;
 }
 
-function input_onblur()
+function complete_onblur()
 {
-	input_validate (this);
+	complete_validate (this);
 }
 
-function input_validate (input)
+function complete_validate (input)
 {
 	if (!input)
 		return;
@@ -99,9 +91,9 @@ function input_validate (input)
 
 	var xmlstr;
 
-	xmlstr = "<?xml version='1.0' encoding='UTF-8'?>";
-	xmlstr += "<validation type='" + input.lookup + "'>";
-	xmlstr += "<input>" + val + "</input>";
+	xmlstr = "<?xml version='1.0' encoding='UTF-8'?>\n";
+	xmlstr += "<validation type='" + input.lookup + "'>\n";
+	xmlstr += "<input>" + val + "</input>\n";
 	xmlstr += "</validation>";
 
 	var x;
@@ -112,17 +104,17 @@ function input_validate (input)
 	}
 
 	x.lookup = input.id;
-	x.onreadystatechange = input_callback;
+	x.onreadystatechange = complete_callback;
 	x.open ("POST", "lookup.php", true);
 	x.setRequestHeader ("Content-Type", "text/plain");
 	x.send (xmlstr);
 }
 
-function input_onkeypress (e)
+function complete_onkeypress (e)
 {
 	// Validate on enter, space or comma
 	if ((e.keyCode == 13) || (e.charCode == 32) || (e.charCode == 44)) {
-		input_validate (this);
+		complete_validate (this);
 		return false;
 	}
 
@@ -149,7 +141,7 @@ function input_onkeypress (e)
 				}
 			}
 		} else {
-			input_validate (this);
+			complete_validate (this);
 		}
 	}
 

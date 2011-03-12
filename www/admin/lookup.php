@@ -2,7 +2,6 @@
 
 set_include_path ('../../libs');
 
-include 'log.php';
 include 'xml.php';
 
 function lookup_main()
@@ -13,7 +12,6 @@ function lookup_main()
 		$xml = xml_new_string ('validation');
 		$xml->addAttribute ('type', 'unknown');
 		$msg = "no HTTP_RAW_POST_DATA";
-		log_string ($msg);
 		return $xml;
 	}
 
@@ -24,7 +22,6 @@ function lookup_main()
 		$xml->addAttribute ('type', 'unknown');
 		foreach ($errlist as $error) {
 			$xml->addChild ('error', $error->message);
-			log_var ($error);
 		}
 		return $xml;
 	}
@@ -32,7 +29,6 @@ function lookup_main()
 	$attrs = xml_get_attributes ($xml[0]);
 	if (!array_key_exists ('type', $attrs)) {
 		$msg = "no type in xml";
-		log_string ($msg);
 		$xml->addChild ('error', $msg);
 		return $xml;
 	}
@@ -73,7 +69,6 @@ function lookup_main()
 			break;
 		default:
 			$msg = "unknown type: $type";
-			log_string ($msg);
 			$xml->addChild ('error', $msg);
 	}
 
@@ -81,13 +76,10 @@ function lookup_main()
 }
 
 
-log_init ('/dev/pts/8');
-
 // We're going to reply in xml, regardless of the input
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
 $xml = lookup_main();
 
 echo $xml->asXML();
-log_var ($xml);
 

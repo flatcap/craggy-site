@@ -42,7 +42,7 @@ function route_main()
 	$output .= '</div>'; // content
 
 	$output .= "<script type='text/javascript' src='notify.js'></script>";
-	$output .= "<script type='text/javascript' src='input.js'></script>";
+	$output .= "<script type='text/javascript' src='complete.js'></script>";
 	$output .= "<script type='text/javascript' src='del_route.js'></script>";
 
 	$output .= get_errors();

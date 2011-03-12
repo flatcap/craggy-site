@@ -1,1 +1,1 @@
-../../www/admin/input.js
+../../www/admin/complete.js

@@ -157,67 +157,6 @@ function click_cancel()
 }
 
 
-function table_create (columns, ticklist)
-{
-	var t  = document.createElement ('table');
-	var th = document.createElement ('thead');
-	var tb = document.createElement ('tbody');
-
-	t.border      = 1;
-	t.cellspacing = 0;
-
-	t.appendChild (th);
-	t.appendChild (tb);
-
-	var r = t.insertRow (0);
-
-	var c;
-	if (ticklist) {
-		c = document.createElement ('th');
-		var i = document.createElement ('input');
-
-		i.id   = 'tick_master';
-		i.type = 'checkbox';
-		c.appendChild (i);
-		r.appendChild (c);
-	}
-
-	var name;
-	for (name in columns) {
-		c = document.createElement ('th');
-		c.innerHTML = columns[name];
-		r.appendChild (c);
-	}
-
-	return t;
-}
-
-function table_add_row (table, columns, data, tick)
-{
-	if (!table || !columns || !data)
-		return;
-
-	var tb = table.getElementsByTagName ('tbody');
-	var r = document.createElement ('tr');
-	tb[0].appendChild (r);
-
-	var c;
-	if (tick) {
-		c = r.insertCell (-1);
-		var i = document.createElement ('input');
-
-		i.id   = 'tick_master';
-		i.type = 'checkbox';
-		c.appendChild (i);
-		r.appendChild (c);
-	}
-
-	for (name in columns) {
-		c = r.insertCell (-1);
-		c.innerHTML = xml_get_node (data, columns[name]);
-	}
-}
-
 function display_errors (xml)
 {
 	var errstr = xml_get_errors (xml.responseXML.documentElement);
@@ -252,72 +191,32 @@ function callback_list()
 	if (display_errors(this))
 		return;
 
-	var columns3 = [
-		{ "name": "tick", "type": "checkbox" },
-		{ "name": "id", "type": "hidden" },
-		{ "name": "panel", "type": "text", "size": 3 },
-		{ "name": "colour", "type": "text", "size": 3, "validator": "colour" },
-		{ "name": "grade", "type": "text", "size": 3 }
-	];
-
-	var columns;
+	var table;
 	if (list.children.length === 0) {
-		//columns = new Array ("ID", "Panel", "Colour", "Grade", "Type", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
-		columns = new Array ("ID", "Panel", "Colour", "Grade");
-		var t = table_create (columns, false);
-		list.appendChild (t);
+		var columns = [
+			{ "name": "tick",   "type": "checkbox" },
+			{ "name": "panel",  "type": "text",    "title": "Panel",  "size":  3  },
+			{ "name": "colour", "type": "input",   "title": "Colour", "size": 12, "validator": "colour" },
+			{ "name": "grade",  "type": "input",   "title": "Grade",  "size":  5, "validator": "grade"  }
+		];
+
+		table = table_create (columns);
+		if (table)
+			list.appendChild (table);
+	} else {
+		var tlist = list.getElementsByTagName ('table');
+		if (!tlist)
+			return;
+		table = tlist[0];
 	}
 
-	var table = list.getElementsByTagName ('table');
+	if (!table)
+		return;
 
 	var i;
 	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		columns = new Array ("id", "panel", "colour", "grade");
-		table_add_row (table[0], columns, x[i], false);
-	}
-
-	/* messing about with auto-complete */
-	var tb = list.getElementsByTagName ('tbody');
-	var tbc = tb[0].children;
-
-	for (i = 0; i < tbc.length; i++) {	// number of <tr>
-		tbcc = tbc[i].children;
-		var c = tbcc.length;
-		var val;
-
-		val = tbcc[1].innerHTML;
-		tbcc[1].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "panel" + i;
-		inp.original = val;
-		tbcc[1].appendChild (inp);
-		input_initialise (inp.id, "panel");
-
-		val = tbcc[2].innerHTML;
-		tbcc[2].innerHTML = "";
-		var inp = document.createElement ('input');
-		inp.type = "text";
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "colour" + i;
-		inp.original = val;
-		tbcc[2].appendChild (inp);
-		input_initialise (inp.id, "colour");
-
-		val = tbcc[3].innerHTML;
-		tbcc[3].innerHTML = "";
-		var inp = document.createElement ('input');
-		inp.type = "text";
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "grade" + i;
-		inp.original = val;
-		tbcc[3].appendChild (inp);
-		input_initialise (inp.id, "grade");
+		table_add_row (table, x[i]);
 	}
 
 	//initialise_ticks();

@@ -17,7 +17,6 @@ function route_main()
 	$output .= "<h1>Edit Routes</h1>";
 	$output .= "</div>";
 
-
 	$output .= "<div id='entry_area'>";
 	$output .= "<label for='entry' accesskey='p'><u>P</u>anels</label>";
 	$output .= "<input id='entry' type='text' size='30' value='64-68'>";
@@ -43,6 +42,7 @@ function route_main()
 	$output .= "<script type='text/javascript' src='notify.js'></script>";
 	$output .= "<script type='text/javascript' src='input.js'></script>";
 	$output .= "<script type='text/javascript' src='xml.js'></script>";
+	$output .= "<script type='text/javascript' src='table.js'></script>";
 	$output .= "<script type='text/javascript' src='edit_route.js'></script>";
 
 	$output .= get_errors();

@@ -3,11 +3,24 @@
 function input_initialise (entry_id, lookup)
 {
 	var entry = document.getElementById (entry_id);
+	if (!entry)
+		return;
 
 	entry.onblur     = input_onblur;
 	entry.onkeypress = input_onkeypress;
 	entry.lookup     = lookup;
 	entry.error_id   = entry_id + "_error";
+}
+
+function input_initialise2 (entry, lookup)
+{
+	if (!entry)
+		return;
+
+	entry.onblur     = input_onblur;
+	entry.onkeypress = input_onkeypress;
+	entry.lookup     = lookup;
+	entry.error_id   = entry.id + "_error";
 }
 
 

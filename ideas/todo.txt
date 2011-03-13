@@ -476,3 +476,10 @@ setter could also search for
 rrusson and richr
 
 fix dates so that dd/mm/yyyy and dd-mm-yyyy are accepted
+
+add default option to columns for tables
+prevent duplicate rows in delete routes table
+eliminate tick_list from js
+add climb_type back to add_climbs?
+feedback on del_route
+

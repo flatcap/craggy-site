@@ -7,6 +7,7 @@
 /.*
 /libs/conf.php
 /www/admin/.htaccess
+/www/files/guildford.pdf
 
 # Generated files / Junk
 /craggy_flatcap.sql

@@ -3,6 +3,7 @@ var button_save;
 var button_delete;
 var entry_climb;
 var entry_date;
+var table_climb;
 
 initialise_buttons();
 
@@ -167,74 +168,6 @@ function click_save()
 }
 
 
-function climb_get_node (node, name)
-{
-	try {
-		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
-	} catch (er) {
-	}
-
-	return "";
-}
-
-function table_create (columns, ticklist)
-{
-	var t  = document.createElement ('table');
-	var th = document.createElement ('thead');
-	var tb = document.createElement ('tbody');
-
-	t.border      = 1;
-	t.cellspacing = 0;
-
-	t.appendChild (th);
-	t.appendChild (tb);
-
-	var r = t.insertRow (0);
-
-	var c;
-	if (ticklist) {
-		c = document.createElement ('th');
-		var i = document.createElement ('input');
-
-		i.id   = 'tick_master';
-		i.type = 'checkbox';
-		c.appendChild (i);
-		r.appendChild (c);
-	}
-
-	var name;
-	for (name in columns) {
-		c = document.createElement ('th');
-		c.innerHTML = columns[name];
-		r.appendChild (c);
-	}
-
-	return t;
-}
-
-function table_add_row (table, columns, data, tick)
-{
-	if (!table || !columns || !data)
-		return;
-
-	var tb = table.getElementsByTagName ('tbody');
-	var r = document.createElement ('tr');
-	tb[0].appendChild (r);
-	var c = r.insertCell (-1);
-	var i = document.createElement ('input');
-
-	i.id   = 'tick_master';
-	i.type = 'checkbox';
-	c.appendChild (i);
-	r.appendChild (c);
-
-	for (name in columns) {
-		c = r.insertCell (-1);
-		c.innerHTML = climb_get_node (data, columns[name]);
-	}
-}
-
-
 function display_errors (xml)
 {
 	var x = xml.responseXML.documentElement.getElementsByTagName("error");
@@ -260,8 +193,6 @@ function callback_add()
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	//var x = this.responseText; notify_message (x); return;
-
 	var list = document.getElementById ('climb_list');
 	if (!list)
 		return;
@@ -269,106 +200,39 @@ function callback_add()
 	if (display_errors(this))
 		return;
 
-	var columns3 = [
-		{ "name": "tick", "type": "checkbox" },
-		{ "name": "id", "type": "hidden" },
-		{ "name": "panel", "type": "text", "size": 3 },
-		{ "name": "colour", "type": "text", "size": 3, "validator": "colour" }
-	];
-
-	var columns;
 	if (list.children.length === 0) {
-		//columns = new Array ("ID", "Panel", "Colour", "Grade", "Type", "Date", "Success", "Diff", "Nice", "Notes", "Errors");
-		columns = new Array ("", "", "", "", "Date", "Success", "Diff", "Nice", "Notes");
-		var t = table_create (columns, true);
-		list.appendChild (t);
+		var columns = [
+			{ "name": "tick",       "type": "checkbox" },
+			{ "name": "panel",      "type": "text",    "title": "Panel",      "size":  3 },
+			{ "name": "colour",     "type": "text",    "title": "Colour",     "size":  3 },
+			{ "name": "grade",      "type": "text",    "title": "Grade",      "size":  5},
+			{ "name": "date",       "type": "input",   "title": "Date",       "size":  8, "validator": "date"       },
+			{ "name": "success",    "type": "input",   "title": "Success",    "size":  8, "validator": "success"    },
+			{ "name": "difficulty", "type": "input",   "title": "Difficulty", "size":  8, "validator": "difficulty" },
+			{ "name": "nice",       "type": "input",   "title": "Nice",       "size":  3, "validator": "nice"       },
+			{ "name": "notes",      "type": "input",   "title": "Notes",      "size": 10 },
+		];
+
+		table_climb = table_create (columns);
+		if (table_climb)
+			list.appendChild (table_climb);
+	} else {
+		var tlist = list.getElementsByTagName ('table');
+		if (!tlist)
+			return;
+		table_climb = tlist[0];
 	}
 
-	var table = list.getElementsByTagName ('table');
+	if (!table_climb)
+		return;
 
 	var date = entry_date.value;
 
 	var i;
 	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		columns = new Array ("panel", "colour", "grade", "climb_type", "date", "success", "difficulty", "nice", "notes");
-		table_add_row (table[0], columns, x[i], true);
+		table_add_row (table_climb, x[i]);
 	}
-
-	/* messing about with auto-complete */
-	var tb = list.getElementsByTagName ('tbody');
-	var tbc = tb[0].children;
-
-	for (i = 0; i < tbc.length; i++) {	// number of <tr>
-		tbcc = tbc[i].children;
-		var c = tbcc.length;
-		var val;
-
-		val = tbcc[2].innerHTML;
-		tbcc[2].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[2].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "colour" + i;
-		complete_initialise (inp.id, "colour");
-
-		val = tbcc[5].innerHTML;
-		tbcc[5].innerHTML = "";
-		var inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[5].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "date" + i;
-		complete_initialise (inp.id, "date");
-
-		val = tbcc[6].innerHTML;
-		tbcc[6].innerHTML = "";
-		var inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[6].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "success" + i;
-		complete_initialise (inp.id, "success");
-
-		val = tbcc[7].innerHTML;
-		tbcc[7].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[7].appendChild (inp);
-		inp.value = val;
-		inp.size = 10;
-		inp.id = "difficulty" + i;
-		complete_initialise (inp.id, "difficulty");
-
-		val = tbcc[8].innerHTML;
-		tbcc[8].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[8].appendChild (inp);
-		inp.value = val;
-		inp.size = 6;
-		inp.id = "nice" + i;
-		complete_initialise (inp.id, "nice");
-
-		val = tbcc[9].innerHTML;
-		tbcc[9].innerHTML = "";
-		inp = document.createElement ('input');
-		inp.type = "text";
-		tbcc[9].appendChild (inp);
-		inp.value = val;
-		inp.size = 20;
-		inp.id = "notes" + i;
-
-		//inp.height = 22;
-		//inp.onkeypress = inp_keypress;
-		//inp.onblur     = inp_blur;
-		var z = 1;
-	}
-	/**/
 
 	//initialise_ticks();
 	//initialise_rows();

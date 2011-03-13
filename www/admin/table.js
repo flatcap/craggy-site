@@ -154,7 +154,7 @@ function table_get_header (table)
 	var rlist = hlist[0].getElementsByTagName ('tr');
 	if (!rlist)
 		return null;
-	
+
 	return rlist[0];
 }
 
@@ -168,6 +168,74 @@ function table_get_body (table)
 		return null;
 
 	return blist[0];
+}
+
+function table_get_row_count (table)
+{
+	if (!table)
+		return 0;
+
+	var blist = table.getElementsByTagName ('tbody');
+	if (!blist)
+		return 0;
+
+	var rlist = blist[0].getElementsByTagName ('tr');
+	if (!rlist)
+		return 0;
+
+	return rlist.length;
+}
+
+
+function table_reset_cell (cell)
+{
+	if (!cell)
+		return false;
+
+	if (cell.children === 0)
+		return true;		// nothing we can do
+	
+	for (var i = 0; i < cell.children.length; i++) {
+		var item = cell.children[i];
+		if (item.nodeName.toLowerCase() != 'input') {
+			continue;
+		}
+
+		item.value = item.original;
+		item.className = "";
+	}
+
+	return true;
+}
+
+function table_reset_row (table, row_num)
+{
+	if (!table)
+		return false;
+
+	var blist = table.getElementsByTagName ('tbody');
+	if (!blist)
+		return false;
+
+	var rlist = blist[0].getElementsByTagName ('tr');
+	if (!rlist)
+		return false;
+
+	if (row_num >= rlist.length)
+		return false;
+
+	var row = rlist[row_num];
+
+	// row has children (th)
+	// th has 0 children -> text
+	// th has n children -> input
+	// input has value, original
+
+	for (var i = 0; i < row.children.length; i++) {
+		table_reset_cell (row.children[i]);
+	}
+
+	return true;
 }
 
 
@@ -261,4 +329,5 @@ function table_get_id()
 function table_get_row_by_id()
 {
 }
+*
 */

@@ -2,6 +2,7 @@ var button_list;
 var button_save;
 var button_reset;
 var button_cancel;
+var table_route;
 
 initialise();
 
@@ -148,7 +149,13 @@ function click_save()
 
 function click_reset()
 {
-	alert ('reset');
+	var table = document.getElementById ('route_list');
+	var count = table_get_row_count (table);
+	alert ('reset ' + count);
+
+	for (var i = 0; i < count; i++) {
+		table_reset_row (table, i);
+	}
 }
 
 function click_cancel()
@@ -191,7 +198,6 @@ function callback_list()
 	if (display_errors(this))
 		return;
 
-	var table;
 	if (list.children.length === 0) {
 		var columns = [
 			{ "name": "tick",   "type": "checkbox" },
@@ -200,23 +206,23 @@ function callback_list()
 			{ "name": "grade",  "type": "input",   "title": "Grade",  "size":  5, "validator": "grade"  }
 		];
 
-		table = table_create (columns);
-		if (table)
-			list.appendChild (table);
+		table_route = table_create (columns);
+		if (table_route)
+			list.appendChild (table_route);
 	} else {
 		var tlist = list.getElementsByTagName ('table');
 		if (!tlist)
 			return;
-		table = tlist[0];
+		table_route = tlist[0];
 	}
 
-	if (!table)
+	if (!table_route)
 		return;
 
 	var i;
 	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		table_add_row (table, x[i]);
+		table_add_row (table_route, x[i]);
 	}
 
 	//initialise_ticks();

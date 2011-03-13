@@ -58,8 +58,9 @@ function route_list($data)
 	$table = $DB_V_ROUTE;
 	$columns = array('id', 'panel', 'colour', 'grade');
 	$where = 'panel in (' . implode (',', $list) . ')';
+	$order = 'panel_seq, grade_seq, colour';
 
-	$routes = db_select ($table, $columns, $where);
+	$routes = db_select ($table, $columns, $where, $order);
 	//var_dump ($routes);
 
 	$output .= '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>';

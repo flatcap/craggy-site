@@ -1,8 +1,9 @@
 var button_list;
 var button_delete;
-var button_cancel;
+var button_clear;
 var entry_date;
 var entry_panel;
+var table_route;
 
 var list_ticks;
 var route_data;
@@ -15,17 +16,18 @@ function initialise_buttons()
 {
 	button_list   = document.getElementById ('button_list');
 	button_delete = document.getElementById ('button_delete');
-	button_cancel = document.getElementById ('button_cancel');
+	button_clear  = document.getElementById ('button_clear');
 
 	button_list.onclick = click_list;
 	button_delete.onclick = click_delete;
-	button_cancel.onclick = click_cancel;
+	button_clear.onclick = click_clear;
 
 	entry_date = document.getElementById ('date');
 	complete_initialise ('date', 'date');
 
-	entry_panel = document.getElementById ('entry');
+	entry_panel = document.getElementById ('panel');
 	entry_panel.onkeypress = callback_keypress;
+	entry_panel.onkeyup    = callback_keyup;
 	entry_panel.focus();
 
 	buttons_update();
@@ -88,13 +90,15 @@ function click_delete()
 	}
 
 	var ids = new Array();
+	var ticked = 0;
 	for (i = 0; i < count; i++) {
 		if (list_ticks[i].checked) {
 			ids.push (list_ticks[i].id.substring(3));
+			ticked++;
 		}
 	}
 
-	if (!confirm ("About to delete " + count + " routes.\nAre you sure?")) {
+	if (!confirm ("About to delete " + ticked + " routes.\nAre you sure?")) {
 		return;
 	}
 
@@ -111,8 +115,17 @@ function click_delete()
 	x.send();
 }
 
-function click_cancel()
+function click_clear()
 {
+	if (!table_route)
+		return;
+
+	table_destroy (table_route);
+	table_route = null;
+
+	entry_panel.focus();
+	list_ticks = null;
+	buttons_update();
 }
 
 
@@ -134,6 +147,12 @@ function callback_keypress (e)
 		return false;
 	}
 
+	return true;
+}
+
+function callback_keyup (e)
+{
+	buttons_update();
 	return true;
 }
 
@@ -176,6 +195,8 @@ function callback_list()
 		table_add_row (table_route, x[i]);
 	}
 
+	entry_panel.value = "";
+
 	//button_set_state (button_list, false);
 	initialise_ticks();
 	initialise_rows();
@@ -196,12 +217,6 @@ function callback_delete()
 	var table = document.getElementById ('route_list');
 	table.innerHTML = "";
 	buttons_update();
-}
-
-
-function callback_cancel()
-{
-	alert ('cancel');
 }
 
 
@@ -227,6 +242,7 @@ function row_clicked()
 	buttons_update();
 }
 
+
 function button_set_state (button, enabled)
 {
 	if (enabled) {
@@ -240,17 +256,22 @@ function button_set_state (button, enabled)
 
 function buttons_update()
 {
+	var rows = table_get_row_count (table_route);
 	var set = false;
-	for (i = 0; i < list_ticks.length; i++) {
-		if (list_ticks[i].checked) {
-			set = true;
-			break;
+	if (list_ticks) {
+		for (var i = 0; i < list_ticks.length; i++) {
+			if (list_ticks[i].checked) {
+				set = true;
+				break;
+			}
 		}
 	}
 
-	button_set_state (button_list, true);
-	button_set_state (button_delete, set);
-	button_set_state (button_cancel, set);
+	var text = (entry_panel.value.length > 0);
+
+	button_set_state (button_list,   text);		// some text in entry
+	button_set_state (button_delete, set);		// some ticked rows
+	button_set_state (button_clear,  (rows > 0));	// some rows in table
 }
 
 

@@ -22,8 +22,8 @@ function route_main()
 	$output .= "<div id='entry_area'>";
 	$output .= "<label for='date' accesskey='d'><u>D</u>ate</label>";
 	$output .= "<input id='date' type='text' size='30' value='today'><br>";
-	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
-	$output .= "<input id='entry' type='text' size='30' value=''>";
+	$output .= "<label for='panel' accesskey='p'><u>P</u>anels</label>";
+	$output .= "<input id='panel' type='text' size='30' value=''>";
 	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
 	$output .= "</div>";
 
@@ -35,7 +35,7 @@ function route_main()
 	$output .= "<div class='buttons'>";
 	$output .= "<input type='submit' type='button' id='button_delete' value='Delete'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_cancel' value='Cancel'>";
+	$output .= "<input type='submit' type='button' id='button_clear' value='Clear'>";
 	$output .= '</div>'; // buttons
 	$output .= '</div>'; // list_area
 

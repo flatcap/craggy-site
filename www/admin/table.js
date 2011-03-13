@@ -238,6 +238,23 @@ function table_reset_row (table, row_num)
 	return true;
 }
 
+function table_destroy (table)
+{
+	if (!table)
+		return;
+
+	var parent = table.parentNode;
+	if (!parent)
+		return;
+	var children = parent.children;
+	for (var i = 0; i < children.length; i++) {
+		if (children[i] == table) {
+			parent.removeChild (children[i]);
+			break;
+		}
+	}
+}
+
 
 /*
 function table_add_row2()
@@ -278,10 +295,6 @@ function table_add_row2()
 	}
 
 	var name;
-}
-
-function table_destroy()
-{
 }
 
 function table_add_row()

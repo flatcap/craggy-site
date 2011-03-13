@@ -142,11 +142,11 @@ function add_stats ($panels, $routes, $auto, $top, $lead, $wheight, $last)
 	$this->Ln(3);
 	$this->SetTextColor (0, 0, 255);
 	$this->SetFont ('Times', 'U', 9);
-	$this->Cell (0, $height, "http://craggy.russon.org", $border, 1);
+	$this->Write ($height, 'http://craggy.russon.org', 'http://craggy.russon.org');
 	$this->SetTextColor (0);
 	$this->SetFont ('Times', '', 9);
 
-	$this->Image ('rss.png', 287, 200, 5);
+	$this->Image ('rss.png', 287, 200, 5, 0, '', 'http://craggy.russon.org');
 }
 
 }

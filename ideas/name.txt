@@ -12,3 +12,6 @@ but not
 	first 'sur name'
 leave ' for O'Keefe, etc
 
+don't lowercase in case the name's DeAntony (camel case)
+only fix the case if the name's entirely in one case
+

@@ -1,3 +1,0 @@
-when creating an editable table of values, store the original values.
-onblur, if the value has changed, then submit it.
-this saves unnecessary db hits

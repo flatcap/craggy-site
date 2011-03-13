@@ -1,4 +1,5 @@
 <?php
+// buffer the output
 ob_start();
 for ($j=1; $j <= 5; $j++) {
 

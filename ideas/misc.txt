@@ -1,1 +1,0 @@
-alter table craggy_setter set auto_increment=9;

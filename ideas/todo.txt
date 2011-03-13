@@ -474,3 +474,5 @@ write a test rig to see if missing, or empty, tables cause problems
 
 setter could also search for
 rrusson and richr
+
+fix dates so that dd/mm/yyyy and dd-mm-yyyy are accepted

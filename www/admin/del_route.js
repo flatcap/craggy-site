@@ -111,21 +111,20 @@ function click_delete()
 	x.send();
 }
 
-
 function click_cancel()
 {
 }
 
 
-function route_get_node (node, name)
+function display_errors (xml)
 {
-	try {
-		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
-	} catch (er) {
+	var errstr = xml_get_errors (xml.responseXML.documentElement);
+	if (errstr.length > 0) {
+		notify_message (errstr);
+		return true;
 	}
 
-	return "";
-	//return "<td>" + txt + "</td>";
+	return false;
 }
 
 function callback_keypress (e)
@@ -143,50 +142,39 @@ function callback_list()
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var txt = "<table cellspacing=0 border=1>" +
-		"<thead>" +
-		"<tr>" +
-		"<th><input type='checkbox' id='tick_master'></th>" +
-		//"<th>ID</th>" +
-		"<th>Panel</th>" +
-		"<th>Colour</th>" +
-		"<th>Grade</th>" +
-		"</tr>" +
-		"</thead>" +
-		"<tbody>";
+	var list = document.getElementById ('route_list');
+	if (!list)
+		return;
 
+	if (display_errors(this))
+		return;
 
-	x = this.responseXML.documentElement.getElementsByTagName("route");
-	route_data = new Array();
+	if (list.children.length === 0) {
+		var columns = [
+			{ "name": "tick",   "type": "checkbox" },
+			{ "name": "panel",  "type": "text",    "title": "Panel",  "size":  3 },
+			{ "name": "colour", "type": "text",    "title": "Colour", "size": 12 },
+			{ "name": "grade",  "type": "text",    "title": "Grade",  "size":  5 }
+		];
+
+		table_route = table_create (columns);
+		if (table_route)
+			list.appendChild (table_route);
+	} else {
+		var tlist = list.getElementsByTagName ('table');
+		if (!tlist)
+			return;
+		table_route = tlist[0];
+	}
+
+	if (!table_route)
+		return;
+
+	var i;
+	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		var route = new Array();
-		var id = route_get_node (x[i], "id");
-		route['id']     = id;
-		route['panel']  = route_get_node (x[i], "panel");
-		route['colour'] = route_get_node (x[i], "colour");
-		route['grade']  = route_get_node (x[i], "grade");
-		route_data[id]  = route;
+		table_add_row (table_route, x[i]);
 	}
-	for (s in route_data) {
-		id     = route_data[s]['id'];
-		panel  = route_data[s]['panel'];
-		colour = route_data[s]['colour'];
-		grade  = route_data[s]['grade'];
-
-		txt += "<tr>";
-		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";
-		//txt += "<td>" + id + "</td>";
-		txt += "<td>" + panel + "</td>";
-		txt += "<td>" + colour + "</td>";
-		txt += "<td>" + grade + "</td>";
-		txt += "</tr>";
-	}
-
-	txt += "</tbody>" +
-	       "</table>";
-
-	var table = document.getElementById ('route_list');
-	table.innerHTML = txt;
 
 	//button_set_state (button_list, false);
 	initialise_ticks();

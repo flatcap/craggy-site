@@ -107,7 +107,7 @@ function table_add_row (table, data)
 
 		var value = xml_get_node (data, col_name);
 
-		var cell = document.createElement ('th');	// don't allocate for id
+		var cell = document.createElement ('td');	// don't allocate for id
 
 		switch (col_type) {
 		case 'checkbox':

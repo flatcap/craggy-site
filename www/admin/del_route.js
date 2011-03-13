@@ -93,7 +93,7 @@ function click_delete()
 	var ticked = 0;
 	for (i = 0; i < count; i++) {
 		if (list_ticks[i].checked) {
-			ids.push (list_ticks[i].id.substring(3));
+			ids.push (list_ticks[i].id.substring(5));
 			ticked++;
 		}
 	}

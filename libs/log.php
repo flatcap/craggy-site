@@ -7,6 +7,7 @@ function log_init ($path = null)
 	ini_set('display_errors', 0);
 	ini_set('log_errors', 1);
 	libxml_use_internal_errors (true);
+	log_string (strftime ('Log started on %Y-%m-%d as %H:%M', strtotime('now')));
 }
 
 function log_var ($var)

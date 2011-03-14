@@ -498,7 +498,7 @@ function climb_do_add (&$xml)
 		$climb->addChild ('difficulty', $c['difficulty']);
 		$climb->addChild ('grade',      $c['grade']);
 		$climb->addChild ('id',         $c['id']);
-		$climb->addChild ('nice',       $c['nice']);
+		$climb->addChild ('nice',       ($c['nice'] == 1) ? 'nice' : '');
 		$climb->addChild ('notes',      $c['notes']);
 		$climb->addChild ('panel',      $c['panel']);
 		$climb->addChild ('success',    $c['success']);

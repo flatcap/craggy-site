@@ -1,18 +1,17 @@
 var button_add;
 var button_save;
 var button_delete;
-var entry_panel;
+var entry_routes;
 var entry_date;
 var entry_setter;
 
-var list_ticks;
 var route_data;
 
-//initialise_ticks();
-//initialise_rows();
-initialise_buttons();
+var table_route;
 
-function initialise_buttons()
+initialise();
+
+function initialise()
 {
 	button_add    = document.getElementById ('button_add');
 	button_save   = document.getElementById ('button_save');
@@ -22,62 +21,26 @@ function initialise_buttons()
 	button_save.onclick   = click_save;
 	button_delete.onclick = click_delete;
 
-	entry_panel = document.getElementById ('entry');
-	entry_panel.onkeypress = callback_catch_enter;
-	entry_panel.focus();
+	entry_routes = document.getElementById ('entry');
+	entry_routes.onkeypress = callback_catch_enter;
+	entry_routes.onkeyup    = callback_keyup;
+	entry_routes.focus();
 
 	entry_date   = document.getElementById ('date');
 	complete_initialise ('date', 'date');
-	entry_date.focus(); //tmp
 
 	entry_setter = document.getElementById ('setter');
 	complete_initialise ('setter', 'setter');
 
 	notify_initialise ('notify_area');
 
-	//buttons_update();
-}
-
-function initialise_ticks()
-{
-	var content = document.getElementsByClassName ('content');
-
-	var body = content[0].getElementsByTagName ('tbody');
-
-	list_ticks = body[0].getElementsByTagName ('input');
-
-	for (i = 0; i < list_ticks.length; i++) {
-		list_ticks[i].checked = true;
-		list_ticks[i].onclick = check_click;
-	}
-
-	var master = document.getElementById ('tick_master');
-	master.checked = false;
-	master.onclick = tick_master_click;
-}
-
-function initialise_rows()
-{
-	var content = document.getElementsByClassName ('content');
-
-	var body = content[0].getElementsByTagName ('tbody');
-
-	var trs = body[0].getElementsByTagName ('tr');
-	for (i = 0; i < trs.length; i++) {
-		trs[i].onclick = row_clicked;
-	}
-
+	buttons_update();
 }
 
 
 function htmlentities(str)
 {
 	return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function render_html (xml)
-{
-	return "";
 }
 
 function render_xml (list)
@@ -102,9 +65,11 @@ function render_xml (list)
 
 function click_add()
 {
+	if (!entry_routes)
+		return;
+	if (entry_routes.value.length === 0)
+		return;
 	notify_close();
-	var str = entry_panel.value;
-	str = encodeURI(str);
 
 	var x;
 	if (window.XMLHttpRequest) {
@@ -112,8 +77,15 @@ function click_add()
 	} else {
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
+
+	var str = "add_route_work.php?";
+	str += "action=add";
+	str += "&date="   + encodeURIComponent (entry_date.value);
+	str += "&setter=" + encodeURIComponent (entry_setter.value);
+	str += "&routes=" + encodeURIComponent (entry_routes.value);
+
 	x.onreadystatechange = callback_add;
-	x.open ("GET", "add_route_work.php?action=add&data=" + encodeURIComponent (entry_panel.value));
+	x.open ("GET", str);
 	x.send();
 }
 
@@ -121,35 +93,20 @@ function click_delete()
 {
 	notify_close();
 
-	var ticks = get_ticks();
-	var count = ticks.length;
-	if (count === 0) {
-		buttons_update();	// Shouldn't happen
+	var rows = table_get_selected (table_route);
+	if (!rows)
 		return;
+
+	for (var i = 0; i < rows.length; i++) {
+		table_row_delete (table_route, rows[i]);
 	}
 
-	var table = document.getElementById ('route_list');
-	var body = table.getElementsByTagName('tbody');
-	var trs = body[0].childNodes;
-
-	ticks.reverse();
-	for (var i = 0; i < count; i++) {
-		var index = ticks[i];
-		route_data.splice (index, 1);
-		body[0].removeChild (trs[index]);
-	}
+	buttons_update();
 }
 
 function click_save()
 {
 	notify_close();
-
-	var ticks = get_ticks();
-	var count = ticks.length;
-	if (count === 0) {
-		buttons_update();	// Shouldn't happen
-		return;
-	}
 
 	var xml = render_xml (route_data);
 	xml = encodeURIComponent (xml);
@@ -167,74 +124,63 @@ function click_save()
 }
 
 
+function display_errors (xml)
+{
+	var errstr = xml_get_errors (xml.responseXML.documentElement);
+	if (errstr.length > 0) {
+		notify_message (errstr);
+		return true;
+	}
+
+	return false;
+}
+
+
 function callback_add()
 {
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var txt = "<table cellspacing=0 border=1>" +
-		"<thead>" +
-		"<tr>" +
-		"<th><input type='checkbox' id='tick_master'></th>" +
-		"<th>ID</th>" +
-		"<th>Panel</th>" +
-		"<th>Colour</th>" +
-		"<th>Grade</th>" +
-		"<th>Setter</th>" +
-		"<th>Date</th>" +
-		"<th>Notes</th>" +
-		"</tr>" +
-		"</thead>" +
-		"<tbody>";
+	var list = document.getElementById ('route_list');
+	if (!list)
+		return;
 
-	var setter = entry_setter.value;
-	var date   = entry_date.value;
+	if (display_errors(this))
+		return;
 
-	if (!route_data)
-		route_data = new Array();
+	if (list.children.length === 0) {
+		var columns = [
+			{ "name": "tick",   "type": "checkbox" },
+			{ "name": "panel",  "type": "input",   "title": "Panel",  "size":  3  },
+			{ "name": "colour", "type": "input",   "title": "Colour", "size": 12, "validator": "colour" },
+			{ "name": "grade",  "type": "input",   "title": "Grade",  "size":  5, "validator": "grade"  },
+			{ "name": "setter", "type": "input",   "title": "Setter", "size": 12, "validator": "setter" },
+			{ "name": "date",   "type": "input",   "title": "Date",   "size": 12, "validator": "date"   },
+			{ "name": "notes",  "type": "input",   "title": "Notes",  "size": 12  }
+		];
+
+		table_route = table_create (columns);
+		if (table_route)
+			list.appendChild (table_route);
+	} else {
+		var tlist = list.getElementsByTagName ('table');
+		if (!tlist)
+			return;
+		table_route = tlist[0];
+	}
+
+	if (!table_route)
+		return;
+
 	var i;
-	var id_base = route_data.length;
-	x = this.responseXML.documentElement.getElementsByTagName("route");
+	var x = this.responseXML.documentElement.getElementsByTagName("route");
 	for (i = 0; i < x.length; i++) {
-		var route = new Object();
-		id = id_base + i;
-		route.id       = id;
-		route.panel    = xml_get_node (x[i], "panel");
-		route.colour   = xml_get_node (x[i], "colour");
-		route.grade    = xml_get_node (x[i], "grade");
-		route.date     = date;
-		route.setter   = setter;
-		route_data[id] = route;
+		table_add_row (table_route, x[i]);
 	}
 
-	for (i = 0; i < route_data.length; i++) {
-		id     = route_data[i].id;
-		panel  = route_data[i].panel;
-		colour = route_data[i].colour;
-		grade  = route_data[i].grade;
-		date   = route_data[i].date;
-		setter = route_data[i].setter;
-
-		txt += "<tr>";
-		txt += "<td><input type='checkbox' id='id_" + id + "'></td>";
-		txt += "<td>" + id + "</td>";
-		txt += "<td>" + panel + "</td>";
-		txt += "<td>" + colour + "</td>";
-		txt += "<td>" + grade + "</td>";
-		txt += "<td>" + setter + "</td>";
-		txt += "<td>" + date + "</td>";
-		txt += "<td>" + '' + "</td>";
-		txt += "</tr>";
-	}
-
-	txt += "</tbody>" +
-	       "</table>";
-
-	var table = document.getElementById ('route_list');
-	table.innerHTML = txt;
-
-	initialise_ticks();
-	initialise_rows();
+	var master = document.getElementById ('tick_master');
+	master.checked = true;
+	master.onclick = tick_master_click;
 	buttons_update();
 
 	// empty route entry
@@ -260,6 +206,12 @@ function callback_catch_enter (e)
 	return true;
 }
 
+function callback_keyup (e)
+{
+	buttons_update();
+	return true;
+}
+
 
 function check_click(e)
 {
@@ -269,17 +221,7 @@ function check_click(e)
 
 function tick_master_click()
 {
-	for (i = 0; i < list_ticks.length; i++) {
-		list_ticks[i].checked = this.checked;
-	}
-	buttons_update();
-}
-
-function row_clicked()
-{
-	var ticks = this.getElementsByTagName ('input');
-
-	ticks[0].checked = !ticks[0].checked;
+	table_select_all (table_route, this.checked);
 	buttons_update();
 }
 
@@ -296,25 +238,15 @@ function button_set_state (button, enabled)
 
 function buttons_update()
 {
-	var ticks = get_ticks();
-	var set = (ticks.length > 0);
-
-	button_set_state (button_add,    true);
-	button_set_state (button_save,   set);
-	button_set_state (button_delete, set);
-}
-
-function get_ticks()
-{
-	var ids = new Array();
-
-	if (list_ticks) {
-		for (var i = 0; i < list_ticks.length; i++) {
-			if (list_ticks[i].checked) {
-				ids.push (list_ticks[i].id.substring(3));
-			}
-		}
+	var rows     = (table_get_row_count (table_route) > 0);
+	var text     = (entry_routes.value.length > 0);
+	var selected = table_get_selected (table_route);
+	if (selected) {
+		selected = (selected.length > 0);
 	}
 
-	return ids;
+	button_set_state (button_add,    text);
+	button_set_state (button_save,   rows);
+	button_set_state (button_delete, selected);
 }
+

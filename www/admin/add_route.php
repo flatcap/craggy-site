@@ -50,6 +50,8 @@ function add_main()
 
 	$output .= "<script type='text/javascript' src='notify.js'></script>";
 	$output .= "<script type='text/javascript' src='complete.js'></script>";
+	$output .= "<script type='text/javascript' src='xml.js'></script>";
+	$output .= "<script type='text/javascript' src='table.js'></script>";
 	$output .= "<script type='text/javascript' src='add_route.js'></script>";
 
 	$output .= "<div id='debug_area'></div>";

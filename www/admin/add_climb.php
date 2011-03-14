@@ -38,7 +38,7 @@ function add_main()
 
 	$output .= "<div id='notify_area'></div>";
 	$output .= "<div id='list_area'>";
-	$output .= "<div id='climb_list'>";
+	$output .= "<div id='route_list'></div>";
 	$output .= "</div>";
 
 	$output .= '<br>';

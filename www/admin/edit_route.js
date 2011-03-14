@@ -65,7 +65,7 @@ function get_row (row, columns, diff)
 	}
 
 	if (diff && !changed)
-		return null
+		return null;
 	else
 		return obj;
 }
@@ -245,9 +245,11 @@ function callback_save()
 	notify_message (response);
 	return;
 
+	/*
 	var table = document.getElementById ('route_list');
 	table.innerHTML = "";
 	buttons_update();
+	*/
 }
 
 

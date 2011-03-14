@@ -80,11 +80,11 @@ function obj_to_xml (name, obj)
 
 function click_add()
 {
-	notify_close();
-	var str = entry_climb.value;
-	if (str.length === 0)
+	if (!entry_climb)
 		return;
-	str = encodeURI(str);
+	if (entry_climb.value.length === 0)
+		return;
+	notify_close();
 
 	var x;
 	if (window.XMLHttpRequest) {
@@ -93,11 +93,12 @@ function click_add()
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
 
-	str  = "add_climb_work.php?";
+	var str  = "add_climb_work.php?";
 	str += "action=add";
 	str += "&climbs=" + encodeURIComponent (entry_climb.value);
 	str += "&date=" + encodeURIComponent (entry_date.value);
 	str += "&climber=" + encodeURIComponent (entry_climber.value);
+
 	x.onreadystatechange = callback_add;
 	x.open ("GET", str);
 	x.send();
@@ -210,7 +211,7 @@ function callback_add()
 			{ "name": "success",    "type": "input",   "title": "Success",    "size":  8, "validator": "success"    },
 			{ "name": "difficulty", "type": "input",   "title": "Difficulty", "size":  8, "validator": "difficulty" },
 			{ "name": "nice",       "type": "input",   "title": "Nice",       "size":  3, "validator": "nice"       },
-			{ "name": "notes",      "type": "input",   "title": "Notes",      "size": 10 },
+			{ "name": "notes",      "type": "input",   "title": "Notes",      "size": 10 }
 		];
 
 		table_climb = table_create (columns);

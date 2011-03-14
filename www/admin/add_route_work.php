@@ -9,6 +9,8 @@ include 'db_names.php';
 include 'cache.php';
 include 'utils.php';
 include 'colour.php';
+include 'date.php';
+include 'setter.php';
 
 function parse_grade ($text)
 {
@@ -204,7 +206,7 @@ function db_route_add ($route)
 }
 
 
-function route_add ($data)
+function route_add ($date, $setter, $data)
 {
 	//printf ("data = >>$data<<\n");
 	// parse:
@@ -213,6 +215,21 @@ function route_add ($data)
 	//	45 Red 5+
 	//	45 Green 6a
 	//	45 Beige 6b
+	
+	$message = "";
+
+	$date = date_match ($date, $message);
+	if ($date === null) {
+		echo $message;
+		return null;
+	}
+
+	$setter = setter_match ($setter, $message);
+	if ($setter === null) {
+		echo $message;
+		return null;
+	}
+	$setter = trim ($setter['first_name'] . ' ' . $setter['surname']);
 
 	$routes = array();
 
@@ -230,10 +247,10 @@ function route_add ($data)
 			$colour = $c['colour'];
 		}
 		$grade = trim ($grade);
-		$routes[] = array ('panel' => $panel, 'colour' => $colour, 'grade' => $grade);
+		$routes[] = array ('panel' => $panel, 'colour' => $colour, 'grade' => $grade, 'date' => $date, 'setter' => $setter);
 	}
 
-	$columns = array ('panel', 'colour', 'grade');
+	$columns = array ('panel', 'colour', 'grade', 'date', 'setter');
 	$xml = '<?xml version="1.0"?'.">\n";
 	$xml .= '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.">\n";
 	$xml .= list_render_xml2 ('route', $routes, $columns);
@@ -280,16 +297,36 @@ function route_main()
 	}
 	$action = $_GET['action'];
 
+	if ($action == 'add') {
+		if (!array_key_exists ('date', $_GET)) {
+			echo 'NO DATE';
+			return;
+		}
+		$date = $_GET['date'];
+		if (!array_key_exists ('setter', $_GET)) {
+			echo 'NO SETTER';
+			return;
+		}
+		$setter = $_GET['setter'];
+		if (!array_key_exists ('routes', $_GET)) {
+			echo 'NO ROUTES';
+			return;
+		}
+		$routes = $_GET['routes'];
+
+	}
+	/*
 	if (array_key_exists ('data', $_GET)) {
 		$data = $_GET['data'];
 	} else {
 		$data = '';
 	}
+	*/
 
 	switch ($action) {
 		case 'add':
 			header('Content-Type: application/xml; charset=ISO-8859-1');
-			$response = route_add($data);
+			$response = route_add($date, $setter, $routes);
 			break;
 		case 'save':
 			header('Content-Type: application/xml; charset=ISO-8859-1');

@@ -1,14 +1,5 @@
 var uniq_id = 0;
 
-/**
-td (id)
-	checkbox	rw tickbox(true)
-	id		-> td
-	text		ro text
-	input		rw text
-
-*/
-
 function table_create (columns)
 {
 	if (!columns)
@@ -256,52 +247,90 @@ function table_destroy (table)
 }
 
 
-/*
-function table_add_row2()
+function table_select_all (table, state)
 {
-	for (var i in columns) {
-		var col = columns[i];
-		var name = col['name'];
-		var type = col['type'];
-		if (!name || !type)
+	var body = table_get_body (table);
+	if (!body)
+		return;
+
+	var rlist = body.getElementsByTagName ('tr');
+	if (!rlist)
+		return;
+
+	for (var i = 0; i < rlist.length; i++) {
+		var item = rlist[i].firstChild;
+		item = item.firstChild;
+		if (item.nodeName.toLowerCase() != 'input')
 			continue;
-
-		var item;
-		var cell;
-		cell = document.createElement ('th');
-		switch (type) {
-			case 'input':
-				item = document.createElement ('input');
-				item.type = 'text';
-				break;
-			case 'checkbox':
-				item = document.createElement ('input');
-				item.type = 'checkbox';
-				break;
-			case 'text':
-			default:
-				break;
-		}
+		if (item.type.toLowerCase() != 'checkbox')
+			continue;
+		item.checked = state;
 	}
-	return;
-
-	if (ticklist) {
-		var i = document.createElement ('input');
-
-		i.id   = 'tick_master';
-		i.type = 'checkbox';
-		c.appendChild (i);
-		r.appendChild (c);
-	}
-
-	var name;
 }
 
-function table_add_row()
+function table_row_delete (table, row_id)
 {
+	if (!table)
+		return;
+	if (row_id.substr (0, 4) != 'row_')
+		row_id = "row_" + row_id;
+	var row = document.getElementById (row_id);
+	if (!row)
+		return;
+
+	var body = table_get_body (table);
+	if (!body)
+		return;
+
+	if (row.parentNode != body)
+		return;
+	
+	body.removeChild (row);
 }
 
-function table_del_row()
+
+function table_get_selected (table)
+{
+	var body = table_get_body (table);
+	if (!body)
+		return null;
+
+	var rlist = body.getElementsByTagName ('tr');
+	if (!rlist)
+		return null;
+
+	var row_ids = new Array();
+	for (var i = 0; i < rlist.length; i++) {
+		var item = rlist[i].firstChild;
+		item = item.firstChild;
+		if (item.nodeName.toLowerCase() != 'input')
+			continue;
+		if (item.type.toLowerCase() != 'checkbox')
+			continue;
+		if (!item.checked)
+			continue;
+		var id = table_get_row_id (item);
+		row_ids.push (id.substr(4));	// strip "row_"
+	}
+
+	return row_ids;
+}
+
+function table_get_row_id (item)
+{
+	if (!item)
+		return null;
+	
+	while ((item = item.parentNode)) {
+		if (item.nodeName.toLowerCase() == 'tr')
+			return item.id;
+	}
+
+	return null;
+}
+
+/*
+function table_row_selected()
 {
 }
 
@@ -315,20 +344,6 @@ function table_prev_sibling()
 
 function table_row_to_xml()
 {
-}
-
-function table_row_selected()
-{
-}
-
-function table_select_all()
-{
-	tick all rows (true/false)
-}
-
-function table_get_selected()
-{
-	what do I return?
 }
 
 function table_find_type()

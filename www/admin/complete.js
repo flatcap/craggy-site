@@ -59,7 +59,7 @@ function complete_callback()
 	// 	clear error_box
 	var result = xml_get_node (xml, type);
 	entry.value = result;
-	if ((entry.original == null) || (entry.value == entry.original))
+	if ((entry.original === null) || (entry.value == entry.original))
 		entry.className = "";
 	else
 		entry.className = "diff";

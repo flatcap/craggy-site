@@ -4,9 +4,6 @@ var button_delete;
 var entry_routes;
 var entry_date;
 var entry_setter;
-
-var route_data;
-
 var table_route;
 
 initialise();
@@ -108,7 +105,7 @@ function click_save()
 {
 	notify_close();
 
-	var xml = render_xml (route_data);
+	//var xml = render_xml (route_data);
 	xml = encodeURIComponent (xml);
 
 	var x;

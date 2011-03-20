@@ -107,34 +107,9 @@ function click_save()
 {
 	notify_close();
 
-	var list = document.getElementById ('route_list');
-	if (!list)
+	var xml = table_to_xml (table_route, 'different');
+	if (xml == "")
 		return;
-
-	var tb = document.getElementsByTagName ('tbody');
-	if (!tb)
-		return;
-	var rows = tb[0].children;
-
-	var count = 0;
-	var xml;
-	xml  = "<?xml version='1.0'?>\n";
-	xml += "<?xml-stylesheet type='text/xsl' href='route.xsl'?>\n";
-	xml += "<list type='route'>";
-	//var columns = new Array ("tick", "panel", "colour", "grade", "type", "date", "success", "diff", "nice", "notes");
-	var columns = new Array (null, "panel", "colour", "grade");
-	for (var i = 0; i < rows.length; i++) {
-		var r = get_row (rows[i], columns, true);
-		if (r) {
-			// only send the rows that have changed
-			xml += obj_to_xml ('route', r);
-			count++;
-		}
-	}
-	xml += '</list>';
-
-	if (count === 0)
-		return;		// Nothing's changed
 
 	var x;
 	if (window.XMLHttpRequest) {

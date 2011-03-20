@@ -6,11 +6,9 @@ include 'db.php';
 include 'db_names.php';
 include 'utils.php';
 include 'xml.php';
-include 'log.php';
 include 'colour.php';
 include 'grade.php';
 include 'panel.php';
-include 'log.php';
 
 function parse_range ($string)
 {
@@ -95,7 +93,6 @@ function route_do_list (&$xml)
 	//print_r ($routes);
 
 	list_render_xml3 ($xml, 'route', $routes, $columns);
-	log_var ($xml);
 }
 
 function route_do_save()
@@ -123,7 +120,6 @@ function route_do_save()
 	for ($i = 0; $i < $xml->count(); $i++) {
 		$a = $xml->route[$i];
 
-		log_var ($a);
 		$id     = $a->id;
 		$panel  = panel_match  ($a->panel);
 		$colour = colour_match ($a->colour);
@@ -178,7 +174,6 @@ function route_main()
 
 date_default_timezone_set('UTC');
 
-log_init ('/dev/pts/47');
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
 $xml = route_main();

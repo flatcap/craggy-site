@@ -11,6 +11,7 @@ function table_create (type, columns)
 
 	t.border      = 1;
 	t.cellspacing = 0;
+	t.data_type   = type;
 
 	t.appendChild (th);
 	t.appendChild (tb);
@@ -19,8 +20,6 @@ function table_create (type, columns)
 	if (!row)
 		return null;
 	
-	row.obj_type = type;
-
 	for (var i in columns) {
 		var col   = columns[i];
 		var name  = col['name'];
@@ -301,19 +300,28 @@ function table_get_selected (table)
 
 	var row_ids = new Array();
 	for (var i = 0; i < rlist.length; i++) {
-		var item = rlist[i].firstChild;
-		item = item.firstChild;
-		if (item.nodeName.toLowerCase() != 'input')
-			continue;
-		if (item.type.toLowerCase() != 'checkbox')
-			continue;
-		if (!item.checked)
+		if (!table_row_selected (rlist[i]))
 			continue;
 		var id = table_get_row_id (item);
 		row_ids.push (id.substr(4));	// strip "row_"
 	}
 
 	return row_ids;
+}
+
+function table_row_selected (row)
+{
+	if (!row)
+		return false;
+
+	var item = row.firstChild;
+	item = item.firstChild;
+	if (item.nodeName.toLowerCase() != 'input')
+		return false;;
+	if (item.type.toLowerCase() != 'checkbox')
+		return false;;
+
+	return item.checked;
 }
 
 function table_get_row_id (item)
@@ -329,11 +337,159 @@ function table_get_row_id (item)
 	return null;
 }
 
-/*
-function table_row_selected()
+
+function table_cell_get_value (cell)
 {
+	if (!cell)
+		return null;
+
+	if (cell.childElementCount === 0) {
+		return cell.innerHTML;					// Just text
+	} else {
+		var f = cell.firstChild;
+		if (f.nodeName.toLowerCase() == 'input') {
+			if (f.type.toLowerCase() == 'checkbox') {
+				return f.checked;			// A tickbox
+			} else if (f.type.toLowerCase() == 'text') {
+				return  f.value;			// A textbox
+			}
+		}
+	}
+
+	return null;
 }
 
+function table_cell_get_orig (cell)
+{
+	if (!cell)
+		return null;
+
+	if (cell.childElementCount === 0)
+		return null;
+
+	var f = cell.firstChild;
+	if (f.nodeName.toLowerCase() == 'input') {
+		return f.original;
+	}
+
+	return null;
+}
+
+function table_get_id (row)
+{
+	if (!row)
+		return null;
+	
+	var id = row.id;
+
+	if (id.substring (0, 4) == 'row_')
+		id = id.substr (4);
+	
+	return id;
+}
+
+function table_get_columns (table)
+{
+	if (!table)
+		return null;
+	
+	var head = table_get_header (table);
+	if (!head)
+		return null;
+
+	var children = head.children;
+	var cols = new Array();
+	for (var i = 0; i < children.length; i++) {
+		var name = children[i].col_name;
+		if (name) {
+			cols.push (name);
+		}
+	}
+
+	return cols;
+}
+
+function table_row_to_xml (row, cols, type, diff)
+{
+	if (!row || !cols)
+		return "";
+
+	var changed = false;
+
+	var children = row.children;
+	if (children.length != cols.length)
+		return "";
+
+	var xml = "";
+	for (var i = 0; i < children.length; i++) {
+		var name  = cols[i];
+		if (!name)
+			continue;
+		var value = table_cell_get_value (children[i]);
+		if (diff) {
+			var orig = table_cell_get_orig (children[i]);
+			if (orig && (value != orig)) {
+				changed = true;
+			}
+		}
+
+		xml += "<" + name + ">" + value + "</" + name + ">";
+	}
+
+	if (xml == "")
+		return "";
+
+	var id = table_get_id (row);
+	if (id) {
+		xml += "<id>" + id + "</id>";
+	}
+
+	if (diff && !changed)
+		return "";
+
+	xml = "<" + type + ">" + xml + "</" + type + ">";
+	return xml;
+}
+
+function table_to_xml (table, selection)
+{
+	// selection can be 'different', or 'ticked'
+	if (!table)
+		return null;
+
+	var cols = table_get_columns (table);
+	cols[0] = null;				// Ignore the tick column
+
+	var data_type = table.data_type;
+
+	var body = table_get_body (table);
+	var rlist = body.getElementsByTagName ('tr');
+	if (!rlist)
+		return null;
+
+	var xml = "";
+	for (var i = 0; i < rlist.length; i++) {
+		if ((selection == 'ticked') && !table_row_selected (rlist[i]))
+			continue;
+		var diff = (selection == 'different');
+
+		xml += table_row_to_xml (rlist[i], cols, data_type, diff);
+	}
+
+	if (xml == "") {
+		return xml;
+	}
+
+	xml =	"<?xml version='1.0'?>\n" +
+		"<list type='" + data_type + "'>" +
+		xml +
+		'</list>';
+
+	return xml;
+}
+
+
+/*
 function table_next_sibling()
 {
 }
@@ -342,15 +498,7 @@ function table_prev_sibling()
 {
 }
 
-function table_row_to_xml()
-{
-}
-
 function table_find_type()
-{
-}
-
-function table_get_id()
 {
 }
 

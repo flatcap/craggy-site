@@ -60,6 +60,54 @@ function render_xml (list)
 }
 
 
+function get_row (row, columns)
+{
+	var obj = new Object();
+
+	var children = row.children;
+	if (!children)
+		return null;
+
+	if (children.length != columns.length)
+		return null;
+
+	for (var i = 0; i < children.length; i++) {
+		if (columns[i] === null)
+			continue;
+
+		if (children[i].childElementCount === 0) {
+			obj[columns[i]] = children[i].innerHTML;		// Just text
+		} else {
+			var f = children[i].firstChild;
+			if (f.nodeName.toLowerCase() == 'input') {
+				if (f.type.toLowerCase() == 'checkbox') {
+					obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
+				} else if (f.type.toLowerCase() == 'text') {
+					obj[columns[i]] = children[i].firstChild.value;		// A textbox
+				}
+			}
+		}
+	}
+
+	return obj;
+}
+
+function obj_to_xml (name, obj)
+{
+	var xml = '<' + name + '>';
+
+	for (o in obj) {
+		if (obj[o].length === 0)
+			continue;
+		xml += '<' + o + '>' + encodeURIComponent (obj[o]) + '</' + o + '>';
+	}
+
+	xml += '</' + name + '>';
+
+	return xml;
+}
+
+
 function click_add()
 {
 	if (!entry_routes)
@@ -105,8 +153,22 @@ function click_save()
 {
 	notify_close();
 
-	//var xml = render_xml (route_data);
-	xml = encodeURIComponent (xml);
+	var list = document.getElementById ('route_list');
+	if (!list)
+		return;
+
+	var tb = document.getElementsByTagName ('tbody');
+	if (!tb)
+		return;
+	var rows = tb[0].children;
+
+	var xml = '<list type="climb">';
+	var columns = new Array (null, 'panel', 'colour', 'grade', 'setter', 'date', 'notes');
+	for (var i = 0; i < rows.length; i++) {
+		var r = get_row (rows[i], columns);
+		xml += obj_to_xml ('route', r);
+	}
+	xml += '</list>';
 
 	var x;
 	if (window.XMLHttpRequest) {
@@ -114,8 +176,12 @@ function click_save()
 	} else {
 		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
 	}
+
+	var str  = "add_route_work.php?";
+	str += "action=save";
+	str += "&route_xml=" + encodeURIComponent (xml);
+	x.open ("GET", str);
 	x.onreadystatechange = callback_save;
-	x.open ("GET", "add_route_work.php?action=save&data=" + xml);
 	x.setRequestHeader ("Content-Type", "text/plain");
 	x.send();
 }
@@ -181,7 +247,9 @@ function callback_add()
 	buttons_update();
 
 	// empty route entry
+	entry_routes.value = "";
 	// set focus
+	entry_routes.focus();
 }
 
 function callback_save()

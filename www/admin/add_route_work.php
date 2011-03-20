@@ -92,7 +92,7 @@ function parse_setter ($text)
 
 function valid_colour (&$route)
 {
-	$c = colour_match ($route->colour);
+	$c = colour_match (urldecode ($route->colour));
 	if ($c !== null) {
 		$route->colour = $c['colour'];
 		$route->colour_id = $c['id'];
@@ -105,7 +105,7 @@ function valid_colour (&$route)
 
 function valid_date (&$route)
 {
-	$d = strtotime ($route->date);
+	$d = strtotime (urldecode ($route->date));
 
 	if ($d !== false) {
 		$now = strtotime ('now');
@@ -123,7 +123,7 @@ function valid_date (&$route)
 
 function valid_grade (&$route)
 {
-	$g = parse_grade ($route->grade);
+	$g = parse_grade (urldecode ($route->grade));
 	if ($g !== null) {
 		$route->grade    = $g['grade'];
 		$route->grade_id = $g['id'];
@@ -137,12 +137,13 @@ function valid_grade (&$route)
 function valid_notes (&$route)
 {
 	// check for invalid characters
+	$route->notes = urldecode ($route->notes);
 	return true;
 }
 
 function valid_panel (&$route)
 {
-	$p = parse_panel ($route->panel);
+	$p = parse_panel (urldecode ($route->panel));
 	if ($p !== null) {
 		$route->panel    = $p['name'];
 		$route->panel_id = $p['id'];
@@ -155,7 +156,7 @@ function valid_panel (&$route)
 
 function valid_setter (&$route)
 {
-	$s = parse_setter ($route->setter);
+	$s = parse_setter (urldecode ($route->setter));
 	if ($s !== null) {
 		$route->setter    = $s['first_name'] . ' ' . $s['surname'];
 		$route->setter_id = $s['id'];
@@ -191,7 +192,7 @@ function db_route_add ($route)
 	*/
 
 	$query = "insert into route (panel_id,colour_id,grade_id,setter_id,notes,date_set) values ";
-	$query .= "($route->panel_id, $route->colour_id, $route->grade_id, $route->setter_id, null, '$route->date')";
+	$query .= "($route->panel_id, $route->colour_id, $route->grade_id, $route->setter_id, '$route->notes', '$route->date')";
 	//echo $query . "\n";
 
 	$db = db_get_database();
@@ -314,14 +315,13 @@ function route_main()
 		}
 		$routes = $_GET['routes'];
 
+	} else if ($action == 'save') {
+		if (!array_key_exists ('route_xml', $_GET)) {
+			echo 'NO ROUTE_XML';
+			return;
+		}
+		$route_xml = $_GET['route_xml'];
 	}
-	/*
-	if (array_key_exists ('data', $_GET)) {
-		$data = $_GET['data'];
-	} else {
-		$data = '';
-	}
-	*/
 
 	switch ($action) {
 		case 'add':
@@ -330,7 +330,7 @@ function route_main()
 			break;
 		case 'save':
 			header('Content-Type: application/xml; charset=ISO-8859-1');
-			$response = route_save($data);
+			$response = route_save($route_xml);
 			break;
 		default:
 			$response = "unknown action";

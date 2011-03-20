@@ -165,7 +165,6 @@ function click_save()
 	x.onreadystatechange = callback_save;
 	x.setRequestHeader ("Content-Type", "text/plain");
 	x.send();
-
 }
 
 

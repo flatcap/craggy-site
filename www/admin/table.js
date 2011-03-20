@@ -1,8 +1,8 @@
 var uniq_id = 0;
 
-function table_create (columns)
+function table_create (type, columns)
 {
-	if (!columns)
+	if (!type || !columns)
 		return null;
 
 	var t  = document.createElement ('table');
@@ -16,6 +16,10 @@ function table_create (columns)
 	t.appendChild (tb);
 
 	var row = t.insertRow (0);
+	if (!row)
+		return null;
+	
+	row.obj_type = type;
 
 	for (var i in columns) {
 		var col   = columns[i];
@@ -44,9 +48,6 @@ function table_create (columns)
 			tick.checked = true;
 			cell.appendChild (tick);
 			break;
-		case 'id':
-			row.id = 'row_' + 0;
-			break;
 		case 'input':
 		case 'text':
 		default:
@@ -54,8 +55,7 @@ function table_create (columns)
 			break;
 		}
 
-		if (type != "id")
-			row.appendChild (cell);
+		row.appendChild (cell);
 	}
 
 	return t;

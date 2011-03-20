@@ -176,7 +176,7 @@ function callback_list()
 			{ "name": "grade",  "type": "text",    "title": "Grade",  "size":  5 }
 		];
 
-		table_route = table_create (columns);
+		table_route = table_create ('route', columns);
 		if (table_route)
 			list.appendChild (table_route);
 	} else {

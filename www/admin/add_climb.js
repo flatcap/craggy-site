@@ -213,7 +213,7 @@ function callback_add()
 			{ "name": "notes",      "type": "input",   "title": "Notes",      "size": 10 }
 		];
 
-		table_climb = table_create (columns);
+		table_climb = table_create ('climb', columns);
 		if (table_climb)
 			list.appendChild (table_climb);
 	} else {

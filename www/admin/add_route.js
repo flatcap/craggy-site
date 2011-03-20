@@ -222,7 +222,7 @@ function callback_add()
 			{ "name": "notes",  "type": "input",   "title": "Notes",  "size": 12  }
 		];
 
-		table_route = table_create (columns);
+		table_route = table_create ('route', columns);
 		if (table_route)
 			list.appendChild (table_route);
 	} else {

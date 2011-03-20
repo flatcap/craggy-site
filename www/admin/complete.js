@@ -79,6 +79,9 @@ function complete_validate (input)
 	if (!input)
 		return;
 
+	if (!input.lookup)
+		return;
+
 	var val = input.value;
 	if (val.length === 0) {
 		var orig = input.original;
@@ -112,8 +115,8 @@ function complete_validate (input)
 
 function complete_onkeypress (e)
 {
-	// Validate on enter, space or comma
-	if ((e.keyCode == 13) || (e.charCode == 32) || (e.charCode == 44)) {
+	// Validate on enter or comma
+	if ((e.keyCode == 13) || (e.charCode == 44)) {
 		complete_validate (this);
 		return false;
 	}

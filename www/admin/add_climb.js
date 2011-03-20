@@ -115,7 +115,7 @@ function click_delete()
 		return;
 	}
 
-	var table = document.getElementById ('climb_list');
+	var table = document.getElementById ('route_list');
 	var body = table.getElementsByTagName('tbody');
 	var trs = body[0].childNodes;
 
@@ -132,7 +132,7 @@ function click_save()
 {
 	notify_close();
 
-	var list = document.getElementById ('climb_list');
+	var list = document.getElementById ('route_list');
 	if (!list)
 		return;
 
@@ -193,7 +193,7 @@ function callback_add()
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
-	var list = document.getElementById ('climb_list');
+	var list = document.getElementById ('route_list');
 	if (!list)
 		return;
 

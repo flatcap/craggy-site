@@ -216,7 +216,7 @@ function route_add ($date, $setter, $data)
 	//	45 Red 5+
 	//	45 Green 6a
 	//	45 Beige 6b
-	
+
 	$message = "";
 
 	$date = date_match ($date, $message);

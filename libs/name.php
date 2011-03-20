@@ -40,7 +40,7 @@ function name_uppercase ($name)
  * sur name parts, first
  *
  * but not
- * 	first 'sur name'
+ *	first 'sur name'
  * leave ' for O'Keefe, etc
  */
 function name_parse ($name)

@@ -39,10 +39,10 @@ function complete_callback()
 	var entry_err = document.getElementById (entry.error_id);
 
 	// if errors exist
-	// 	get errors
-	// 	turn input red (class='error')
-	// 	find error_box for this input
-	// 	display errors
+	//	get errors
+	//	turn input red (class='error')
+	//	find error_box for this input
+	//	display errors
 	var errstr = xml_get_errors (xml);
 	if (errstr.length > 0) {
 		entry.className = "error";
@@ -52,11 +52,11 @@ function complete_callback()
 	}
 
 	// if no errors
-	// 	get result
-	// 	display result
-	// 	turn input white (! class='error')
-	// 	find error_box for this input
-	// 	clear error_box
+	//	get result
+	//	display result
+	//	turn input white (! class='error')
+	//	find error_box for this input
+	//	clear error_box
 	var result = xml_get_node (xml, type);
 	entry.value = result;
 	if ((entry.original == null) || (entry.value == entry.original))

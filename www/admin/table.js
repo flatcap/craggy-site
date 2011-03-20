@@ -19,7 +19,7 @@ function table_create (data_type, columns)
 	var row = t.insertRow (0);
 	if (!row)
 		return null;
-	
+
 	for (var i in columns) {
 		var col   = columns[i];
 		var name  = col['name'];
@@ -184,7 +184,7 @@ function table_reset_cell (cell)
 
 	if (cell.children === 0)
 		return true;		// nothing we can do
-	
+
 	for (var i = 0; i < cell.children.length; i++) {
 		var item = cell.children[i];
 		if (item.nodeName.toLowerCase() != 'input') {
@@ -283,7 +283,7 @@ function table_row_delete (table, row_id)
 
 	if (row.parentNode != body)
 		return;
-	
+
 	body.removeChild (row);
 }
 
@@ -302,7 +302,7 @@ function table_get_selected (table)
 	for (var i = 0; i < rlist.length; i++) {
 		if (!table_row_selected (rlist[i]))
 			continue;
-		var id = table_get_row_id (item);
+		var id = table_get_row_id (rlist[i]);
 		row_ids.push (id.substr(4));	// strip "row_"
 	}
 
@@ -328,11 +328,11 @@ function table_get_row_id (item)
 {
 	if (!item)
 		return null;
-	
-	while ((item = item.parentNode)) {
+
+	do {
 		if (item.nodeName.toLowerCase() == 'tr')
 			return item.id;
-	}
+	} while ((item = item.parentNode))
 
 	return null;
 }
@@ -379,12 +379,12 @@ function table_get_id (row)
 {
 	if (!row)
 		return null;
-	
+
 	var id = row.id;
 
 	if (id.substring (0, 4) == 'row_')
 		id = id.substr (4);
-	
+
 	return id;
 }
 
@@ -392,7 +392,7 @@ function table_get_columns (table)
 {
 	if (!table)
 		return null;
-	
+
 	var head = table_get_header (table);
 	if (!head)
 		return null;

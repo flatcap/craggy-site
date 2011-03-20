@@ -116,22 +116,13 @@ function click_add()
 		return;
 	notify_close();
 
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
+	var params = new Object();
+	params.action = 'add';
+	params.date   = encodeURIComponent (entry_date.value);
+	params.setter = encodeURIComponent (entry_setter.value);
+	params.routes = encodeURIComponent (entry_routes.value);
 
-	var str = "add_route_work.php?";
-	str += "action=add";
-	str += "&date="   + encodeURIComponent (entry_date.value);
-	str += "&setter=" + encodeURIComponent (entry_setter.value);
-	str += "&routes=" + encodeURIComponent (entry_routes.value);
-
-	x.onreadystatechange = callback_add;
-	x.open ("GET", str);
-	x.send();
+	ajax_get ('add_route_work.php', params, callback_add);
 }
 
 function click_delete()
@@ -170,20 +161,11 @@ function click_save()
 	}
 	xml += '</list>';
 
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
+	var params = new Object();
+	params.action    = 'save';
+	params.route_xml = encodeURIComponent (xml);
 
-	var str  = "add_route_work.php?";
-	str += "action=save";
-	str += "&route_xml=" + encodeURIComponent (xml);
-	x.open ("GET", str);
-	x.onreadystatechange = callback_save;
-	x.setRequestHeader ("Content-Type", "text/plain");
-	x.send();
+	ajax_get ('add_route_work.php', params, callback_save);
 }
 
 

@@ -99,18 +99,8 @@ function complete_validate (input)
 	xmlstr += "<input>" + val + "</input>\n";
 	xmlstr += "</validation>";
 
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-
+	var x = ajax_post ('lookup.php', xmlstr, complete_callback);
 	x.lookup = input.id;
-	x.onreadystatechange = complete_callback;
-	x.open ("POST", "lookup.php", true);
-	x.setRequestHeader ("Content-Type", "text/plain");
-	x.send (xmlstr);
 }
 
 function complete_onkeypress (e)

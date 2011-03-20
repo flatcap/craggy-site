@@ -67,18 +67,11 @@ function initialise_rows()
 
 function click_list()
 {
-	var str = entry_panel.value;
-	str = encodeURI(str);
+	var params = new Object();
+	params.action = 'list';
+	params.data   = encodeURI (entry_panel.value);
 
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	x.onreadystatechange = callback_list;
-	x.open ("GET", "del_route_work.php?action=list&data=" + encodeURI (entry_panel.value));
-	x.send();
+	ajax_get ('del_route_work.php', params, callback_list);
 }
 
 function click_delete()
@@ -102,17 +95,12 @@ function click_delete()
 		return;
 	}
 
-	var str = ids.join(',');
-	var date = entry_date.value;
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	x.onreadystatechange = callback_delete;
-	x.open ("GET", "del_route_work.php?action=delete&date=" + date + "&data=" + str, true);
-	x.send();
+	var params = new Object();
+	params.action = 'delete';
+	params.date   = entry_date.value;	// XXX encode it?
+	params.data   = ids.join(',');
+
+	ajax_get ('del_route_work.php', params, callback_delete);
 }
 
 function click_clear()

@@ -88,19 +88,11 @@ function obj_to_xml (name, obj)
 
 function click_list()
 {
-	var str = entry_panel.value;
+	var params = new Object();
+	params.action = 'list';
+	params.data   = entry_panel.value;
 
-	//str = encodeURI(str);
-
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	x.onreadystatechange = callback_list;
-	x.open ("GET", "edit_route_work.php?action=list&data=" + str);
-	x.send();
+	ajax_get ('edit_route_work.php', params, callback_list);
 }
 
 function click_save()
@@ -111,20 +103,11 @@ function click_save()
 	if (xml === "")
 		return;
 
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
+	var params = new Object();
+	params.action    = 'save';
+	params.route_xml = encodeURIComponent (xml);
 
-	var str  = "edit_route_work.php?";
-	str += "action=save";
-	str += "&route_xml=" + encodeURIComponent (xml);
-	x.open ("GET", str);
-	x.onreadystatechange = callback_save;
-	x.setRequestHeader ("Content-Type", "text/plain");
-	x.send();
+	ajax_get ('edit_route_work.php', params, callback_save);
 }
 
 function click_reset()

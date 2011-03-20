@@ -152,29 +152,21 @@ function click_delete()
 		}
 	}
 
-	var str = ids.join(',');
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	x.onreadystatechange = callback_delete_query;
-	x.open ("GET", "setter_work.php?action=delete_query&data=" + str, true);
-	x.send();
+	//if (ids.length === 0)
+
+	var params = new Object();
+	params.action = 'delete_query';
+	params.data   = ids.join(',');
+
+	ajax_get ('setter_work.php', params, callback_delete_query);
 }
 
 function click_list()
 {
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	x.onreadystatechange = callback_list;
-	x.open ("GET", "setter_work.php?action=list");
-	x.send();
+	var params = new Object();
+	params.action  = 'list';
+
+	ajax_get ('setter_work.php', params, callback_list);
 }
 
 
@@ -217,17 +209,13 @@ function callback_delete_query()
 		}
 	}
 
-	var str = ids.join(',');
+	// if ids.length === 0
 
-	var x;
-	if (window.XMLHttpRequest) {
-		x = new XMLHttpRequest();				// IE7+, Firefox, Chrome, Opera, Safari
-	} else {
-		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
-	}
-	x.onreadystatechange = callback_delete;
-	x.open ("GET", "setter_work.php?action=delete&data=" + str, true);
-	x.send();
+	var params = new Object();
+	params.action = 'delete';
+	params.data   = ids.join(',');
+
+	ajax_get ('setter_work.php', params, callback_delete);
 }
 
 function callback_delete()

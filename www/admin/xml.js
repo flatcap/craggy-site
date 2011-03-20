@@ -45,3 +45,45 @@ function xml_get_errors (xml, separator)
 	return errstr;
 }
 
+
+function ajax_get (url, params, callback)
+{
+	var x;
+	if (window.XMLHttpRequest) {
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+	} else {
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+	}
+
+	var data = new Array();
+	for (var i in params) {
+		data.push (i + "=" + params[i]);
+	}
+
+	var getstr = url + "?" + data.join('&');
+
+	x.onreadystatechange = callback;
+	x.open ("GET", getstr, true);
+	x.setRequestHeader ("Content-Type", "text/plain");	// application/xml; charset=ISO-8859-1
+	x.send();
+
+	return x;
+}
+
+function ajax_post (url, poststr, callback)
+{
+	var x;
+	if (window.XMLHttpRequest) {
+		x = new XMLHttpRequest();			// IE7+, Firefox, Chrome, Opera, Safari
+	} else {
+		x = new ActiveXObject ("Microsoft.XMLHTTP");	// IE6, IE5
+	}
+
+	x.onreadystatechange = callback;
+	x.open ("POST", url, true);
+	x.setRequestHeader ("Content-Type", "text/plain");	// application/xml; charset=ISO-8859-1
+	x.send (poststr);
+
+	return x;
+}
+

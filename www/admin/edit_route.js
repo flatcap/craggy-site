@@ -108,7 +108,7 @@ function click_save()
 	notify_close();
 
 	var xml = table_to_xml (table_route, 'different');
-	if (xml == "")
+	if (xml === "")
 		return;
 
 	var x;

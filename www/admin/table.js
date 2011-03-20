@@ -1,8 +1,8 @@
 var uniq_id = 0;
 
-function table_create (type, columns)
+function table_create (data_type, columns)
 {
-	if (!type || !columns)
+	if (!data_type || !columns)
 		return null;
 
 	var t  = document.createElement ('table');
@@ -11,7 +11,7 @@ function table_create (type, columns)
 
 	t.border      = 1;
 	t.cellspacing = 0;
-	t.data_type   = type;
+	t.data_type   = data_type;
 
 	t.appendChild (th);
 	t.appendChild (tb);
@@ -317,9 +317,9 @@ function table_row_selected (row)
 	var item = row.firstChild;
 	item = item.firstChild;
 	if (item.nodeName.toLowerCase() != 'input')
-		return false;;
+		return false;
 	if (item.type.toLowerCase() != 'checkbox')
-		return false;;
+		return false;
 
 	return item.checked;
 }
@@ -436,7 +436,7 @@ function table_row_to_xml (row, cols, type, diff)
 		xml += "<" + name + ">" + value + "</" + name + ">";
 	}
 
-	if (xml == "")
+	if (xml === "")
 		return "";
 
 	var id = table_get_id (row);
@@ -476,7 +476,7 @@ function table_to_xml (table, selection)
 		xml += table_row_to_xml (rlist[i], cols, data_type, diff);
 	}
 
-	if (xml == "") {
+	if (xml === "") {
 		return xml;
 	}
 

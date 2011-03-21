@@ -35,79 +35,6 @@ function initialise()
 }
 
 
-function htmlentities(str)
-{
-	return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-function render_xml (list)
-{
-	var xml = "";
-
-	xml += "<list type='route'>";
-	for (var i = 0; i < list.length; i++) {
-		xml += "\t<route>";
-		for (var j in list[i]) {
-			xml += "\t\t<" + j + ">";
-			xml += list[i][j];
-			xml += "</" + j + ">";
-		}
-		xml += "\t</route>";
-	}
-	xml += "</list>";
-
-	return xml;
-}
-
-
-function get_row (row, columns)
-{
-	var obj = new Object();
-
-	var children = row.children;
-	if (!children)
-		return null;
-
-	if (children.length != columns.length)
-		return null;
-
-	for (var i = 0; i < children.length; i++) {
-		if (columns[i] === null)
-			continue;
-
-		if (children[i].childElementCount === 0) {
-			obj[columns[i]] = children[i].innerHTML;		// Just text
-		} else {
-			var f = children[i].firstChild;
-			if (f.nodeName.toLowerCase() == 'input') {
-				if (f.type.toLowerCase() == 'checkbox') {
-					obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
-				} else if (f.type.toLowerCase() == 'text') {
-					obj[columns[i]] = children[i].firstChild.value;		// A textbox
-				}
-			}
-		}
-	}
-
-	return obj;
-}
-
-function obj_to_xml (name, obj)
-{
-	var xml = '<' + name + '>';
-
-	for (o in obj) {
-		if (obj[o].length === 0)
-			continue;
-		xml += '<' + o + '>' + encodeURIComponent (obj[o]) + '</' + o + '>';
-	}
-
-	xml += '</' + name + '>';
-
-	return xml;
-}
-
-
 function click_add()
 {
 	if (!entry_routes)
@@ -142,24 +69,9 @@ function click_delete()
 
 function click_save()
 {
-	notify_close();
-
-	var list = document.getElementById ('route_list');
-	if (!list)
+	var xml = table_to_xml (table_route, 'all');
+	if (xml === "")
 		return;
-
-	var tb = document.getElementsByTagName ('tbody');
-	if (!tb)
-		return;
-	var rows = tb[0].children;
-
-	var xml = '<list type="climb">';
-	var columns = new Array (null, 'panel', 'colour', 'grade', 'setter', 'date', 'notes');
-	for (var i = 0; i < rows.length; i++) {
-		var r = get_row (rows[i], columns);
-		xml += obj_to_xml ('route', r);
-	}
-	xml += '</list>';
 
 	var params = new Object();
 	params.action    = 'save';
@@ -205,8 +117,12 @@ function callback_add()
 		];
 
 		table_route = table_create ('route', columns);
-		if (table_route)
+		if (table_route) {
 			list.appendChild (table_route);
+			var master = document.getElementById ('tick_master');
+			master.checked = true;
+			master.onclick = tick_master_click;
+		}
 	} else {
 		var tlist = list.getElementsByTagName ('table');
 		if (!tlist)
@@ -223,9 +139,8 @@ function callback_add()
 		table_add_row (table_route, x[i]);
 	}
 
-	var master = document.getElementById ('tick_master');
-	master.checked = true;
-	master.onclick = tick_master_click;
+	table_set_clicks (table_route, check_click); // temporary kludge
+
 	buttons_update();
 
 	// empty route entry
@@ -262,7 +177,6 @@ function callback_keyup (e)
 
 function check_click(e)
 {
-	this.checked = !this.checked;
 	buttons_update();
 }
 
@@ -285,15 +199,12 @@ function button_set_state (button, enabled)
 
 function buttons_update()
 {
-	var rows     = (table_get_row_count (table_route) > 0);
-	var text     = (entry_routes.value.length > 0);
-	var selected = table_get_selected (table_route);
-	if (selected) {
-		selected = (selected.length > 0);
-	}
+	var rows = (table_get_row_count (table_route) > 0);
+	var text = (entry_routes.value.length > 0);
+	var sel  = (table_get_selected (table_route).length > 0);
 
 	button_set_state (button_add,    text);
 	button_set_state (button_save,   rows);
-	button_set_state (button_delete, selected);
+	button_set_state (button_delete, sel);
 }
 

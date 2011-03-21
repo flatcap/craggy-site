@@ -433,7 +433,7 @@ function table_row_to_xml (row, cols, type, diff)
 			}
 		}
 
-		xml += "<" + name + ">" + value + "</" + name + ">";
+		xml += "<" + name + ">" + encodeURIComponent (value) + "</" + name + ">";
 	}
 
 	if (xml === "")

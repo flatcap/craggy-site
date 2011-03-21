@@ -115,7 +115,7 @@ function click_edit()
 	for (var i = 0; i < list_ticks.length; i++) {
 		if (!list_ticks[i].checked)
 			continue;
-		id = list_ticks[i].id.substring(3);
+		id = list_ticks[i].id.substring (3);
 		txt += "<tr>";
 		txt += "<td>" + id + "</td>";
 		txt += "<td><input type='text' size='4' value='"  + setter_data[id]['initials']   + "'></td>";
@@ -148,7 +148,7 @@ function click_delete()
 	var ids = new Array();
 	for (i = 0; i < list_ticks.length; i++) {
 		if (list_ticks[i].checked) {
-			ids.push (list_ticks[i].id.substring(3));
+			ids.push (list_ticks[i].id.substring (3));
 		}
 	}
 
@@ -156,7 +156,7 @@ function click_delete()
 
 	var params = new Object();
 	params.action = 'delete_query';
-	params.data   = ids.join(',');
+	params.data   = ids.join (',');
 
 	ajax_get ('setter_work.php', params, callback_delete_query);
 }
@@ -182,7 +182,7 @@ function click_save()
 function route_get_node (node, name)
 {
 	try {
-		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
+		return node.getElementsByTagName (name)[0].firstChild.nodeValue;
 	} catch (er) {
 	}
 
@@ -205,7 +205,7 @@ function callback_delete_query()
 	var ids = new Array();
 	for (i = 0; i < list_ticks.length; i++) {
 		if (list_ticks[i].checked) {
-			ids.push (list_ticks[i].id.substring(3));
+			ids.push (list_ticks[i].id.substring (3));
 		}
 	}
 
@@ -213,7 +213,7 @@ function callback_delete_query()
 
 	var params = new Object();
 	params.action = 'delete';
-	params.data   = ids.join(',');
+	params.data   = ids.join (',');
 
 	ajax_get ('setter_work.php', params, callback_delete);
 }
@@ -250,7 +250,7 @@ function callback_list()
 		"<tbody>";
 
 
-	x = this.responseXML.documentElement.getElementsByTagName("setter");
+	x = this.responseXML.documentElement.getElementsByTagName ("setter");
 	setter_data = new Array();
 	for (i = 0; i < x.length; i++) {
 		var setter = new Array();
@@ -303,7 +303,7 @@ function callback_cancel()
 }
 
 
-function check_click(e)
+function check_click (e)
 {
 	this.checked = !this.checked;
 	buttons_update();

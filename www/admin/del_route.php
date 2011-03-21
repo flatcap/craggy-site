@@ -41,8 +41,9 @@ function route_main()
 
 	$output .= '</div>'; // content
 
-	$output .= "<script type='text/javascript' src='notify.js'></script>";
 	$output .= "<script type='text/javascript' src='complete.js'></script>";
+	$output .= "<script type='text/javascript' src='dialog.js'></script>";
+	$output .= "<script type='text/javascript' src='notify.js'></script>";
 	$output .= "<script type='text/javascript' src='table.js'></script>";
 	$output .= "<script type='text/javascript' src='xml.js'></script>";
 	$output .= "<script type='text/javascript' src='del_route.js'></script>";

@@ -1,7 +1,7 @@
 function xml_get_node (node, name)
 {
 	try {
-		return node.getElementsByTagName(name)[0].firstChild.nodeValue;
+		return node.getElementsByTagName (name)[0].firstChild.nodeValue;
 	} catch (e) {
 	}
 
@@ -32,7 +32,7 @@ function xml_get_errors (xml, separator)
 		separator = "<br>";
 
 	var errstr = "";
-	var x = xml.getElementsByTagName("error");
+	var x = xml.getElementsByTagName ("error");
 	for (i = 0; i < x.length; i++) {
 		var e = x[i];
 		if (e && e.childNodes) {
@@ -60,7 +60,7 @@ function ajax_get (url, params, callback)
 		data.push (i + "=" + params[i]);
 	}
 
-	var getstr = url + "?" + data.join('&');
+	var getstr = url + "?" + data.join ('&');
 
 	x.onreadystatechange = callback;
 	x.open ("GET", getstr, true);

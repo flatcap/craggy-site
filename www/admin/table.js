@@ -303,7 +303,7 @@ function table_get_selected (table)
 		if (!table_row_selected (rlist[i]))
 			continue;
 		var id = table_get_row_id (rlist[i]);
-		row_ids.push (id.substr(4));	// strip "row_"
+		row_ids.push (id.substr (4));	// strip "row_"
 	}
 
 	return row_ids;
@@ -332,6 +332,19 @@ function table_get_row_id (item)
 	do {
 		if (item.nodeName.toLowerCase() == 'tr')
 			return item.id;
+	} while ((item = item.parentNode))
+
+	return null;
+}
+
+function table_get_table (item)
+{
+	if (!item)
+		return null;
+
+	do {
+		if (item.nodeName.toLowerCase() == 'table')
+			return item;
 	} while ((item = item.parentNode))
 
 	return null;

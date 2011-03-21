@@ -20,12 +20,12 @@ function initialise()
 	button_save.onclick   = click_save;
 
 	entry_panel = document.getElementById ('entry');
+	entry_panel.onenter    = click_list;		// Our own callback
 	entry_panel.onkeypress = callback_keypress;
 	entry_panel.onkeyup    = callback_keyup;
 	entry_panel.focus();
 
 	notify_initialise ('notify_area');
-
 	buttons_update();
 }
 
@@ -70,45 +70,6 @@ function click_save()
 	ajax_get ('edit_route_work.php', params, callback_save);
 }
 
-function click_tick(e)
-{
-	buttons_update();
-}
-
-function click_tick_master()
-{
-	table_select_all (table_route, this.checked);
-	buttons_update();
-}
-
-
-function display_errors (xml)
-{
-	var errstr = xml_get_errors (xml.responseXML.documentElement);
-	if (errstr.length > 0) {
-		notify_message (errstr);
-		return true;
-	}
-
-	return false;
-}
-
-
-function callback_keypress (e)
-{
-	if (e.keyCode == 13) {
-		click_list();
-		return false;
-	}
-
-	return true;
-}
-
-function callback_keyup (e)
-{
-	buttons_update();
-	return true;
-}
 
 function callback_list()
 {
@@ -119,7 +80,7 @@ function callback_list()
 	if (!list)
 		return;
 
-	if (display_errors(this))
+	if (display_errors (this))
 		return;
 
 	if (list.children.length === 0) {
@@ -148,7 +109,7 @@ function callback_list()
 		return;
 
 	var i;
-	var x = this.responseXML.documentElement.getElementsByTagName("route");
+	var x = this.responseXML.documentElement.getElementsByTagName ("route");
 	for (i = 0; i < x.length; i++) {
 		table_add_row (table_route, x[i]);
 	}
@@ -171,17 +132,6 @@ function callback_save()
 	notify_message (response);
 }
 
-
-function button_set_state (button, enabled)
-{
-	if (enabled) {
-		button.disabled = false;
-		button.className = "enabled";
-	} else {
-		button.disabled = true;
-		button.className = "disabled";
-	}
-}
 
 function buttons_update()
 {

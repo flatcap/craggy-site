@@ -1,20 +1,3 @@
-lookup.php
-	switch ($lookup)
-		colour
-			include "validate_colour.php";
-			return validate_colour ($input, $options);
-		date
-		difficulty
-		grade
-		nice
-		panel
-		setter
-		success
-
-combine
-	lookup_colour.php and libs/colour.php
-	etc
-
 options:
 	match case
 	first match
@@ -42,15 +25,8 @@ validation:
 			<input>rd</input>
 		</validation>
 libs/
-	validate_colour
 	validate_date
 		option:	range_start
 		option:	range_end
 		option:	format_yyyymmdd
 		option:	format_human
-	validate_difficulty
-	validate_grade
-	validate_nice
-	validate_panel
-	validate_setter
-	validate_success

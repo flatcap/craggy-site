@@ -66,9 +66,6 @@ Work list:
     C       Coverage D  L   12  downclimb = 0       grade < 6b
 
 check edits of parse/get_id
-coalesce google/import
-colour parsing based on abbrev (explode abbrev, search)
-tidy db cols, more name,id fewer reserved names
 stats functions -> array, then print
 generic parse function (x, table, match_field, out_field)
 
@@ -80,8 +77,6 @@ process_date => 2009-12-15 -> 15 Dec 09
 date_tidy
 date_add_month
 date_add_days
-
-refactor seldom to a array of arrays
 
 is everyone using the array form of db_select?
 
@@ -110,11 +105,6 @@ remove privileges from craggy:
 
 -----------------------
 
-two pane dialog for climb/route add
-
-pane1 typing area
-pane2 matches ajax as you type
-
 crontab backup of russon.org/sql
 use rdiff-backup
 
@@ -131,17 +121,6 @@ to update routes
 	deletion	set date clear
 			set climbs as old
 	new		add route
-
-add/del route
-add/del climb
-
-addclimb
-	abbr -> colour id
-	panel -> route id, col id
-	routes -> route ids
-	decode success
-	decode comments
-	add to climbs
 
 add/del climbs/routes need to work from command line, too
 

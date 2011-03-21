@@ -290,15 +290,16 @@ function table_row_delete (table, row_id)
 
 function table_get_selected (table)
 {
+	var row_ids = new Array();
+
 	var body = table_get_body (table);
 	if (!body)
-		return null;
+		return row_ids;
 
 	var rlist = body.getElementsByTagName ('tr');
 	if (!rlist)
-		return null;
+		return row_ids;
 
-	var row_ids = new Array();
 	for (var i = 0; i < rlist.length; i++) {
 		if (!table_row_selected (rlist[i]))
 			continue;

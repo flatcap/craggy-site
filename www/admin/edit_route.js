@@ -145,4 +145,3 @@ function buttons_update()
 	button_set_state (button_save,   rows);		// some rows in table
 }
 
-

@@ -150,8 +150,8 @@ function callback_save()
 function buttons_update()
 {
 	var rows = (table_get_row_count (table_route) > 0);
-	var text = (entry_routes.value.length > 0);
 	var sel  = (table_get_selected (table_route).length > 0);
+	var text = (entry_routes.value.length > 0);
 
 	button_set_state (button_add,    text);
 	button_set_state (button_delete, sel);

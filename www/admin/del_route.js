@@ -155,4 +155,3 @@ function buttons_update()
 	button_set_state (button_list,   text);		// some text in entry
 }
 
-

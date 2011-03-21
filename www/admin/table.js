@@ -453,7 +453,7 @@ function table_row_to_xml (row, cols, type, diff)
 
 function table_to_xml (table, selection)
 {
-	// selection can be 'different', or 'ticked'
+	// selection can be 'all', 'different', or 'ticked'
 	if (!table)
 		return null;
 
@@ -486,6 +486,19 @@ function table_to_xml (table, selection)
 		'</list>';
 
 	return xml;
+}
+
+function table_set_clicks (table, callback)
+{
+	var ticks = table.getElementsByTagName ('input');
+	if (!ticks)
+		return;
+
+	for (var i = 0; i < ticks.length; i++) {
+		item = ticks[i];
+		if (item.id != 'tick_master')
+			item.onclick = callback;
+	}
 }
 
 

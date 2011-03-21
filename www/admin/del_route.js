@@ -76,19 +76,6 @@ function click_clear()
 }
 
 
-function table_set_clicks (table_route, check_click)
-{
-	var ticks = table_route.getElementsByTagName ('input');
-	if (!ticks)
-		return;
-
-	for (var i = 0; i < ticks.length; i++) {
-		item = ticks[i];
-		if (item.id != 'tick_master')
-			item.onclick = check_click;
-	}
-}
-
 function display_errors (xml)
 {
 	var errstr = xml_get_errors (xml.responseXML.documentElement);
@@ -136,7 +123,7 @@ function callback_list()
 			{ "name": "grade",  "type": "text",    "title": "Grade",  "size":  5 }
 		];
 
-		table_route = table_create ('route', columns, check_click);
+		table_route = table_create ('route', columns);
 		if (table_route) {
 			list.appendChild (table_route);
 			var master = document.getElementById ('tick_master');
@@ -213,7 +200,7 @@ function buttons_update()
 
 	button_set_state (button_list,   text);		// some text in entry
 	button_set_state (button_delete, sel);		// some ticked rows
-	button_set_state (button_clear,  sel);		// some rows in table
+	button_set_state (button_clear,  sel);		// some ticked rows
 }
 
 

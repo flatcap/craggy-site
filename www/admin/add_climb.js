@@ -5,9 +5,9 @@ var entry_climb;
 var entry_date;
 var table_climb;
 
-initialise_buttons();
+initialise();
 
-function initialise_buttons()
+function initialise()
 {
 	button_add    = document.getElementById ('button_add');
 	button_save   = document.getElementById ('button_save');
@@ -26,7 +26,7 @@ function initialise_buttons()
 
 	notify_initialise ('notify_area');
 
-	//buttons_update();
+	buttons_update();
 }
 
 
@@ -99,47 +99,25 @@ function click_delete()
 {
 	notify_close();
 
-	var ticks = get_ticks();
-	var count = ticks.length;
-	if (count === 0) {
-		buttons_update();	// Shouldn't happen
+	var rows = table_get_selected (table_climb);
+	if (!rows)
 		return;
+
+	for (var i = 0; i < rows.length; i++) {
+		table_row_delete (table_climb, rows[i]);
 	}
 
-	var table = document.getElementById ('route_list');
-	var body = table.getElementsByTagName('tbody');
-	var trs = body[0].childNodes;
-
-	var climb_data;
-	ticks.reverse();
-	for (var i = 0; i < count; i++) {
-		var index = ticks[i];
-		climb_data.splice (index, 1);
-		body[0].removeChild (trs[index]);
-	}
+	entry_climb.focus();	// not ideal
+	buttons_update();
 }
 
 function click_save()
 {
 	notify_close();
 
-	var list = document.getElementById ('route_list');
-	if (!list)
+	var xml = table_to_xml (table_climb, 'all');
+	if (xml === "")
 		return;
-
-	var tb = document.getElementsByTagName ('tbody');
-	if (!tb)
-		return;
-	var rows = tb[0].children;
-
-	var xml = '<list type="climb">';
-	//var columns = new Array ("tick", "panel", "colour", "grade", "type", "date", "success", "diff", "nice", "notes");
-	var columns = new Array (null, "panel", "colour", null, "date", "success", "difficulty", "nice", "notes");
-	for (var i = 0; i < rows.length; i++) {
-		var r = get_row (rows[i], columns);
-		xml += obj_to_xml ('climb', r);
-	}
-	xml += '</list>';
 
 	var params = new Object();
 	params.action    = 'save';
@@ -196,8 +174,12 @@ function callback_add()
 		];
 
 		table_climb = table_create ('climb', columns);
-		if (table_climb)
+		if (table_climb) {
 			list.appendChild (table_climb);
+			var master = document.getElementById ('tick_master');
+			master.checked = true;
+			master.onclick = tick_master_click;
+		}
 	} else {
 		var tlist = list.getElementsByTagName ('table');
 		if (!tlist)
@@ -216,12 +198,10 @@ function callback_add()
 		table_add_row (table_climb, x[i]);
 	}
 
-	//initialise_ticks();
-	//initialise_rows();
-	//buttons_update();
-
 	entry_climb.value = "";
-	// set focus
+	entry_climb.focus();
+	table_set_clicks (table_climb, check_click); // temporary kludge
+	buttons_update();
 }
 
 function callback_save()
@@ -247,18 +227,36 @@ function callback_catch_enter (e)
 }
 
 
-function inp_keypress (e)
+function tick_master_click()
 {
-	if (e.keyCode == 13) {
-		//alert ("enter pressed");
-		return false;
-	}
-
-	return true;
+	table_select_all (table_climb, this.checked);
+	buttons_update();
 }
 
-function inp_blur()
+function check_click(e)
 {
-	//alert ("blur");
+	buttons_update();
+}
+
+function button_set_state (button, enabled)
+{
+	if (enabled) {
+		button.disabled = false;
+		button.className = "enabled";
+	} else {
+		button.disabled = true;
+		button.className = "disabled";
+	}
+}
+
+function buttons_update()
+{
+	var rows = (table_get_row_count (table_climb) > 0);
+	var sel  = (table_get_selected (table_climb).length > 0);
+	var text = (entry_climb.value.length > 0);
+
+	button_set_state (button_add,    text);		// some text in entry
+	button_set_state (button_delete, sel);		// some ticked rows
+	button_set_state (button_save,   rows);		// some rows in table
 }
 

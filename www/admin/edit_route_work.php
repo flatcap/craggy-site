@@ -9,6 +9,7 @@ include 'xml.php';
 include 'colour.php';
 include 'grade.php';
 include 'panel.php';
+include 'setter.php';
 
 function parse_range ($string)
 {
@@ -41,12 +42,15 @@ function parse_range ($string)
 }
 
 
-function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id)
+function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id, $setter_id, $date, $notes)
 {
 	$query  = "update route set " .
 		  "panel_id  = $panel_id, " .
 		  "colour_id = $colour_id, " .
-		  "grade_id  = $grade_id " .
+		  "grade_id  = $grade_id, " .
+		  "setter_id  = $setter_id, " .
+		  "date_set  = '$date', " .
+		  "notes  = '$notes' " .
 		  "where id = $id";
 
 	$result = mysql_query($query);
@@ -86,10 +90,11 @@ function route_do_list (&$xml)
 	//print_r ($list);
 
 	$table = $DB_V_ROUTE;
-	$columns = array('id', 'panel', 'colour', 'grade');
+	$columns = array('id', 'panel', 'colour', 'grade', 'setter', 'date_set', 'notes');
 	$where = 'panel in (' . implode (',', $list) . ')';
+	$order = 'panel_seq, grade_seq, colour';
 
-	$routes = db_select ($table, $columns, $where);
+	$routes = db_select ($table, $columns, $where, $order);
 	//print_r ($routes);
 
 	list_render_xml3 ($xml, 'route', $routes, $columns);
@@ -120,10 +125,13 @@ function route_do_save()
 	for ($i = 0; $i < $xml->count(); $i++) {
 		$a = $xml->route[$i];
 
-		$id     = $a->id;
-		$panel  = panel_match  ($a->panel);
-		$colour = colour_match ($a->colour);
-		$grade  = grade_match  ($a->grade);
+		$id     = urldecode ($a->id);
+		$panel  = panel_match  (urldecode ($a->panel));
+		$colour = colour_match (urldecode ($a->colour));
+		$grade  = grade_match  (urldecode ($a->grade));
+		$setter = setter_match (urldecode ($a->setter));
+		$date   = urldecode ($a->date_set);
+		$notes  = urldecode ($a->notes);
 
 		/*
 		print_r ($id);
@@ -132,7 +140,7 @@ function route_do_save()
 		print_r ($grade);
 		*/
 
-		route_commit ($a, $id, $panel['id'], $colour['id'], $grade['id']);
+		route_commit ($a, $id, $panel['id'], $colour['id'], $grade['id'], $setter['id'], $date, $notes);
 	}
 
 	return $xml;

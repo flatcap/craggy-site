@@ -101,7 +101,7 @@ function callback_add()
 			{ "name": "grade",  "type": "input",   "title": "Grade",  "size":  5, "validator": "grade"  },
 			{ "name": "setter", "type": "input",   "title": "Setter", "size": 12, "validator": "setter" },
 			{ "name": "date",   "type": "input",   "title": "Date",   "size": 12, "validator": "date"   },
-			{ "name": "notes",  "type": "input",   "title": "Notes",  "size": 12  }
+			{ "name": "notes",  "type": "input",   "title": "Notes",  "size": 30  }
 		];
 
 		table_route = table_create ('route', columns);

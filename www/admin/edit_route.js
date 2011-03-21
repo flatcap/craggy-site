@@ -85,10 +85,13 @@ function callback_list()
 
 	if (list.children.length === 0) {
 		var columns = [
-			{ "name": "tick",   "type": "checkbox" },
-			{ "name": "panel",  "type": "text",    "title": "Panel",  "size":  3  },
-			{ "name": "colour", "type": "input",   "title": "Colour", "size": 12, "validator": "colour" },
-			{ "name": "grade",  "type": "input",   "title": "Grade",  "size":  5, "validator": "grade"  }
+			{ "name": "tick",     "type": "checkbox" },
+			{ "name": "panel",    "type": "text",    "title": "Panel",  "size":  3  },
+			{ "name": "colour",   "type": "input",   "title": "Colour", "size": 12, "validator": "colour" },
+			{ "name": "grade",    "type": "input",   "title": "Grade",  "size":  5, "validator": "grade"  },
+			{ "name": "setter",   "type": "input",   "title": "Setter", "size": 12, "validator": "setter" },
+			{ "name": "date_set", "type": "input",   "title": "Date",   "size": 12, "validator": "date"   },
+			{ "name": "notes",    "type": "input",   "title": "Notes",  "size": 30  }
 		];
 
 		table_route = table_create ('route', columns);

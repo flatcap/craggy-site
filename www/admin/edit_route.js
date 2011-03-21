@@ -3,6 +3,7 @@ var button_save;
 var button_reset;
 var button_cancel;
 var table_route;
+var entry_panel;
 
 initialise();
 
@@ -20,69 +21,12 @@ function initialise()
 
 	entry_panel = document.getElementById ('entry');
 	entry_panel.onkeypress = callback_keypress;
+	entry_panel.onkeyup    = callback_keyup;
 	entry_panel.focus();
 
 	notify_initialise ('notify_area');
 
 	buttons_update();
-}
-
-
-function get_row (row, columns, diff)
-{
-	var obj = new Object();
-
-	var changed = false;
-
-	var children = row.children;
-	if (!children)
-		return null;
-
-	if (children.length != columns.length)
-		return null;
-
-	for (var i = 0; i < children.length; i++) {
-		if (columns[i] === null)
-			continue;
-
-		if (children[i].childElementCount === 0) {
-			obj[columns[i]] = children[i].innerHTML;		// Just text
-		} else {
-			var f = children[i].firstChild;
-			if (f.nodeName.toLowerCase() == 'input') {
-				var orig = f.original;
-				if (f.type.toLowerCase() == 'checkbox') {
-					obj[columns[i]] = f.checked;		// A tickbox
-					if (orig != f.checked)
-						changed = true;
-				} else if (f.type.toLowerCase() == 'text') {
-					obj[columns[i]] = f.value;		// A textbox
-					if (orig != f.value)
-						changed = true;
-				}
-			}
-		}
-	}
-
-	if (diff && !changed)
-		return null;
-	else
-		return obj;
-}
-
-function obj_to_xml (name, obj)
-{
-	var xml = '<' + name + '>';
-
-	for (o in obj) {
-		if (obj[o].length === 0)
-			continue;
-		xml += '<' + o + '>' + escape (obj[o]) + '</' + o + '>';
-	}
-
-	xml += '</' + name + '>';
-
-	return xml;
 }
 
 
@@ -149,6 +93,12 @@ function callback_keypress (e)
 	return true;
 }
 
+function callback_keyup (e)
+{
+	buttons_update();
+	return true;
+}
+
 function callback_list()
 {
 	if ((this.readyState != 4) || (this.status != 200))
@@ -170,8 +120,12 @@ function callback_list()
 		];
 
 		table_route = table_create ('route', columns);
-		if (table_route)
+		if (table_route) {
 			list.appendChild (table_route);
+			var master = document.getElementById ('tick_master');
+			master.checked = true;
+			master.onclick = tick_master_click;
+		}
 	} else {
 		var tlist = list.getElementsByTagName ('table');
 		if (!tlist)
@@ -188,12 +142,10 @@ function callback_list()
 		table_add_row (table_route, x[i]);
 	}
 
-	//initialise_ticks();
-	//initialise_rows();
-	//buttons_update();
-
-	//entry_climb.value = "";
-	// set focus
+	table_set_clicks (table_route, check_click); // temporary kludge
+	entry_panel.value = "";
+	entry_panel.focus();
+	buttons_update();
 }
 
 function callback_save()
@@ -206,15 +158,19 @@ function callback_save()
 		return;
 
 	notify_message (response);
-	return;
-
-	/*
-	var table = document.getElementById ('route_list');
-	table.innerHTML = "";
-	buttons_update();
-	*/
 }
 
+
+function tick_master_click()
+{
+	table_select_all (table_route, this.checked);
+	buttons_update();
+}
+
+function check_click(e)
+{
+	buttons_update();
+}
 
 function button_set_state (button, enabled)
 {
@@ -229,20 +185,14 @@ function button_set_state (button, enabled)
 
 function buttons_update()
 {
-	/*
-	var set = false;
-	for (i = 0; i < list_ticks.length; i++) {
-		if (list_ticks[i].checked) {
-			set = true;
-			break;
-		}
-	}
+	var rows = (table_get_row_count (table_route) > 0);
+	var sel  = (table_get_selected (table_route).length > 0);
+	var text = (entry_panel.value.length > 0);
 
-	button_set_state (button_list, true);
-	button_set_state (button_save, set);
-	button_set_state (button_reset, set);
-	button_set_state (button_cancel, set);
-	*/
+	button_set_state (button_list,   text);		// some text in entry
+	button_set_state (button_reset,  sel);		// some ticked rows
+	button_set_state (button_save,   rows);		// some rows in table
+	button_set_state (button_cancel, rows);		// some rows in table
 }
 
 

@@ -19,7 +19,7 @@ function route_main()
 
 	$output .= "<div id='entry_area'>";
 	$output .= "<label for='entry' accesskey='p'><u>P</u>anels</label>";
-	$output .= "<input id='entry' type='text' size='30' value='1-4'>";
+	$output .= "<input id='entry' type='text' size='30' value=''>";
 	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
 	$output .= "</div>";
 

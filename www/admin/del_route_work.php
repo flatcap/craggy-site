@@ -104,13 +104,13 @@ function route_main()
 	$action = $_GET['action'];
 
 	if (array_key_exists ('data', $_GET)) {
-		$data = $_GET['data'];
+		$data = urldecode ($_GET['data']);
 	} else {
 		$data = '';
 	}
 
 	if (array_key_exists ('date', $_GET)) {
-		$date = $_GET['date'];
+		$date = urldecode ($_GET['date']);
 	} else {
 		$date = '';
 	}

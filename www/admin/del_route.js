@@ -62,7 +62,7 @@ function click_delete()
 
 	var params = new Object();
 	params.action = 'delete';
-	params.date   = entry_date.value;	// XXX encode it?
+	params.date   = encodeURIComponent (entry_date.value);
 	params.data   = ids.join (',');
 
 	ajax_get ('del_route_work.php', params, callback_delete);
@@ -72,7 +72,7 @@ function click_list()
 {
 	var params = new Object();
 	params.action = 'list';
-	params.data   = encodeURI (entry_panel.value);
+	params.data   = encodeURIComponent (entry_panel.value);
 
 	ajax_get ('del_route_work.php', params, callback_list);
 }
@@ -87,10 +87,24 @@ function callback_delete()
 	if (response.length === 0)
 		return;
 
-	alert (response);
+	notify_message (response, 'limegreen', 'black');
 
-	var table = document.getElementById ('route_list');
-	table.innerHTML = "";
+	var selection = table_get_selected (table_route);
+	if (!selection)
+		return;
+
+	var total_rows = table_get_row_count (table_route);
+
+	if (selection.length == total_rows) {
+		table_destroy (table_route);
+		table_route = null;
+	} else {
+		for (var i = 0; i < selection.length; i++) {
+			table_row_delete (table_route, selection[i]);
+		}
+	}
+
+	entry_panel.focus();
 	buttons_update();
 }
 
@@ -105,6 +119,12 @@ function callback_list()
 
 	if (display_errors (this))
 		return;
+
+	var x = this.responseXML.documentElement.getElementsByTagName ("route");
+	if (x.length === 0) {
+		notify_message ("No matching panels");
+		return;
+	}
 
 	if (list.children.length === 0) {
 		var columns = [
@@ -131,16 +151,14 @@ function callback_list()
 	if (!table_route)
 		return;
 
-	var i;
-	var x = this.responseXML.documentElement.getElementsByTagName ("route");
-	for (i = 0; i < x.length; i++) {
+	for (var i = 0; i < x.length; i++) {
 		table_add_row (table_route, x[i]);
 	}
 
 	table_set_clicks (table_route, click_tick); // temporary kludge
 
 	entry_panel.value = "";
-
+	entry_panel.focus();
 	buttons_update();
 }
 

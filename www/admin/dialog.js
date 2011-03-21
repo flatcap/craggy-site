@@ -47,6 +47,8 @@ function click_tick_master()
 
 function display_errors (xml)
 {
+	notify_close();
+
 	var errstr = xml_get_errors (xml.responseXML.documentElement);
 	if (errstr.length > 0) {
 		notify_message (errstr);

@@ -1,23 +1,23 @@
-var button_list;
-var button_save;
-var button_reset;
 var button_cancel;
-var table_route;
+var button_list;
+var button_reset;
+var button_save;
 var entry_panel;
+var table_route;
 
 initialise();
 
 function initialise()
 {
-	button_list   = document.getElementById ('button_list');
-	button_save   = document.getElementById ('button_save');
-	button_reset  = document.getElementById ('button_reset');
 	button_cancel = document.getElementById ('button_cancel');
+	button_list   = document.getElementById ('button_list');
+	button_reset  = document.getElementById ('button_reset');
+	button_save   = document.getElementById ('button_save');
 
-	button_list.onclick   = click_list;
-	button_save.onclick   = click_save;
-	button_reset.onclick  = click_reset;
 	button_cancel.onclick = click_cancel;
+	button_list.onclick   = click_list;
+	button_reset.onclick  = click_reset;
+	button_save.onclick   = click_save;
 
 	entry_panel = document.getElementById ('entry');
 	entry_panel.onkeypress = callback_keypress;
@@ -30,6 +30,11 @@ function initialise()
 }
 
 
+function click_cancel()
+{
+	alert ('cancel');
+}
+
 function click_list()
 {
 	var params = new Object();
@@ -37,6 +42,17 @@ function click_list()
 	params.data   = entry_panel.value;
 
 	ajax_get ('edit_route_work.php', params, callback_list);
+}
+
+function click_reset()
+{
+	var table = document.getElementById ('route_list');
+	var count = table_get_row_count (table);
+	alert ('reset ' + count);
+
+	for (var i = 0; i < count; i++) {
+		table_reset_row (table, i);
+	}
 }
 
 function click_save()
@@ -54,20 +70,15 @@ function click_save()
 	ajax_get ('edit_route_work.php', params, callback_save);
 }
 
-function click_reset()
+function click_tick(e)
 {
-	var table = document.getElementById ('route_list');
-	var count = table_get_row_count (table);
-	alert ('reset ' + count);
-
-	for (var i = 0; i < count; i++) {
-		table_reset_row (table, i);
-	}
+	buttons_update();
 }
 
-function click_cancel()
+function click_tick_master()
 {
-	alert ('cancel');
+	table_select_all (table_route, this.checked);
+	buttons_update();
 }
 
 
@@ -124,7 +135,7 @@ function callback_list()
 			list.appendChild (table_route);
 			var master = document.getElementById ('tick_master');
 			master.checked = true;
-			master.onclick = tick_master_click;
+			master.onclick = click_tick_master;
 		}
 	} else {
 		var tlist = list.getElementsByTagName ('table');
@@ -142,7 +153,7 @@ function callback_list()
 		table_add_row (table_route, x[i]);
 	}
 
-	table_set_clicks (table_route, check_click); // temporary kludge
+	table_set_clicks (table_route, click_tick); // temporary kludge
 	entry_panel.value = "";
 	entry_panel.focus();
 	buttons_update();
@@ -161,17 +172,6 @@ function callback_save()
 }
 
 
-function tick_master_click()
-{
-	table_select_all (table_route, this.checked);
-	buttons_update();
-}
-
-function check_click(e)
-{
-	buttons_update();
-}
-
 function button_set_state (button, enabled)
 {
 	if (enabled) {
@@ -189,10 +189,10 @@ function buttons_update()
 	var sel  = (table_get_selected (table_route).length > 0);
 	var text = (entry_panel.value.length > 0);
 
+	button_set_state (button_cancel, rows);		// some rows in table
 	button_set_state (button_list,   text);		// some text in entry
 	button_set_state (button_reset,  sel);		// some ticked rows
 	button_set_state (button_save,   rows);		// some rows in table
-	button_set_state (button_cancel, rows);		// some rows in table
 }
 
 

@@ -1,6 +1,6 @@
 var button_add;
-var button_save;
 var button_delete;
+var button_save;
 var entry_climb;
 var entry_date;
 var table_climb;
@@ -10,15 +10,15 @@ initialise();
 function initialise()
 {
 	button_add    = document.getElementById ('button_add');
-	button_save   = document.getElementById ('button_save');
 	button_delete = document.getElementById ('button_delete');
+	button_save   = document.getElementById ('button_save');
 
 	button_add.onclick    = click_add;
-	button_save.onclick   = click_save;
 	button_delete.onclick = click_delete;
+	button_save.onclick   = click_save;
 
 	entry_climb = document.getElementById ('entry');
-	entry_climb.onkeypress = callback_catch_enter;
+	entry_climb.onkeypress = callback_keypress;
 	entry_climb.focus();
 
 	entry_date    = document.getElementById ('date');
@@ -27,54 +27,6 @@ function initialise()
 	notify_initialise ('notify_area');
 
 	buttons_update();
-}
-
-
-function get_row (row, columns)
-{
-	var obj = new Object();
-
-	var children = row.children;
-	if (!children)
-		return null;
-
-	if (children.length != columns.length)
-		return null;
-
-	for (var i = 0; i < children.length; i++) {
-		if (columns[i] === null)
-			continue;
-
-		if (children[i].childElementCount === 0) {
-			obj[columns[i]] = children[i].innerHTML;		// Just text
-		} else {
-			var f = children[i].firstChild;
-			if (f.nodeName.toLowerCase() == 'input') {
-				if (f.type.toLowerCase() == 'checkbox') {
-					obj[columns[i]] = children[i].firstChild.checked;	// A tickbox
-				} else if (f.type.toLowerCase() == 'text') {
-					obj[columns[i]] = children[i].firstChild.value;		// A textbox
-				}
-			}
-		}
-	}
-
-	return obj;
-}
-
-function obj_to_xml (name, obj)
-{
-	var xml = '<' + name + '>';
-
-	for (o in obj) {
-		if (obj[o].length === 0)
-			continue;
-		xml += '<' + o + '>' + escape (obj[o]) + '</' + o + '>';
-	}
-
-	xml += '</' + name + '>';
-
-	return xml;
 }
 
 
@@ -127,18 +79,21 @@ function click_save()
 	ajax_get ('add_climb_work.php', params, callback_save);
 }
 
+function click_tick(e)
+{
+	buttons_update();
+}
+
+function click_tick_master()
+{
+	table_select_all (table_climb, this.checked);
+	buttons_update();
+}
+
 
 function display_errors (xml)
 {
-	var x = xml.responseXML.documentElement.getElementsByTagName("error");
-	var errstr = "";
-	for (i = 0; i < x.length; i++) {
-		var e = x[i];
-		if (e && e.childNodes) {
-			errstr += e.childNodes[0].nodeValue + "<br>";
-		}
-	}
-
+	var errstr = xml_get_errors (xml.responseXML.documentElement);
 	if (errstr.length > 0) {
 		notify_message (errstr);
 		return true;
@@ -178,7 +133,7 @@ function callback_add()
 			list.appendChild (table_climb);
 			var master = document.getElementById ('tick_master');
 			master.checked = true;
-			master.onclick = tick_master_click;
+			master.onclick = click_tick_master;
 		}
 	} else {
 		var tlist = list.getElementsByTagName ('table');
@@ -200,8 +155,18 @@ function callback_add()
 
 	entry_climb.value = "";
 	entry_climb.focus();
-	table_set_clicks (table_climb, check_click); // temporary kludge
+	table_set_clicks (table_climb, click_tick); // temporary kludge
 	buttons_update();
+}
+
+function callback_keypress (e)
+{
+	if (e.keyCode == 13) {
+		click_add();
+		return false;
+	}
+
+	return true;
 }
 
 function callback_save()
@@ -216,27 +181,6 @@ function callback_save()
 	notify_message (x);
 }
 
-function callback_catch_enter (e)
-{
-	if (e.keyCode == 13) {
-		click_add();
-		return false;
-	}
-
-	return true;
-}
-
-
-function tick_master_click()
-{
-	table_select_all (table_climb, this.checked);
-	buttons_update();
-}
-
-function check_click(e)
-{
-	buttons_update();
-}
 
 function button_set_state (button, enabled)
 {

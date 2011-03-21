@@ -1,8 +1,8 @@
 var button_add;
-var button_save;
 var button_delete;
-var entry_routes;
+var button_save;
 var entry_date;
+var entry_routes;
 var entry_setter;
 var table_route;
 
@@ -11,15 +11,15 @@ initialise();
 function initialise()
 {
 	button_add    = document.getElementById ('button_add');
-	button_save   = document.getElementById ('button_save');
 	button_delete = document.getElementById ('button_delete');
+	button_save   = document.getElementById ('button_save');
 
 	button_add.onclick    = click_add;
-	button_save.onclick   = click_save;
 	button_delete.onclick = click_delete;
+	button_save.onclick   = click_save;
 
 	entry_routes = document.getElementById ('entry');
-	entry_routes.onkeypress = callback_catch_enter;
+	entry_routes.onkeypress = callback_keypress;
 	entry_routes.onkeyup    = callback_keyup;
 	entry_routes.focus();
 
@@ -80,6 +80,17 @@ function click_save()
 	ajax_get ('add_route_work.php', params, callback_save);
 }
 
+function click_tick(e)
+{
+	buttons_update();
+}
+
+function click_tick_master()
+{
+	table_select_all (table_route, this.checked);
+	buttons_update();
+}
+
 
 function display_errors (xml)
 {
@@ -121,7 +132,7 @@ function callback_add()
 			list.appendChild (table_route);
 			var master = document.getElementById ('tick_master');
 			master.checked = true;
-			master.onclick = tick_master_click;
+			master.onclick = click_tick_master;
 		}
 	} else {
 		var tlist = list.getElementsByTagName ('table');
@@ -139,7 +150,7 @@ function callback_add()
 		table_add_row (table_route, x[i]);
 	}
 
-	table_set_clicks (table_route, check_click); // temporary kludge
+	table_set_clicks (table_route, click_tick); // temporary kludge
 
 	buttons_update();
 
@@ -149,16 +160,7 @@ function callback_add()
 	entry_routes.focus();
 }
 
-function callback_save()
-{
-	if ((this.readyState != 4) || (this.status != 200))
-		return;
-
-	x = this.responseText;
-	notify_message (x);
-}
-
-function callback_catch_enter (e)
+function callback_keypress (e)
 {
 	if (e.keyCode == 13) {
 		click_add();
@@ -174,17 +176,15 @@ function callback_keyup (e)
 	return true;
 }
 
-
-function check_click(e)
+function callback_save()
 {
-	buttons_update();
+	if ((this.readyState != 4) || (this.status != 200))
+		return;
+
+	x = this.responseText;
+	notify_message (x);
 }
 
-function tick_master_click()
-{
-	table_select_all (table_route, this.checked);
-	buttons_update();
-}
 
 function button_set_state (button, enabled)
 {
@@ -204,7 +204,7 @@ function buttons_update()
 	var sel  = (table_get_selected (table_route).length > 0);
 
 	button_set_state (button_add,    text);
-	button_set_state (button_save,   rows);
 	button_set_state (button_delete, sel);
+	button_set_state (button_save,   rows);
 }
 

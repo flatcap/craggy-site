@@ -1,6 +1,6 @@
-var button_list;
-var button_delete;
 var button_clear;
+var button_delete;
+var button_list;
 var entry_date;
 var entry_panel;
 var table_route;
@@ -9,13 +9,13 @@ initialise();
 
 function initialise()
 {
-	button_list   = document.getElementById ('button_list');
-	button_delete = document.getElementById ('button_delete');
 	button_clear  = document.getElementById ('button_clear');
+	button_delete = document.getElementById ('button_delete');
+	button_list   = document.getElementById ('button_list');
 
-	button_list.onclick = click_list;
+	button_clear.onclick  = click_clear;
 	button_delete.onclick = click_delete;
-	button_clear.onclick = click_clear;
+	button_list.onclick   = click_list;
 
 	entry_date = document.getElementById ('date');
 	complete_initialise ('date', 'date');
@@ -25,17 +25,27 @@ function initialise()
 	entry_panel.onkeyup    = callback_keyup;
 	entry_panel.focus();
 
+	notify_initialise ('notify_area');
+
 	buttons_update();
 }
 
 
-function click_list()
+function click_clear()
 {
-	var params = new Object();
-	params.action = 'list';
-	params.data   = encodeURI (entry_panel.value);
+	if (!table_route)
+		return;
 
-	ajax_get ('del_route_work.php', params, callback_list);
+	var rows = table_get_selected (table_route);
+	if (!rows)
+		return;
+
+	for (var i = 0; i < rows.length; i++) {
+		table_row_delete (table_route, rows[i]);
+	}
+
+	entry_panel.focus();
+	buttons_update();
 }
 
 function click_delete()
@@ -58,20 +68,23 @@ function click_delete()
 	ajax_get ('del_route_work.php', params, callback_delete);
 }
 
-function click_clear()
+function click_list()
 {
-	if (!table_route)
-		return;
+	var params = new Object();
+	params.action = 'list';
+	params.data   = encodeURI (entry_panel.value);
 
-	var rows = table_get_selected (table_route);
-	if (!rows)
-		return;
+	ajax_get ('del_route_work.php', params, callback_list);
+}
 
-	for (var i = 0; i < rows.length; i++) {
-		table_row_delete (table_route, rows[i]);
-	}
+function click_tick (e)
+{
+	buttons_update();
+}
 
-	entry_panel.focus();
+function click_tick_master()
+{
+	table_select_all (table_route, this.checked);
 	buttons_update();
 }
 
@@ -85,6 +98,23 @@ function display_errors (xml)
 	}
 
 	return false;
+}
+
+
+function callback_delete()
+{
+	if ((this.readyState != 4) || (this.status != 200))
+		return;
+
+	var response = this.responseText;
+	if (response.length === 0)
+		return;
+
+	alert (response);
+
+	var table = document.getElementById ('route_list');
+	table.innerHTML = "";
+	buttons_update();
 }
 
 function callback_keypress (e)
@@ -128,7 +158,7 @@ function callback_list()
 			list.appendChild (table_route);
 			var master = document.getElementById ('tick_master');
 			master.checked = true;
-			master.onclick = tick_master_click;
+			master.onclick = click_tick_master;
 		}
 	} else {
 		var tlist = list.getElementsByTagName ('table');
@@ -146,38 +176,10 @@ function callback_list()
 		table_add_row (table_route, x[i]);
 	}
 
-	table_set_clicks (table_route, check_click); // temporary kludge
+	table_set_clicks (table_route, click_tick); // temporary kludge
 
 	entry_panel.value = "";
 
-	buttons_update();
-}
-
-function callback_delete()
-{
-	if ((this.readyState != 4) || (this.status != 200))
-		return;
-
-	var response = this.responseText;
-	if (response.length === 0)
-		return;
-
-	alert (response);
-
-	var table = document.getElementById ('route_list');
-	table.innerHTML = "";
-	buttons_update();
-}
-
-
-function check_click(e)
-{
-	buttons_update();
-}
-
-function tick_master_click()
-{
-	table_select_all (table_route, this.checked);
 	buttons_update();
 }
 
@@ -198,9 +200,9 @@ function buttons_update()
 	var sel  = (table_get_selected (table_route).length > 0);
 	var text = (entry_panel.value.length > 0);
 
-	button_set_state (button_list,   text);		// some text in entry
-	button_set_state (button_delete, sel);		// some ticked rows
 	button_set_state (button_clear,  sel);		// some ticked rows
+	button_set_state (button_delete, sel);		// some ticked rows
+	button_set_state (button_list,   text);		// some text in entry
 }
 
 

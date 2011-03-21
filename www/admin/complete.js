@@ -105,15 +105,18 @@ function complete_validate (input)
 
 function complete_onkeypress (e)
 {
+	var lookup = this.lookup;
+
 	// Validate on enter or comma
 	if ((e.keyCode == 13) || (e.charCode == 44)) {
-		complete_validate (this);
-		return false;
+		if (lookup) {
+			complete_validate (this);
+			return false;
+		}
 	}
 
 	var item = this;
-	var lookup = this.lookup;
-	var parent = this.parentNode;
+	var parent = item.parentNode;
 	var grandparent = parent.parentNode;
 	var sibling;
 	if (e.keyCode == 38) {			// move up
@@ -124,10 +127,22 @@ function complete_onkeypress (e)
 
 	if ((e.keyCode == 38) || (e.keyCode == 40)) {
 		if (sibling) {
+			var my_name = '###';
+			if (this.id) {
+				var j = this.id.indexOf ('_');
+				if (j >= 0)
+					my_name = this.id.substr (0, j-1);
+			}
 			var c = sibling.children;
 			for (var i = 0; i < c.length; i++) {
 				var fc = c[i].firstChild;
-				if (fc.lookup == lookup) {
+				var fc_name;
+				if (fc.id) {
+					var j = fc.id.indexOf ('_');
+					if (j >= 0)
+						fc_name = fc.id.substr (0, j-1);
+				}
+				if (fc_name == my_name) {
 					fc.focus();
 					fc.select();
 					break;

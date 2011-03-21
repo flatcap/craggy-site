@@ -35,6 +35,10 @@ function lookup_main()
 
 	$type = $attrs['type'];
 	switch ($type) {
+		case 'climber':
+			include 'climber.php';
+			climber_match_xml ($xml);
+			break;
 		case 'colour':
 			include 'colour.php';
 			colour_match_xml ($xml);

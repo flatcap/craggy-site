@@ -27,6 +27,7 @@ function initialise()
 	complete_initialise ('date', 'date');
 
 	entry_climber = document.getElementById ('climber');
+	complete_initialise ('climber', 'climber');
 
 	notify_initialise ('notify_area');
 	buttons_update();

@@ -1,4 +1,4 @@
-function complete_initialise (entry_id, lookup)
+function complete_initialise_by_id (entry_id, lookup)
 
 entry_id	unique identifier for the input field
 lookup		a php program to do the work

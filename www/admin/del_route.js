@@ -18,7 +18,7 @@ function initialise()
 	button_list.onclick   = click_list;
 
 	entry_date = document.getElementById ('date');
-	complete_initialise ('date', 'date');
+	complete_initialise (entry_date, 'date');
 
 	entry_panel = document.getElementById ('panel');
 	entry_panel.onenter    = click_list;		// Our own callback

@@ -1,10 +1,4 @@
-function complete_initialise (entry_id, lookup)
-{
-	var entry = document.getElementById (entry_id);
-	complete_initialise2 (entry, lookup);
-}
-
-function complete_initialise2 (entry, lookup)
+function complete_initialise (entry, lookup)
 {
 	if (!entry)
 		return;
@@ -13,6 +7,12 @@ function complete_initialise2 (entry, lookup)
 	entry.onkeypress = complete_onkeypress;
 	entry.lookup     = lookup;
 	entry.error_id   = entry.id + "_error";
+}
+
+function complete_initialise_by_id (entry_id, lookup)
+{
+	var entry = document.getElementById (entry_id);
+	complete_initialise (entry, lookup);
 }
 
 

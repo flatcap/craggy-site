@@ -24,11 +24,11 @@ function initialise()
 	entry_routes.onkeyup    = callback_keyup;
 	entry_routes.focus();
 
-	entry_date   = document.getElementById ('date');
-	complete_initialise ('date', 'date');
+	entry_date = document.getElementById ('date');
+	complete_initialise (entry_date, 'date');
 
 	entry_setter = document.getElementById ('setter');
-	complete_initialise ('setter', 'setter');
+	complete_initialise (entry_setter, 'setter');
 
 	notify_initialise ('notify_area');
 	buttons_update();

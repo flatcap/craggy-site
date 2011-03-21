@@ -24,10 +24,10 @@ function initialise()
 	entry_climb.focus();
 
 	entry_date    = document.getElementById ('date');
-	complete_initialise ('date', 'date');
+	complete_initialise (entry_date, 'date');
 
 	entry_climber = document.getElementById ('climber');
-	complete_initialise ('climber', 'climber');
+	complete_initialise (entry_climber, 'climber');
 
 	notify_initialise ('notify_area');
 	buttons_update();

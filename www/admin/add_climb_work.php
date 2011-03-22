@@ -550,18 +550,18 @@ function climb_do_save (&$xml)
 	//printf ("rid   Panel Colour         Date         Success     Diff       Nice   Notes\n");
 	for ($i = 0; $i < $cxml->count(); $i++) {
 		$a = $cxml->climb[$i];
-		$route_id = climb_get_route_id ($xml, $panels, $a->panel, $a->colour);
+		$route_id = climb_get_route_id ($xml, $panels, urldecode ($a->panel), urldecode ($a->colour));
 		if ($route_id === null) {
-			climb_add_error ($xml, sprintf ("Route %s %s doesn't exist", $a->panel, $a->colour));
+			climb_add_error ($xml, sprintf ("Route %s %s doesn't exist", urldecode ($a->panel), urldecode ($a->colour)));
 			continue;
 		}
-		$date_climbed = climb_valid_date ($xml, $a->date);
-		$success_id = climb_lookup_success ($a->success);
-		$difficulty_id = climb_lookup_difficulty ($a->difficulty);
-		$nice = (string) $a->nice;
-		$notes = (string) $a->notes;
+		$date_climbed = climb_valid_date ($xml, urldecode ($a->date));
+		$success_id = climb_lookup_success (urldecode ($a->success));
+		$difficulty_id = climb_lookup_difficulty (urldecode ($a->difficulty));
+		$nice = (string) urldecode ($a->nice);
+		$notes = (string) urldecode ($a->notes);
 
-		//printf ("%-5s %-5s %-14s %-12s %-11s %-10s %-6s %s\n", $route_id, $a->panel, $a->colour, $a->date, $a->success, $a->difficulty, $a->nice, $a->notes);
+		//printf ("%-5s %-5s %-14s %-12s %-11s %-10s %-6s %s\n", $route_id, urldecode ($a->panel), urldecode ($a->colour), urldecode ($a->date), urldecode ($a->success), urldecode ($a->difficulty), urldecode ($a->nice), urldecode ($a->notes));
 
 		// Validate add_climb
 		// Add climb using: climber_id, route_id, success_id, date_climbed

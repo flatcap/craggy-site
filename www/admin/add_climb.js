@@ -106,7 +106,7 @@ function callback_add()
 			{ "name": "success",    "type": "input",   "title": "Success",    "size":  8, "validator": "success"    },
 			{ "name": "difficulty", "type": "input",   "title": "Difficulty", "size":  8, "validator": "difficulty" },
 			{ "name": "nice",       "type": "input",   "title": "Nice",       "size":  3, "validator": "nice"       },
-			{ "name": "notes",      "type": "input",   "title": "Notes",      "size": 10 }
+			{ "name": "notes",      "type": "input",   "title": "Notes",      "size": 30 }
 		];
 
 		table_climb = table_create ('climb', columns);

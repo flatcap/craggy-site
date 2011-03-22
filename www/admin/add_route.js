@@ -143,7 +143,7 @@ function callback_save()
 		return;
 
 	x = this.responseText;
-	notify_message (x);
+	notify_warning (x);
 }
 
 

@@ -87,7 +87,7 @@ function callback_delete()
 	if (response.length === 0)
 		return;
 
-	notify_message (response, 'limegreen', 'black');
+	notify_info (response);
 
 	var selection = table_get_selected (table_route);
 	if (!selection)
@@ -122,7 +122,7 @@ function callback_list()
 
 	var x = this.responseXML.documentElement.getElementsByTagName ("route");
 	if (x.length === 0) {
-		notify_message ("No matching panels");
+		notify_warning ("No matching panels");
 		return;
 	}
 

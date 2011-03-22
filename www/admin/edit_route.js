@@ -32,7 +32,9 @@ function initialise()
 
 function click_cancel()
 {
-	alert ('cancel');
+	table_destroy (table_route);
+	table_route = null;
+	entry_panel.focus();
 }
 
 function click_list()
@@ -132,7 +134,7 @@ function callback_save()
 	if (response.length === 0)
 		return;
 
-	notify_message (response);
+	notify_warning (response);
 }
 
 

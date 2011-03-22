@@ -51,7 +51,7 @@ function display_errors (xml)
 
 	var errstr = xml_get_errors (xml.responseXML.documentElement);
 	if (errstr.length > 0) {
-		notify_message (errstr);
+		notify_error (errstr);
 		return true;
 	}
 

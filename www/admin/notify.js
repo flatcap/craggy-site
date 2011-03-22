@@ -1,4 +1,5 @@
 var notify_area;
+
 function notify_initialise (divname)
 {
 	if (!divname) {
@@ -14,26 +15,33 @@ function notify_initialise (divname)
 	notify_area.style.display = 'none';
 }
 
-function notify_message (message, background, colour)
+function notify_info (text)
 {
-	if (!notify_area) {
+	notify_message (text, '#0f0', '#000');
+}
+
+function notify_warning (text)
+{
+	notify_message (text, '#f84', '#000');
+}
+
+function notify_error (text)
+{
+	notify_message (text, '#f66', '#000');
+}
+
+function notify_message (text, background, colour)
+{
+	if (!notify_area || !background || !colour) {
 		return;
 	}
 
-	if (message.length === 0) {
+	if (text.length === 0) {
 		notify_close();
 		return;
 	}
 
-	if (!background) {
-		background = 'orange';
-	}
-
-	if (!colour) {
-		colour = 'black';
-	}
-
-	notify_area.innerHTML             = message;
+	notify_area.innerHTML             = text;
 	notify_area.style.backgroundColor = background;
 	notify_area.style.color           = colour;
 	notify_area.style.display         = 'block';

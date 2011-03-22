@@ -2,7 +2,6 @@
 
 set_include_path ('../../libs');
 
-include 'db.php';
 include 'utils.php';
 
 function add_main()
@@ -55,7 +54,6 @@ function add_main()
 	$output .= "<script type='text/javascript' src='xml.js'></script>";
 	$output .= "<script type='text/javascript' src='add_route.js'></script>";
 
-	$output .= "<div id='debug_area'></div>";
 	$output .= get_errors();
 	$output .= '</body>';
 	$output .= '</html>';
@@ -67,3 +65,4 @@ function add_main()
 date_default_timezone_set('UTC');
 
 echo add_main();
+

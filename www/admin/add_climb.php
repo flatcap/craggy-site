@@ -2,7 +2,6 @@
 
 set_include_path ('../../libs');
 
-include 'db.php';
 include 'utils.php';
 
 function add_main()
@@ -37,7 +36,6 @@ function add_main()
 	$output .= "<div id='notify_area'></div>";
 	$output .= "<div id='list_area'>";
 	$output .= "<div id='route_list'></div>";
-	$output .= "</div>";
 
 	$output .= '<br>';
 	$output .= "<div class='buttons'>";
@@ -56,7 +54,6 @@ function add_main()
 	$output .= "<script type='text/javascript' src='xml.js'></script>";
 	$output .= "<script type='text/javascript' src='add_climb.js'></script>";
 
-	$output .= "<div id='debug_area'></div>";
 	$output .= get_errors();
 	$output .= '</body>';
 	$output .= '</html>';

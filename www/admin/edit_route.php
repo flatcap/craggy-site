@@ -18,6 +18,7 @@ function route_main()
 	$output .= "</div>";
 
 	$output .= "<div id='entry_area'>";
+
 	$output .= "<label for='entry' accesskey='p'><u>P</u>anels</label>";
 	$output .= "<input id='entry' type='text' size='30' value=''>";
 	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
@@ -57,3 +58,4 @@ function route_main()
 date_default_timezone_set('UTC');
 
 echo route_main();
+

@@ -2,7 +2,6 @@
 
 set_include_path ('../../libs');
 
-include 'db.php';
 include 'utils.php';
 
 function route_main()
@@ -18,8 +17,8 @@ function route_main()
 	$output .= "<h1>Delete Routes</h1>";
 	$output .= "</div>";
 
-
 	$output .= "<div id='entry_area'>";
+
 	$output .= "<label for='date' accesskey='d'><u>D</u>ate</label>";
 	$output .= "<input id='date' type='text' size='30' value='today'><br>";
 	$output .= "<label for='panel' accesskey='p'><u>P</u>anels</label>";
@@ -59,3 +58,4 @@ function route_main()
 date_default_timezone_set('UTC');
 
 echo route_main();
+

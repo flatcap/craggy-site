@@ -407,3 +407,6 @@ feedback on del_route
 if table title field is missing take the name and uppercase the first letter
 likewise the validator -- use the name -- no, we need to specify if there's a validator or not
 
+add climb count on add_climbs
+include downclimbs
+

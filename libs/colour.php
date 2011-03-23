@@ -72,11 +72,12 @@ function colour_match ($test)
 	return colour_match_single ($col1['colour'].'/'.$col2['colour']);
 }
 
-function colour_match_xml (&$xml)
+function colour_match_xml (&$xml, $test)
 {
-	$colour = colour_match ($xml->input);
+	$colour = colour_match ($test);
 	if ($colour === null) {
 		$xml->addChild ('error', "no such colour");
+		$xml->addChild ('error', sprintf ("'%s' is not a valid colour", $test));
 	} else {
 		$xml->addChild ('colour', $colour['colour']);
 	}

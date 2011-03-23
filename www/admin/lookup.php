@@ -35,42 +35,15 @@ function lookup_main()
 
 	$type = $attrs['type'];
 	switch ($type) {
-		case 'climber':
-			include 'climber.php';
-			climber_match_xml ($xml);
-			break;
-		case 'colour':
-			include 'colour.php';
-			colour_match_xml ($xml);
-			break;
-		case 'date':
-			include 'date.php';
-			date_match_xml ($xml);
-			break;
-		case 'difficulty':
-			include 'difficulty.php';
-			difficulty_match_xml ($xml);
-			break;
-		case 'grade':
-			include 'grade.php';
-			grade_match_xml ($xml);
-			break;
-		case 'nice':
-			include 'nice.php';
-			nice_match_xml ($xml);
-			break;
-		case 'panel':
-			include 'panel.php';
-			panel_match_xml ($xml);
-			break;
-		case 'setter':
-			include 'setter.php';
-			setter_match_xml ($xml);
-			break;
-		case 'success':
-			include 'success.php';
-			success_match_xml ($xml);
-			break;
+		case 'climber':    include 'climber.php';    climber_match_xml    ($xml, $xml->input); break;
+		case 'colour':     include 'colour.php';     colour_match_xml     ($xml, $xml->input); break;
+		case 'date':       include 'date.php';       date_match_xml       ($xml, $xml->input); break;
+		case 'difficulty': include 'difficulty.php'; difficulty_match_xml ($xml, $xml->input); break;
+		case 'grade':      include 'grade.php';      grade_match_xml      ($xml, $xml->input); break;
+		case 'nice':       include 'nice.php';       nice_match_xml       ($xml, $xml->input); break;
+		case 'panel':      include 'panel.php';      panel_match_xml      ($xml, $xml->input); break;
+		case 'setter':     include 'setter.php';     setter_match_xml     ($xml, $xml->input); break;
+		case 'success':    include 'success.php';    success_match_xml    ($xml, $xml->input); break;
 		default:
 			$msg = "unknown type: $type";
 			$xml->addChild ('error', $msg);

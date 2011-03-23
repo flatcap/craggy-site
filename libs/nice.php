@@ -4,7 +4,7 @@ set_include_path ('../../libs');
 
 include 'utils.php';
 
-function nice_match ($str, &$message = null)
+function nice_match ($str)
 {
 	if ((partial_match ($str, 'nice')) ||
 	    (strcasecmp ($str, 'true') == 0) ||
@@ -21,18 +21,15 @@ function nice_match ($str, &$message = null)
 		return '';
 	}
 
-	$message = "Invalid niceness";
 	return false;
 }
 
-function nice_match_xml (&$xml)
+function nice_match_xml (&$xml, $test)
 {
 	$message = "";
-	$nice = nice_match ($xml->input, $message);
+	$nice = nice_match ($test, $message);
 	if ($nice === false) {
-		if (empty ($message))
-			$message = "Invalid niceness";
-		$xml->addChild ('error', $message);
+		$xml->addChild ('error', sprintf ("'%s' is not a valid niceness", $test));
 	} else {
 		$xml->addChild ('nice', $nice);
 	}

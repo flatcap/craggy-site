@@ -22,13 +22,11 @@ function date_match ($str, &$message = null)
 	return $result;
 }
 
-function date_match_xml (&$xml)
+function date_match_xml (&$xml, $test)
 {
 	$message = "";
-	$date = date_match ($xml->input, $message);
+	$date = date_match ($test, $message);
 	if (empty ($date)) {
-		if (empty ($message))
-			$message = "Invalid date";
 		$xml->addChild ('error', $message);
 	} else {
 		$xml->addChild ('date', $date);

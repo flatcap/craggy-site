@@ -33,11 +33,11 @@ function grade_match ($test)
 	return null;
 }
 
-function grade_match_xml (&$xml)
+function grade_match_xml (&$xml, $test)
 {
-	$grade = grade_match ($xml->input);
+	$grade = grade_match ($test);
 	if ($grade === null) {
-		$xml->addChild ('error', "no such grade");
+		$xml->addChild ('error', sprintf ("'%s' is not a valid grade", $test));
 	} else {
 		$xml->addChild ('grade', $grade['grade']);
 	}

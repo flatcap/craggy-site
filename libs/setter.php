@@ -17,28 +17,28 @@ function setter_get()
 	return $setter;
 }
 
-function setter_match ($str)
+function setter_match ($test)
 {
-	$setters = setter_get();
-	if (!$setters)
+	$setter = setter_get();
+	if (!$setter)
 		return null;
 
-	$match = null;
 	$count = 0;
-	foreach ($setters as $key => $s) {
+	$match = null;
+	foreach ($setter as $key => $s) {
 		$name = trim ($s['first_name'] . " " . $s['surname']);
-		if (strcasecmp ($str, $s['initials']) === 0) {
+		if (strcasecmp ($test, $s['initials']) === 0) {
 			$count++;
-			$match = &$setters[$key];
-		} else if (partial_match ($str, $s['first_name'])) {
+			$match = &$setter[$key];
+		} else if (partial_match ($test, $s['first_name'])) {
 			$count++;
-			$match = &$setters[$key];
-		} else if (partial_match ($str, $s['surname'])) {
+			$match = &$setter[$key];
+		} else if (partial_match ($test, $s['surname'])) {
 			$count++;
-			$match = &$setters[$key];
-		} else if (partial_match ($str, $name)) {
+			$match = &$setter[$key];
+		} else if (partial_match ($test, $name)) {
 			$count++;
-			$match = &$setters[$key];
+			$match = &$setter[$key];
 		}
 	}
 
@@ -49,11 +49,11 @@ function setter_match ($str)
 	}
 }
 
-function setter_match_xml (&$xml)
+function setter_match_xml (&$xml, $test)
 {
-	$setter = setter_match ($xml->input);
+	$setter = setter_match ($test);
 	if ($setter === null) {
-		$xml->addChild ('error', "no such setter");
+		$xml->addChild ('error', sprintf ("'%s' is not a valid setter", $test));
 	} else {
 		$name = trim ($setter['first_name'] . " " . $setter['surname']);
 		$xml->addChild ('setter', $name);

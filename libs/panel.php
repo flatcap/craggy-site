@@ -33,11 +33,11 @@ function panel_match ($test)
 	return null;
 }
 
-function panel_match_xml (&$xml)
+function panel_match_xml (&$xml, $test)
 {
-	$panel = panel_match ($xml->input);
+	$panel = panel_match ($test);
 	if ($panel === null) {
-		$xml->addChild ('error', "no such panel");
+		$xml->addChild ('error', sprintf ("'%s' is not a valid panel", $test));
 	} else {
 		$xml->addChild ('panel', $panel['name']);
 	}

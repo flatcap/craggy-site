@@ -42,11 +42,11 @@ function success_match ($test)
 	}
 }
 
-function success_match_xml (&$xml)
+function success_match_xml (&$xml, $test)
 {
-	$success = success_match ($xml->input);
+	$success = success_match ($test);
 	if ($success === null) {
-		$xml->addChild ('error', "no such success");
+		$xml->addChild ('error', sprintf ("'%s' is not a valid success", $test));
 	} else {
 		$xml->addChild ('success', $success['outcome']);
 	}

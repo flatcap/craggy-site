@@ -46,11 +46,11 @@ function climber_match ($str)
 	}
 }
 
-function climber_match_xml (&$xml)
+function climber_match_xml (&$xml, $test)
 {
-	$climber = climber_match ($xml->input);
+	$climber = climber_match ($test);
 	if ($climber === null) {
-		$xml->addChild ('error', "no such climber");
+		$xml->addChild ('error', sprintf ("'%s' is not a valid climber", $test));
 	} else {
 		$name = trim ($climber['first_name'] . " " . $climber['surname']);
 		$xml->addChild ('climber', $name);

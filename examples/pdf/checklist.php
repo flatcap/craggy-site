@@ -148,7 +148,7 @@ function add_stats ($panels, $routes, $auto, $top, $lead, $height, $last)
 	$this->Cell (0, $h, "Lead: $lead", $b, 1);
 	$this->Ln(2);
 	$this->Cell (3);
-	$this->Cell (0, $h, "Total Route h: {$height}m", $b, 1);
+	$this->Cell (0, $h, "Total Route Height: {$height}m", $b, 1);
 	$this->Cell (3);
 	$this->Cell (0, $h, "Last Route Set: $last", $b, 1);
 

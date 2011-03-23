@@ -1,46 +1,17 @@
 <?php
 
+date_default_timezone_set('UTC');
+
 set_include_path ('../../libs');
 
+include 'utils.php';
 include 'db.php';
 include 'db_names.php';
-include 'utils.php';
 include 'xml.php';
 include 'colour.php';
 include 'grade.php';
 include 'panel.php';
 include 'setter.php';
-
-function parse_range ($string)
-{
-    $delim = ", \n\t";
-    $ranges = array();
-
-    $tok = strtok($string, $delim);
-
-    while ($tok !== false) {
-        $pos = strpos ($tok, '-');
-        if ($pos !== false) {
-            $start = substr ($tok, 0, $pos);
-            $end   = substr ($tok, $pos+1);
-        } else {
-            $start = $tok;
-            $end   = $tok;
-        }
-
-        if (is_numeric ($start) && is_numeric ($end) && ($end >= $start)) {
-            $a = array();
-            $a['start'] = $start;
-            $a['end']   = $end;
-            array_push ($ranges, $a);
-        }
-
-        $tok = strtok($delim);
-    }
-
-    return $ranges;
-}
-
 
 function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id, $setter_id, $date, $notes)
 {
@@ -179,8 +150,6 @@ function route_main()
 	return $xml;
 }
 
-
-date_default_timezone_set('UTC');
 
 header('Content-Type: application/xml; charset=ISO-8859-1');
 

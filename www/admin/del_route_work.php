@@ -1,40 +1,12 @@
 <?php
 
+date_default_timezone_set('UTC');
+
 set_include_path ('../../libs');
 
+include 'utils.php';
 include 'db.php';
 include 'db_names.php';
-include 'utils.php';
-
-function parse_range ($string)
-{
-    $delim = ", \n\t";
-    $ranges = array();
-
-    $tok = strtok($string, $delim);
-
-    while ($tok !== false) {
-        $pos = strpos ($tok, '-');
-        if ($pos !== false) {
-            $start = substr ($tok, 0, $pos);
-            $end   = substr ($tok, $pos+1);
-        } else {
-            $start = $tok;
-            $end   = $tok;
-        }
-
-        if (is_numeric ($start) && is_numeric ($end) && ($end >= $start)) {
-            $a = array();
-            $a['start'] = $start;
-            $a['end']   = $end;
-            array_push ($ranges, $a);
-        }
-
-        $tok = strtok($delim);
-    }
-
-    return $ranges;
-}
 
 function route_list($data)
 {

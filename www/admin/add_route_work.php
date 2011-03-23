@@ -4,10 +4,10 @@ date_default_timezone_set('UTC');
 
 set_include_path ('../../libs');
 
+include 'utils.php';
 include 'db.php';
 include 'db_names.php';
 include 'cache.php';
-include 'utils.php';
 include 'colour.php';
 include 'date.php';
 include 'setter.php';

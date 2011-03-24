@@ -343,10 +343,9 @@ function get_columns ($row)
 
 function process_height_abbreviate (&$list)
 {
-	// manipulate data (800 -> 8m)
+	// manipulate data (8 -> 8m)
 	foreach ($list as $key => $row) {
-		$height = $row['height'] / 100.0;
-		$list[$key]['height'] = sprintf ('%1.1Fm', $height);
+		$list[$key]['height'] = sprintf ('%1.1Fm', $row['height']);
 	}
 }
 
@@ -358,7 +357,7 @@ function process_height_total (&$list)
 		$total += $row['height'];
 	}
 
-	return ($total / 100);
+	return $total;
 }
 
 function get_stats()
@@ -439,7 +438,7 @@ function get_stats()
 	$age_months = sprintf ('%.1f', $age_total / 30.44);
 	$output .= "Average route age: {$age_days} days ({$age_months} months)<br>";
 
-	$height = sprintf ('%d', $route_height / 100);
+	$height = sprintf ('%d', $route_height);
 	$output.= "Total Route Height: {$height}m<br>";
 
 	// Last Route Set -------------------------------------

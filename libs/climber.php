@@ -11,7 +11,8 @@ function climber_get()
 	if ($climber === null) {
 		include 'db.php';
 		include 'db_names.php';
-		$climber = db_select ($DB_CLIMBER);
+		$columns = array ('id', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
+		$climber = db_select ($DB_CLIMBER, $columns);
 	}
 
 	return $climber;

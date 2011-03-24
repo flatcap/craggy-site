@@ -11,7 +11,8 @@ function setter_get()
 	if ($setter === null) {
 		include 'db.php';
 		include 'db_names.php';
-		$setter = db_select ($DB_SETTER);
+		$columns = array ('id', 'initials', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
+		$setter = db_select ($DB_SETTER, $columns);
 	}
 
 	return $setter;

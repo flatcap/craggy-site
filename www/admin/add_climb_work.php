@@ -7,11 +7,10 @@ set_include_path ('../../libs');
 include 'utils.php';
 include 'db.php';
 include 'db_names.php';
+include 'date.php';
 include 'colour.php';
-
-global $g_climbers;
-global $g_success;
-global $g_difficulty;
+include 'success.php';
+include 'difficulty.php';
 
 function climb_get_panels ($panels)
 {
@@ -25,27 +24,11 @@ function climb_get_panels ($panels)
 	return db_select ($table, $columns, $where, $order);
 }
 
-function climb_get_success()
-{
-	global $g_success;
-
-	if (!$g_success) {
-		global $DB_SUCCESS;
-
-		$table   = $DB_SUCCESS;
-		$columns = array ('id', 'outcome');
-
-		$g_success = db_select ($table, $columns);
-	}
-
-	return $g_success;
-}
-
 function climb_lookup_success ($text)
 {
-	global $g_success;
+	$success = success_get();
 
-	foreach ($g_success as $s) {
+	foreach ($success as $s) {
 		if ($s['outcome'] == $text)
 			return $s['id'];
 	}
@@ -53,27 +36,11 @@ function climb_lookup_success ($text)
 	return null;
 }
 
-function climb_get_difficulty()
-{
-	global $g_difficulty;
-
-	if (!$g_difficulty) {
-		global $DB_DIFFICULTY;
-
-		$table   = $DB_DIFFICULTY;
-		$columns = array ('id', 'description');
-
-		$g_difficulty = db_select ($table, $columns);
-	}
-
-	return $g_difficulty;
-}
-
 function climb_lookup_difficulty ($text)
 {
-	global $g_difficulty;
+	$difficulty = difficulty_get();
 
-	foreach ($g_difficulty as $s) {
+	foreach ($difficulty as $s) {
 		if ($s['description'] == $text)
 			return $s['id'];
 	}
@@ -107,17 +74,9 @@ function climb_find_rating_ids ($rids)
 
 function climb_lookup_climber (&$xml, $name)
 {
-	static $g_climbers = null;
-	global $DB_CLIMBER;
+	$climbers = climber_get();
 
-	if ($g_climbers === null) {
-		$columns = array ('id', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
-		$g_climbers = db_select ($DB_CLIMBER, $columns);
-		if ($g_climbers === null)
-			return null;
-	}
-
-	foreach ($g_climbers as $c) {
+	foreach ($climbers as $c) {
 		if (strcasecmp ($c['name'], $name) == 0) {
 			return $c['id'];
 		}
@@ -125,23 +84,6 @@ function climb_lookup_climber (&$xml, $name)
 
 	xml_add_error ($xml, sprintf ("'%s' is not a valid climber", $name));
 	return null;
-}
-
-function climb_valid_date (&$xml, $date)
-{
-	$t = strtotime ('today');
-	$d = strtotime ($date);
-	if ($d === false) {
-		xml_add_error ($xml, sprintf ("'%s' is not a valid date", $date));
-		return null;
-	}
-
-	if ($d > $t) {
-		xml_add_error ($xml, sprintf ("'%s': Date cannot be in the future", $date));
-		return null;
-	}
-
-	return strftime('%Y-%m-%d', $d);
 }
 
 
@@ -418,7 +360,7 @@ function climb_do_add (&$xml)
 		return;
 	}
 
-	$date = climb_valid_date ($xml, $_GET['date']);
+	$date = date_match_xml ($xml, $_GET['date']);
 	if ($date === null)
 		return;
 
@@ -534,9 +476,6 @@ function climb_do_save (&$xml)
 	}
 
 	$panels = climb_get_panels ($pnames);
-
-	climb_get_success();
-	climb_get_difficulty();
 
 	$commit_climb = array();
 	$commit_rating = array();

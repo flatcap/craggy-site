@@ -52,9 +52,11 @@ function climber_match_xml (&$xml, $test)
 	$climber = climber_match ($test);
 	if ($climber === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid climber", $test));
+		return false;
 	} else {
 		$name = trim ($climber['first_name'] . " " . $climber['surname']);
 		$xml->addChild ('climber', $name);
+		return true;
 	}
 }
 

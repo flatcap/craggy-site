@@ -30,8 +30,10 @@ function nice_match_xml (&$xml, $test)
 	$nice = nice_match ($test, $message);
 	if ($nice === false) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid niceness", $test));
+		return false;
 	} else {
 		$xml->addChild ('nice', $nice);
+		return true;
 	}
 }
 

@@ -47,8 +47,10 @@ function success_match_xml (&$xml, $test)
 	$success = success_match ($test);
 	if ($success === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid success", $test));
+		return false;
 	} else {
 		$xml->addChild ('success', $success['outcome']);
+		return true;
 	}
 }
 

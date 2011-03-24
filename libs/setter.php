@@ -55,9 +55,11 @@ function setter_match_xml (&$xml, $test)
 	$setter = setter_match ($test);
 	if ($setter === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid setter", $test));
+		return false;
 	} else {
 		$name = trim ($setter['first_name'] . " " . $setter['surname']);
 		$xml->addChild ('setter', $name);
+		return true;
 	}
 }
 

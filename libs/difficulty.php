@@ -52,8 +52,10 @@ function difficulty_match_xml (&$xml, $test)
 	$difficulty = difficulty_match ($test);
 	if ($difficulty === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid difficulty", $test));
+		return false;
 	} else {
 		$xml->addChild ('difficulty', $difficulty['description']);
+		return true;
 	}
 }
 

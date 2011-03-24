@@ -33,6 +33,7 @@ function nice_match_xml (&$xml, $test)
 		return false;
 	} else {
 		$xml->addChild ('nice', $nice);
+		$xml->nice = $nice;
 		return true;
 	}
 }

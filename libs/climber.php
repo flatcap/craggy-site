@@ -55,7 +55,8 @@ function climber_match_xml (&$xml, $test)
 		return false;
 	} else {
 		$name = trim ($climber['first_name'] . " " . $climber['surname']);
-		$xml->addChild ('climber', $name);
+		$xml->climber    = $name;
+		$xml->climber_id = $climber['id'];
 		return true;
 	}
 }

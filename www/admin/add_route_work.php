@@ -17,40 +17,19 @@ include 'setter.php';
 function validate_route (&$route)
 {
 	$colour = colour_match_xml ($route, urldecode ($route->colour));
-	if ($colour) {
-		$route->colour    = $c['colour'];
-		$route->colour_id = $c['id'];
-	}
-
-	$date = date_match_xml ($route, urldecode ($route->date));
-
-	$grade = grade_match_xml ($route, urldecode ($route->grade));
-	if ($grade) {
-		$route->grade    = $g['grade'];
-		$route->grade_id = $g['id'];
-	}
-
-	// XXX check for invalid characters?
-	$route->notes = urldecode ($route->notes);
-
-	$panel = panel_match_xml ($route, urldecode ($route->panel));
-	if ($panel) {
-		$route->panel    = $p['name'];
-		$route->panel_id = $p['id'];
-	}
-
+	$date   = date_match_xml   ($route, urldecode ($route->date));
+	$grade  = grade_match_xml  ($route, urldecode ($route->grade));
+	$panel  = panel_match_xml  ($route, urldecode ($route->panel));
 	$setter = setter_match_xml ($route, urldecode ($route->setter));
-	if ($setter) {
-		$route->setter    = $s['name'];
-		$route->setter_id = $s['id'];
-	}
+
+	$route->notes = urldecode ($route->notes);				// XXX check for invalid characters?
 
 	return ($colour && $date && $grade && $panel && $setter);
 }
 
 function db_route_add ($route)
 {
-	global $DB_ROUTE
+	global $DB_ROUTE;
 	$query = "insert into $DB_ROUTE (panel_id,colour_id,grade_id,setter_id,notes,date_set) values ";
 	$query .= "($route->panel_id, $route->colour_id, $route->grade_id, $route->setter_id, '$route->notes', '$route->date')";
 

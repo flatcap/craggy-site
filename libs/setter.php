@@ -58,7 +58,8 @@ function setter_match_xml (&$xml, $test)
 		return false;
 	} else {
 		$name = trim ($setter['first_name'] . " " . $setter['surname']);
-		$xml->addChild ('setter', $name);
+		$xml->setter    = $name;
+		$xml->setter_id = $setter['id'];
 		return true;
 	}
 }

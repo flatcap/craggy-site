@@ -40,7 +40,8 @@ function grade_match_xml (&$xml, $test)
 		$xml->addChild ('error', sprintf ("'%s' is not a valid grade", $test));
 		return false;
 	} else {
-		$xml->addChild ('grade', $grade['grade']);
+		$xml->grade    = $grade['grade'];
+		$xml->grade_id = $grade['id'];
 		return true;
 	}
 }

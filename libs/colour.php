@@ -76,10 +76,12 @@ function colour_match_xml (&$xml, $test)
 {
 	$colour = colour_match ($test);
 	if ($colour === null) {
-		$xml->addChild ('error', "no such colour");
 		$xml->addChild ('error', sprintf ("'%s' is not a valid colour", $test));
+		return false;
 	} else {
-		$xml->addChild ('colour', $colour['colour']);
+		$xml->colour    = $colour['colour'];
+		$xml->colour_id = $colour['id'];
+		return true;
 	}
 }
 

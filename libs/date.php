@@ -28,8 +28,10 @@ function date_match_xml (&$xml, $test)
 	$date = date_match ($test, $message);
 	if (empty ($date)) {
 		$xml->addChild ('error', $message);
+		return false;
 	} else {
-		$xml->addChild ('date', $date);
+		$xml->date = $date;
+		return true;
 	}
 }
 

@@ -40,7 +40,8 @@ function panel_match_xml (&$xml, $test)
 		$xml->addChild ('error', sprintf ("'%s' is not a valid panel", $test));
 		return false;
 	} else {
-		$xml->addChild ('panel', $panel['name']);
+		$xml->panel    = $panel['name'];
+		$xml->panel_id = $panel['id'];
 		return true;
 	}
 }

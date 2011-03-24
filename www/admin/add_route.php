@@ -41,7 +41,7 @@ function add_main()
 	$output .= "<div class='buttons'>";
 	$output .= "<input type='submit' type='button' id='button_save' value='Save All'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_delete' value='Delete'>";
+	$output .= "<input type='submit' type='button' id='button_clear' value='Clear'>";
 	$output .= '</div>'; // buttons
 	$output .= '</div>'; // list_area
 

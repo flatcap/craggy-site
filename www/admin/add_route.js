@@ -1,5 +1,5 @@
 var button_add;
-var button_delete;
+var button_clear;
 var button_save;
 var entry_date;
 var entry_routes;
@@ -10,13 +10,13 @@ initialise();
 
 function initialise()
 {
-	button_add    = document.getElementById ('button_add');
-	button_delete = document.getElementById ('button_delete');
-	button_save   = document.getElementById ('button_save');
+	button_add   = document.getElementById ('button_add');
+	button_clear = document.getElementById ('button_clear');
+	button_save  = document.getElementById ('button_save');
 
-	button_add.onclick    = click_add;
-	button_delete.onclick = click_delete;
-	button_save.onclick   = click_save;
+	button_add.onclick   = click_add;
+	button_clear.onclick = click_clear;
+	button_save.onclick  = click_save;
 
 	entry_routes = document.getElementById ('entry');
 	entry_routes.onenter    = click_add;		// Our own callback
@@ -52,7 +52,7 @@ function click_add()
 	ajax_get ('add_route_work.php', params, callback_add);
 }
 
-function click_delete()
+function click_clear()
 {
 	notify_close();
 
@@ -153,8 +153,8 @@ function buttons_update()
 	var sel  = (table_get_selected (table_route).length > 0);
 	var text = (entry_routes.value.length > 0);
 
-	button_set_state (button_add,    text);
-	button_set_state (button_delete, sel);
-	button_set_state (button_save,   rows);
+	button_set_state (button_add,   text);
+	button_set_state (button_clear, sel);
+	button_set_state (button_save,  rows);
 }
 

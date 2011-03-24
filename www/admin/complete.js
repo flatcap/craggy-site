@@ -107,8 +107,8 @@ function complete_onkeypress (e)
 {
 	var lookup = this.lookup;
 
-	// Validate on enter or comma
-	if ((e.keyCode == 13) || (e.charCode == 44)) {
+	// Validate on enter
+	if (e.keyCode == 13) {
 		if (lookup) {
 			complete_validate (this);
 			return false;

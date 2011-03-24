@@ -127,9 +127,10 @@ function complete_onkeypress (e)
 
 	if ((e.keyCode == 38) || (e.keyCode == 40)) {
 		if (sibling) {
+			var j;
 			var my_name = '###';
 			if (this.id) {
-				var j = this.id.indexOf ('_');
+				j = this.id.indexOf ('_');
 				if (j >= 0)
 					my_name = this.id.substr (0, j-1);
 			}
@@ -138,7 +139,7 @@ function complete_onkeypress (e)
 				var fc = c[i].firstChild;
 				var fc_name;
 				if (fc.id) {
-					var j = fc.id.indexOf ('_');
+					j = fc.id.indexOf ('_');
 					if (j >= 0)
 						fc_name = fc.id.substr (0, j-1);
 				}

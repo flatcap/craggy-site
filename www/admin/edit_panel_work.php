@@ -48,6 +48,12 @@ function panel_do_list (&$xml)
 		$data = '';
 	}
 
+	if (array_key_exists ('seq', $_GET)) {
+		$seq = $_GET['seq'];
+	} else {
+		$seq = '';
+	}
+
 	$range = parse_range ($data);
 	//print_r ($range);
 
@@ -61,7 +67,11 @@ function panel_do_list (&$xml)
 
 	$table = "$DB_PANEL left join $DB_CLIMB_TYPE on (climb_type_id = climb_type.id)";
 	$columns = array("$DB_PANEL.id as id", 'sequence', 'name', 'climb_type', 'height', 'tags');
-	$where = 'name in (' . implode (',', $list) . ')';
+	if (empty ($seq) || ($seq == 'false')) {
+		$where = 'name in (' . implode (',', $list) . ')';
+	} else {
+		$where = 'sequence in (' . implode (',', $list) . ')';
+	}
 	$order = 'sequence';
 
 	$routes = db_select ($table, $columns, $where, $order);

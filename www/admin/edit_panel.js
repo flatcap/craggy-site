@@ -3,6 +3,7 @@ var button_list;
 var button_reset;
 var button_save;
 var entry_panel;
+var entry_seq;
 var table_panel;
 
 initialise();
@@ -18,6 +19,8 @@ function initialise()
 	button_list.onclick   = click_list;
 	button_reset.onclick  = click_reset;
 	button_save.onclick   = click_save;
+
+	entry_seq = document.getElementById ('sequence');
 
 	entry_panel = document.getElementById ('entry');
 	entry_panel.onenter    = click_list;		// Our own callback
@@ -42,6 +45,7 @@ function click_list()
 	var params = new Object();
 	params.action = 'list';
 	params.data   = entry_panel.value;
+	params.seq    = entry_seq.checked;
 
 	ajax_get ('edit_panel_work.php', params, callback_list);
 }

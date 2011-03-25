@@ -19,6 +19,8 @@ function panel_main()
 
 	$output .= "<div id='entry_area'>";
 
+	$output .= "<label for='sequence' accesskey='s'><u>S</u>equence</label>";
+	$output .= "<input type='checkbox' id='sequence'><br>";
 	$output .= "<label for='entry' accesskey='p'><u>P</u>anels</label>";
 	$output .= "<input id='entry' type='text' size='30' value=''>";
 	$output .= "<input type='button' id='button_list' value='List'>";

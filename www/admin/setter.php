@@ -24,13 +24,13 @@ function setter_main()
 
 	$output .= '<br>';
 	$output .= "<div class='buttons'>";
-	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
+	$output .= "<input type='button' id='button_add' value='Add'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_edit' value='Edit'>";
+	$output .= "<input type='button' id='button_edit' value='Edit'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_delete' value='Delete'>";
+	$output .= "<input type='button' id='button_delete' value='Delete'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
+	$output .= "<input type='button' id='button_list' value='List'>";
 	$output .= '</div>';
 	$output .= '</div>';
 	$output .= "<div id='notify_area'>";

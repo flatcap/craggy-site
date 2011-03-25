@@ -21,7 +21,7 @@ function panel_main()
 
 	$output .= "<label for='entry' accesskey='p'><u>P</u>anels</label>";
 	$output .= "<input id='entry' type='text' size='30' value=''>";
-	$output .= "<input type='submit' type='button' id='button_list' value='List'>";
+	$output .= "<input type='button' id='button_list' value='List'>";
 	$output .= "</div>";
 
 	$output .= "<div id='notify_area'></div>";
@@ -30,11 +30,11 @@ function panel_main()
 
 	$output .= '<br>';
 	$output .= "<div class='buttons'>";
-	$output .= "<input type='submit' type='button' id='button_save' value='Save All'>";
+	$output .= "<input type='button' id='button_save' value='Save All'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_reset' value='Reset'>";
+	$output .= "<input type='button' id='button_reset' value='Reset'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_cancel' value='Cancel'>";
+	$output .= "<input type='button' id='button_cancel' value='Cancel'>";
 	$output .= '</div>'; // buttons
 	$output .= '</div>'; // list_area
 

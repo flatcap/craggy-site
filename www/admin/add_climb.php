@@ -27,7 +27,7 @@ function add_main()
 
 	$output .= "<label for='entry' accesskey='r'><u>R</u>outes</label>";
 	$output .= "<input id='entry' type='text' size='30' value=''>";
-	$output .= "<input type='submit' type='button' id='button_add' value='Add'>";
+	$output .= "<input type='button' id='button_add' value='Add'>";
 	//$output .= "<div id='matches'>46 Purple/White 5, Blue 6a+, Beige 6b, Features 7b+</div>";
 
 
@@ -39,9 +39,9 @@ function add_main()
 
 	$output .= '<br>';
 	$output .= "<div class='buttons'>";
-	$output .= "<input type='submit' type='button' id='button_save' value='Save All'>";
+	$output .= "<input type='button' id='button_save' value='Save All'>";
 	$output .= '&nbsp;';
-	$output .= "<input type='submit' type='button' id='button_clear' value='Clear'>";
+	$output .= "<input type='button' id='button_clear' value='Clear'>";
 	$output .= '</div>'; // buttons
 	$output .= '</div>'; // list_area
 

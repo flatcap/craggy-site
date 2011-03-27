@@ -20,13 +20,13 @@ function initialise()
 	button_reset.onclick  = click_reset;
 	button_save.onclick   = click_save;
 
-	entry_seq = document.getElementById ('sequence');
-
 	entry_panel = document.getElementById ('entry');
 	entry_panel.onenter    = click_list;		// Our own callback
 	entry_panel.onkeypress = callback_keypress;
 	entry_panel.onkeyup    = callback_keyup;
 	entry_panel.focus();
+
+	entry_seq = document.getElementById ('sequence');
 
 	notify_initialise ('notify_area');
 	buttons_update();

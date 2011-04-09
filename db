@@ -4,7 +4,7 @@ BASE_DIR="/home/flatcap/downloads/craggy"
 DB_HOST="127.0.0.1"
 DB_PORT="3307"
 DB_USER="backup"
-DB_PASS="phokio10"
+DB_PASS="aicu0Hai"
 DB_DATABASE="craggy"
 
 DB_CMP_OPTS="--add-drop-database --skip-dump-date --single-transaction --skip-extended-insert"

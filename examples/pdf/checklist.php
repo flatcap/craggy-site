@@ -138,14 +138,15 @@ function add_stats ($panels, $routes, $auto, $top, $lead, $height, $last)
 	$this->Ln(3);
 	$this->SetFont ('Times', '', 9);
 
+	$height = sprintf ("%.0f", $height);
 	$this->Cell (3);
 	$this->Cell (0, $h, "$routes Routes ($panels Panels)", $b, 1);
 	$this->Cell (3);
-	$this->Cell (0, $h, "Auto-Belay: $auto", $b, 1);
+	$this->Cell (0, $h, "$auto Auto-Belays", $b, 1);
 	$this->Cell (3);
-	$this->Cell (0, $h, "Top Rope: $top", $b, 1);
+	$this->Cell (0, $h, "$lead Leads", $b, 1);
 	$this->Cell (3);
-	$this->Cell (0, $h, "Lead: $lead", $b, 1);
+	$this->Cell (0, $h, "$top Top Ropes", $b, 1);
 	$this->Ln(2);
 	$this->Cell (3);
 	$this->Cell (0, $h, "Total Route Height: {$height}m", $b, 1);
@@ -223,7 +224,7 @@ function checklist_main ()
 			$last = $l['date_set'];
 		}
 	}
-	$last = strftime ("%d %b %Y", strtotime ($last));
+	$last = trim (strftime ("%e %b %Y", strtotime ($last)));
 
 	$checklist = array (3 => array(), 4 => array(), 5 => array(), 6 => array(), 7 => array());
 	while ($row = array_shift ($list)) {

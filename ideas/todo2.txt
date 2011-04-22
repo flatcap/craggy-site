@@ -1,10 +1,6 @@
 db.sh check mysql for errors
 check for empty files and delete them
 
-sort out ~/git
-back with git@colo repositories
-link key dot files
-
 add_climb
         success = del climb from table
         fail don't
@@ -21,14 +17,6 @@ edit_route
         success update table's "original" values
         fail don't
 
-get readline test working - tab autocompletion? how?
-
-colo - named - separate log file
-
-500 emails - 367 different hosts
-
-fix local email delivery on muse
-
 hide buttons when no table?
 
 x_error area for completion - use it or lose it
@@ -37,10 +25,6 @@ likewise "matches" div
 &nbsp; between buttons!
 
 button order
-
-fix colo backup _pull_ on muse
-
-add colo web users to apache group?
 
 standardise *_work.php
 
@@ -51,13 +35,6 @@ paste into field doesn't activate on keyup/down/press => no active button
 add tablesorter to edit table?
 
 db.sh check mysql for errors, or empty files & delete them
-
-git update server hook?
-cgit docs?
-
-dovecot fail2ban on colo
-relay access denied
-allow rich+id@flatcap.org
 
 can't enter a features only route without a setter and date
 
@@ -77,8 +54,6 @@ all transfers in xml
 empty fields, auto complete
 default values!
 tie in with reset button
-
-colo config in git
 
 multiple climb problem
 need to uniquely identify them
@@ -142,44 +117,6 @@ notes prepend original "; "
 
 ------------------------------
 
-create bare git repos in ~git
-crontab from craggy to pull into live / mater hourly?
-
-rm --no-lone-star -> prevent rm -fr jim *
-
-DDX - 2D
-DRI 3D
-DRM - kernel
-Mesa - 3D Gfx library
-Gallium  - 3D arch for 3D gfx libraries
-XvMC - hardware accelerated video decoding
-Xv - XVideo output video to the screen directly
-
-------------------------------------
-
-Interaction diagram between
-        keyboard
-        readline
-        bash, ncurses, application (vim)
-        vte
-        gnome-terminal
-        cairo
-
-Taking into account
-        multiple tabs
-        current directory
-        current (executing) command
-        accessibility
-        input methods
-        (translation from XYZ -> [chinese char]
-        termcap / terminfo
-
-Who talks to whom?
-What data passes? Signals, etc?
-What files are used (if any)?
-
--------------------------------------
-
 use autocompletion on the "add climbs" dialog:
 34 all(d)<space> -> 34 White(d), Blue(d), Pink(d)
 
@@ -192,13 +129,6 @@ select historic routes as of a certin date
 w.r.t. date_set & date_end
 
 -------------------------------
-
-add russon.org/files:
-        vncviewer
-        putty
-        shell-in-a-box
-
-------------------------
 
 colours list in apc_cache ['table_colour']
 colour_lookup store as table_colour_1 or _lookup
@@ -214,7 +144,6 @@ invalidate
 what if if depends on several tables?
 
 ---------------------------------
-
 
 route:
         id, row, panel, colour, grade, setter, date, notes, message
@@ -240,7 +169,7 @@ clear successful routes?
 on failed routes, reaplce table data with reply from php
 sync would be good, but just replacing the table would be simpler
 
-how should I renumber the ros?  In route_data they correspond to the index?
+how should I renumber the rows?  In route_data they correspond to the index?
 change the id column heading to Row -> clear success, renumber rows, display warnings
 
 OR
@@ -313,3 +242,32 @@ UI
 		[X] Success
 		etc
 	
+fix php to work in deeper dirs
+/index.php        OK
+/craggy/index.php FAIL
+
+fpdf on russon.org
+
+allow update on russon.org (only in admin)
+
+db control
+	craggy user can read from route tables
+	admin user can read/write from/to route tables
+	rich user can read/write climb tables, read from route tables
+
+route tables
+	climb_type
+	colour
+	data
+	grade
+	panel
+	route
+	setter
+
+climb tables
+	climb
+	climber
+	difficulty
+	rating
+	success
+

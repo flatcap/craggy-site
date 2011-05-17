@@ -8,7 +8,7 @@ DB_PASS="aicu0Hai"
 DB_DATABASE="craggy"
 
 DB_CMP_OPTS="--add-drop-database --skip-dump-date --single-transaction --skip-extended-insert"
-DB_LOCAL_USER="craggy"
+DB_LOCAL_USER="root"
 DB_LOCAL_PORT="3306"
 DB_CMP_FILE_LOCAL="craggy_flatcap.sql"
 DB_CMP_FILE_REMOTE="craggy_russon.sql"
@@ -37,15 +37,17 @@ database_cmp()
 		mysqldump $DB_CMP_OPTS -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASS $DB_DATABASE ${TABLES[*]}	\
 			| sed	-e '/^-- Server version/d'							\
 				-e 's/^-- Host: 127.0.0.1/-- Host: russon.org/'					\
-				-e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
 			> "$BASE_DIR/$DB_CMP_FILE_REMOTE"
 	fi
+
+				#-e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
 
 	mysqldump $DB_CMP_OPTS -h$DB_HOST -P$DB_LOCAL_PORT -u$DB_LOCAL_USER $DB_DATABASE ${TABLES[*]}	\
 		| sed	-e '/^-- Server version/d'							\
 			-e 's/^-- Host: 127.0.0.1/-- Host: flatcap.org/'				\
-			-e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
 		> "$BASE_DIR/$DB_CMP_FILE_LOCAL"
+
+			#-e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
 
 	dwdiff -c -C 3 --color=red,yellow "$BASE_DIR/$DB_CMP_FILE_REMOTE" "$BASE_DIR/$DB_CMP_FILE_LOCAL" | less -E
 }

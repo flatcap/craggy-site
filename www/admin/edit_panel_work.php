@@ -4,13 +4,14 @@ date_default_timezone_set('UTC');
 
 set_include_path ('../../libs');
 
-include 'utils.php';
-include 'db.php';
+include_once 'utils.php';
+include_once 'db.php';
+include_once 'xml.php';
+include_once 'number.php';
+include_once 'height.php';
+include_once 'taglist.php';
+
 include 'db_names.php';
-include 'xml.php';
-include 'number.php';
-include 'height.php';
-include 'taglist.php';
 
 function panel_commit ($xml, $id, $name, $sequence, $height, $tags)
 {

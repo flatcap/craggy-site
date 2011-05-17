@@ -4,8 +4,9 @@ date_default_timezone_set('UTC');
 
 set_include_path ('../../libs');
 
-include 'utils.php';
-include 'db.php';
+include_once 'utils.php';
+include_once 'db.php';
+
 include 'db_names.php';
 
 function route_list($data)

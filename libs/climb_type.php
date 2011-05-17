@@ -2,7 +2,7 @@
 
 set_include_path ('../../libs');
 
-include 'utils.php';
+include_once 'utils.php';
 
 function climb_type_get()
 {

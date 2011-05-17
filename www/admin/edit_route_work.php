@@ -4,14 +4,15 @@ date_default_timezone_set('UTC');
 
 set_include_path ('../../libs');
 
-include 'utils.php';
-include 'db.php';
+include_once 'utils.php';
+include_once 'db.php';
+include_once 'xml.php';
+include_once 'colour.php';
+include_once 'grade.php';
+include_once 'panel.php';
+include_once 'setter.php';
+
 include 'db_names.php';
-include 'xml.php';
-include 'colour.php';
-include 'grade.php';
-include 'panel.php';
-include 'setter.php';
 
 function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id, $setter_id, $date, $notes)
 {

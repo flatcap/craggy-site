@@ -2,7 +2,7 @@
 
 set_include_path ('../../libs');
 
-include 'xml.php';
+include_once 'xml.php';
 
 function lookup_main()
 {
@@ -35,19 +35,19 @@ function lookup_main()
 
 	$type = $attrs['type'];
 	switch ($type) {
-		case 'climber':    include 'climber.php';    climber_match_xml    ($xml, $xml->input); break;
-		case 'climb_type': include 'climb_type.php'; climb_type_match_xml ($xml, $xml->input); break;
-		case 'colour':     include 'colour.php';     colour_match_xml     ($xml, $xml->input); break;
-		case 'date':       include 'date.php';       date_match_xml       ($xml, $xml->input); break;
-		case 'difficulty': include 'difficulty.php'; difficulty_match_xml ($xml, $xml->input); break;
-		case 'grade':      include 'grade.php';      grade_match_xml      ($xml, $xml->input); break;
-		case 'height':     include 'height.php';     height_match_xml     ($xml, $xml->input); break;
-		case 'nice':       include 'nice.php';       nice_match_xml       ($xml, $xml->input); break;
-		case 'number':     include 'number.php';     number_match_xml     ($xml, $xml->input); break;
-		case 'panel':      include 'panel.php';      panel_match_xml      ($xml, $xml->input); break;
-		case 'setter':     include 'setter.php';     setter_match_xml     ($xml, $xml->input); break;
-		case 'success':    include 'success.php';    success_match_xml    ($xml, $xml->input); break;
-		case 'taglist':    include 'taglist.php';    taglist_match_xml    ($xml, $xml->input); break;
+		case 'climber':    include_once 'climber.php';    climber_match_xml    ($xml, $xml->input); break;
+		case 'climb_type': include_once 'climb_type.php'; climb_type_match_xml ($xml, $xml->input); break;
+		case 'colour':     include_once 'colour.php';     colour_match_xml     ($xml, $xml->input); break;
+		case 'date':       include_once 'date.php';       date_match_xml       ($xml, $xml->input); break;
+		case 'difficulty': include_once 'difficulty.php'; difficulty_match_xml ($xml, $xml->input); break;
+		case 'grade':      include_once 'grade.php';      grade_match_xml      ($xml, $xml->input); break;
+		case 'height':     include_once 'height.php';     height_match_xml     ($xml, $xml->input); break;
+		case 'nice':       include_once 'nice.php';       nice_match_xml       ($xml, $xml->input); break;
+		case 'number':     include_once 'number.php';     number_match_xml     ($xml, $xml->input); break;
+		case 'panel':      include_once 'panel.php';      panel_match_xml      ($xml, $xml->input); break;
+		case 'setter':     include_once 'setter.php';     setter_match_xml     ($xml, $xml->input); break;
+		case 'success':    include_once 'success.php';    success_match_xml    ($xml, $xml->input); break;
+		case 'taglist':    include_once 'taglist.php';    taglist_match_xml    ($xml, $xml->input); break;
 		default:
 			$msg = "unknown type: $type";
 			$xml->addChild ('error', $msg);

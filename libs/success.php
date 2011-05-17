@@ -2,14 +2,14 @@
 
 set_include_path ('../../libs');
 
-include 'utils.php';
+include_once 'utils.php';
 
 function success_get()
 {
 	static $success = null;
 
 	if ($success === null) {
-		include 'db.php';
+		include_once 'db.php';
 		include 'db_names.php';
 		$success = db_select($DB_SUCCESS);
 	}

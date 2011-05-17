@@ -1,6 +1,6 @@
 <?php
 
-include 'db.php';
+include_once 'db.php';
 
 function cache_uptodate ($name)
 {

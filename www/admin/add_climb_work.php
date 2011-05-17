@@ -4,16 +4,17 @@ date_default_timezone_set('UTC');
 
 set_include_path ('../../libs');
 
-include 'utils.php';
-include 'db.php';
-include 'db_names.php';
-include 'xml.php';
+include_once 'utils.php';
+include_once 'db.php';
+include_once 'xml.php';
 
-include 'climber.php';
-include 'colour.php';
-include 'date.php';
-include 'difficulty.php';
-include 'success.php';
+include_once 'climber.php';
+include_once 'colour.php';
+include_once 'date.php';
+include_once 'difficulty.php';
+include_once 'success.php';
+
+include 'db_names.php';
 
 function climb_get_panels ($panels)
 {

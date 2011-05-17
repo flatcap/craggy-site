@@ -28,6 +28,8 @@ function log_string ($str)
 {
 	global $fd;
 	fwrite ($fd, $str);
+	if ($str[strlen ($str) - 1] != "\n")
+		fwrite ($fd, "\n");
 }
 
 

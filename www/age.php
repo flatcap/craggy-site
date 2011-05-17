@@ -2,8 +2,8 @@
 
 set_include_path ('../libs');
 
-include 'db.php';
-include 'utils.php';
+include_once 'db.php';
+include_once 'utils.php';
 
 function stats_age()
 {

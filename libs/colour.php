@@ -2,14 +2,14 @@
 
 set_include_path ('../../libs');
 
-include 'utils.php';
+include_once 'utils.php';
 
 function colour_get()
 {
 	static $colours = null;
 
 	if ($colours === null) {
-		include 'db.php';
+		include_once 'db.php';
 		include 'db_names.php';
 		$colours = db_select($DB_COLOUR);
 	}

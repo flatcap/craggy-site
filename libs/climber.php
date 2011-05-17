@@ -2,14 +2,14 @@
 
 set_include_path ('../../libs');
 
-include 'utils.php';
+include_once 'utils.php';
 
 function climber_get()
 {
 	static $climber = null;
 
 	if ($climber === null) {
-		include 'db.php';
+		include_once 'db.php';
 		include 'db_names.php';
 		$columns = array ('id', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
 		$climber = db_select ($DB_CLIMBER, $columns);

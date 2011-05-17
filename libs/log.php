@@ -18,7 +18,10 @@ function log_init ($path = null)
 function log_var ($var)
 {
 	global $fd;
-	fwrite ($fd, print_r ($var, true));
+	$str = print_r ($var, true);
+	fwrite ($fd, $str);
+	if ($str[strlen ($str) - 1] != "\n")
+		fwrite ($fd, "\n");
 }
 
 function log_string ($str)

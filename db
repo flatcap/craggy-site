@@ -58,7 +58,7 @@ database_pull()
 		mysqldump $DB_PULL_OPTS -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASS --database $DB_DATABASE |	\
 			sed -e '/^-- Server version/d'								\
 			    -e 's/^-- Host: 127.0.0.1/-- Host: russon.org/'					\
-			    -e 's/\(DEFINER=\)`root`/\1`craggy`/'						\
+			    -e 's/\(DEFINER=\)`craggy`/\1`root`/'						\
 			> "$BASE_DIR/$DB_PULL_FILE_REMOTE"
 	fi
 

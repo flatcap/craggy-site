@@ -14,11 +14,12 @@ Parent/Guardian name
 Complete 10 climbs (any colour, may rest)
 Complete 10 climbs (without resting on the rope)
 Complete 10 climbs (on a single colour, without using the rope)
+Complete 10 climbs at your current grade of "X"
+Complete 10 climbs at a harder grade (log the grade too)
+Complete 10 climbs above grade X
 
 without weighting the rope?
 	proper explanation for instructors
-	no lifting heels when belaying
-	no jumping when belaying
 
 slightly loose rope?
 
@@ -57,9 +58,9 @@ Assessment
 [notes - explain why failed]
 
 Assessment Outcome
-	Pass - All good
+	Pass  - All good
 	Defer - Try next week
-	Fail - More instruction needed
+	Fail  - More instruction needed
 
 Best grade climbed
 

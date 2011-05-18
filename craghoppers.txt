@@ -52,20 +52,20 @@ yearly retest of belay proficiency
 minimum age to lead climb is 12 years, 13? 14?
 
 Personal training
-	stamina
-	power
-	flexibility
-	balance
-	recovery
-	core stability
-	best route grade
-	best boulder grade
-	palming and bridging
-	half crimp
-	full crimp
-	flagging
-	ability to read a route
-	overhangs/steep ground
+	Stamina
+	Power
+	Flexibility
+	Balance
+	Recovery
+	Core stability
+	Best route grade
+	Best boulder grade
+	Palming and bridging
+	Half crimp
+	Full crimp
+	Flagging
+	Ability to read a route
+	Overhangs/steep ground
 
 gold/Craghoppers
 	anchors

@@ -15,6 +15,8 @@ Know the safety rules for top-roping
 Use a Gri-Gri to safely belay and lower off a climber
 	setup
 	belaying
+		bell-ringing
+		V, knee, 1, 2, 3
 	lowering
 
 [combine two previous rules categories]
@@ -23,6 +25,8 @@ Know the safety rules for the climbing centre
 
 Learn how to set up a Gri-Gri belay device
 Learn how to belay using a Gri-Gri (V, knee, 1, 2, 3)
+	no lifting heels when belaying
+	no jumping when belaying
 
 Learn about Route Grading (French Sport Grading)
 	Measure of technical difficulty

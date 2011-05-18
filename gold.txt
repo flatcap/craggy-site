@@ -19,44 +19,34 @@ Assist your instructor in running a Kids Club Session
 Improve your climbing by one grade
 	tally of climbs
 
-Participate in an Abseiling Session
+Ascend a fixed rope using prussiks
 
-Ascend a rope using prussiks
-
-escape the system
-
-Sutton2: Bouldering
-
-Sutton2: caving
+Escape the system
 
 assist a nervous climber by giving them advice on their climbing / lowering
 	how?  What if there's no nervous people?
 
 Rope work
-	different rope types
-	static
-	dynamic
-	coiling
-	knots
-	flaking
+	Different rope types
+	Static
+	Dynamic
+	Coiling
+	Knots
+	Flaking
 
 What's the difference in properties and use of dynamic and static rope
 
-teaching
-	helping novices equip themselves
-	helping a stuck climber
-	tying in  novices
+Teaching
+	Helping novices equip themselves
+	Helping a stuck climber
+	Tying in  novices
 
-leading
-	climbing
-	clipping
-	belaying
+Leading
+	Climbing
+	Clipping
+	Belaying
 
 Re-Assemble your harness after your instructor has completely taken it apart
-
-Climb at 3 other Indoor Climbing Centres
-
-Climb at another Indoor Climbing Centre (singular)
 
 Log all your completed climbs and their grade while you are on Gold Award
 
@@ -65,29 +55,31 @@ Keep them neat and tidy and include the date so you and your instructor can see 
 
 Do lots of HARD climbs
 
-advanced abseiling
+Abseiling
+	advanced abseiling
+	Participate in an Abseiling Session
+	abseil using an auto-block
+	prussik
+	create a French prussik
+	tie a double fisherman's bend
 
-ascending a fixed rope
-
-how to assess?
-
-no formal assessment
-
-continual assessment
-
-tie a double fisherman's bend
-create a French prussik
-abseil using an auto-block
+Assessment
+	how to assess?
+	no formal assessment?
+	continual assessment?
 
 make it achievable within craggy
 i.e. outdoor, other centre stuff is optional
 
 optional extras
-	craggy 2
+	Sutton2: Bouldering
+	Sutton2: caving
 	outdoors
-	other centres
 	go ape
 	teaching others - how does this help the kids?
+	Assist your instructor with running a kids club session
+	Climb at 3 other Indoor Climbing Centres
+	Climb at another Indoor Climbing Centre (singular)
 
 Gold+ Challenge Sheet
 
@@ -95,19 +87,14 @@ This challenge sheet is designed to further develop a gold climber's skills.
 (Instructors - talk to Tom about some of the challenges if you need help)
 
 Learn why we use and how to tie a:
-
-Clove Hitch
-
-Italian Hitch
-
-Bowline
-
-Assist your instructor with running a kids club session
+	Clove Hitch
+	Italian Hitch
+	Bowline
 
 Teach a technique to another climber
 
 Find a professional climber and do some research on them
-(0. Name, age, sponsors, discipline etc) & find at least 2 videos of this climber
+(Name, age, sponsors, discipline etc) & find at least 2 videos of this climber
 
 Use the above climber in a "climb like them" session
 

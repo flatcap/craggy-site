@@ -8,29 +8,25 @@ Maintain Bronze Award skills
 	if there's time, reassess skills from that award
 
 Describe and demonstrate safety checks on Harness, Helmet, Belay Device, Karabiner and Rope
-	checking set up?
-	checking integrity/quality of equipment
+	Trust - checking set up?
+	Silver - checking integrity of equipment
 
-Complete a belay proficiency test
-	knot tying
-	belay device setup
-	checking
-	stance
-	anchor bag
-	belaying at speed
-	catching falls
-
-Complete a Junior Competency Test
-	same as above
+Complete a Junior Competency Test (belay proficiency)
+	Anchor bag
+	Auto-belay
+	Belay device setup
+		ATC
+		Gri-Gri
+	Belaying at speed
+	Catching falls
+	Checking
+	Knot tying
+	Stance
 
 Improve your climbing by one grade
 	define this
 	5+ is a grade
 	Improve by half-a-grade?
-
-Climb 10 climbs at your current grade of "X"
-
-Climb 10 climbs at a harder grade (log the grade too)
 
 Explain climbing styles
 	Static
@@ -38,68 +34,27 @@ Explain climbing styles
 
 Abseiling
 	Only if above grade 3? 4? 5?
-	only if above Trust?
-	only if above Bronze?
+	Only if above Trust?
+	Only if above Bronze?
+	Practice at ground level
 
-Abseiling for fun
-	practice at ground level
-
-Climb X climbs above grade Y
-
-Hand
-	Sidepull
-	2 finger pocket
-	Crimp
-	Cross-Through
-	Matching
-	Open-Hand
-	Palming
-	Pinching
-	undercut
-	gaston
-
-Feet
-	Foot Swap
-		efficient use (hopping, dagger)
-	Heel Hook
-		proper use of
-	Inside / Outside Edging
-	Silent Feet
-	Smearing
-	Step-Through
-
-Body
-	Bridging
-	Chimneying
-	Dead-Pointing
-	Drop-Knee
-	Flagging
-	Layback
-	Mantleshelf
-	Resting Whilst Climbing
-	Rock-Over - full
-	Straight Arms
-	No hands on slab
-	Open hand crimp
-	Dyno
+Techniques
+	see techniques.txt
 
 Create boulder problems
-	set themselves problems
-	find their own
-	route selection
+	Set themselves problems
+	Find their own
+	Route selection
 
-body awareness
-	what is meant by
-		centre of gravity
-		base of support
-		stable balance
-		offset balance
-		dynamic balance
+Body Awareness - What is meant by
+	Centre of gravity
+	Base of support
+	Stable balance
+	Offset balance
+	Dynamic balance
 
 Route reading
 	study a route
-
-turning hips and heels
 
 ----
 

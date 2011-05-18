@@ -7,17 +7,22 @@ climbing technique and climbing without any help from the rope
 Maintain Trust Award skills
 
 Learn how to use an ATC XP belay device
+Demonstrate safe belaying technique
+	V, Knee, 1, 2, 3
 
 Belay using 2 different belay devices (not a Gri-Gri)
-	after learning the ATC
+	After learning the ATC
 	Figure-8 descender
-	stich plate
+	Stich Plate
+	Italian Hitch
+	Body belaying
 
 Holding a falling climber
 
 Climb safely using 2 different harnesses
 
 Learn about different styles of harnesses
+	Bowline
 	DMM Alpine
 	Black Diamond (comfy harness)
 	Petzl junior full-body
@@ -27,13 +32,13 @@ Learn about different styles of harnesses
 	Belay points
 	Who are they suitable for?
 		thin people
-		fat
-		small
-		nervous
+		fat people
+		small people
+		nervous people
 	tie-in point relative to centre of balance
 	down through harness (waist first)
 
-perfect knots
+Perfect knots
 	small loop
 	nice, even, figure of 8
 	stopper knot (two turns) against figure of 8
@@ -45,16 +50,13 @@ Check your partner every time before you climb
 	karabiner
 	knot
 
-spot a boulderer across the traverse
-
 learn about grading
-	French Sport
-	V0
-	F3+
-	HVS
+	French Sport Climbing Grades - 3, 4, 5, 6a, 6b, ...
+	Font Bouldering Grades - V0, V1
+	English Adjectival Grades - Diff, VDiff, HVS
 
 Communicate clearly with your climbing partner
-	know climbing calls
+	Know climbing calls
 	Take (in)
 	Slack
 	That's me
@@ -66,23 +68,22 @@ Communicate clearly with your climbing partner
 
 Correctly use an anchor bag
 
-Spot a boulderer / advanced bouldering
-
 Learn names of hold types
 
-Effectively spot a boulderer
-	spotting stance
-	track boulderer
-	keep area clear
-	don't actually do any spotting
-	traverse spotting
-
-Know how to effectively spot a boulderer
+Spotting a Boulderer
+	Rationale
+		What are we protecting?
+		Why?
+		How?
+	Know how to effectively spot a boulderer
+		spotting stance
+		track boulderer
+		keep area clear
+		don't actually do any spotting
+		traverse spotting
 
 Explain importance of warming up / cooling down
 [lead warm up with friend]
-
-Demonstrate safe belaying technique (V, knee, 1, 2, 3)
 
 ------------------
 

@@ -46,6 +46,15 @@ Hand
 		Combine with silent feet
 	Gaston
 	Pinch (Arete)
+	Sidepull
+	2 finger pocket
+	Crimp
+	Cross-Through
+	Matching
+	Open-Hand
+	Palming
+	Pinching
+	Undercut
 
 Feet
 	Basic foot placement
@@ -64,6 +73,11 @@ Feet
 		Combine with sticky hands
 	Toe Hook
 	Frogging
+	Foot Swap
+		efficient use (hopping, dagger)
+	Heel Hook
+		proper use of
+	Inside / Outside Edging
 
 Body
 	Balance
@@ -80,10 +94,17 @@ Body
 	Straight Arms
 	Dead-Pointing
 	Resting Whilst Climbing
+		Slab
+		Corner (bridging)
+		Straight Arms
+		Balanced
+		Weight on feet
+		Knee-bar
 	Dyno
 	Layback (Arete/flake)
 	No Hands on Slab
 		Weight feet, balance
+	Dyno
 
 Jamming
 	Hand Jam

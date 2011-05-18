@@ -1,0 +1,111 @@
+Glossary
+
+top roping
+gear names
+grigri
+atc
+figure 8 rethreaded
+stopper knot
+bouldering
+traversing
+karabiner (d-shape, pear-shaped, HMS)
+clean/successful/fail/rainbow
+onsight
+figure 8 descender
+
+TECHNIQUES
+HAND
+	Crimp
+	Open-Hand
+	Matching
+	Cross-Through
+	Palming
+FEET
+	Inside/Outside
+	Edging
+	Foot
+	Swap
+	Step-Through
+	Smearing
+	Heel
+	Hook
+	Silent Feet
+BODY
+	Flagging
+	Bridging
+	Chimneying
+	Mantleshelf
+	Rock-Over
+	Drop-Knee
+	Straight Arms
+	Dead-Pointing
+	Resting Whilst Climbing
+	Layback
+
+bat-hang
+toe-hook
+jamming
+	hand jam
+	knee bar
+
+spotting a boulderer
+
+top roping
+
+lead climbing
+
+names of hold types
+	jug
+	sloper
+	crimp
+	undercut
+	side-pull
+
+quick-draw
+arete
+tufa
+seconding
+drop zone
+anchor
+back-clipping
+z-clipping
+
+	bolt
+	hanger
+	gaston
+	overhang
+	volume
+	steep
+	slab
+	pocket
+	mono
+	woody
+	pull-up board
+	campusing
+	features
+	disc (features)
+	anchor bag
+	crimp (hold)
+	crimp (hand position)
+	frogging
+	break
+	groove
+	auto-belay
+	belay master
+	dyno
+	pear-shaped karabiner
+	d-shaped karabiner
+	krab = karabiner
+	ATC
+	GriGri
+	Stich plate
+	belay device
+	belay plate
+	thread
+	pinch (arete)
+	layback (arete)
+	arete
+	resting whilst climbing
+	snapgate (karabiner)
+	screwgate (karabiner)
+	sling

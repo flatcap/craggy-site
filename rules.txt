@@ -1,24 +1,56 @@
 Rules
 
 Craggy Ten Commandments
-reformat
 
-A high standard of behaviour is expected at all times
-Always Belay inside the red lines
-Always climb down on the bouldering wall, DO NOT JUMP off
-Always climb down on the bouldering wall, NO jumping off
-Always listen to your instructors directions, they are there to help you
-Always remove your harness before going bouldering
-Always walk outside the red lines
-Check your partner before you climb
-Don.t walk through the arches
-Never pull on, stand on, or put fingers in the bolts, chains or quickdraws
-Never pull or stand on the bolts or chains
-Never pull, stand or put fingers in the bolts, chains or quickdraws
-Never walk under a climber or between belayer and a climber
-Never walk under a climber on the bouldering mat
-Never walk under ropes
-No swinging on the ropes
-Remember to check your partner before you climb
-Stay below the max feet line unless you are tied in and belayed
-Stay outside the red lines unless climbing or belaying
+Centre
+	Walk around the red lines, belayers and ropes
+	Don't walk under the arches
+	Keep below the max feet line unless belayed
+	Don't hold or stand on metal rings, chains or quickdraws
+
+Safety/Behaviour
+	Check your partner before you climb
+	Try to belay within the red lines
+	Don't swing on the ropes
+
+Bouldering
+	Remove your harness before bouldering
+	Don't climb near, or underneath, other boulderers
+	Don't jump down, try to climb down safely
+
+Smallprint
+	A high standard of behaviour is expected at all times
+	Always listen to your instructors directions, they are there to help you
+
+
+------------------------------------------------------------
+
+Originals
+
+Safety/Behaviour
+	A high standard of behaviour is expected at all times
+	Always listen to your instructors directions, they are there to help you
+	No swinging on the ropes
+	Remember to check your partner before you climb
+	Check your partner before you climb
+	Belay inside red lines
+
+
+Bouldering
+	Always climb down on the bouldering wall, Do not jump off
+	Always climb down on the bouldering wall, No jumping off
+	Always remove your harness before going bouldering
+	Never walk under a climber on the bouldering mat
+
+Centre
+	Always walk outside the red lines
+	Always Belay inside the red lines
+	Stay outside the red lines unless climbing or belaying
+	Don't walk through the arches
+	Stay below the max feet line unless you are tied in and belayed
+	Never pull on, stand on, or put fingers in the bolts, chains or quickdraws
+	Never pull or stand on the bolts or chains
+	Never pull, stand or put fingers in the bolts, chains or quickdraws
+	Never walk under a climber or between belayer and a climber
+	Never walk under ropes
+

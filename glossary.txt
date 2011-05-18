@@ -1,111 +1,87 @@
 Glossary
 
-top roping
-gear names
-grigri
-atc
-figure 8 rethreaded
-stopper knot
-bouldering
-traversing
-karabiner (d-shape, pear-shaped, HMS)
-clean/successful/fail/rainbow
-onsight
-figure 8 descender
+Equipment / Gear names
+	Wall
+		Anchor
+		Bolt holes
+		Hanger
+		Quick-Draw
 
-TECHNIQUES
-HAND
+	Belay device
+		ATC
+		Belay master
+		Belay plate
+		Bug
+		Figure 8 descender
+		GriGri
+		Stich plate
+
+	Karabiner
+		D-Shaped
+		HMS
+		Krab
+		Pear-Shaped
+		Screwgate
+		Snapgate
+
+	Knots
+		Clove Hitch
+		Italian Hitch
+		Bowline
+		Alpine Butterfly
+		Figure 8
+		Figure 8 Rethreaded
+		Stopper Knot
+
+	Other
+		Sling
+		Prussik
+
+Hold Types - On the Walls
+	Arete
+	Break
 	Crimp
-	Open-Hand
-	Matching
-	Cross-Through
-	Palming
-FEET
-	Inside/Outside
-	Edging
-	Foot
-	Swap
-	Step-Through
-	Smearing
-	Heel
-	Hook
-	Silent Feet
-BODY
-	Flagging
-	Bridging
-	Chimneying
-	Mantleshelf
-	Rock-Over
-	Drop-Knee
-	Straight Arms
-	Dead-Pointing
-	Resting Whilst Climbing
-	Layback
+	Disc (Features)
+	Features
+	Flake
+	Groove
+	Jug
+	Mono
+	Pocket
+	Side-pull
+	Sloper
+	Thread
+	Tufa
+	Undercut
+	Volume
 
-bat-hang
-toe-hook
-jamming
-	hand jam
-	knee bar
-
-spotting a boulderer
-
-top roping
-
-lead climbing
-
-names of hold types
-	jug
-	sloper
-	crimp
-	undercut
-	side-pull
-
-quick-draw
-arete
-tufa
-seconding
-drop zone
-anchor
-back-clipping
-z-clipping
-
-	bolt
-	hanger
-	gaston
+Climbing
+	clean/successful/fail/rainbow
+	beta
+	onsight
 	overhang
-	volume
 	steep
 	slab
-	pocket
-	mono
-	woody
-	pull-up board
 	campusing
-	features
-	disc (features)
-	anchor bag
-	crimp (hold)
-	crimp (hand position)
-	frogging
-	break
-	groove
-	auto-belay
-	belay master
-	dyno
-	pear-shaped karabiner
-	d-shaped karabiner
-	krab = karabiner
-	ATC
-	GriGri
-	Stich plate
-	belay device
-	belay plate
-	thread
-	pinch (arete)
-	layback (arete)
-	arete
-	resting whilst climbing
-	snapgate (karabiner)
-	screwgate (karabiner)
-	sling
+
+Around the Centre
+	Auto-belay
+	Top roping
+	Lead climbing
+		clipping
+		back-clipping
+		z-clipping
+	Anchor bag
+	Seconding
+	Drop zone
+	Bouldering
+		spotting a boulderer
+	Traversing
+		traverse wall
+		main walls
+	Woody
+	Pull-up board / Finger board
+
+Techniques
+	see techniques.txt
+

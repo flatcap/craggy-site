@@ -1,17 +1,19 @@
 Levels
 
-trust - fun
-bronze - progressive (solo?)
-silver - technical
-gold - expert
+Trust  - fun
+Bronze - basic, progressive
+Silver - technical
+Gold   - expert
 
-mission statement for each award
+Mission statement for each award
 
-estimated (minimum) time for each level
-	trust: 1/2 term
-	bronze: 1-2 terms
-	silver: 2-3 terms
-	gold: 3+ terms
-	total: 3 years => 8 - 11 years old
-	craghoppers from 12+ years old
+Estimated (minimum) time for each level
+	Trust: 1/2 term
+	Bronze: 1-2 terms
+	Silver: 2-3 terms
+	Gold: 3+ terms
+
+	Total: 3 years => 8 - 11 years old
+
+	Craghoppers from 12+ years old
 

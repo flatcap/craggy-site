@@ -3,7 +3,6 @@ Silver Award
 To be in Silver Training a climber must be able to maintain all the Bronze Award skills, and be willing to learn
 about climbing technique and climbing without any help from the rope
 
-
 Maintain Bronze Award skills
 	What does this mean?
 	if there's time, reassess skills from that award
@@ -11,13 +10,6 @@ Maintain Bronze Award skills
 Describe and demonstrate safety checks on Harness, Helmet, Belay Device, Karabiner and Rope
 	checking set up?
 	checking integrity/quality of equipment
-
-Demonstrate 6 techniques (2 from each technique group listed below)
-
-Demonstrate all the techniques below
-	how to assess this?
-		test all?
-		test random?
 
 Complete a belay proficiency test
 	knot tying
@@ -40,37 +32,14 @@ Climb 10 climbs at your current grade of "X"
 
 Climb 10 climbs at a harder grade (log the grade too)
 
-Techniques: (Demonstrate 2 from each technique group listed below)
-	need technique list
-
-Techniques: Learn the techniques below
-
-Techniques:
-	Learn
-	Understand
-	Demonstrate
-
-Demonstrate techniques
-	smearing
-	heel hook
-	rock over
-	lock off
-
 Explain climbing styles
 	Static
 	Dynamic
-
-Efficient climbing
-	straight arms
-	frogging
-	drop knee
 
 Abseiling
 	Only if above grade 3? 4? 5?
 	only if above Trust?
 	only if above Bronze?
-
-Learn advanced techniques
 
 Abseiling for fun
 	practice at ground level
@@ -119,20 +88,6 @@ Create boulder problems
 	find their own
 	route selection
 
-
-half-crimp
-full-crimp
-closed-crimp
-
-flagging
-	inner flag
-	outer flag
-
-Jamming
-	hand jam
-	fist jam
-	foot jam
-
 body awareness
 	what is meant by
 		centre of gravity
@@ -144,21 +99,7 @@ body awareness
 Route reading
 	study a route
 
-
 turning hips and heels
-
-Techniques / Movement skills
-
-Techniques
-	quiet feet
-	quiet feet without scuffing feet against the wall
-	quiet feet with foot on hold only - foot must not touch wall
-	quiet feet with foot on hold only - foot must not touch wall - no adjustments
-
-	glue hands
-	glue hands - name grip type before touching hold
-	glue hands and silent feet
-
 
 ----
 

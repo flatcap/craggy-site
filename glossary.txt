@@ -13,7 +13,7 @@ Equipment / Gear names
 		Belay plate
 		Bug
 		Figure 8 descender
-		GriGri
+		Gri-Gri
 		Stich plate
 
 	Karabiner

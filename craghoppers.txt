@@ -13,7 +13,7 @@ abseil
 	figure-8
 	prussik
 		tie it
-			fishermans
+			fisherman's
 		use it
 	anchor
 	stacked abseil
@@ -38,10 +38,10 @@ logging
 	log1 date
 	log2 date
 	...
-	competant date
+	competent date
 
-boulder league - craghoppers / gold / silver
-climbing league - craghoppers / gold / silver
+boulder league - Craghoppers / gold / silver
+climbing league - Craghoppers / gold / silver
 
 yearly retest of belay proficiency
 	reception test
@@ -67,7 +67,7 @@ Personal training
 	ability to read a route
 	overhangs/steep ground
 
-gold/craghoppers
+gold/Craghoppers
 	anchors
 		direct
 		indirect

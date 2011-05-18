@@ -12,7 +12,7 @@ Know the safety rules for the bouldering wall and traverse wall
 
 Know the safety rules for top-roping
 
-Use a GriGri to safely belay and lower off a climber
+Use a Gri-Gri to safely belay and lower off a climber
 	setup
 	belaying
 	lowering
@@ -21,8 +21,8 @@ Use a GriGri to safely belay and lower off a climber
 Know the safety rules for the climbing centre
 (Craggy Ten Commandments)
 
-Learn how to set up a GriGri belay device
-Learn how to belay using a GriGri (V, knee, 1, 2, 3)
+Learn how to set up a Gri-Gri belay device
+Learn how to belay using a Gri-Gri (V, knee, 1, 2, 3)
 
 Learn about Route Grading (French Sport Grading)
 	Measure of technical difficulty
@@ -35,7 +35,7 @@ Tie in with a figure-of-8 rethreaded knot
 	correct knot
 	stopper
 	correct part of harness
-		dmm
+		DMM
 		black diamond
 
 Make sure the rope isn't twisted before climbing

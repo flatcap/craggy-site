@@ -87,7 +87,7 @@ Demonstrate safe belaying technique (V, knee, 1, 2, 3)
 ------------------
 
 instructor notes:
-	rainbow routes ok
+	rainbow routes 0
 	passing bronze => allowed on big boulder wall
 		make sure they're good
 

@@ -45,7 +45,7 @@ Hand
 		Name the type of hold before placement
 		Combine with silent feet
 	Gaston
-	Pinch (arete)
+	Pinch (Arete)
 
 Feet
 	Basic foot placement
@@ -81,7 +81,7 @@ Body
 	Dead-Pointing
 	Resting Whilst Climbing
 	Dyno
-	Layback (arete/flake)
+	Layback (Arete/flake)
 	No Hands on Slab
 		Weight feet, balance
 

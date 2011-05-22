@@ -9,7 +9,7 @@ function setter_get()
 	static $setter = null;
 
 	if ($setter === null) {
-		include 'db.php';
+		include_once 'db.php';
 		include 'db_names.php';
 		$columns = array ('id', 'initials', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
 		$setter = db_select ($DB_SETTER, $columns);

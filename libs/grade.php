@@ -7,7 +7,7 @@ function grade_get()
 	static $grade = null;
 
 	if ($grade === null) {
-		include 'db.php';
+		include_once 'db.php';
 		include 'db_names.php';
 		$grade = db_select($DB_GRADE);
 	}

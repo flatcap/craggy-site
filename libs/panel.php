@@ -7,7 +7,7 @@ function panel_get()
 	static $panel = null;
 
 	if ($panel === null) {
-		include 'db.php';
+		include_once 'db.php';
 		include 'db_names.php';
 		$panel = db_select($DB_PANEL);
 	}

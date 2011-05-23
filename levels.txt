@@ -1,11 +1,15 @@
 Levels
 
-Trust  - fun
-Bronze - basic, progressive
-Silver - technical
-Gold   - expert
-
 Mission statement for each award
+
+Trust
+	fun, safety
+Bronze
+	basic climbing skills
+Silver
+	technical climber
+Gold
+	expert climber
 
 Estimated (minimum) time for each level
 	Trust: 1/2 term

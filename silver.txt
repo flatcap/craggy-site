@@ -11,7 +11,7 @@ Describe and demonstrate safety checks on Harness, Helmet, Belay Device, Karabin
 	Trust - checking set up?
 	Silver - checking integrity of equipment
 
-Complete a Junior Competency Test (belay proficiency)
+Complete a Junior Competency Test (belay proficiency) - both names
 	Anchor bag
 	Auto-belay
 	Belay device setup
@@ -22,6 +22,7 @@ Complete a Junior Competency Test (belay proficiency)
 	Checking
 	Knot tying
 	Stance
+	Rate the importance of each (optional -> mandatory)
 
 Improve your climbing by one grade
 	define this
@@ -50,14 +51,9 @@ Body Awareness - What is meant by
 	Centre of gravity
 	Base of support
 	Stable balance
-	Offset balance
+	Off balance
 	Dynamic balance
 
 Route reading
 	study a route
-
-----
-
-instructor notes
-	maintain bronze award skills - leave till last
 

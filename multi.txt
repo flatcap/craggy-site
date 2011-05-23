@@ -9,7 +9,7 @@ Child's Name
 Kids Club Day
 Kids Club Time
 Age
-Parent/Guardian name
+Parent/Guardian name - remove?
 
 Complete 10 climbs (any colour, may rest)
 Complete 10 climbs (without resting on the rope)
@@ -23,10 +23,9 @@ without weighting the rope?
 
 slightly loose rope?
 
-Complete 10 Boulder (any colours)
+Complete 10 Boulder Problems (any colours)
 Complete 10 Boulder Problems (on a single colour)
-
-Create 10 Boulder Problems
+Create and test 10 Boulder Problems
 
 Log of X
 	Date / Sign 1
@@ -57,6 +56,8 @@ Assessment
 
 [notes - explain why failed]
 
+keep safe / maintain prev level - leave till last
+
 Assessment Outcome
 	Pass  - All good
 	Defer - Try next week
@@ -76,3 +77,5 @@ and only sign off _best_two_ climbs
 Trust, Bronze, Silver, Gold => four levels (Platinum?)
 other names, Beginner, Advanced, Elite, etc could be more?
 
+Learn and remember - Once you're learned a fact/technique,
+should know it / be able to demonstrate it, thereafter

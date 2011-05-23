@@ -35,7 +35,7 @@ escape the system
 rescues?
 
 logging
-	log1 date
+	log1 date - amount of tuition (mins) - areas covered
 	log2 date
 	...
 	competent date

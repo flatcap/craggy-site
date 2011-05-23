@@ -16,7 +16,6 @@ Techniques:
 	Demonstrate
 
 Demonstrate techniques
-	lock off
 
 Efficient climbing
 
@@ -66,17 +65,17 @@ Feet
 	Smearing
 	Heel
 	Hook
+		Toe
+		Heel
+			proper use of
 	Silent Feet
 		Foot placement
 		No scuffing feet against the wall
 		Cannot move once placed
 		Combine with sticky hands
-	Toe Hook
 	Frogging
 	Foot Swap
 		efficient use (hopping, dagger)
-	Heel Hook
-		proper use of
 	Inside / Outside Edging
 
 Body
@@ -104,7 +103,6 @@ Body
 	Layback (Arete/flake)
 	No Hands on Slab
 		Weight feet, balance
-	Dyno
 
 Jamming
 	Hand Jam

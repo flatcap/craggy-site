@@ -46,6 +46,8 @@ Perfect knots
 
 Check your partner every time before you climb
 	Harness
+		for the first climb
+		after bouldering / toilet
 	belay device
 	karabiner
 	knot
@@ -56,17 +58,14 @@ learn about grading
 	English Adjectival Grades - Diff, VDiff, HVS
 
 Communicate clearly with your climbing partner
-	Know climbing calls
-	Take (in)
-	Slack
-	That's me
-	Climb when ready
-	Climbing
-	Lean back (and hold your knot)
-	Lowering
-	I'm at the top
+	see calls.txt
 
 Correctly use an anchor bag
+	daisy chain / rope tight
+	behind yor
+	direction of forces
+	can't move, so pick position before start
+	attach to belay loop
 
 Learn names of hold types
 
@@ -88,7 +87,7 @@ Explain importance of warming up / cooling down
 ------------------
 
 instructor notes:
-	rainbow routes 0
+	rainbow routes
 	passing bronze => allowed on big boulder wall
 		make sure they're good
 

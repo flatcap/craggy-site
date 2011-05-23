@@ -51,8 +51,6 @@ tidy harness after use
 ------------
 
 instructor notes:
-	explain why they failed
 	explain loose / unweighted rope
 	tally of grades
-	keep safe... sign off last
 	keep safe... set of boxes

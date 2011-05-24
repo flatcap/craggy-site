@@ -26,14 +26,15 @@ Equipment / Gear names
 		Snapgate
 
 	Knots
-		Clove Hitch
-		Italian Hitch
-		Bowline
 		Alpine Butterfly
+		Bight
+		Bowline
+		Clove Hitch
 		Figure 8
 		Figure 8 Rethreaded
-		Stopper Knot
 		Fisherman's
+		Italian Hitch
+		Stopper Knot
 
 	Other
 		Sling
@@ -103,7 +104,6 @@ Kids Clubs
 
 Unsorted
 	ascend
-	bight
 	bolt holes
 	bug
 	commandments craggy
@@ -122,6 +122,7 @@ Unsorted
 	lower
 	petzl / dmm / black diamond
 	route
+	sit start
 	sport climbing
 	stance
 	static / rope / move

@@ -14,13 +14,13 @@ Define:
 	Chimney
 	Features only routes
 
-Clean, Success, Fail - Sitting on route vs resting whilst climbing
+Clean, Success, Fail - Sitting on rope vs resting whilst climbing
 
 List defaults
 List exceptions
 
 Traverse
-Climb
+Climbing
 Bouldering
 
 Difficulty of grades

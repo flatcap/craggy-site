@@ -3,26 +3,26 @@ Rules
 Craggy Ten Commandments
 
 Centre
-	Walk around the red lines, belayers and ropes
-	Don't walk under the arches
-	Keep below the max feet line unless belayed
-	Don't hold or stand on metal rings, chains or quickdraws
+	* Walk around the red lines, belayers and ropes
+	* Don't walk under the arches
+	* Keep below the max feet line unless belayed
+	* Don't hold or stand on metal rings, chains or quickdraws
 
 Safety/Behaviour
-	Check your partner before you climb
-	Try to belay within the red lines
-	Don't swing on the ropes
+	* Check your partner before you climb
+	* Try to belay within the red lines
+	* Don't swing on the ropes
 
 Bouldering
-	Remove your harness before bouldering
-	Don't climb near, or underneath, other boulderers
-	Don't jump down, try to climb down safely
+	* Remove your harness before bouldering
+	* Don't climb near, or underneath, other boulderers
+	* Don't jump down, try to climb down safely
 
 Smallprint
 	A high standard of behaviour is expected at all times
 	Always listen to your instructors directions, they are there to help you
 
-------------------------------------------------------------
+----
 
 Originals
 

@@ -1,18 +1,15 @@
 Multi-Level
 
-
-
+----
 
 Craggy Island Achievement Award in Climbing Skills
 
-
-
+----
 
 (Instructor to date and sign or initial over each image to
 show when complete or when the climber is considered competent)
 
-
-
+----
 
 Child's Name
 Kids Club Day
@@ -20,8 +17,7 @@ Kids Club Time
 Age
 Parent/Guardian name - remove?
 
-
-
+----
 
 Complete 10 climbs (any colour, may rest)
 Complete 10 climbs (without resting on the rope)
@@ -30,26 +26,22 @@ Complete 10 climbs at your current grade of "X"
 Complete 10 climbs at a harder grade (log the grade too)
 Complete 10 climbs above grade X
 
-
-
+----
 
 without weighting the rope?
 	proper explanation for instructors
 
-
-
+----
 
 slightly loose rope?
 
-
-
+----
 
 Complete 10 Boulder Problems (any colours)
 Complete 10 Boulder Problems (on a single colour)
 Create and test 10 Boulder Problems
 
-
-
+----
 
 Log of X
 	Date / Sign 1
@@ -57,21 +49,18 @@ Log of X
 	...
 	Date / Sign n
 
-
-
+----
 
 Behaviour Log
 Misbehaviour log?
 	self-fulfilling prophecy?
 	Three unlabelled boxes
 
-
-
+----
 
 Climbs [ init / grade ] [ init / grade ] boxes
 
-
-
+----
 
 Climbs:
 	Grade 3  XXXXXX
@@ -80,8 +69,7 @@ Climbs:
 	Grade 6a
 	...
 
-
-
+----
 
 Assessment
 	[Y/N] Can the climber complete all the above in a trustworthy manner?
@@ -90,55 +78,49 @@ Assessment
 	Signed
 	Date
 
-
-
+	test previous awards too - make sure they're safe
+		if there's time?
+		always?
+----
 
 [notes - explain why failed]
 
-
-
+----
 
 keep safe / maintain prev level - leave till last
 
-
-
+----
 
 Assessment Outcome
 	Pass  - All good
 	Defer - Try next week
 	Fail  - More instruction needed
 
-
-
+----
 
 Best grade climbed
 
-
-
+----
 
 sign off climbs with initials and grade (RR 5+)
 
-
-
+----
 
 climbing competition
 
-
-
+----
 
 reduce number of climbs for each section
 and only sign off _best_two_ climbs
 	doesn't penalise the slower climbers
 	better climbers can focus on quality not quantity
 
-
-
+----
 
 Trust, Bronze, Silver, Gold => four levels (Platinum?)
 other names, Beginner, Advanced, Elite, etc could be more?
 
-
-
+----
 
 Learn and remember - Once you're learned a fact/technique,
 should know it / be able to demonstrate it, thereafter

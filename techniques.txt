@@ -1,7 +1,9 @@
 Techniques
 
-Learn some basic technique
+Learn some basic techniques
+
 Learn some techniques
+
 Learn some advanced techniques
 
 Explain and demonstrate techniques
@@ -28,7 +30,7 @@ Demonstrate all the techniques below
 		test all?
 		test random?
 
-------------------------------------------------------------
+----
 
 Hand
 	Crimp
@@ -45,8 +47,7 @@ Hand
 		Combine with silent feet
 	Gaston
 	Pinch (Arete)
-	Sidepull
-	2 finger pocket
+	Side-pull
 	Crimp
 	Cross-Through
 	Matching
@@ -57,10 +58,8 @@ Hand
 
 Feet
 	Basic foot placement
-	Inside/Outside
-	Edging
-	Foot
-	Swap
+	Inside/Outside Edging
+	Foot Swap
 	Step-Through
 	Smearing
 	Heel
@@ -88,16 +87,19 @@ Body
 		Inner
 		Outer
 	Mantleshelf
+		On emergency mats
+		On windowsill in the changing room
+		On the benches in the changing room
 	Rock-Over
 	Drop-Knee
 	Straight Arms
 	Dead-Pointing
 	Resting Whilst Climbing
+		Weight on feet
 		Slab
 		Corner (bridging)
 		Straight Arms
 		Balanced
-		Weight on feet
 		Knee-bar
 	Dyno
 	Layback (Arete/flake)

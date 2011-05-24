@@ -1,14 +1,26 @@
 Bronze Award
 
+
+
+
 To be in Bronze Training a climber must be able to maintain
 all the Trust Award skills, and be willing to learn about
 climbing technique and climbing without any help from the rope
 
+
+
+
 Maintain Trust Award skills
+
+
+
 
 Learn how to use an ATC XP belay device
 Demonstrate safe belaying technique
 	V, Knee, 1, 2, 3
+
+
+
 
 Belay using 2 different belay devices (not a Gri-Gri)
 	After learning the ATC
@@ -17,9 +29,18 @@ Belay using 2 different belay devices (not a Gri-Gri)
 	Italian Hitch
 	Body belaying
 
+
+
+
 Holding a falling climber
 
+
+
+
 Climb safely using 2 different harnesses
+
+
+
 
 Learn about different styles of harnesses
 	Bowline
@@ -38,11 +59,17 @@ Learn about different styles of harnesses
 	tie-in point relative to centre of balance
 	down through harness (waist first)
 
+
+
+
 Perfect knots
 	small loop
 	nice, even, figure of 8
 	stopper knot (two turns) against figure of 8
 	short tail 5-10cm
+
+
+
 
 Check your partner every time before you climb
 	Harness
@@ -52,13 +79,22 @@ Check your partner every time before you climb
 	karabiner
 	knot
 
+
+
+
 learn about grading
 	French Sport Climbing Grades - 3, 4, 5, 6a, 6b, ...
 	Font Bouldering Grades - V0, V1
 	English Adjectival Grades - Diff, VDiff, HVS
 
+
+
+
 Communicate clearly with your climbing partner
 	see calls.txt
+
+
+
 
 Correctly use an anchor bag
 	daisy chain / rope tight
@@ -67,7 +103,13 @@ Correctly use an anchor bag
 	can't move, so pick position before start
 	attach to belay loop
 
+
+
+
 Learn names of hold types
+
+
+
 
 Spotting a Boulderer
 	Rationale
@@ -81,15 +123,27 @@ Spotting a Boulderer
 		don't actually do any spotting
 		traverse spotting
 
+
+
+
 Explain importance of warming up / cooling down
 [lead warm up with friend]
 
+
+
+
 ------------------
+
+
+
 
 instructor notes:
 	rainbow routes
 	passing bronze => allowed on big boulder wall
 		make sure they're good
+
+
+
 
 	check partner - instructor belay - deliberate mistakes
 	assessment - test previous awards too - make sure they're safe

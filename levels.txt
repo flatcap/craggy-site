@@ -3,7 +3,7 @@ Levels
 Mission statement for each award
 
 Trust
-	fun, safety
+	fun, safe climbing
 Bronze
 	basic climbing skills
 Silver
@@ -20,4 +20,3 @@ Estimated (minimum) time for each level
 	Total: 3 years => 8 - 11 years old
 
 	Craghoppers from 12+ years old
-

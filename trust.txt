@@ -2,15 +2,33 @@ Trust Award
 
 To earn a Trust Award you must be able to do the following:
 
+
+
+
 Keep safe and behave at all times
+
+
+
 
 Correctly put on your helmet and harness
 
+
+
+
 Ask my instructor to check me and hold my rope when I am belaying and lowering my climber
+
+
+
 
 Know the safety rules for the bouldering wall and traverse wall
 
+
+
+
 Know the safety rules for top-roping
+
+
+
 
 Use a Gri-Gri to safely belay and lower off a climber
 	setup
@@ -19,36 +37,65 @@ Use a Gri-Gri to safely belay and lower off a climber
 		V, knee, 1, 2, 3
 	lowering
 
-[combine two previous rules categories]
+
+
+
 Know the safety rules for the climbing centre
 (Craggy Ten Commandments)
+
+
+
 
 Learn how to set up a Gri-Gri belay device
 Learn how to belay using a Gri-Gri (V, knee, 1, 2, 3)
 	no lifting heels when belaying
 	no jumping when belaying
 
+
+
+
 Learn about Route Grading (French Sport Grading)
 	Measure of technical difficulty
 	Difficulty of hardest move
 	What do we want them to know?
 
+
+
+
 Importance of tailing, when belaying
 
+
+
+
 Tie in with a figure-of-8 rethreaded knot
-	correct knot
-	stopper
-	correct part of harness
+	Correct knot
+	Stopper
+	Correct part of harness
 		DMM
 		black diamond
 
+
+
+
 Make sure the rope isn't twisted before climbing
+
+
+
 
 untie fig-8 and hang up rope after climb
 
+
+
+
 tidy harness after use
 
+
+
+
 ------------
+
+
+
 
 instructor notes:
 	explain loose / unweighted rope

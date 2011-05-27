@@ -179,6 +179,7 @@ function route_main()
 	return $response;
 }
 
+header('Pragma: no-cache');
 
 echo route_main();
 

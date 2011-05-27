@@ -170,4 +170,6 @@ function setter_main()
 }
 
 
+header('Pragma: no-cache');
+
 echo setter_main();

@@ -159,6 +159,7 @@ function panel_main()
 }
 
 
+header('Pragma: no-cache');
 header('Content-Type: application/xml; charset=ISO-8859-1');
 
 $xml = panel_main();

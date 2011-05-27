@@ -587,6 +587,7 @@ function climb_main (&$xml)
 }
 
 
+header('Pragma: no-cache');
 header('Content-Type: application/xml; charset=ISO-8859-1');
 $xml = new SimpleXMLElement ("<?xml-stylesheet type='text/xsl' href='route.xsl'?"."><list />");
 $xml->addAttribute ('type', 'climb');

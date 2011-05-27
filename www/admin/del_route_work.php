@@ -107,5 +107,8 @@ function route_main()
 
 
 //$_GET = array('action' => 'delete', 'data' => '42-45');
+
+header('Pragma: no-cache');
+
 echo route_main();
 

@@ -2,7 +2,7 @@
 
 static $fd = null;
 
-function log_init ($path = null)
+function log_init ($path = null, $verbose = false)
 {
 	global $fd;
 
@@ -13,6 +13,9 @@ function log_init ($path = null)
 	libxml_use_internal_errors (true);
 
 	$fd = fopen ($path, "a");
+
+	if ($verbose)
+		log_string ("Log started: " . date ('Y/m/d H:i:s'));
 }
 
 function log_var ($var)
@@ -31,5 +34,4 @@ function log_string ($str)
 	if ($str[strlen ($str) - 1] != "\n")
 		fwrite ($fd, "\n");
 }
-
 

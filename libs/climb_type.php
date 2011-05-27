@@ -9,7 +9,7 @@ function climb_type_get()
 	static $climb_type = null;
 
 	if ($climb_type === null) {
-		include 'db.php';
+		include_once 'db.php';
 		include 'db_names.php';
 		$climb_type = db_select ($DB_CLIMB_TYPE);
 	}

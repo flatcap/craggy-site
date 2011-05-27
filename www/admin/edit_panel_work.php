@@ -10,18 +10,20 @@ include_once 'xml.php';
 include_once 'number.php';
 include_once 'height.php';
 include_once 'taglist.php';
+include_once 'climb_type.php';
 
 include 'db_names.php';
 
-function panel_commit ($xml, $id, $name, $sequence, $height, $tags)
+function panel_commit ($xml, $id, $name, $sequence, $climb_type_id, $height, $tags)
 {
 	global $DB_PANEL;
 	$query  = "update $DB_PANEL set " .
-		  "name     = '$name', " .
-		  "sequence = $sequence, " .
-		  "height   = $height, " .
-		  "tags     = '$tags' " .
-		  "where id = $id";
+		  "name          = '$name', " .
+		  "sequence      = $sequence, " .
+		  "climb_type_id = $climb_type_id, " .
+		  "height        = $height, " .
+		  "tags          = '$tags' " .
+		  "where id      = $id";
 
 	db_get_database();
 	$result = mysql_query($query);
@@ -114,7 +116,10 @@ function panel_do_save()
 		$height = substr ($height, 0, -1);	//XXX lose the 'm'
 		$tags     = urldecode ($a->tags);
 
-		panel_commit ($a, $id, $name, $sequence, $height, $tags);
+		$climb_type = climb_type_match (urldecode ($a->climb_type));
+		$climb_type_id = $climb_type['id'];
+
+		panel_commit ($a, $id, $name, $sequence, $climb_type_id, $height, $tags);
 	}
 
 	return $xml;

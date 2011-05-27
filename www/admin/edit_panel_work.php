@@ -134,7 +134,7 @@ function panel_main()
 		$xml = xml_new_string ("list");
 		$xml->addAttribute ('type', 'panel');
 		xml_add_error ($xml, "No action");
-		return;
+		return $xml;
 	}
 
 	$action  = $_GET['action'];

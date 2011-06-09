@@ -1,68 +1,71 @@
-Techniques
-
 Learn some basic techniques
+
+
 
 Learn some techniques
 
+
+
 Learn some advanced techniques
+
+
 
 Explain and demonstrate techniques
 
+
+
 Techniques: (Demonstrate 2 from each technique group listed below)
 
+
+
 Techniques: Learn the techniques below
+
+
 
 Techniques:
 	Learn
 	Understand
 	Demonstrate
 
+
+
 Demonstrate techniques
+
+
 
 Efficient climbing
 
+
+
 Techniques / Movement skills
 
+
+
 Demonstrate 6 techniques (2 from each technique group listed below)
+
+
 
 Demonstrate all the techniques below
 	how to assess this?
 		test all?
 		test random?
 
+
+
 ----
 
+
+
 Hand
-	Crimp
-		Half Crimp
-		Open Crimp
-		Closed Crimp
-	Open-Hand
-	Matching
-	Cross-Through
-	Palming
 	Sticky Hands
 		Cannot move once placed
 		Name the type of hold before placement
 		Combine with silent feet
-	Gaston
 	Pinch (Arete)
-	Side-pull
-	Crimp
-	Cross-Through
-	Matching
-	Open-Hand
-	Palming
-	Pinching
-	Undercut
+
+
 
 Feet
-	Basic foot placement
-	Inside/Outside Edging
-	Foot Swap
-	Step-Through
-	Smearing
-	Heel
 	Hook
 		Toe
 		Heel
@@ -72,28 +75,18 @@ Feet
 		No scuffing feet against the wall
 		Cannot move once placed
 		Combine with sticky hands
-	Frogging
 	Foot Swap
 		efficient use (hopping, dagger)
-	Inside / Outside Edging
+
+
 
 Body
-	Balance
-	Bat Hang
 	Bridging
 		Climb a corner
-	Chimneying
-	Flagging
-		Inner
-		Outer
 	Mantleshelf
 		On emergency mats
 		On windowsill in the changing room
 		On the benches in the changing room
-	Rock-Over
-	Drop-Knee
-	Straight Arms
-	Dead-Pointing
 	Resting Whilst Climbing
 		Weight on feet
 		Slab
@@ -101,14 +94,13 @@ Body
 		Straight Arms
 		Balanced
 		Knee-bar
-	Dyno
-	Layback (Arete/flake)
+	Layback
+		Arete
+			Up the edge of the slab
+		Flake
 	No Hands on Slab
-		Weight feet, balance
+		Weight feet
+		Balance
 
-Jamming
-	Hand Jam
-	Fist Jam
-	Foot Jam
-	Knee Bar
+
 

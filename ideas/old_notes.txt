@@ -1,0 +1,59 @@
+Editing Routes
+	Delete
+	Add New
+	Edit
+
+	Search (select & action)
+
+	Add Climb
+	Edit Climb
+	Delete Climb
+
+	Search Climbs (select & action)
+
+Delete Route
+	Search by panel number
+	No Matches - error message - back to search
+	Matches - list & checkbox by each & delete button
+	(deselect those with no "set date" (i.e. features only)
+	message: n routes deleted - back to search
+
+Add New Route
+	Text area and number box
+	Enter climbs in "56 gn" notation, or a number
+	parse climbs or create 'n' empty templates
+	Edit / fill in more details & OK
+
+Edit Routes
+	Text box for panel numbers
+	Generate List
+	Edit & OK
+
+Search Climbs
+	Search by panel, colour, grade, date, etc
+	List & Tickbox
+	Edit, Delete, Add New
+
+Search Route
+	Search by panel, colour, grade, date, etc
+	List matches and tickbox
+	0 matches (error & back to search)
+	Keep search box on all screens?
+	tick boxes and Delete or Edit or Add Climb
+
+Add Climb - need a single datebox
+	Text area and number box
+	Enter climbs in "56 gn" notation or num
+	Parse climbs or create 'n' empty templates
+	Edit/fill in details and OK
+
+Edit Climb
+	Search by panel, colour, grade, date, etc
+	List matches and tickbox
+	Edit, tick & OK
+
+Delete Climb
+	Search by panel, etc
+	List matches & tickbox
+	Tick and OK
+

@@ -1,0 +1,8 @@
+route history doesn't include whether the route was a lead / top rope
+
+changing *just* the notes, doesn't alter the route itself
+
+checklist.pdf
+	compare timestamp against latest route
+	new -> update pdf and save it
+	old -> give out the original pdf

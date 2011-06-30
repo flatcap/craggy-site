@@ -6,3 +6,6 @@ checklist.pdf
 	compare timestamp against latest route
 	new -> update pdf and save it
 	old -> give out the original pdf
+
+restore syntax highlighting of files
+need to put back the examples dir!

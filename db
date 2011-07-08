@@ -1,6 +1,6 @@
 #/bin/bash
 
-BASE_DIR="/home/flatcap/downloads/craggy"
+BASE_DIR="/home/work/craggy"
 DB_HOST="127.0.0.1"
 DB_PORT="3307"
 DB_USER="backup"

@@ -1,0 +1,136 @@
+Glossary
+
+Equipment / Gear names
+	Wall
+		Anchor
+		Bolt holes
+		Hanger
+		Quick-Draw
+		Daisy chain
+
+	Belay device
+		ATC
+		Belay master
+		Belay plate
+		Bug
+		Figure 8 descender
+		Gri-Gri
+		Stich plate
+
+	Karabiner
+		D-Shaped
+		HMS
+		Krab
+		Pear-Shaped
+		Screwgate
+		Snapgate
+
+	Knots
+		Alpine Butterfly
+		Bight
+		Bowline
+		Clove Hitch
+		Figure 8
+		Figure 8 Rethreaded
+		Fisherman's
+		Italian Hitch
+		Stopper Knot
+
+	Other
+		Sling
+		Prussik
+
+Hold Types - On the Walls
+	Arete
+	Break
+	Crimp
+	Disc (Features)
+	Features
+	Flake
+	Groove
+	Jam
+	Jug
+	Mono
+	Pocket
+	Side-pull
+	Sloper
+	Thread
+	Tufa
+	Undercut
+	Volume
+
+Climbing
+	clean/successful/fail/rainbow
+	beta
+	onsight
+	overhang
+	steep
+	slab
+	campus, campusing
+
+Around the Centre
+	Auto-belay
+	Top roping
+	Lead climbing
+		clipping
+		back-clipping
+		z-clipping
+	Anchor bag
+	Seconding
+	Drop zone
+	Bouldering / Boulderer / Boulder
+		spotting a boulderer
+	Traverse / traversing
+		traverse wall
+		main walls
+	Woody
+	Pull-up board / Finger board
+	chimney
+	belay, belayer, belaying
+	abseil / abseiling
+
+Techniques
+	see techniques.txt
+
+Kids Clubs
+	Trust
+	Bronze
+	Silver
+	Gold
+
+	Mini Kids (5-8)
+	Kids Club (8-16)
+	Craghoppers (12-16)
+
+Unsorted
+	ascend
+	bolt holes
+	bug
+	commandments craggy
+	competency
+	craggy
+	dynamic
+	escape the system
+	flaking
+	grade
+	gravity
+	harnesses
+	hold
+	hvs
+	indirect / direct / anchor
+	limbo
+	lower
+	petzl / dmm / black diamond
+	route
+	sit start
+	sport climbing
+	stance
+	static / rope / move
+	sutton2 / craggy 2
+	tailing
+	tape /finger
+	topping out
+	unweighted
+	vdiff
+	weighting
+

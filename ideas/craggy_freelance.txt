@@ -1,0 +1,88 @@
+Craggy freelance tasks
+
+Wordpress - plugins
+Overview of site
+list of routes - sortable, etc
+user updateable
+rate climbs
+comment on climbs - link to routes
+climb history
+personal stats / log
+search climbs
+map
+list of 6as
+build-me-a-list page
+stats
+config route columns
+link to forum?  auto? how?
+pictures? gallery linked to routes
+same for sutton
+paged routes 1-15,16-31,etc Next>
+split on panel boundaries - max climbs / page
+GPL
+ownership of code? delay? 6m 1y?
+forums
+admin site separate
+integrated admin site
+setter links to user's page
+export on data pages
+
+docs & training
+maintenance 1 month bugfix free
+
+add/remove
+	centre (Guildford)
+	panel (86 panels)
+	climb (268 climbs)
+	colour
+	grade
+	type (Lead, TR, auto)
+	setter
+
+centre info
+	Name
+	Tag line
+	Address
+	Phone
+	Website
+
+panel
+	Name/Num
+	Styles (list)
+	TR/Lead/Auto/Boulder
+	Height
+
+climb
+	colour
+	grade
+	type (via panel)
+	setter
+	date set
+	permanent (features)
+	notes (list / string)
+	attrs (comp, etc)
+
+setter
+	name
+	initials
+	url
+
+colour
+	colour
+	abbreviations
+
+grade
+	grade
+	order
+
+type
+	name
+
+Delete routes:
+	Panels x-y,z  (tickbox -> default state on the confirm page)
+	list routes (tickbox)
+	features routes (not ticked)
+
+delete centre
+	clear out *all* related data
+

@@ -1,42 +1,22 @@
 Multiples
 
-
-
 Complete 10 climbs (any colour, may rest)
-
-
 
 Complete 10 climbs (without resting on the rope)
 
-
-
 Complete 10 climbs (on a single colour, without using the rope)
-
-
 
 Complete 10 climbs at your current grade of "X"
 
-
-
 Complete 10 climbs at a harder grade (log the grade too)
-
-
 
 Complete 10 climbs above grade X
 
-
-
 Complete 10 Boulder Problems (any colours)
-
-
 
 Complete 10 Boulder Problems (on a single colour)
 
-
-
 Create and test 10 Boulder Problems
-
-
 
 Log of X
 	Date / Sign 1
@@ -44,11 +24,7 @@ Log of X
 	...
 	Date / Sign n
 
-
-
 Climbs [ init / grade ] [ init / grade ] boxes
-
-
 
 Climbs:
 	Grade 3  XXXXXX
@@ -57,9 +33,5 @@ Climbs:
 	Grade 6a
 	...
 
-
-
 Best grade climbed
-
-
 

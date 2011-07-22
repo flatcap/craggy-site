@@ -2,8 +2,6 @@ Craghoppers
 
 Skills sheet
 
-
-
 lead
 	clipping
 	belaying
@@ -12,8 +10,6 @@ lead
 		quick-draws
 		pigtail
 	falling
-
-
 
 abseil
 	figure-8
@@ -26,31 +22,19 @@ abseil
 	daisy chain / sling to extend abseil device
 	set up own abseil - personal gear and the ropes
 
-
-
 Rope handling
 	flaking
 	coiling
 	carrying
 
-
-
 ascend a fixed line
 
-
-
 keep sheets in folder, like mini-kids
-
-
 
 tie off a belay device
 escape the system
 
-
-
 rescues?
-
-
 
 logging
 	log1 date - amount of tuition (mins) - areas covered
@@ -58,12 +42,8 @@ logging
 	...
 	competent date
 
-
-
 boulder league - Craghoppers / gold / silver
 climbing league - Craghoppers / gold / silver
-
-
 
 yearly retest of belay proficiency
 	reception test
@@ -71,11 +51,7 @@ yearly retest of belay proficiency
 		fast climbing
 		big falling
 
-
-
 minimum age to lead climb is 12 years, 13? 14?
-
-
 
 Personal training
 	Stamina
@@ -92,8 +68,6 @@ Personal training
 	Flagging
 	Ability to read a route
 	Overhangs/steep ground
-
-
 
 gold/Craghoppers
 	anchors

@@ -21,10 +21,7 @@ Personal training
 tie off a belay device
 escape the system
 
-
-
 rescues?
-
 
 lead
 	clipping
@@ -34,7 +31,6 @@ lead
 		quick-draws
 		pigtail
 	falling
-
 
 abseil
 	figure-8

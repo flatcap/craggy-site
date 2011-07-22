@@ -1,4 +1,3 @@
-
 Silver Award
 
 To be in Silver Training a climber must be able to maintain all the Bronze Award skills, and be willing to learn
@@ -6,7 +5,6 @@ about climbing technique and climbing without any help from the rope
 
 State: You now have the basic climbing skills
 Aim: Become a technical climber
-
 
 Complete 10 climbs (on a single colour, without using the rope)
 Complete 10 climbs (on a single colour, without using the rope)
@@ -76,7 +74,6 @@ Learn some advanced techniques
 	test 6
 
 Techniques - route applied on
-
 
 Technique - Hand - Closed Crimp
 Technique - Hand - Open Crimp

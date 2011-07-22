@@ -3,18 +3,12 @@ Silver Award
 To be in Silver Training a climber must be able to maintain all the Bronze Award skills, and be willing to learn
 about climbing technique and climbing without any help from the rope
 
-
-
 Maintain Bronze Award skills
 	What does this mean?
-
-
 
 Describe and demonstrate safety checks on Harness, Helmet, Belay Device, Karabiner and Rope
 	Trust - checking set up?
 	Silver - checking integrity of equipment
-
-
 
 Complete a Junior Competency Test (belay proficiency) - both names
 	Anchor bag
@@ -29,20 +23,14 @@ Complete a Junior Competency Test (belay proficiency) - both names
 	Stance
 	Rate the importance of each (optional -> mandatory)
 
-
-
 Improve your climbing by one grade
 	define this
 	5+ is a grade
 	Improve by half-a-grade?
 
-
-
 Explain climbing styles
 	Static
 	Dynamic
-
-
 
 Abseiling
 	Only if above grade 3? 4? 5?
@@ -50,19 +38,13 @@ Abseiling
 	Only if above Bronze?
 	Practice at ground level
 
-
-
 Techniques
 	see techniques.txt
-
-
 
 Create boulder problems
 	Set themselves problems
 	Find their own
 	Route selection
-
-
 
 Body Awareness - What is meant by
 	Centre of gravity
@@ -70,8 +52,6 @@ Body Awareness - What is meant by
 	Stable balance
 	Off balance
 	Dynamic balance
-
-
 
 Route reading
 	study a route

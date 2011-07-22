@@ -6,7 +6,6 @@ about climbing technique and climbing without any help from the rope
 State: I am a technical climbed
 Aim: Become a shining example to all climbers
 
-
 Describe and demonstrate safety checks on Harness, Helmet, Belay Device, Karabiner and Rope
 	Trust - checking set up?
 	Silver - checking integrity of equipment
@@ -32,7 +31,6 @@ Abseiling
 	create a French prussik
 	tie a double fisherman's bend
 
-
 Find a professional climber and do some research on them
 (Name, age, sponsors, discipline etc) & find at least 2 videos of this climber
 
@@ -48,7 +46,6 @@ Explain importance of warming up / cooling down
 no stretching
 structure of session
 easy warm up climb / traverse
-
 
 Learn why we use and how to tie a:
 	Clove Hitch
@@ -110,7 +107,6 @@ optional extras
 5+ challenge
 6a challenge
 	across all kids club / craghoppers
-
 
 Technique - Hand - Undercut
 Technique - Jamming - Fist Jam

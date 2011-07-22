@@ -41,7 +41,6 @@ Log of X
 	...
 	Date / Sign n
 
-
 Climb safely using 2 different harnesses
 know how to
 
@@ -78,7 +77,6 @@ Log of X
 Communicate clearly with your climbing partner
 	see calls.txt
 
-
 Spotting a Boulderer
 	Rationale
 		What are we protecting?
@@ -99,7 +97,6 @@ Check your partner every time before you climb
 	Karabiner
 	Knot
 	Instructor belay - deliberate mistakes
-
 
 Learn about different styles of harnesses
 	Bowline

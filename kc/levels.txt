@@ -20,3 +20,9 @@ Estimated (minimum) time for each level
 	Total: 3 years => 8 - 11 years old
 
 	Craghoppers from 12+ years old
+
+Scrap Trust Badge?
+	Novice works on trust
+	novices finishes trust, gets a bronze badge (and cert)
+	bronze finishes bronze, gets a silver...
+	this leaves gold open-ended

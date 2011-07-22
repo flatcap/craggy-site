@@ -53,15 +53,24 @@ Use a Gri-Gri to safely belay and lower off a climber
 
 Understand the safety rules for the climbing centre (Craggy Ten Commandments)
 
-Ask my instructor to check me and hold my rope when I am belaying and lowering my climber
 Ask my instructor to check me and hold my rope when I am belaying
+Understand the importance of tailing, when belaying
 
 Complete 10 climbs (any colour, may rest)
 Complete 10 climbs (any colour, may rest)
 
 Complete 10 Boulder Problems (any colours)
 
+keep safe / maintain prev level - leave till last
+
+Tidy harness after use
+
+Make sure the rope isn't twisted before climbing
+
+take part in a climbing competition
+
 Best grade climbed
+	on this award
 
 Climbs:
 	Grade 3  XXXXXX
@@ -71,7 +80,7 @@ Climbs:
 	...
 Include half-grades
 
-keep safe / maintain prev level - leave till last
+------------------------------------------------------------
 
 Assessment
 	[Y/N] Can the climber complete all the above in a trustworthy manner?
@@ -80,11 +89,4 @@ Assessment
 	Signed
 	Date
 
-Tidy harness after use
-
-Make sure the rope isn't twisted before climbing
-
-take part in a climbing competition
-
-Understand the importance of tailing, when belaying
-
+------------------------------------------------------------

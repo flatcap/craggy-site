@@ -1,13 +1,22 @@
 Bronze Award
+Craggy Island Achievement Award in Climbing Skills
 
-State: You are now a trustworthy climber
+State: I am now a trustworthy climber
 Aim: A general understanding of the basic principles of climbing and belaying
+
+Child's Name
+Kids Club Day
+Kids Club Time
+Age
 
 To be in Bronze Training a climber must be able to maintain
 all the Trust Award skills, and be willing to learn about
 climbing technique and climbing without any help from the rope
 
 Maintain Trust Award skills
+
+Good Behaviour Log
+six boxes (for instructor initials)
 
 Learn about Route Grading (French Sport Grading)
 	Measure of technical difficulty
@@ -22,14 +31,6 @@ instructor notes:
 
 Holding a falling climber
 
-Climbs:
-	Grade 3  XXXXXX
-	Grade 4  XXX
-	Grade 5  X
-	Grade 6a
-	...
-Include half-grades
-
 Re-Assemble your harness after your instructor has completely taken it apart
 
 Learn how to use an ATC XP belay device
@@ -41,8 +42,8 @@ Log of X
 	...
 	Date / Sign n
 
+Know how to
 Climb safely using 2 different harnesses
-know how to
 
 Belay using 2 different belay devices (not a Gri-Gri)
 	After learning the ATC
@@ -50,10 +51,6 @@ Belay using 2 different belay devices (not a Gri-Gri)
 	Stich Plate
 	Italian Hitch
 	Body belaying
-
-Best grade climbed
-	on previous award
-	on this award
 
 Correctly use an anchor bag
 	daisy chain / rope tight
@@ -122,14 +119,15 @@ Techniques
 learn (and tick off all techniques)
 demonstrate 6 for assessment
 
-Technique - Feet - Basic foot placement
-Technique - Hand - Matching
-Technique - Feet - Smearing
-Technique - Body - Balance
-Technique - Hand - Cross-Through
-Technique - Feet - Silent Feet
-Technique - Feet - Step-Through
-Technique - Feet - Foot Swap
+Techniques
+	Hand - Cross-Through
+	Hand - Matching
+	Feet - Basic foot placement
+	Feet - Foot Swap
+	Feet - Silent Feet
+	Feet - Smearing
+	Feet - Step-Through
+	Body - Balance
 
 Complete 10 climbs at your current grade of "X"
 Complete 10 climbs at a harder grade (log the grade too)
@@ -153,4 +151,27 @@ should know it / be able to demonstrate it, thereafter
 without weighting the rope?
 slightly loose rope?
 	proper explanation for instructors
+
+Best grade climbed
+	on previous award
+	on this award
+
+Climbs:
+	Grade 3  XXXXXX
+	Grade 4  XXX
+	Grade 5  X
+	Grade 6a
+	...
+Include half-grades
+
+------------------------------------------------------------
+
+Assessment
+	[Y/N] Can the climber complete all the above in a trustworthy manner?
+	[Y/N] Has the climber performed all the above tasks competently?
+	Instructors Name
+	Signed
+	Date
+
+------------------------------------------------------------
 

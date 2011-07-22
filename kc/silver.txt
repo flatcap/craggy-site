@@ -1,18 +1,29 @@
 Silver Award
+Craggy Island Achievement Award in Climbing Skills
+
+State: I now have the basic climbing skills
+Aim: Become a technical climber
+
+Child's Name
+Kids Club Day
+Kids Club Time
+Age
 
 To be in Silver Training a climber must be able to maintain all the Bronze Award skills, and be willing to learn
 about climbing technique and climbing without any help from the rope
 
-State: You now have the basic climbing skills
-Aim: Become a technical climber
-
 Maintain Bronze Award skills
 	What does this mean?
 
+Good Behaviour Log
+six boxes (for instructor initials)
+
 Complete 10 climbs (on a single colour, without using the rope)
 Complete 10 climbs (on a single colour, without using the rope)
 Complete 10 climbs (without resting on the rope)
 Complete 10 climbs (without resting on the rope)
+
+Create and test 10 Boulder Problems
 
 Route reading
 	study a route
@@ -21,8 +32,6 @@ reduce number of climbs for each section
 and only sign off _best_two_ climbs
 	doesn't penalise the slower climbers
 	better climbers can focus on quality not quantity
-
-Create and test 10 Boulder Problems
 
 Best grade climbed
 
@@ -72,35 +81,59 @@ Assessment
 	Assess on certain days of term
 	Noticeboard of dates
 
-Learn some advanced techniques
-	Learn all
-	test 6
+Learn some advanced techniques (Learn all - test 6)
+	Hand
+		Closed Crimp
+		Crimp
+		Half Crimp
+		Open Crimp
+		Open-Hand
+		Palming
+		Pinching
+		Sticky Hands
+	Feet
+		Foot Swap
+		Heel Hook
+		Inside/Outside Edging
+		Toe Hook
+	Body
+		Bridging
+		Chimneying
+		Dead-Pointing
+		Inner Flagging
+		Layback
+		Mantleshelf
+		No Hands on Slab
+		Outer Flagging
+		Resting Whilst Climbing
+		Rock-Over
+		Straight Arms
 
 Techniques - route applied on
 
-Technique - Hand - Closed Crimp
-Technique - Hand - Open Crimp
-Technique - Feet - Toe Hook
-Technique - Body - Chimneying
-Technique - Hand - Palming
-Technique - Hand - Open-Hand
-Technique - Body - Layback
-Technique - Body - Inner Flagging
-Technique - Hand - Sticky Hands
-Technique - Body - Mantleshelf
-Technique - Feet - Inside/Outside Edging
-Technique - Feet - Foot Swap
-Technique - Body - Straight Arms
-Technique - Body - Outer Flagging
-Technique - Feet - Heel
-Technique - Body - Bridging
-Technique - Feet - Inside Edging
-Technique - Feet - Heel Hook
-Technique - Body - Dead-Pointing
-Technique - Hand - Pinching
-Technique - Body - Rock-Over
-Technique - Hand - Half Crimp
-Technique - Feet - Outside Edging
-Technique - Body - No Hands on Slab
-Technique - Hand - Crimp
-Technique - Body - Resting Whilst Climbing
+boulder league - Craghoppers / gold / silver
+climbing league - Craghoppers / gold / silver
+
+Best grade climbed
+	on previous award
+	on this award
+
+Climbs:
+	Grade 3  XXXXXX
+	Grade 4  XXX
+	Grade 5  X
+	Grade 6a
+	...
+Include half-grades
+
+------------------------------------------------------------
+
+Assessment
+	[Y/N] Can the climber complete all the above in a trustworthy manner?
+	[Y/N] Has the climber performed all the above tasks competently?
+	Instructors Name
+	Signed
+	Date
+
+------------------------------------------------------------
+

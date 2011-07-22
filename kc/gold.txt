@@ -1,10 +1,22 @@
 Gold Award
+Craggy Island Achievement Award in Climbing Skills
+
+State: I am a technical climber
+Aim: Become a shining example to all climbers
+
+Child's Name
+Kids Club Day
+Kids Club Time
+Age
 
 To be in Gold Training a climber must be able to maintain all the Silver Award skills, and be willing to learn
 about climbing technique and climbing without any help from the rope
 
-State: I am a technical climbed
-Aim: Become a shining example to all climbers
+Maintain Silver Award Skills
+	What does this mean?
+
+Good Behaviour Log
+six boxes (for instructor initials)
 
 Describe and demonstrate safety checks on Harness, Helmet, Belay Device, Karabiner and Rope
 	Trust - checking set up?
@@ -109,13 +121,31 @@ optional extras
 6a challenge
 	across all kids club / craghoppers
 
-Technique - Hand - Undercut
-Technique - Jamming - Fist Jam
-Technique - Jamming - Foot Jam
-Technique - Jamming - Hand Jam
-Technique - Jamming - Knee Bar
-Technique - Feet - Frogging
-Technique - Hand - Gaston
-Technique - Body - Dyno
-Technique - Hand - Side-pull
-Technique - Body - Drop-Knee
+Techniques
+	Hand
+		Gaston
+		Side-pull
+		Undercut
+	Feet
+		Frogging
+	Body
+		Drop-Knee
+		Dyno
+	Jamming
+		Fist Jam
+		Foot Jam
+		Hand Jam
+		Knee Bar
+
+Best grade climbed
+	on previous award
+	on this award
+
+Climbs:
+	Grade 3  XXXXXX
+	Grade 4  XXX
+	Grade 5  X
+	Grade 6a
+	...
+Include half-grades
+

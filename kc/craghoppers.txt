@@ -1,6 +1,6 @@
 Craghoppers
 
-Skills sheet
+Skills sheet - keep in Cupboard, like mini-kids
 
 Personal training
 	Stamina
@@ -18,8 +18,7 @@ Personal training
 	Ability to read a route
 	Overhangs/steep ground
 
-tie off a belay device
-escape the system
+Escape the system
 
 rescues?
 
@@ -43,8 +42,6 @@ abseil
 	daisy chain / sling to extend abseil device
 	set up own abseil - personal gear and the ropes
 
-keep sheets in folder, like mini-kids
-
 ascend a fixed line
 
 yearly retest of belay proficiency
@@ -53,11 +50,6 @@ yearly retest of belay proficiency
 		fast climbing
 		big falling
 
-Leading
-	Climbing
-	Clipping
-	Belaying
-
 Rope work
 	Different rope types
 	Static
@@ -65,6 +57,7 @@ Rope work
 	Coiling
 	Knots
 	Flaking
+	Carrying
 
 Participate in a Craggy Island Outdoor Climbing Taster Day
 climb outside with your Parent/Guardian
@@ -74,8 +67,12 @@ What's the difference in properties and use of dynamic and static rope
 
 Ascend a fixed rope using prussiks
 
-Rope handling
-	flaking
-	coiling
-	carrying
+logging
+	log1 date - amount of tuition (mins) - areas covered
+	log2 date
+	...
+	competent date
+
+boulder league - Craghoppers / gold / silver
+climbing league - Craghoppers / gold / silver
 

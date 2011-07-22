@@ -1,0 +1,17 @@
+
+Personal training
+	Stamina
+	Power
+	Flexibility
+	Balance
+	Recovery
+	Core stability
+	Best route grade
+	Best boulder grade
+	Palming and bridging
+	Half crimp
+	Full crimp
+	Flagging
+	Ability to read a route
+	Overhangs/steep ground
+

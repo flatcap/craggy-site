@@ -1,17 +1,106 @@
-Improve your climbing by one grade
-	define this
-	5+ is a grade
-	Improve by half-a-grade?
+Silver Award
 
-Create boulder problems
-	Set themselves problems
-	Find their own
-	Route selection
+To be in Silver Training a climber must be able to maintain all the Bronze Award skills, and be willing to learn
+about climbing technique and climbing without any help from the rope
 
-Body Awareness - What is meant by
-	Centre of gravity
-	Base of support
-	Stable balance
-	Off balance
-	Dynamic balance
+State: You now have the basic climbing skills
+Aim: Become a technical climber
 
+Maintain Bronze Award skills
+	What does this mean?
+
+Complete 10 climbs (on a single colour, without using the rope)
+Complete 10 climbs (on a single colour, without using the rope)
+Complete 10 climbs (without resting on the rope)
+Complete 10 climbs (without resting on the rope)
+
+Route reading
+	study a route
+
+reduce number of climbs for each section
+and only sign off _best_two_ climbs
+	doesn't penalise the slower climbers
+	better climbers can focus on quality not quantity
+
+Create and test 10 Boulder Problems
+
+Best grade climbed
+
+Climbs:
+	Grade 3  XXXXXX
+	Grade 4  XXX
+	Grade 5  X
+	Grade 6a
+	...
+
+Learn names of hold types
+
+Complete a Junior Competency Test (belay proficiency) - both names
+	Anchor bag
+	Auto-belay
+	Belay device setup
+		ATC
+		Gri-Gri (optional)
+	Belaying at speed
+	Catching falls
+	Checking
+	Knot tying
+	Stance
+	Rate the importance of each (optional -> mandatory)
+Pass Date
+
+Craghopper Assessment Date
+	Belay
+	Sensible
+	12+
+
+Craghopper Referral
+	Sensible
+	Safe
+	Self-motivated
+
+Notes:
+	perfect knots, etc
+	maintain
+
+Explain climbing styles
+	Static
+	Dynamic
+
+Assessment
+	Silver & Gold
+	Assess on certain days of term
+	Noticeboard of dates
+
+Learn some advanced techniques
+	Learn all
+	test 6
+
+Techniques - route applied on
+
+Technique - Hand - Closed Crimp
+Technique - Hand - Open Crimp
+Technique - Feet - Toe Hook
+Technique - Body - Chimneying
+Technique - Hand - Palming
+Technique - Hand - Open-Hand
+Technique - Body - Layback
+Technique - Body - Inner Flagging
+Technique - Hand - Sticky Hands
+Technique - Body - Mantleshelf
+Technique - Feet - Inside/Outside Edging
+Technique - Feet - Foot Swap
+Technique - Body - Straight Arms
+Technique - Body - Outer Flagging
+Technique - Feet - Heel
+Technique - Body - Bridging
+Technique - Feet - Inside Edging
+Technique - Feet - Heel Hook
+Technique - Body - Dead-Pointing
+Technique - Hand - Pinching
+Technique - Body - Rock-Over
+Technique - Hand - Half Crimp
+Technique - Feet - Outside Edging
+Technique - Body - No Hands on Slab
+Technique - Hand - Crimp
+Technique - Body - Resting Whilst Climbing

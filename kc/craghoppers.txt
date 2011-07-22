@@ -1,20 +1,81 @@
+Craghoppers
+
+Skills sheet
+
+Personal training
+	Stamina
+	Power
+	Flexibility
+	Balance
+	Recovery
+	Core stability
+	Best route grade
+	Best boulder grade
+	Palming and bridging
+	Half crimp
+	Full crimp
+	Flagging
+	Ability to read a route
+	Overhangs/steep ground
+
 tie off a belay device
 escape the system
 
-logging
-	log1 date - amount of tuition (mins) - areas covered
-	log2 date
-	...
-	competent date
+rescues?
 
-boulder league - Craghoppers / gold / silver
-climbing league - Craghoppers / gold / silver
+lead
+	clipping
+	belaying
+	sport topping out
+		rings
+		quick-draws
+		pigtail
+	falling
 
-minimum age to lead climb is 12 years, 13? 14?
+abseil
+	figure-8
+	prussik
+		tie it
+			fisherman's
+		use it
+	anchor
+	stacked abseil
+	daisy chain / sling to extend abseil device
+	set up own abseil - personal gear and the ropes
 
-gold/Craghoppers
-	anchors
-		direct
-		indirect
-		use dead end of belay rope
+keep sheets in folder, like mini-kids
+
+ascend a fixed line
+
+yearly retest of belay proficiency
+	reception test
+	junior comp test
+		fast climbing
+		big falling
+
+Leading
+	Climbing
+	Clipping
+	Belaying
+
+Rope work
+	Different rope types
+	Static
+	Dynamic
+	Coiling
+	Knots
+	Flaking
+
+Participate in a Craggy Island Outdoor Climbing Taster Day
+climb outside with your Parent/Guardian
+	Joe C?
+
+What's the difference in properties and use of dynamic and static rope
+
+Ascend a fixed rope using prussiks
+
+Rope handling
+	flaking
+	coiling
+	carrying
 

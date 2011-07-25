@@ -26,3 +26,8 @@ Scrap Trust Badge?
 	novices finishes trust, gets a bronze badge (and cert)
 	bronze finishes bronze, gets a silver...
 	this leaves gold open-ended
+
+
+What *exactly* is required to pass each award?
+What's mandatory?
+What's optional?

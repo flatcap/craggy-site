@@ -1,48 +1,103 @@
 Silver Award
 Craggy Island Achievement Award in Climbing Skills
 
-State: I now have the basic climbing skills
-Aim: Become a technical climber
-
 Child's Name
 Kids Club Day
 Kids Club Time
 Age
 
-To be in Silver Training a climber must be able to maintain all the Bronze Award skills, and be willing to learn
-about climbing technique and climbing without any help from the rope
+------------------------------------------------------------
+
+I am: A basic climber
+Aim: Become a technical climber
+
+------------------------------------------------------------
 
 Maintain Bronze Award skills
-	What does this mean?
 
-Good Behaviour Log
-six boxes (for instructor initials)
+Good Behaviour Log: [ ] [ ] [ ] [ ] [ ] [ ]
 
-Complete 10 climbs (on a single colour, without using the rope)
-Complete 10 climbs (on a single colour, without using the rope)
+Learn names of hold types
+
+Learn to Read a Route
+
+Complete a Junior Competency Test (Belay Proficiency)
+
+Explain climbing styles
+	Static
+	Dynamic
+
+Learn and Demonstrate some Advanced Techniques:
+	Hand
+		Crimp
+		Open-Hand
+		Palming
+		Pinching
+	Feet
+		Foot Swap
+		Heel Hook
+		Inside/Outside Edging
+		Toe Hook
+	Body
+		Bridging
+		Chimneying
+		Dead-Pointing
+		Flagging
+		Layback
+		Mantleshelf
+		No Hands on Slab
+		Resting Whilst Climbing
+		Rock-Over
+		Straight Arms
+
+Learn to abseil
+
+Take part in a climbing competition
+
 Complete 10 climbs (without resting on the rope)
 Complete 10 climbs (without resting on the rope)
+Complete 10 climbs at your current grade of "X"
+Complete 10 climbs at a harder grade (log the grade too)
 
+Complete 10 Boulder Problems
 Create and test 10 Boulder Problems
 
-Route reading
-	study a route
-
-reduce number of climbs for each section
-and only sign off _best_two_ climbs
-	doesn't penalise the slower climbers
-	better climbers can focus on quality not quantity
-
-Best grade climbed
-
+Best Grade Climbed on Bronze Award
 Climbs:
 	Grade 3  XXXXXX
 	Grade 4  XXX
 	Grade 5  X
+	Grade 5+ X
 	Grade 6a
 	...
 
-Learn names of hold types
+Craghopper Assessment / Referral
+
+------------------------------------------------------------
+
+Assessment
+	[Y/N] Can the climber complete all the above in a trustworthy manner?
+	[Y/N] Has the climber performed all the above tasks competently?
+	Instructors Name
+	Signed
+	Date
+
+------------------------------------------------------------
+
+Instructor Notes:
+
+Maintain Bronze Award skills
+	What does this mean?
+	perfect knots, etc
+	maintain
+
+Explain climbing styles
+	What?
+
+Learn some advanced techniques
+	Learn all techniques
+	Demonstrate on a climb, to be signed off
+	Demonstrate 2 from each section (instructor picks which)
 
 Complete a Junior Competency Test (belay proficiency) - both names
 	Anchor bag
@@ -56,84 +111,51 @@ Complete a Junior Competency Test (belay proficiency) - both names
 	Knot tying
 	Stance
 	Rate the importance of each (optional -> mandatory)
-Pass Date
+	Pass Date
 
-Craghopper Assessment Date
-	Belay
-	Sensible
+Learn to abseil
+	Set up a Figure-8 Descender
+	Practice at ground level
+	Demonstrate using both sides of ATC
+
+Learn names of hold types
+	See: Glossary
+
+Take part in a climbing competition
+	Termly competition between ALL silvers in Kids Club
+		Set Climbs
+		Set Boulders
+	Post results
+
+Learn to Read a Route
+	study a route
+	aid someone climbing a route
+
+Craghopper Assessment / Referral
+	Passed Junior Comp
 	12+
-
-Craghopper Referral
+	Belay test
 	Sensible
 	Safe
 	Self-motivated
+	Date / Sign
 
-Notes:
-	perfect knots, etc
-	maintain
+Complete 10 climbs (without resting on the rope)
+	reduce number of climbs for each section
+	and only sign off _best_two_ climbs
+	doesn't penalise the slower climbers
+	better climbers can focus on quality not quantity
 
-Explain climbing styles
-	Static
-	Dynamic
+Complete 10 Boulder Problems
+	10 On main wall, single colour
+
+Create and test 10 Boulder Problems
+	Can be anywhere
+	Get others to test it
 
 Assessment
+	What?
 	Silver & Gold
 	Assess on certain days of term
 	Noticeboard of dates
-
-Learn some advanced techniques (Learn all - test 6)
-	Hand
-		Closed Crimp
-		Crimp
-		Half Crimp
-		Open Crimp
-		Open-Hand
-		Palming
-		Pinching
-		Sticky Hands
-	Feet
-		Foot Swap
-		Heel Hook
-		Inside/Outside Edging
-		Toe Hook
-	Body
-		Bridging
-		Chimneying
-		Dead-Pointing
-		Inner Flagging
-		Layback
-		Mantleshelf
-		No Hands on Slab
-		Outer Flagging
-		Resting Whilst Climbing
-		Rock-Over
-		Straight Arms
-
-Techniques - route applied on
-
-boulder league - Craghoppers / gold / silver
-climbing league - Craghoppers / gold / silver
-
-Best grade climbed
-	on previous award
-	on this award
-
-Climbs:
-	Grade 3  XXXXXX
-	Grade 4  XXX
-	Grade 5  X
-	Grade 6a
-	...
-Include half-grades
-
-------------------------------------------------------------
-
-Assessment
-	[Y/N] Can the climber complete all the above in a trustworthy manner?
-	[Y/N] Has the climber performed all the above tasks competently?
-	Instructors Name
-	Signed
-	Date
-
-------------------------------------------------------------
 

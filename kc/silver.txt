@@ -21,29 +21,37 @@ Learn names of hold types
 
 Learn to Read a Route
 
-Complete a Junior Competency Test (Belay Proficiency)
+Pass a Belay Proficiency Test (Junior Competency)
 
 Explain climbing styles
 	Static
 	Dynamic
+	w.r.t. balance
 
 Learn and Demonstrate some Advanced Techniques:
+	find & categorise logs of differently graded climbs to fulfil this
 	Hand
 		Crimp
 		Open-Hand
 		Palming
 		Pinching
+			find a climb for each
 	Feet
 		Foot Swap
-		Heel Hook
 		Inside/Outside Edging
+			tape route on traverse - holds getting progressively smaller
+		Heel Hook
 		Toe Hook
+			demonstrate on boulder wall
 	Body
 		Bridging
+			corner climb
 		Chimneying
 		Dead-Pointing
 		Flagging
 		Layback
+			slab arete
+			route 43 features
 		Mantleshelf
 		No Hands on Slab
 		Resting Whilst Climbing
@@ -58,8 +66,12 @@ Complete 10 climbs (without resting on the rope)
 Complete 10 climbs (without resting on the rope)
 Complete 10 climbs at your current grade of "X"
 Complete 10 climbs at a harder grade (log the grade too)
+	40 climbs (2 best climbs per session)
+		=> 20 sessions
+		=> 2 terms
 
 Complete 10 Boulder Problems
+	best 1 per session?
 Create and test 10 Boulder Problems
 
 Best Grade Climbed on Bronze Award
@@ -72,6 +84,7 @@ Climbs:
 	...
 
 Craghopper Assessment / Referral
+	move this to assessment?
 
 ------------------------------------------------------------
 
@@ -98,8 +111,10 @@ Learn some advanced techniques
 	Learn all techniques
 	Demonstrate on a climb, to be signed off
 	Demonstrate 2 from each section (instructor picks which)
+	A climb for each of several techniques
+		min grade for climbs
 
-Complete a Junior Competency Test (belay proficiency) - both names
+Pass a Belay Proficiency Test (Junior Competency)
 	Anchor bag
 	Auto-belay
 	Belay device setup
@@ -130,6 +145,7 @@ Take part in a climbing competition
 Learn to Read a Route
 	study a route
 	aid someone climbing a route
+	climb a route several times?
 
 Craghopper Assessment / Referral
 	Passed Junior Comp
@@ -157,5 +173,29 @@ Assessment
 	What?
 	Silver & Gold
 	Assess on certain days of term
+		set graded routes
+		min grade? 5+, 6a?
+		combination of grades
+			6a * 2?
 	Noticeboard of dates
+	must be a *technical* climber
+	doesn't need to be a high grade
+	belaying needs to be solid, reliable
+		graded climb, explain
+			hold names
+			technique name
+	test previous awards
+	belay rope *always* slightly loose
+
+General
+	climb tally needs to be *strict*
+	behaviour - six boxes enough
+
+Resting whilst climbing
+	Sitting on ledge
+	Leaning forward on slab
+	Bridging across a corner or arch
+	Chimneying
+	Straight arms
+	Knee bar
 

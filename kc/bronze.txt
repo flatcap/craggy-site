@@ -190,8 +190,22 @@ Complete 10 Boulder Problems...
 Take part in a climbing competition
 	Fun competition between similar ability children
 
+Climbs
+	A tally of grades climbed
+	Log EVERY climb in the tally
+
 Assessment
-	?
+	Belay and lower safely using an ATC
+	Demonstrate some techniques
+	Know about different harnesses: tie-in point, belay point
+		DMM, Black Diamond, Petzl
+	Understand how to spot a boulderer and when spotting is required
+	Check their partner EVERY time
+		without prompting
+	Communicate clearly with their partner
+	Well-measured knots every time
+	Demonstrate anchor bag usage
+	Hold a falling climber
 
 General Stuff
 	Rope when belaying should be slightly loose

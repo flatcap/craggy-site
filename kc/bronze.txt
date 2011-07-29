@@ -8,14 +8,14 @@ Kids Club:
 I am:	A trustworthy climber
 Aim:	An understanding of the basic principles of climbing and belaying
 
+Good Behaviour Log: [ ] [ ] [ ] [ ] [ ] [ ]
+	Six boxes for instructors' initials
+
 Maintain Trust Award skills
 	Keep safe
 	Safe harness
 	Good knots
 	Leave this till last
-
-Good Behaviour Log: [ ] [ ] [ ] [ ] [ ] [ ]
-	Six boxes for instructors' initials
 
 Learn to belay using an ATC XP: [ ] [ ] [ ] [ ] [ ] [ ]
 	ATC = Air Traffic Control, eXtra Protection (teeth)
@@ -103,7 +103,7 @@ Learn about Route Grading (French Sport Grading)
 	Difficulty of hardest move
 	What do we want them to know?
 
-Techniques: Learn, Understand, Demonstrate
+Techniques: Learn, Understand, Demonstrate:
 	Hand - Cross-Through
 	Hand - Matching
 	Feet - Basic foot placement
@@ -138,7 +138,6 @@ Climbs:
 		A tally of grades climbed
 		Log every climb in the tally
 
-
 Assessment
 	[Y/N] Can the climber complete all the above in a trustworthy manner?
 	[Y/N] Has the climber performed all the above tasks competently?
@@ -154,7 +153,7 @@ Assessment
 		Demonstrate anchor bag usage
 		Hold a falling climber
 
-General Stuff:
+General Notes:
 	Rope when belaying should be slightly loose
 	Kids may rainbow routes, but no sitting on the rope
 	Once kids pass, they may use Adult Bouldering Wall, so make sure they're sensible

@@ -1,67 +1,20 @@
 Trust Award
 Craggy Island Achievement Award in Climbing Skills
 
-Child's Name
-Kids Club Day
-Kids Club Time
-Age
+Child's Name:
+Age:
+Kids Club:
 
-------------------------------------------------------------
+I am:	A beginner to climbing
+Aim:	Be safe in a climbing environment
 
-I am: A beginner to climbing
-Aim: Be safe in a climbing environment
-
-------------------------------------------------------------
-
-Keep safe and behave at all times:
-	[ ] [ ] [ ] [ ] [ ] [ ]
-
-Understand the safety rules for the climbing centre
-
-Correctly put on your harness and helmet
-
-Tie in with a rethreaded figure-of-8 knot
-
-Use a Gri-Gri to safely belay and lower off a climber
-
-Ask my instructor to check me and hold my rope when I am belaying
-
-Complete 10 Climbs to the top (any colour, may rest)
-Complete 10 Climbs to the top (any colour, may rest)
-
-Complete 10 Boulder Problems (any colours)
-
-Take part in a climbing competition
-
-Climbs:
-	Grade 3  XXXXXX
-	Grade 4  XXX
-	Grade 5  X
-	Grade 5+ X
-	Grade 6a
-	...
-
-------------------------------------------------------------
-
-Assessment
-	[Y/N] Can the climber complete all the above in a trustworthy manner?
-	[Y/N] Has the climber performed all the above tasks competently?
-	Instructors Name
-	Signed
-	Date
-
-------------------------------------------------------------
-
-Instructor Notes:
-
-Keep safe and behave at all times:
+Keep safe and behave at all times: [ ] [ ] [ ] [ ] [ ] [ ]
 	Six boxes for Instructors' initials
 
 Understand the safety rules for the climbing centre
 	See: 10 Craggy Commandments
 
 Correctly put on your harness and helmet
-Must be put on:
 	Without assistance
 	High above the hips
 	Straps tight
@@ -74,7 +27,7 @@ Tie in with a rethreaded figure-of-8 knot
 	Neat figure of 8 (small loop at harness)
 	Double stopper knot (against figure of 8)
 	Short tail (5-10cm)
-	Correct part of harness
+	Tied in to correct part of harness:
 		DMM
 		Black Diamond
 		Petzl full-body
@@ -84,51 +37,60 @@ Use a Gri-Gri to safely belay and lower off a climber
 	Belaying
 		Bell-ringing: up and down
 		Proper: V, knee, 1, 2, 3
+		No lifting heels, or jumping, when belaying
 	Lowering
-		rope tight
-		wait for them to lean back
-		tell them "lowering"
-		*then* lower them carefully
-		watch the climber as you lower
-		warn climber of any obstacles
-	general
-		no lifting heels when belaying
-		no jumping when belaying
+		Rope tight
+		Wait for them to lean back
+		Tell them "lowering"
+		Then, lower them carefully
+		Watch the climber as you lower
+		Warn climber of any obstacles
 
 Ask my instructor to check me and hold my rope when I am belaying
 	Check knot, belay device and harness
 	Tail the rope (closely at first)
 	Explain the reason for tailing
 
-Complete 10 Climbs...
-Complete 10 Boulder Problems...
+Complete 20 Climbs to the top (any colour, may rest)
+	Any colours
+	A good try is good enough
+
+Complete 10 Boulder Problems (any colours)
 	Any colours
 	A good try is good enough
 
 Take part in a climbing competition
 	Fun competition between similar ability children
 
-Climbs
-	A tally of grades climbed (optional)
-	Log EVERY climb in the tally
+Climbs:
+	Grade 3		XXXXXXXX
+	Grade 4		XXXXX
+	Grade 5		XX
+	Grade 5+	X
+	Grade 6a
+	...
+		A tally of grades climbed (optional for Trust)
+		Log every climb in the tally
 
 Assessment
-	Need to be trustworthy
-	Climb to the top of the wall
-	Lower off correctly (leaning back, hands on knot)
-	Harness and helmet on correctly
-	Know the rules (Craggy Commandments)
-	A correct knot
-	Belay and lower off using a GriGri
-	Instructor holding the end of the rope
+	[Y/N] Can the climber complete all the above in a trustworthy manner?
+	[Y/N] Has the climber performed all the above tasks competently?
+	Instructors Name / Signed / Date
+		Need to be safe, trustworthy
+		Know the rules (Craggy Commandments)
+		Harness and helmet on correctly
+		A correct knot
+		Climb to the top of the wall
+		Lower off correctly (leaning back, hands on knot)
+		Belay and lower off using a GriGri
+			Bell-ringing is OK
+			V, knee, 1, 2, 3 is better
+		Instructor holding the end of the rope
+		Give out a new sheet (and explain it) on completion of the old
 
-General Stuff
+General Notes
 	Make sure the rope isn't twisted before climbing
 	Untie figure-8 and hang up rope after climb
 	Tidy harness after use
-	Learn and remember
-		Once you're learned a fact/technique, you should know it
-		be able to demonstrate it, thereafter
-	legible initials
-	new sheet on completion of old
+	Learn and remember: Once you've learned a fact/technique, you should know it and be able to demonstrate it, thereafter
 

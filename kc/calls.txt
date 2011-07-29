@@ -1,13 +1,28 @@
-Climbing calls
-	Take (in)
-	Slack
-	That's me
-	Climb when ready
-	Climbing
-	OK
-	I'm at the top
-	Lean back (and hold your knot)
-	Lowering
+Climbing Calls
 
-who says what and when
+On the Floor                                                                                                            
+
+Who?     |  What?                             |  When?
+---------+------------------------------------+----------------------------------------------------
+Climber  |  Take (in)                         |  Before a climb starts
+Climber  |  That's me                         |  When the rope is tight, before starting a climb
+Belayer  |  Climb when ready                  |  Belayer is ready to belay the climber
+Climber  |  Climbing                          |  Climber is starting to climb
+Belayer  |  OK                                |  As the Climber begins
+
+On the Climb                                                                                    
+
+Who?     |  What?                             |  When?
+---------+------------------------------------+----------------------------------------------------
+Climber  |  Take (in)                         |  Climber wants the rope to be made tighter
+Climber  |  Slack                             |  Climber wants the rope to be made looser
+
+At the Top of a Climb                                                                                   
+
+Who?     |  What?                             |  When?
+---------+------------------------------------+----------------------------------------------------
+Climber  |  I'm at the top                    |  Climber reaches the top
+Belayer  |  OK, Lean back and hold your knot  |  Climber wants to come down
+Climber  |  Ready                             |  Climber ready to come down
+Belayer  |  Lowering                          |  Just before the Belayer starts lowering
 

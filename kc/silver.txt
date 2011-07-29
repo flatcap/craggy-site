@@ -1,201 +1,160 @@
 Silver Award
 Craggy Island Achievement Award in Climbing Skills
 
-Child's Name
-Kids Club Day
-Kids Club Time
-Age
+Child's Name:
+Age:
+Kids Club:
 
-------------------------------------------------------------
-
-I am: A basic climber
-Aim: Become a technical climber
-
-------------------------------------------------------------
-
-Maintain Bronze Award skills
+I am:	A basic climber
+Aim:	Become a technical climber
 
 Good Behaviour Log: [ ] [ ] [ ] [ ] [ ] [ ]
+Six boxes for instructors' initials
+
+Maintain Trust and Bronze Award skills
+	Trustworthy
+	Perfect knots
+	Good belaying
+	Check partner
+	Good communication with partner
+	Leave this till last
 
 Learn names of hold types
+	See: Glossary
 
 Learn to Read a Route
-
-Pass a Belay Proficiency Test (Junior Competency)
-
-Explain climbing styles
-	Static
-	Dynamic
-	w.r.t. balance
-
-Learn and Demonstrate some Advanced Techniques:
-	find & categorise logs of differently graded climbs to fulfil this
-	Hand
-		Crimp
-		Open-Hand
-		Palming
-		Pinching
-			find a climb for each
-	Feet
-		Foot Swap
-		Inside/Outside Edging
-			tape route on traverse - holds getting progressively smaller
-		Heel Hook
-		Toe Hook
-			demonstrate on boulder wall
-	Body
-		Bridging
-			corner climb
-		Chimneying
-		Dead-Pointing
-		Flagging
-		Layback
-			slab arete
-			route 43 features
-		Mantleshelf
-		No Hands on Slab
-		Resting Whilst Climbing
-		Rock-Over
-		Straight Arms
-
-Learn to abseil
-
-Take part in a climbing competition
-
-Complete 10 climbs (without resting on the rope)
-Complete 10 climbs (without resting on the rope)
-Complete 10 climbs at your current grade of "X"
-Complete 10 climbs at a harder grade (log the grade too)
-	40 climbs (2 best climbs per session)
-		=> 20 sessions
-		=> 2 terms
-
-Complete 10 Boulder Problems
-	best 1 per session?
-Create and test 10 Boulder Problems
-
-Best Grade Climbed on Bronze Award
-Climbs:
-	Grade 3  XXXXXX
-	Grade 4  XXX
-	Grade 5  X
-	Grade 5+ X
-	Grade 6a
-	...
-
-Craghopper Assessment / Referral
-	move this to assessment?
-
-------------------------------------------------------------
-
-Assessment
-	[Y/N] Can the climber complete all the above in a trustworthy manner?
-	[Y/N] Has the climber performed all the above tasks competently?
-	Instructors Name
-	Signed
-	Date
-
-------------------------------------------------------------
-
-Instructor Notes:
-
-Maintain Bronze Award skills
-	What does this mean?
-	perfect knots, etc
-	maintain
-
-Explain climbing styles
-	What?
-
-Learn some advanced techniques
-	Learn all techniques
-	Demonstrate on a climb, to be signed off
-	Demonstrate 2 from each section (instructor picks which)
-	A climb for each of several techniques
-		min grade for climbs
+	Study a route
+	Aid someone climbing a route
+	Climb a route several times, showing improvement
 
 Pass a Belay Proficiency Test (Junior Competency)
 	Anchor bag
 	Auto-belay
-	Belay device setup
+	Belay device set-up:
 		ATC
-		Gri-Gri (optional)
+		Gri-Gri
 	Belaying at speed
 	Catching falls
 	Checking
 	Knot tying
 	Stance
-	Rate the importance of each (optional -> mandatory)
-	Pass Date
+
+Explain the difference between Static and Dynamic climbing styles
+	Find a route to best demonstrate each
+	Explain what's happening to the climber's centre of balance
+
+Advanced Techniques: Learn, Understand, Demonstrate:
+	Hand:
+		Crimp
+		Open-Hand
+		Palming
+		Pinching
+			Find a climb for each
+	Feet:
+		Foot Swap
+		Inside/Outside Edging
+			Tape route on traverse - holds getting progressively smaller
+		Heel Hook
+		Toe Hook
+			Demonstrate on boulder wall
+	Body:
+		Bridging
+			Corner climb
+		Chimneying
+		Dead-Pointing
+		Flagging
+		Layback
+			Slab arete
+			Route 43 features
+		Mantelshelf
+			Mats against wall, or slab
+			Windowsills in changing area
+		No Hands on Slab
+		Resting Whilst Climbing
+			Sitting on ledge
+			Leaning forward on slab
+			Bridging across a corner or arch
+			Chimneying
+			Straight arms
+			Knee bar
+		Rock-Over
+		Straight Arms
+	Find & categorise lots of differently graded climbs to test these
+	Learn and sign off all the techniques
+	Assessment:
+		Instructor selects a couple of techniques from each section
+		Climber must demonstrate techniques on a climb
+		Minimum grade for demonstration climbs?
 
 Learn to abseil
 	Set up a Figure-8 Descender
 	Practice at ground level
 	Demonstrate using both sides of ATC
-
-Learn names of hold types
-	See: Glossary
+	Do an abseil
 
 Take part in a climbing competition
-	Termly competition between ALL silvers in Kids Club
-		Set Climbs
-		Set Boulders
+	Termly competition between all silvers in Kids Club
+	Set Climbs
+	Set Boulders
 	Post results
 
-Learn to Read a Route
-	study a route
-	aid someone climbing a route
-	climb a route several times?
-
-Craghopper Assessment / Referral
-	Passed Junior Comp
-	12+
-	Belay test
-	Sensible
-	Safe
-	Self-motivated
-	Date / Sign
-
-Complete 10 climbs (without resting on the rope)
-	reduce number of climbs for each section
-	and only sign off _best_two_ climbs
-	doesn't penalise the slower climbers
-	better climbers can focus on quality not quantity
+Complete 10 climbs (on a single colour, without resting on the rope)
+Complete 10 climbs (on a single colour, without resting on the rope)
+	Low grades are fine
+Complete 10 climbs at your best grade on Bronze
+Complete 10 climbs at a harder grade (log the grade too)
+	Single colour, or route chosen by the Instructor
+	Loose rope
+	Reduce number of climbs for each section and only sign off _best_two_ climbs?
+	Doesn't penalise the slower climbers; better climbers can focus on quality not quantity
 
 Complete 10 Boulder Problems
-	10 On main wall, single colour
+	Single colour, or route chosen by the Instructor
+Create and Test 10 Boulder Problems
+	Can be anywhere: Boulder Wall, Traverse, Climbing Walls over a safety mat
+	Mark up routes with tape
+	Get others to test
+	Clean up tape afterwards
 
-Create and test 10 Boulder Problems
-	Can be anywhere
-	Get others to test it
+Best Grade Climbed on Bronze Award:
+Climbs:
+	Grade 3		XXXXXXXX
+	Grade 4		XXXXX
+	Grade 5		XX
+	Grade 5+	X
+	Grade 6a
+	...
+		A tally of grades climbed
+		Log every climb in the tally
 
 Assessment
-	What?
-	Silver & Gold
-	Assess on certain days of term
-		set graded routes
-		min grade? 5+, 6a?
-		combination of grades
-			6a * 2?
-	Noticeboard of dates
-	must be a *technical* climber
-	doesn't need to be a high grade
-	belaying needs to be solid, reliable
-		graded climb, explain
-			hold names
-			technique name
-	test previous awards
-	belay rope *always* slightly loose
+	[Y/N] Can the climber complete all the above in a trustworthy manner?
+	[Y/N] Has the climber performed all the above tasks competently?
+	Instructors Name / Signed / Date
+		Assess on certain days of term (on noticeboard)
+		Every time, without prompting:
+			Correct set-up of equipment
+			Perfect belaying and knots
+			Clear communication
+			Checking of partner
+		Must be a technical climber
+			Do several technical climbs, explaining:
+				Reading of route beforehand
+				Techniques that will be used
+				Hold types that will be used
+		Minimum grade of climbs?
+			5+, 6a?
+			Combination of routes to achieve grade, e.g. 6a and a 6b?
+		Set graded routes?
+		Test skills from previous awards
 
-General
-	climb tally needs to be *strict*
-	behaviour - six boxes enough
+Craghopper Referral
+	[Y/N] Is the climber over 12 years old?
+	[Y/N] Is the climber safe?
+	[Y/N] Is the climber sensible?
+	[Y/N] Is the climber self-motivated?
+	Instructors Name / Signed / Date
 
-Resting whilst climbing
-	Sitting on ledge
-	Leaning forward on slab
-	Bridging across a corner or arch
-	Chimneying
-	Straight arms
-	Knee bar
-
+General Notes:
+	Climb tally needs to be strict
+	Loose rope for all climbs

@@ -1,59 +1,45 @@
-Gold Award
+﻿Gold Award
 Craggy Island Achievement Award in Climbing Skills
 
-Child's Name
-Kids Club Day
-Kids Club Time
-Age
-
-------------------------------------------------------------
+Child's Name:
+Age:
+Kids Club:
 
 I am: A technical climber
 Aim: Become a shining example to all climbers
 
-------------------------------------------------------------
+Good Behaviour Log: [] [] [] [] [] []
+	Six boxes for instructors' initials
 
-To be in Gold Training a climber must be able to maintain all the Silver Award skills, and be willing to learn
-about climbing technique and climbing without any help from the rope
+Maintain Trust, Bronze and Silver Award Skills
+	Trust:
+		Trustworthy
+	Bronze:
+		Perfect knots
+		Good belaying
+		Check partner
+		Good communication with partner
+	Silver:
+		technical
+	Leave this till last
 
-Maintain Silver Award Skills
-	What does this mean?
-
-Good Behaviour Log
-six boxes (for instructor initials)
-
-Describe and demonstrate safety checks on Harness, Helmet, Belay Device, Karabiner and Rope
+Demonstrate Safety Checks on Harness, Helmet, Belay Device, Karabiner, Rope
 	Trust - checking set up?
 	Silver - checking integrity of equipment
-
-logging
-	log1 date - amount of tuition (mins) - areas covered
-	log2 date
-	...
-	competent date
-
-Teaching
-	Helping novices equip themselves
-	Helping a stuck climber
-	Tying in  novices
-
-Teach a technique to another climber
+	Check for signs of damage
 
 Abseiling
-	advanced abseiling
-	Participate in an Abseiling Session
-	abseil using an auto-block
-	prussik
-	create a French prussik
-	tie a double fisherman's bend
+	Do an abseil
+		Set-up your own Figure-8 Descender
+	Learn about prussiks
+		Tie a double fisherman's bend
+		Create a prussik loop
+		Create a French prussik
+	Do an abseil using a prussik
+		Set-up your own Figure-8 Descender and Prussik
 	Practice skills at ground level
 
-Find a professional climber and do some research on them
-(Name, age, sponsors, discipline etc) & find at least 2 videos of this climber
-
-Use the above climber in a "climb like them" session
-
-Learn about grading
+Learn about Route Grading
 	French Sport Climbing Grades - 3, 4, 5, 6a, 6b, ...
 	Font Bouldering Grades - V0, V1
 	English Adjectival Grades - Diff, VDiff, HVS
@@ -64,163 +50,126 @@ no stretching
 structure of session
 easy warm up climb / traverse
 
-Learn why we use and how to tie a:
+Advanced Knots:
 	Clove Hitch
 	Italian Hitch
-		belay
-		abseil
+		To Belay
+		Abseil set-up
 	Bowline
+	Alpine Butterfly
+	Learn how to tie them
+	Learn why we use them
 
-Set a route (using tape on either top rope or boulder)
+Set a Climbing Route
+	On a top rope, use tape to mark route
+	Climb it and give it a grade
+	Get others to test it
+	Clean up afterwards
 
-Complete 10 climbs at your current grade of "X"
-Complete 10 climbs at your current grade of "X"
-Complete 10 climbs at a harder grade (log the grade too)
-Complete 10 climbs at a harder grade (log the grade too)
-Complete 10 Boulder Problems (on a single colour)
-Complete 10 Boulder Problems (on a single colour)
+Research a Professional Climber:
+	Name, Age, Sponsors, Awards
+	Find some videos of them climbing
+	Do a climb in the style of that person
 
-Best grade climbed
-
-Do lots of HARD climbs
-
-Log all your completed climbs and their grade while you are on Gold Award
-
-Use the Gold Award logbook sheet to record your climbs.
-Keep them neat and tidy and include the date so you and your instructor can see your progress
+Log your climbs and their grade
+	Best climbs
+	Favourites
+	Try others' favourites
+	Put favourites on the noticeboard
 
 boulder league - Craghoppers / gold / silver
 climbing league - Craghoppers / gold / silver
 
-make it achievable within craggy
-i.e. outdoor, other centre stuff is optional
-
-Personal training
+Personal Training
 	Stamina
 	Power
 	Flexibility
 	Balance
 	Recovery
 	Core stability
-	Best route grade
-	Best boulder grade
-	Palming and bridging
-	Half crimp
-	Full crimp
-	Flagging
 	Ability to read a route
 	Overhangs/steep ground
 
-optional extras
-	Sutton2: Bouldering
-	Sutton2: caving
-	outdoors
-	go ape
-	teaching others - how does this help the kids?
-	Assist your instructor with running a kids club session
-	Climb at 3 other Indoor Climbing Centres
-	Climb at another Indoor Climbing Centre (singular)
+Assist your instructor with running a kids club session:
+	Help novices kit up []
+		teach, don't do
+	Choose climbs for the group []
+		get opinions after
+	Lead games for others []
+	Lead warm up for others []
+	Create boulders for others []
+	Teach a technique to another climber
 
 5+ challenge
 6a challenge
-	across all kids club / craghoppers
+across all kids club / Craghoppers
 
-Techniques
-	Hand
+
+second a lead climb []
+ascend a fixed line []
+
+
+Advanced Techniques: Learn, Understand, Demonstrate:
+	Hand:
 		Gaston
 		Side-pull
 		Undercut
-	Feet
+	Feet:
 		Frogging
-	Body
+	Body:
 		Drop-Knee
 		Dyno
-	Jamming
+	Jamming:
 		Fist Jam
 		Foot Jam
 		Hand Jam
 		Knee Bar
+	Demonstrate techniques on climbs
 
-Best grade climbed
-	on previous award
-	on this award
+Complete 10 climbs at your best grade on Silver
+Complete 10 climbs at your best grade on Silver
+Complete 10 climbs at a harder grade (log the grade too)
+Complete 10 climbs at a harder grade (log the grade too)
 
+Complete 10 Boulder Problems (on a single colour)
+Complete 10 Boulder Problems (on a single colour)
+Complete 10 Boulder Problems (on a single colour)
+
+Best Grade Climbed on Silver Award:
 Climbs:
-	Grade 3  XXXXXX
-	Grade 4  XXX
-	Grade 5  X
+	Grade 3		XXXXXXXX
+	Grade 4		XXXXX
+	Grade 5		XX
+	Grade 5+	X
 	Grade 6a
 	...
-Include half-grades
+		A tally of grades climbed
+		Log every climb in the tally
 
-golds need to be self-motivated
+Optional Extras:
+	Climbing, or Bouldering, at another centre
+	Indoor Caving
+	Climbing Outdoors on real rock
+	High Ropes
 
-lots of hard technical climbs
+Assessment
+	[Y/N] Can the climber complete all the above in a trustworthy manner?
+	[Y/N] Has the climber performed all the above tasks competently?
+	Instructors Name / Signed / Date
+		Assess on certain days of term (on noticeboard)
+		Climbs completed
+		Consistently good:
+			Behaviour
+			Technical ability
+			Belaying and knots
+		Every multi-sign-off ticked at least once
 
-advanced abseiling []
-	prussik
-	what else?
-
-advanced techniques
-	demonstrate techniques on climbs
-
-second a lead climb []
-
-ascend a fixed line []
-
-research a professional climber
-
-climb like the above - how?
-
-advanced knots - how and why
-	bowline
-	alpine butterfly
-	italian hitch
-
-regular testing of previous awards
-	trust []
-	bronze []
-	silver []
-
-lead games for others []
-
-lead warmup for others []
-
-help beginners kit up []
-	teach, don't *do*
-
-create a climbing route []
-	using tape
-
-create boulders for others []
+General Notes:
+	Many will need multi-sign-off
+	Need dating too
+	Golds need to be self-motivated
+	Once gold is finished, keep signing off, keep logging
 
 allow to kit up, warm up unsupervised?
-	need more benefits of being gold
+need more benefits of being gold
 
-choose climbs for the group []
-	get opinions after
-
-log climbs
-	all?
-	best?
-	favourites?
-		try others' favourites
-		share favourites from all golds
-
-assessment - how?
-	every box ticked at least once
-	lots of climbs
-	1 year of *shining*?
-		behaviour
-		knots
-		belaying
-		climbing
-			progression
-
-optional
-	outdoors
-	other centres
-
-general
-	many will need multi-sign-off
-	need dating too

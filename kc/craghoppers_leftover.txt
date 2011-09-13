@@ -1,0 +1,8 @@
+minimum age to lead climb is 12 years, 13? 14?
+
+gold/Craghoppers
+	anchors
+		direct
+		indirect
+		use dead end of belay rope
+

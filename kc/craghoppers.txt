@@ -1,81 +1,6 @@
 Craghoppers
 
-Skills sheet
-
-
-
-lead
-	clipping
-	belaying
-	sport topping out
-		rings
-		quick-draws
-		pigtail
-	falling
-
-
-
-abseil
-	figure-8
-	prussik
-		tie it
-			fisherman's
-		use it
-	anchor
-	stacked abseil
-	daisy chain / sling to extend abseil device
-	set up own abseil - personal gear and the ropes
-
-
-
-Rope handling
-	flaking
-	coiling
-	carrying
-
-
-
-ascend a fixed line
-
-
-
-keep sheets in folder, like mini-kids
-
-
-
-tie off a belay device
-escape the system
-
-
-
-rescues?
-
-
-
-logging
-	log1 date - amount of tuition (mins) - areas covered
-	log2 date
-	...
-	competent date
-
-
-
-boulder league - Craghoppers / gold / silver
-climbing league - Craghoppers / gold / silver
-
-
-
-yearly retest of belay proficiency
-	reception test
-	junior comp test
-		fast climbing
-		big falling
-
-
-
-minimum age to lead climb is 12 years, 13? 14?
-
-
+Skills sheet - keep in Cupboard, like mini-kids
 
 Personal training
 	Stamina
@@ -93,11 +18,61 @@ Personal training
 	Ability to read a route
 	Overhangs/steep ground
 
+Escape the system
 
+rescues?
 
-gold/Craghoppers
-	anchors
-		direct
-		indirect
-		use dead end of belay rope
+lead
+	clipping
+	belaying
+	sport topping out
+		rings
+		quick-draws
+		pigtail
+	falling
+
+abseil
+	figure-8
+	prussik
+		tie it
+			fisherman's
+		use it
+	anchor
+	stacked abseil
+	daisy chain / sling to extend abseil device
+	set up own abseil - personal gear and the ropes
+
+ascend a fixed line
+
+yearly retest of belay proficiency
+	reception test
+	junior comp test
+		fast climbing
+		big falling
+
+Rope work
+	Different rope types
+	Static
+	Dynamic
+	Coiling
+	Knots
+	Flaking
+	Carrying
+
+Participate in a Craggy Island Outdoor Climbing Taster Day
+climb outside with your Parent/Guardian
+	Joe C?
+
+What's the difference in properties and use of dynamic and static rope
+
+Ascend a fixed rope using prussiks
+
+logging
+	log1 date - amount of tuition (mins) - areas covered
+	log2 date
+	...
+	competent date
+
+boulder league - Craghoppers / gold / silver
+climbing league - Craghoppers / gold / silver
 

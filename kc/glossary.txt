@@ -128,7 +128,7 @@ Unsorted
 	static / rope / move
 	sutton2 / craggy 2
 	tailing
-	tape /finger
+	tape / finger
 	topping out
 	unweighted
 	vdiff

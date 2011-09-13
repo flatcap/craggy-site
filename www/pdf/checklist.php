@@ -275,7 +275,8 @@ function checklist_main ()
 		$title = $titles[$gb];
 		$count = count ($list);
 
-		if (($gb == 6) || ($gb == 8))
+		//if (($gb == 6) || ($gb == 8))
+		if ($gb == 6)
 			$pdf->new_column();
 
 		$pdf->print_grade ($title, $count);

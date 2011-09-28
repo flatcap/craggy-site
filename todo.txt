@@ -12,3 +12,5 @@ need to put back the examples dir!
 
 climb notes converting all '+' into spaces -> "6a ?"
 
+use compression on the ssh link
+

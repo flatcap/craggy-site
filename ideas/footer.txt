@@ -3,7 +3,7 @@ only for rich user
 
 header
 	route data - pdf, txt, csv
-	validation - html, css, rss - http://validator.w3.org/unicorn/check?ucn_uri=craggy.russon.org/routes.php
+	validation - html, css, rss - http://validator.w3.org/unicorn/check?ucn_uri=russon.org/craggy/routes.php
 	link to live page on russon.org
 
 footer

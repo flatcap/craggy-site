@@ -14,3 +14,4 @@ climb notes converting all '+' into spaces -> "6a ?"
 
 use compression on the ssh link
 
+crontab to update images (nightly)

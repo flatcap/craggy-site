@@ -12,3 +12,4 @@ need to put back the examples dir!
 
 climb notes converting all '+' into spaces -> "6a ?"
 
+crontab to update images (nightly)

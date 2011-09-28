@@ -149,7 +149,7 @@ route:
         id, row, panel, colour, grade, setter, date, notes, message
 
 if all successful, green box *12 new routes created* link to routes table
-http://craggy.russon.org/routes.php?highlight=34-36,38
+http://russon.org/craggy/routes.php?highlight=34-36,38
 
 some successful, orange box *4 new routes created*, however
 list of errors

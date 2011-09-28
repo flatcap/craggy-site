@@ -50,7 +50,7 @@ function rss_render_xml ($records)
 	$output .= "\t<description>New routes set at Craggy</description>\n";
 	$output .= "\t<link>http://craggy-island.com/</link>\n\n";
 	$output .= "\t<copyright>Rich Russon</copyright>\n";
-	$output .= "\t<atom:link href='http://craggy.russon.org/rss.xml' rel='self' type='application/rss+xml' />\n";
+	$output .= "\t<atom:link href='http://russon.org/craggy/rss.xml' rel='self' type='application/rss+xml' />\n";
 
 	foreach ($records as $date => $routes) {
 		$panels = array();
@@ -77,8 +77,8 @@ function rss_render_xml ($records)
 
 		$output .= "\t\t<title>$title</title>\n";
 		$output .= "\t\t<pubDate>" . strftime( "%a, %d %b %Y 09:00:00 %Z", strtotime ($date)) . "</pubDate>\n";
-		$output .= "\t\t<link>http://craggy.russon.org/routes.php</link>\n";
-		$output .= "\t\t<guid>http://craggy.russon.org/routes.php?id=001&amp;d=$date</guid>\n";
+		$output .= "\t\t<link>http://russon.org/craggy/routes.php</link>\n";
+		$output .= "\t\t<guid>http://russon.org/craggy/routes.php?id=001&amp;d=$date</guid>\n";
 		$output .= "\t\t<description>$desc</description>\n";
 		$output .= "\t</item>\n";
 	}

@@ -249,7 +249,7 @@ is this a rich or not?
 	127.0.0.0/8
 
 	82.8.178.149	home.russon.org
-	78.129.239.63	craggy.russon.org
+	78.129.239.63	russon.org/craggy
 	95.177.35.86	unknown.griffin.com
 
 	control showing of:

@@ -1,22 +1,9 @@
-# Local dirs
-/indices/
-
 # Local files
 /.*
 /libs/conf.php
-/www/admin/.htaccess
-/www/files/guildford.pdf
-/kc/kids_club.pdf
+/admin/.htaccess
 
 # Generated files / Junk
-/craggy_flatcap.sql
-/craggy_russon_compact.sql
-/craggy_russon.sql
-/schema.mwb
-/schema.png
-.*.swp
-tags
-/www/img/age.png
-/www/img/colour.png
-/www/img/grade.png
-watcher
+/img/age.png
+/img/colour.png
+/img/grade.png

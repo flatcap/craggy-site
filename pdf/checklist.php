@@ -3,7 +3,7 @@
 set_include_path ('/usr/share/php/fpdf');
 require ('fpdf.php');
 
-set_include_path ('../../libs');
+set_include_path ('../libs');
 
 include 'db.php';
 include 'utils.php';

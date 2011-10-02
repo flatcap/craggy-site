@@ -2,7 +2,7 @@
 
 date_default_timezone_set('UTC');
 
-set_include_path ('../../libs');
+set_include_path ('../libs');
 
 include_once 'db.php';
 include_once 'utils.php';

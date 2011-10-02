@@ -1,6 +1,6 @@
 <?php
 
-set_include_path ('../../libs');
+set_include_path ('../libs');
 
 date_default_timezone_set('UTC');
 

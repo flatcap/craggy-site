@@ -1,6 +1,6 @@
 <?php
 
-set_include_path ('../../libs');
+set_include_path ('../libs');
 
 include_once 'xml.php';
 

@@ -1,2 +1,0 @@
-if you tab off, leaving a field empty
-if it's compulsory, fill in the default value (or the original value)

@@ -1,5 +1,0 @@
-add abbr to other tables:
-	climb_type	Lead -> L
-	successs	Failed -> f
-	difficulty	Very Easy -> ve
-

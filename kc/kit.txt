@@ -1,2 +1,0 @@
-Rebuild the kit board showing kit, knots, etc
-Build a hold board - every variety of hold

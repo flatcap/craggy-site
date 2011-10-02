@@ -1,7 +1,0 @@
-function complete_initialise_by_id (entry_id, lookup)
-
-entry_id	unique identifier for the input field
-lookup		a php program to do the work
-
-default		put this text into the field, if it's left empty
-

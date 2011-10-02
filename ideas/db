@@ -1,4 +1,0 @@
-db pull; db clean (remove work files)
-db p = pull
-db c = compare
-db clean

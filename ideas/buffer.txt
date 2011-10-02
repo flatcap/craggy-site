@@ -1,9 +1,0 @@
-buffer:
-	max size?
-	what happens when full?
-		fail?
-		delete oldest?
-	how much space am I using?
-	how much space is left?
-	encode expiry time into object?
-

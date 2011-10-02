@@ -1,6 +1,0 @@
-when they say "DON'T PUT YOUR CONN CREDENTIALS under DOCUMENT ROOT!!!" I have
-mine off somewhere in my home directory that is outside the webserver's realm
-of knowledge with only read permission for the webserver user and I include it.
-My code looks like this:
-
-require_once "/home/me/deep/nested/obscure.php";

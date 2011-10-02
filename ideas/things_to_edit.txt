@@ -1,9 +1,0 @@
-colour
-grade
-climber
-difficulty
-success
-climbs
-routes
-panel
-climb_type

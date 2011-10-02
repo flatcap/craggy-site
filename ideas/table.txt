@@ -1,7 +1,0 @@
-tell the <tr> what type the data is, e.g. "route", "climb"
-then the entire row can be rendered into xml in one go.
-
-for a table
-	firstChild -> <thead>
-	lastChild  -> <tbody>
-

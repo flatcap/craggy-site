@@ -1,3 +1,0 @@
-add_js sends:
-36 blue 3, red 3+, red 4, red 4+, red 5
-

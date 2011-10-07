@@ -28,7 +28,7 @@ for i in age colour grade; do
 	php $i.php > $i.dat
 	gnuplot $i.plot
 	convert $i.svg
-	install -m 644 $i.png ../www/img
+	install -m 644 $i.png ../img
 done
 
 cleanup

@@ -20,7 +20,7 @@ function Header()
 {
 	$logo  = 'logo.png';
 	$title = 'Checklist';
-	$date  = strftime ("%d %B %Y");
+	$date  = trim (strftime ("%e %B %Y"));
 
 	$this->Image ($logo, 5, 5, 17);
 	$this->SetFont ('Arial', 'B', 20);

@@ -44,9 +44,9 @@ function routes_main($options)
 			$output .= "<h1>Route List</h1> <span>(Last updated: $last_update)</span>";
 			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
-			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' width='32' height='32' src='img/txt.png'></a>";
-			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='32' height='32' src='img/ss.png'></a>";
-			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' width='32' height='32' src='img/pdf.png'></a>";
+			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' width='32' height='32' src='style/txt.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='route data as a csv document' width='32' height='32' src='style/ss.png'></a>";
+			$output .= "<a href='files/guildford.pdf'><img alt='route data as a pdf document' width='32' height='32' src='style/pdf.png'></a>";
 			$output .= '</span>';
 			$output .= '</div>';
 

@@ -46,7 +46,7 @@ function html_menu($reldir = '')
 
 	$output  = "<div class='menu'>";
 
-	$output .= "  <img alt='craggy logo' width='135' height='66' src='{$reldir}img/craggy.png'>";
+	$output .= "  <img alt='craggy logo' width='135' height='66' src='{$reldir}style/craggy.png'>";
 	$output .= '  <h1>Home</h1>';
 	$output .= '  <ul>';
 	$output .= "    <li><a href='{$reldir}index.php'>Craggy</a></li>";

@@ -18,7 +18,7 @@ div#notify_area {
 }
 
 div.grade {
-	background-image: url(../img/grades.png);
+	background-image: url(../style/grades.png);
 	border: 1px solid black;
 	width: 500px;
 	height: 30px;

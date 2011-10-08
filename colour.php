@@ -20,7 +20,7 @@ function stats_colour()
 	$list = db_select($table, $columns, $where, $order, $group);
 
 	$output .= '<h2>Stats - Colour</h2>';
-	$output .= "<img alt='graph of colour vs frequency' width='800' height='400' src='img/colour.png'>";
+	$output .= "<img alt='graph of colour vs frequency' width='800' height='400' src='style/colour.png'>";
 
 	$columns = array ('colour', 'count');
 	$widths = column_widths ($list, $columns, true);

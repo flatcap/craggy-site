@@ -59,9 +59,9 @@ function six_main ($options)
 			$output .= "<h1>Top Roped 6a Routes</h1> <span>(Last updated: $last_update)</span>";
 			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
-			//$output .= "<a href='files/guildford_6a.pdf'><img alt='6a route list as a pdf document' width='32' height='32' src='img/pdf.png'></a>";
-			$output .= "<a href='?format=text'><img alt='6a route list as a formatted text document' width='32' height='32' src='img/txt.png'></a>";
-			$output .= "<a href='?format=csv'><img alt='6a route list as a csv document' width='32' height='32' src='img/ss.png'></a>";
+			//$output .= "<a href='files/guildford_6a.pdf'><img alt='6a route list as a pdf document' width='32' height='32' src='style/pdf.png'></a>";
+			$output .= "<a href='?format=text'><img alt='6a route list as a formatted text document' width='32' height='32' src='style/txt.png'></a>";
+			$output .= "<a href='?format=csv'><img alt='6a route list as a csv document' width='32' height='32' src='style/ss.png'></a>";
 			$output .= '</span>';
 
 			$output .= '</div>';	// title

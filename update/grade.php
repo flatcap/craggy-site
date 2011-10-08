@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set('UTC');
+
 set_include_path ('../libs');
 
 include 'db.php';

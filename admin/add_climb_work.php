@@ -522,7 +522,7 @@ function climb_do_save (&$xml)
 		$r['route_id']      = $route_id;
 		$r['difficulty_id'] = $difficulty_id;
 		$r['nice']          = $nice;
-		$r['notes']         = htmlentities (urldecode ($notes));
+		$r['notes']         = htmlentities ($notes);
 		$commit_rating[] = $r;
 	}
 	//printf ("\n");

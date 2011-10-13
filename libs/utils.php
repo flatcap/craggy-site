@@ -9,6 +9,7 @@ function html_header ($title, $reldir = '')
 	$output .= '<head>';
 	$output .= "<link rel='stylesheet' title='green' href='{$reldir}style/style.css' type='text/css'>";
 	$output .= "<link rel='alternate' title='Craggy RSS' href='http://russon.org/craggy/rss.xml' type='application/rss+xml'>";
+	$output .= "<link rel='icon' type='image/png' href='{$reldir}style/favicon.png'>";
 	$output .= "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
 	$output .= "<title>$title - Craggy Island</title>";
 

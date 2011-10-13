@@ -265,6 +265,7 @@ function checklist_main ()
 	$pdf->SetCreator ('Richard Russon');
 	$pdf->SetAuthor ('Richard Russon');
 	$pdf->SetSubject ('Craggy Routes');
+	$pdf->SetCompression (true);
 	$pdf->AddFont('WingDing','','wingding.php');
 	$pdf->SetCol (0);
 
@@ -289,7 +290,6 @@ function checklist_main ()
 
 	$pdf->add_stats ($panels, $routes, $auto, $top, $lead, $height, $last);
 	$pdf->Output();
-
 }
 
 

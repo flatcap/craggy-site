@@ -146,7 +146,7 @@ function stats_main()
 }
 
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/London');
 
 echo stats_main();
 

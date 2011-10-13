@@ -108,7 +108,7 @@ function boards_browser_options ($format, $def_format)
 }
 
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/London');
 
 $format = array ('csv', 'html', 'text');
 

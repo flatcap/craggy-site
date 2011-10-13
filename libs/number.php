@@ -2,7 +2,7 @@
 
 set_include_path ('../libs');
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/London');
 
 function number_match ($str)
 {

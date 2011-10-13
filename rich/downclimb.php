@@ -156,7 +156,7 @@ function downclimb_main ($options, $climber_id)
 }
 
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/London');
 
 $format = array ('csv', 'html', 'text');
 

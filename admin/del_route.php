@@ -55,7 +55,7 @@ function route_main()
 }
 
 
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/London');
 
 echo route_main();
 

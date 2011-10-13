@@ -9,9 +9,7 @@ pushd ${0%/*} > /dev/null
 
 cleanup()
 {
-	rm -f *.svg
-	rm -f *.png
-	rm -f *.dat
+	rm -f {age,colour,grade}.{dat,png,svg}
 }
 
 convert()

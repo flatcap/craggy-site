@@ -53,7 +53,7 @@ function stats_main()
 
 	$output .= "<div class='content'>";
 	$output .= "<div class='title'>";
-	$output .= "<h1>Craggy Routes</h1> <span>(Last updated: $last_update)</span>";
+	$output .= "<h1>Craggy Routes</h1>";
 	$output .= '</div>';
 
 	$output .= stats_style();

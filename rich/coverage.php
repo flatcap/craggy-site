@@ -143,7 +143,7 @@ function coverage_main ($options, $climber_id)
 			$output .= "<div class='content'>\n";
 
 			$output .= "<div class='title'>";
-			$output .= "<h1>Coverage</h1> <span>(Last updated: $last_update)</span>\n";
+			$output .= "<h1>Coverage</h1>\n";
 			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
 			$output .= "<a href='?format=text'><img alt='coverage as a formatted text document' width='32' height='32' src='../style/txt.png'></a>";

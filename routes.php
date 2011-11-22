@@ -41,7 +41,7 @@ function routes_main($options)
 
 			$output .= "<div class='content'>\n";
 			$output .= "<div class='title'>";
-			$output .= "<h1>Route List</h1> <span>(Last updated: $last_update)</span>";
+			$output .= "<h1>Route List</h1>";
 			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
 			$output .= "<a href='?format=text'><img alt='route data as a formatted text document' width='32' height='32' src='style/txt.png'></a>";
@@ -50,7 +50,7 @@ function routes_main($options)
 			$output .= '</span>';
 			$output .= '</div>';
 
-			//$output .= "All Routes <span>(Last updated: $last_update)</span>";
+			//$output .= "All Routes";
 
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';

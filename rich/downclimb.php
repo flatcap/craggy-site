@@ -126,7 +126,7 @@ function downclimb_main ($options, $climber_id)
 			$output .= "<a href='?format=text'><img alt='downclimb data as a formatted text document' width='32' height='32' src='../style/txt.png'></a>";
 			$output .= "<a href='?format=csv'><img alt='downclimb data as a csv document' width='32' height='32' src='../style/ss.png'></a>";
 			$output .= '</span>';
-			$output .= "<h1>Downclimbs</h1> <span>(Last updated: $last_update)</span>";
+			$output .= "<h1>Downclimbs</h1>";
 			$output .= '</div>';
 
 			$output .= "<h2>Downclimb <span>($count climbs)</span></h2>";

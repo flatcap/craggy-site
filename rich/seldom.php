@@ -110,7 +110,7 @@ function seldom_main ($options, $climber_id)
 			$output .= "<div class='content'>";
 
 			$output .= "<div class='title'>";
-			$output .= "<h1>Seldom</h1> <span>(Last updated: $last_update)</span>";
+			$output .= "<h1>Seldom</h1>";
 			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
 			$output .= "<a href='?format=text'><img alt='seldom list as a formatted text document' width='32' height='32' src='../style/txt.png'></a>";

@@ -56,7 +56,7 @@ function six_main ($options)
 			$output .= "<div class='content'>\n";
 
 			$output .= "<div class='title'>";
-			$output .= "<h1>Top Roped 6a Routes</h1> <span>(Last updated: $last_update)</span>";
+			$output .= "<h1>Top Roped 6a Routes</h1>";
 			$output .= "<span class='download'>";
 			$output .= '<h3>Route Data</h3>';
 			//$output .= "<a href='guildford_6a.pdf'><img alt='6a route list as a pdf document' width='32' height='32' src='style/pdf.png'></a>";

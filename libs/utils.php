@@ -42,7 +42,7 @@ function html_menu($reldir = '')
 			$rich = (($_SERVER['REMOTE_ADDR'] == '127.0.0.1') ||
 				 ($_SERVER['REMOTE_ADDR'] == '192.168.2.2') ||
 				 ($_SERVER['REMOTE_ADDR'] == '192.168.2.3') ||
-				 ($_SERVER['REMOTE_ADDR'] == '213.105.7.241'));
+				 ($_SERVER['REMOTE_ADDR'] == '82.8.177.153'));
 	}
 
 	$output  = "<div class='menu'>";

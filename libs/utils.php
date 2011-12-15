@@ -40,8 +40,8 @@ function html_menu($reldir = '')
 				strstr ($_SERVER['PHP_SELF'], '/admin/');
 		if (!$rich && array_key_exists ('REMOTE_ADDR', $_SERVER))
 			$rich = (($_SERVER['REMOTE_ADDR'] == '127.0.0.1') ||
-				 ($_SERVER['REMOTE_ADDR'] == '192.168.2.2') ||
-				 ($_SERVER['REMOTE_ADDR'] == '192.168.2.3') ||
+				 ($_SERVER['REMOTE_ADDR'] == '192.168.5.40') ||
+				 ($_SERVER['REMOTE_ADDR'] == '192.168.5.41') ||
 				 ($_SERVER['REMOTE_ADDR'] == '82.8.177.153'));
 	}
 

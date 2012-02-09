@@ -13,7 +13,7 @@ function stats_colour()
 
 	$table   = "$DB_COLOUR,$DB_ROUTE";
 	$columns = array ("$DB_COLOUR.id as id", "colour", "count($DB_ROUTE.id) as count");
-	$where   = "$DB_ROUTE.colour_id = $DB_COLOUR.id";
+	$where   = array ("$DB_ROUTE.colour_id = $DB_COLOUR.id", "$DB_ROUTE.date_end is null");
 	$order   = 'count desc';
 	$group   = 'colour';
 

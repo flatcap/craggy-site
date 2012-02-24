@@ -98,7 +98,7 @@ function coverage_get_data ($climber_id)
 	$p_tried   = 95;
 	$p_success = 90;
 	$p_clean   = 85;
-	$p_onsight = 70;
+	$p_onsight = 80;
 	$p_down    = 65;
 
 	$t_tried   = ceil ($num_routes * $p_tried   / 100) - $num_tried;

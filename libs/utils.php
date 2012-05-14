@@ -116,14 +116,14 @@ function get_url_variable($name)
 function cmp_age($a, $b)
 {
 	$a1 = strtotime ($a['date_set']);
-	$p1 = $a['panel']['number'];
-	$g1 = $a['grade']['order'];
-	$c1 = $a['colour']['colour'];
+	$p1 = $a['panel'];
+	$g1 = $a['grade'];
+	$c1 = $a['colour'];
 
 	$a2 = strtotime ($b['date_set']);
-	$p2 = $b['panel']['number'];
-	$g2 = $b['grade']['order'];
-	$c2 = $b['colour']['colour'];
+	$p2 = $b['panel'];
+	$g2 = $b['grade'];
+	$c2 = $b['colour'];
 
 	if ($a1 != $a2)
 		return ($a1 < $a2) ? -1 : 1;

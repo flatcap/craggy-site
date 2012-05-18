@@ -2,7 +2,7 @@
 
 PATH="/bin:/usr/bin"
 
-umask 0002
+umask 0027
 
 # Change to the working directory
 pushd ${0%/*} > /dev/null
@@ -28,7 +28,7 @@ for i in age colour grade; do
 	php $i.php > $i.dat
 	gnuplot $i.plot
 	convert $i.svg
-	install -m 644 $i.png ../style
+	mv $i.png ../style
 done
 
 cleanup

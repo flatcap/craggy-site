@@ -62,7 +62,7 @@ function boards_main ($options)
 
 	foreach ($boards as $panel => $routes) {
 		$output .= sprintf ('%2d | ', $panel);
-		for ($i = 0; $i < 5; $i++) {
+		for ($i = 0; $i < 6; $i++) {
 			if (array_key_exists ($i, $routes))
 				$output .= sprintf ('%-12s %-3s | ', $routes[$i]['colour'], $routes[$i]['grade']);
 			else

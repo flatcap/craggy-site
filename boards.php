@@ -23,7 +23,10 @@ function get_setter ($setters)
 
 function get_date ($date)
 {
-	return date ('j/m', strtotime ($date));
+	$d = date ('j/n', strtotime ($date));
+	if ($d[1] == '/')
+		$d = ' ' . $d;
+	return $d;
 }
 
 function boards_main ($options)

@@ -4,7 +4,7 @@ set_include_path ('../libs');
 
 include_once 'utils.php';
 
-function climber_get()
+function climber_get($db)
 {
 	static $climber = null;
 
@@ -12,7 +12,7 @@ function climber_get()
 		include_once 'db.php';
 		include 'db_names.php';
 		$columns = array ('id', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
-		$climber = db_select ($DB_CLIMBER, $columns);
+		$climber = db_select ($db, $DB_CLIMBER, $columns);
 	}
 
 	return $climber;

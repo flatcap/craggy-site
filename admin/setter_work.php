@@ -16,21 +16,19 @@ function xml_error()
 	// render error info in xml
 }
 
-function db_delete($table, $join_tables, $where)
+function db_delete($db, $table, $join_tables, $where)
 {
 	//global $fh;
 
 	if (empty ($where))
 		return false;
 
-	$db = db_get_database();
-
 	$query = "delete $table from $join_tables where $where";
 	//fwrite ($fh, "$query\n");
 
-	$result = mysql_query($query);
+	$result = $db->query($query);
 
-	return mysql_affected_rows();
+	return $db->affected_rows();
 }
 
 
@@ -65,7 +63,7 @@ function setter_delete_query ($data)
 	return sprintf ("Delete:\n\t%d setters,\n\t%d routes,\n\t%d climbs?", $setter_count, $route_count, $climb_count);
 }
 
-function setter_delete ($data)
+function setter_delete ($db, $data)
 {
 	// VALIDATE USER DATA
 	// $data
@@ -75,19 +73,19 @@ function setter_delete ($data)
 	$table      = $DB_CLIMB;
 	$join_table = "$DB_CLIMB, $DB_ROUTE, $DB_SETTER";
 	$where = "($DB_CLIMB.route_id = $DB_ROUTE.id) and ($DB_ROUTE.setter_id = $DB_SETTER.id) and ($DB_SETTER.id in ($data))";
-	$climb_count = db_delete ($table, $join_table, $where);
+	$climb_count = db_delete ($db, $table, $join_table, $where);
 
 	// How many routes will be deleted?
 	$table = '';
 	$join_table = $DB_ROUTE;
 	$where = "setter_id in ($data)";
-	$route_count = db_delete ($table, $join_table, $where);
+	$route_count = db_delete ($db, $table, $join_table, $where);
 
 	// How many setters will be deleted?
 	$table = '';
 	$join_table = $DB_SETTER;
 	$where = "id in ($data)";
-	$setter_count = db_delete ($table, $join_table, $where);
+	$setter_count = db_delete ($db, $table, $join_table, $where);
 
 	// <result type='setter' action='delete_query'>
 	//     <setter>4</setter>
@@ -97,7 +95,7 @@ function setter_delete ($data)
 	return sprintf ("DELETED:\n\t%d setters,\n\t%d routes,\n\t%d climbs.", $setter_count, $route_count, $climb_count);
 }
 
-function setter_list()
+function setter_list($db)
 {
 //	<setter>
 //		<id>23</id>
@@ -118,7 +116,7 @@ function setter_list()
 	$order   = 'id';
 	$group   = 'id';
 
-	$list = db_select ($table, $columns, $where, $order, $group);
+	$list = db_select ($db, $table, $columns, $where, $order, $group);
 
 	$columns = array ('id', 'initials', 'first_name', 'surname', 'count');
 
@@ -147,20 +145,23 @@ function setter_main()
 		$data = '';
 	}
 
+	$db = db_get_database();
+
 	//$fh = fopen ('/tmp/db_log', 'a');
 	//fwrite ($fh, "action=$action,data=$data\n");
 
+	echo "action = $action<br>";
 	// action: delete, list, update
 	switch ($action) {
 		case 'list':
 			header('Content-Type: application/xml; charset=ISO-8859-1');
-			$response = setter_list();
+			$response = setter_list($db);
 			break;
 		case 'delete_query':
-			$response = setter_delete_query($data);
+			$response = setter_delete_query($db, $data);
 			break;
 		case 'delete':
-			$response = setter_delete($data);
+			$response = setter_delete($db, $data);
 			break;
 	}
 

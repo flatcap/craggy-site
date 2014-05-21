@@ -16,7 +16,7 @@ include_once 'success.php';
 
 include 'db_names.php';
 
-function climb_get_panels ($panels)
+function climb_get_panels ($db, $panels)
 {
 	global $DB_V_ROUTE;
 
@@ -25,7 +25,7 @@ function climb_get_panels ($panels)
 	$where   = "panel in ('" . implode ("','", $panels) . "')";
 	$order   = "grade_seq, colour";
 
-	return db_select ($table, $columns, $where, $order);
+	return db_select ($db, $table, $columns, $where, $order);
 }
 
 function climb_lookup_success ($text)
@@ -64,7 +64,7 @@ function climb_get_route_id ($xml, $panels, $name, $colour)
 	return null;
 }
 
-function climb_find_rating_ids ($rids)
+function climb_find_rating_ids ($db, $rids)
 {
 	global $DB_RATING;
 
@@ -73,12 +73,12 @@ function climb_find_rating_ids ($rids)
 
 	$where = "route_id in ('" . implode ("','", $rids) . "')";
 
-	return db_select ($table, $columns, $where);
+	return db_select ($db, $table, $columns, $where);
 }
 
 function climb_lookup_climber (&$xml, $name)
 {
-	$climbers = climber_get();
+	$climbers = climber_get($db);
 
 	foreach ($climbers as $c) {
 		if (strcasecmp ($c['name'], $name) == 0) {
@@ -200,7 +200,7 @@ function climb_parse_climb (&$xml, $text)
 }
 
 
-function climb_commit_climb (&$xml, $climbs)
+function climb_commit_climb ($db, &$xml, $climbs)
 {
 	$query  = "insert into climb (climber_id, route_id, success_id, date_climbed) values ";
 	$values = array();
@@ -216,17 +216,17 @@ function climb_commit_climb (&$xml, $climbs)
 
 	$query .= implode (',', $values);
 
-	$result = mysql_query($query);
+	$result = $db->query($query);
 	if ($result === true) {
-		xml_add_error ($xml, sprintf ("Created %d climbs", mysql_affected_rows()));
+		xml_add_error ($xml, sprintf ("Created %d climbs", $db->affected_rows()));
 		//printf ("Created %d climbs\n\n", mysql_affected_rows());
-		return mysql_affected_rows();
+		return $db->affected_rows();
 	} else {
 		return -1;
 	}
 }
 
-function climb_commit_rating (&$xml, $ratings)
+function climb_commit_rating ($db, &$xml, $ratings)
 {
 	// split the ratings into "insert" or "update"
 
@@ -236,7 +236,7 @@ function climb_commit_rating (&$xml, $ratings)
 		$rids[$route_id] = $route_id;
 	}
 
-	$rating_ids = climb_find_rating_ids ($rids);
+	$rating_ids = climb_find_rating_ids ($db, $rids);
 
 	$count_insert = 0;
 	$count_update = 0;
@@ -283,9 +283,9 @@ function climb_commit_rating (&$xml, $ratings)
 
 		$query .= implode (',', $values);
 
-		$result = mysql_query($query);
+		$result = $db->query($query);
 		if ($result === true) {
-			xml_add_error ($xml, sprintf ("Created %s new ratings", mysql_affected_rows()));
+			xml_add_error ($xml, sprintf ("Created %s new ratings", $db->affected_rows()));
 		} else {
 			xml_add_error ($xml, "Rating insert failed");
 		}
@@ -302,7 +302,7 @@ function climb_commit_rating (&$xml, $ratings)
 
 			$query .= "where id = " . $r['rating_id'];
 
-			$result = mysql_query($query);
+			$result = $db->query($query);
 			if ($result === true) {
 				$count_update++;
 			} else {
@@ -317,7 +317,7 @@ function climb_commit_rating (&$xml, $ratings)
 }
 
 
-function climb_get_rating_notes (&$xml, &$climbs)		// XXX $xml isn't used
+function climb_get_rating_notes ($db, &$xml, &$climbs)		// XXX $xml isn't used
 {
 	global $DB_RATING;
 	global $DB_SUCCESS;
@@ -338,7 +338,7 @@ function climb_get_rating_notes (&$xml, &$climbs)		// XXX $xml isn't used
 
 	$where = "route_id in (" . implode (',', $ids) . ')';
 
-	$ratings = db_select ($table, $columns, $where);
+	$ratings = db_select ($db, $table, $columns, $where);
 
 	foreach ($climbs as &$c) {
 		$rid = $c['id'];
@@ -357,7 +357,7 @@ function climb_get_rating_notes (&$xml, &$climbs)		// XXX $xml isn't used
 }
 
 
-function climb_do_add (&$xml)
+function climb_do_add ($db, &$xml)
 {
 	if (!array_key_exists ('date', $_GET)) {
 		xml_add_error ($xml, "No date");
@@ -392,7 +392,7 @@ function climb_do_add (&$xml)
 		}
 	}
 
-	$panel = climb_get_panels (array ($panel_name));
+	$panel = climb_get_panels ($db, array ($panel_name));
 	if (count ($panel) == 0) {
 		xml_add_error ($xml, sprintf ("'%s' is not a valid panel name", $name));
 		return;
@@ -430,7 +430,7 @@ function climb_do_add (&$xml)
 	if ($errors > 0)
 		return;
 
-	climb_get_rating_notes ($xml, $climbs);
+	climb_get_rating_notes ($db, $xml, $climbs);
 
 	foreach ($climbs as $c) {
 		$climb = $xml->addChild ('route');
@@ -447,7 +447,7 @@ function climb_do_add (&$xml)
 	}
 }
 
-function climb_do_save (&$xml)
+function climb_do_save ($db, &$xml)
 {
 	global $_GET;
 
@@ -481,7 +481,7 @@ function climb_do_save (&$xml)
 		$pnames[$p] = $p;
 	}
 
-	$panels = climb_get_panels ($pnames);
+	$panels = climb_get_panels ($db, $pnames);
 
 	$commit_climb = array();
 	$commit_rating = array();
@@ -527,8 +527,8 @@ function climb_do_save (&$xml)
 	}
 	//printf ("\n");
 
-	climb_commit_climb ($xml, $commit_climb);
-	climb_commit_rating ($xml, $commit_rating);
+	climb_commit_climb ($db, $xml, $commit_climb);
+	climb_commit_rating ($db, $xml, $commit_rating);
 
 	// for each <climb>
 	//	lookup <panel> <colour>		[route_id]
@@ -575,10 +575,10 @@ function climb_main (&$xml)
 
 	switch ($action) {
 	case 'add':
-		climb_do_add ($xml);
+		climb_do_add ($db, $xml);
 		break;
 	case 'save':
-		climb_do_save ($xml);
+		climb_do_save ($db, $xml);
 		break;
 	default:
 		xml_add_error ($xml, sprintf ("'%s' is not a valid action", $action));

@@ -9,7 +9,7 @@ include_once 'db.php';
 
 include 'db_names.php';
 
-function route_list($data)
+function route_list($db, $data)
 {
 	global $DB_V_ROUTE;
 
@@ -33,7 +33,7 @@ function route_list($data)
 	$where = 'panel in (' . implode (',', $list) . ')';
 	$order = 'panel_seq, grade_seq, colour';
 
-	$routes = db_select ($table, $columns, $where, $order);
+	$routes = db_select ($db, $table, $columns, $where, $order);
 	//var_dump ($routes);
 
 	$output .= '<?xml-stylesheet type="text/xsl" href="route.xsl"?'.'>';
@@ -42,7 +42,7 @@ function route_list($data)
 	return $output;
 }
 
-function route_delete ($data, $date)
+function route_delete ($db, $data, $date)
 {
 	$ids = array();
 	$range = parse_range ($data);
@@ -56,7 +56,7 @@ function route_delete ($data, $date)
 		}
 	}
 
-	$results = db_route_delete ($ids, $date);
+	$results = db_route_delete ($db, $ids, $date);
 
 	return "deleted {$results['routes']} routes.";
 }
@@ -88,14 +88,16 @@ function route_main()
 		$date = '';
 	}
 
+	$db = db_get_database();
+
 	// action: delete, list, update
 	switch ($action) {
 		case 'list':
 			header('Content-Type: application/xml; charset=ISO-8859-1');
-			$response = route_list($data);
+			$response = route_list($db, $data);
 			break;
 		case 'delete':
-			$response = route_delete($data, $date);
+			$response = route_delete($db, $data, $date);
 			break;
 		default:
 			$response = "unknown action";

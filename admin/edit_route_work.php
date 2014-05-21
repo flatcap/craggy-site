@@ -14,7 +14,7 @@ include_once 'setter.php';
 
 include 'db_names.php';
 
-function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id, $setter_id, $date, $notes)
+function route_commit ($db, $xml, $id, $panel_id, $colour_id, $grade_id, $setter_id, $date, $notes)
 {
 	$query  = "update route set " .
 		  "panel_id  = $panel_id, " .
@@ -25,7 +25,7 @@ function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id, $setter_id, 
 		  "notes  = '$notes' " .
 		  "where id = $id";
 
-	$result = mysql_query($query);
+	$result = $db->query($query);
 	if ($result !== true) {
 		xml_add_error ($xml, sprintf ("Failed to update route_id %d", $id));
 	}
@@ -33,7 +33,7 @@ function route_commit ($xml, $id, $panel_id, $colour_id, $grade_id, $setter_id, 
 	return $result;
 }
 
-function route_do_list (&$xml)
+function route_do_list ($db, &$xml)
 {
 	global $_GET;
 	global $DB_V_ROUTE;
@@ -66,13 +66,13 @@ function route_do_list (&$xml)
 	$where = 'panel in (' . implode (',', $list) . ')';
 	$order = 'panel_seq, grade_seq, colour';
 
-	$routes = db_select ($table, $columns, $where, $order);
+	$routes = db_select ($db, $table, $columns, $where, $order);
 	//print_r ($routes);
 
 	list_render_xml3 ($xml, 'route', $routes, $columns);
 }
 
-function route_do_save()
+function route_do_save($db)
 {
 	global $_GET;
 
@@ -112,7 +112,7 @@ function route_do_save()
 		print_r ($grade);
 		*/
 
-		route_commit ($a, $id, $panel['id'], $colour['id'], $grade['id'], $setter['id'], $date, $notes);
+		route_commit ($db, $a, $id, $panel['id'], $colour['id'], $grade['id'], $setter['id'], $date, $notes);
 	}
 
 	return $xml;
@@ -130,16 +130,18 @@ function route_main()
 		return;
 	}
 
+	$db = db_get_database();
+
 	$action  = $_GET['action'];
 
 	switch ($action) {
 	case 'list':
 		$xml = xml_new_string ("list");
 		$xml->addAttribute ('type', 'route');
-		route_do_list ($xml);
+		route_do_list ($db, $xml);
 		break;
 	case 'save':
-		$xml = route_do_save();
+		$xml = route_do_save($db);
 		break;
 	default:
 		$xml = xml_new_string ("list");

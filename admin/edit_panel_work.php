@@ -14,7 +14,7 @@ include_once 'climb_type.php';
 
 include 'db_names.php';
 
-function panel_commit ($xml, $id, $name, $sequence, $climb_type_id, $height, $tags)
+function panel_commit ($db, $xml, $id, $name, $sequence, $climb_type_id, $height, $tags)
 {
 	global $DB_PANEL;
 	$query  = "update $DB_PANEL set " .
@@ -25,8 +25,7 @@ function panel_commit ($xml, $id, $name, $sequence, $climb_type_id, $height, $ta
 		  "tags          = '$tags' " .
 		  "where id      = $id";
 
-	db_get_database();
-	$result = mysql_query($query);
+	$result = $db->query($query);
 	if ($result !== true) {
 		xml_add_error ($xml, sprintf ("Failed to update panel_id %d", $id));
 	}
@@ -34,7 +33,7 @@ function panel_commit ($xml, $id, $name, $sequence, $climb_type_id, $height, $ta
 	return $result;
 }
 
-function panel_do_list (&$xml)
+function panel_do_list ($db, &$xml)
 {
 	global $_GET;
 	global $DB_PANEL;
@@ -77,7 +76,7 @@ function panel_do_list (&$xml)
 	}
 	$order = 'sequence';
 
-	$routes = db_select ($table, $columns, $where, $order);
+	$routes = db_select ($db, $table, $columns, $where, $order);
 	process_height_abbreviate ($routes);
 	//print_r ($routes);
 
@@ -85,7 +84,7 @@ function panel_do_list (&$xml)
 	list_render_xml3 ($xml, 'panel', $routes, $columns);
 }
 
-function panel_do_save()
+function panel_do_save($db)
 {
 	global $_GET;
 
@@ -119,7 +118,7 @@ function panel_do_save()
 		$climb_type = climb_type_match (urldecode ($a->climb_type));
 		$climb_type_id = $climb_type['id'];
 
-		panel_commit ($a, $id, $name, $sequence, $climb_type_id, $height, $tags);
+		panel_commit ($db, $a, $id, $name, $sequence, $climb_type_id, $height, $tags);
 	}
 
 	return $xml;
@@ -139,14 +138,16 @@ function panel_main()
 
 	$action  = $_GET['action'];
 
+	$db = db_get_database();
+
 	switch ($action) {
 	case 'list':
 		$xml = xml_new_string ("list");
 		$xml->addAttribute ('type', 'panel');
-		panel_do_list ($xml);
+		panel_do_list ($db, $xml);
 		break;
 	case 'save':
-		$xml = panel_do_save();
+		$xml = panel_do_save($db);
 		break;
 	default:
 		$xml = xml_new_string ("list");

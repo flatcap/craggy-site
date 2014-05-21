@@ -28,16 +28,15 @@ function validate_route (&$route)
 	return ($colour && $date && $grade && $panel && $setter);
 }
 
-function db_route_add ($route)
+function db_route_add ($db, $route)
 {
 	global $DB_ROUTE;
 	$query = "insert into $DB_ROUTE (panel_id,colour_id,grade_id,setter_id,notes,date_set) values ";
 	$query .= "($route->panel_id, $route->colour_id, $route->grade_id, $route->setter_id, '$route->notes', '$route->date')";
 
-	$db = db_get_database();
-	$result = mysql_query($query);
+	$result = $db->query($query);
 	if ($result === true) {
-		$route_id = mysql_insert_id();
+		$route_id = $db->insert_id();
 	} else {
 		$route_id = false;
 	}
@@ -97,7 +96,7 @@ function route_add ($date, $setter, $data)
 	return $xml;
 }
 
-function route_save ($data)
+function route_save ($db, $data)
 {
 	$xml = simplexml_load_string ($data);
 
@@ -106,7 +105,7 @@ function route_save ($data)
 		$a = $xml->route[$i];
 		$route = validate_route ($a);
 		if ($route !== false) {
-			$route_id = db_route_add ($a);
+			$route_id = db_route_add ($db, $a);
 		} else {
 			$route_id = false;
 		}
@@ -162,6 +161,8 @@ function route_main()
 		$route_xml = $_GET['route_xml'];
 	}
 
+	$db = db_get_database();
+
 	switch ($action) {
 		case 'add':
 			header('Content-Type: application/xml; charset=ISO-8859-1');
@@ -169,7 +170,7 @@ function route_main()
 			break;
 		case 'save':
 			header('Content-Type: application/xml; charset=ISO-8859-1');
-			$response = route_save($route_xml);
+			$response = route_save($db, $route_xml);
 			break;
 		default:
 			$response = "unknown action";

@@ -39,7 +39,7 @@ function process_best ($list)
 	return $result;
 }
 
-function seldom_climbs ($ranges, $climber_id)
+function seldom_climbs ($db, $ranges, $climber_id)
 {
 	include 'db_names.php';
 
@@ -70,7 +70,7 @@ function seldom_climbs ($ranges, $climber_id)
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";
 
 	// print data (based on column names)
-	$list = db_select2($table, $columns, $where, $order);
+	$list = db_select2($db, $table, $columns, $where, $order);
 
 	$list = process_best ($list);
 
@@ -100,9 +100,11 @@ function seldom_main ($options, $climber_id)
 	$output = '';
 	$ranges = array (12, 6, 4, 3, 2);
 
+	$db = db_get_database();
+
 	switch ($options['format']) {
 		case 'html':
-			$last_update = date ('j M Y', strtotime (db_get_last_update()));
+			$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 			$output .= html_header ('Seldom', '../');
 			$output .= '<body>';
@@ -131,7 +133,7 @@ function seldom_main ($options, $climber_id)
 			break;
 	}
 
-	$list = seldom_climbs ($ranges, $climber_id);
+	$list = seldom_climbs ($db, $ranges, $climber_id);
 
 	$total = 0;
 	foreach ($ranges as $lower) {

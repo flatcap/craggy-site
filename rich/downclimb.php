@@ -60,6 +60,8 @@ function downclimb_main ($options, $climber_id)
 {
 	include 'db_names.php';
 
+	$db = db_get_database();
+
 	$table   = $DB_ROUTE .
 			" left join $DB_CLIMB      on (($DB_CLIMB.route_id      = $DB_ROUTE.id) and (climber_id = {$climber_id}))" .
 			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
@@ -85,7 +87,7 @@ function downclimb_main ($options, $climber_id)
 	$where   = array ('date_end is null', "$DB_GRADE.sequence < 400");
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour, date_climbed";
 
-	$list = db_select2($table, $columns, $where, $order);
+	$list = db_select2($db, $table, $columns, $where, $order);
 
 	$list = process_best ($list);
 
@@ -112,7 +114,7 @@ function downclimb_main ($options, $climber_id)
 	$output = '';
 	switch ($options['format']) {
 		case 'html':
-			$last_update = date ('j M Y', strtotime (db_get_last_update()));
+			$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 			$output .= html_header ('Downclimbs', '../');
 			$output .= '<body>';

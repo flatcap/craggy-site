@@ -29,7 +29,7 @@ function process_best ($list)
 	return $result;
 }
 
-function coverage_get_data ($climber_id)
+function coverage_get_data ($db, $climber_id)
 {
 	include 'db_names.php';
 
@@ -45,7 +45,7 @@ function coverage_get_data ($climber_id)
 	$where   = array ('date_end is null');
 	$order   = "panel_id, $DB_GRADE.sequence, colour_id, date_climbed";
 
-	$climbs = db_select2($table, $columns, $where, $order);
+	$climbs = db_select2($db, $table, $columns, $where, $order);
 
 	$climbs = process_best ($climbs);
 
@@ -122,7 +122,9 @@ function coverage_get_data ($climber_id)
 
 function coverage_main ($options, $climber_id)
 {
-	$list = coverage_get_data ($climber_id);
+	$db = db_get_database();
+
+	$list = coverage_get_data ($db, $climber_id);
 
 	$columns = get_columns ($list[0]);
 
@@ -134,7 +136,7 @@ function coverage_main ($options, $climber_id)
 	$output = '';
 	switch ($options['format']) {
 		case 'html':
-			$last_update = date ('j M Y', strtotime (db_get_last_update()));
+			$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 			$output .= html_header ('Coverage', '../');
 			$output .= '<body>';

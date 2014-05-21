@@ -95,7 +95,7 @@ function process_best ($list)
 	return $result;
 }
 
-function work_all_climbs ($climber_id)
+function work_all_climbs ($db, $climber_id)
 {
 	include 'db_names.php';
 
@@ -124,7 +124,7 @@ function work_all_climbs ($climber_id)
 
 	$where   = array ('date_end is null');
 
-	$list = db_select2($table, $columns, $where);
+	$list = db_select2($db, $table, $columns, $where);
 	$list = process_best ($list);
 
 	$today = strtotime('2012-09-14');	// RAR was 'today'
@@ -164,7 +164,9 @@ function work_all_climbs ($climber_id)
 
 function work_main ($options, $climber_id)
 {
-	$all = work_all_climbs ($climber_id);
+	$db = db_get_database();
+
+	$all = work_all_climbs ($db, $climber_id);
 	$score = work_score ($all);
 
 	$cmp = 'cmp_panel2';
@@ -180,7 +182,7 @@ function work_main ($options, $climber_id)
 	$output = '';
 	switch ($options['format']) {
 		case 'html':
-			$last_update = date ('j M Y', strtotime (db_get_last_update()));
+			$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 			$output .= html_header ('Work', '../');
 			$output .= '<body>';

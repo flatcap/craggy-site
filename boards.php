@@ -33,12 +33,14 @@ function boards_main ($options)
 {
 	include 'db_names.php';
 
+	$db = db_get_database();
+
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'colour', 'grade', 'setter', 'date_set');
 	$where   = null;
 	$order   = 'panel_seq,grade_seq,colour';
 
-	$list = db_select($table, $columns, $where, $order);
+	$list = db_select($db, $table, $columns, $where, $order);
 
 	$output = html_header ('Boards');
 	$boards = array();

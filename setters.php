@@ -5,7 +5,7 @@ set_include_path ('libs');
 include_once 'db.php';
 include_once 'utils.php';
 
-function stats_setters()
+function stats_setters($db)
 {
 	include 'db_names.php';
 
@@ -16,7 +16,7 @@ function stats_setters()
 	$where   = null;
 	$order   = 'setter';
 
-	$list = db_select($table, $columns, $where, $order);
+	$list = db_select($db, $table, $columns, $where, $order);
 
 	$setters = array();
 	foreach ($list as $s) {
@@ -45,7 +45,9 @@ function stats_main()
 {
 	$type = get_url_variable('type');
 
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
+	$db = db_get_database();
+
+	$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 	$output  = '<body>';
 	$output .= html_menu();
@@ -55,7 +57,7 @@ function stats_main()
 	$output .= "<h1>Craggy Routes</h1>";
 	$output .= '</div>';
 
-	$output .= stats_setters();
+	$output .= stats_setters($db);
 	$output .= '</div>';
 	$output .= get_errors();
 	$output .= '</body>';

@@ -5,7 +5,7 @@ set_include_path ('libs');
 include_once 'db.php';
 include_once 'utils.php';
 
-function stats_style()
+function stats_style($db)
 {
 	include 'db_names.php';
 
@@ -16,7 +16,7 @@ function stats_style()
 	$where   = null;
 	$order   = null;
 
-	$list = db_select($table, $columns, $where, $order);
+	$list = db_select($db, $table, $columns, $where, $order);
 
 	$tag_list = array();
 	foreach ($list as $row) {
@@ -45,7 +45,9 @@ function stats_main()
 {
 	$type = get_url_variable('type');
 
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
+	$db = db_get_database();
+
+	$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 	$output  = '<body>';
 
@@ -56,7 +58,7 @@ function stats_main()
 	$output .= "<h1>Craggy Routes</h1>";
 	$output .= '</div>';
 
-	$output .= stats_style();
+	$output .= stats_style($db);
 	$output .= '</div>';
 	$output .= get_errors();
 	$output .= '</body>';

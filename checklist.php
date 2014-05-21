@@ -47,7 +47,9 @@ function checklist_main ($options)
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'climb_type', 'colour', 'grade', 'grade_seq', 'notes', 'date_set');
 
-	$list = db_select($table, $columns);
+	$db = db_get_database();
+
+	$list = db_select($db, $table, $columns);
 
 	usort($list, 'cmp_panel');
 
@@ -64,7 +66,7 @@ function checklist_main ($options)
 	//switch ($options['format']) {
 	switch ($options['f']) {
 		case 'html':
-			$last_update = date ('j M Y', strtotime (db_get_last_update()));
+			$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 			$output .= html_header ('Checklist');
 			$output .= '<body>';

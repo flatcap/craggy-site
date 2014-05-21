@@ -44,7 +44,7 @@ function stats_grade_table ($grade_list, $whole_grades = false)
 	return $output;
 }
 
-function stats_grade_mean ($grade_list)
+function stats_grade_mean ($db, $grade_list)
 {
 	global $DB_GRADE;
 
@@ -78,7 +78,7 @@ function stats_grade_mean ($grade_list)
 	$columns = array('id', 'grade', 'sequence');
 	$order   = 'sequence';
 
-	$grades = db_select ($table, $columns, null, $order);
+	$grades = db_select ($db, $table, $columns, null, $order);
 
 	$output .= '<h2>Average Grades</h2>';
 	$output .= '<b>All Routes</b>:<br>';
@@ -96,7 +96,7 @@ function stats_grade_mean ($grade_list)
 	return $output;
 }
 
-function stats_grade()
+function stats_grade($db)
 {
 	global $DB_V_ROUTE;
 
@@ -107,9 +107,9 @@ function stats_grade()
 	$where   = null;
 	$order   = 'grade_seq';
 
-	$grade_list = db_select($table, $columns, $where, $order);
+	$grade_list = db_select($db, $table, $columns, $where, $order);
 
-	$output .= stats_grade_mean ($grade_list);
+	$output .= stats_grade_mean ($db, $grade_list);
 	$output .= '<br>';
 	$output .= "<div class='graph'>";
 	$output .= "<img alt='graph of grade vs frequency' width='800' height='400' src='style/grade.png'>";
@@ -124,7 +124,9 @@ function stats_main()
 {
 	$type = get_url_variable('type');
 
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
+	$db = db_get_database();
+
+	$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 	$output  = '<body>';
 	$output .= html_menu();
@@ -134,7 +136,7 @@ function stats_main()
 	$output .= "<h1>Craggy Routes</h1>";
 	$output .= '</div>';
 
-	$output .= stats_grade();
+	$output .= stats_grade($db);
 	$output .= '</div>';
 	$output .= get_errors();
 	$output .= '</body>';

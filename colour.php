@@ -5,7 +5,7 @@ set_include_path ('libs');
 include_once 'db.php';
 include_once 'utils.php';
 
-function stats_colour()
+function stats_colour($db)
 {
 	include 'db_names.php';
 
@@ -17,7 +17,7 @@ function stats_colour()
 	$order   = 'count desc';
 	$group   = 'colour';
 
-	$list = db_select($table, $columns, $where, $order, $group);
+	$list = db_select($db, $table, $columns, $where, $order, $group);
 
 	$output .= '<h2>Stats - Colour</h2>';
 	$output .= "<img alt='graph of colour vs frequency' width='800' height='400' src='style/colour.png'>";
@@ -34,7 +34,9 @@ function stats_main()
 {
 	$type = get_url_variable('type');
 
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
+	$db = db_get_database();
+
+	$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 	$output  = '<body>';
 	$output .= html_menu();
@@ -44,7 +46,7 @@ function stats_main()
 	$output .= "<h1>Craggy Routes</h1>";
 	$output .= '</div>';
 
-	$output .= stats_colour();
+	$output .= stats_colour($db);
 	$output .= '</div>';
 	$output .= get_errors();
 	$output .= '</body>';

@@ -155,6 +155,7 @@ h2 {
 div.error {
 	clear: both;
 	border: 3px solid red;
+	margin-left: 150px;	//RAR tmp
 }
 
 img {

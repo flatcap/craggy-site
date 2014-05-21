@@ -9,6 +9,8 @@ function six_main ($options)
 {
 	include 'db_names.php';
 
+	$db = db_get_database();
+
 	$table   = $DB_ROUTE .
 			" left join $DB_COLOUR     on ($DB_ROUTE.colour_id      = $DB_COLOUR.id)" .
 			" left join $DB_PANEL      on ($DB_ROUTE.panel_id       = $DB_PANEL.id)" .
@@ -31,7 +33,7 @@ function six_main ($options)
 	$where   = array ("date_end is null", "$DB_GRADE.sequence >= 400", "$DB_GRADE.sequence < 500", "$DB_CLIMB_TYPE.id <> 1");
 	$order   = "$DB_PANEL.sequence, $DB_GRADE.sequence, colour";
 
-	$list = db_select2($table, $columns, $where, $order);
+	$list = db_select2($db, $table, $columns, $where, $order);
 
 	$columns = array ('id', 'panel', 'colour', 'grade', 'diff', 'height');
 
@@ -46,7 +48,7 @@ function six_main ($options)
 	$output = '';
 	switch ($options['format']) {
 		case 'html':
-			$last_update = date ('j M Y', strtotime (db_get_last_update()));
+			$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 			$output .= html_header ('6a');
 			$output .= '<body>';

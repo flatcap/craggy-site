@@ -7,7 +7,9 @@ include_once 'utils.php';
 
 function index_main()
 {
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
+	$db = db_get_database();
+
+	$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 	$output  = html_header ('Overview');
 	$output .= '<body>';
@@ -20,7 +22,7 @@ function index_main()
 	$output .= "<h1>Craggy Routes</h1>";
 	$output .= '</div>';	// title
 
-	$output .= get_stats();
+	$output .= get_stats($db);
 	$output .= '</div>';	// content
 	$output .= get_errors();
 
@@ -39,12 +41,12 @@ function index_main()
 	$output .= '</body>';
 	$output .= '</html>';
 
+	$db->close();
 	return $output;
 }
 
 
 date_default_timezone_set('Europe/London');
-db_get_database();
 
 echo index_main();
 

@@ -4,16 +4,18 @@ function db_get_database()
 {
 	include 'conf.php';
 
-	$db = mysql_connect($db_host, $db_user, $db_pass);
-	if (!$db) {
-		die('Could not connect: ' . mysql_error());
+	$db = new mysqli($db_host, $db_user, $db_pass, $db_database);
+	if ($db->connect_error) {
+		die('Connect Error (' . $db->connect_errno . ') ' . $db->connect_error);
 	}
-	mysql_select_db($db_database);
+
+	//echo "db = $db<br>";
 	return $db;
 }
 
-function db_select ($table, $columns = null, $where = null, $order = null, $group = null)
+function db_select ($db, $table, $columns = null, $where = null, $order = null, $group = null)
 {
+	//echo "db = $db<br>";
 	if (isset($columns)) {
 		if (is_array($columns))
 			$cols = implode ($columns, ',');
@@ -45,21 +47,21 @@ function db_select ($table, $columns = null, $where = null, $order = null, $grou
 		$query .= ' order by ' . $order;
 	}
 
-	$db = db_get_database();
-
 	//echo "$query;<br>";
-	$result = mysql_query($query);
+	$result = $db->query($query);
 
 	$list = array();
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		$list[$row[$key]] = $row;
+	if ($result) {
+		while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
+			$list[$row[$key]] = $row;
+		}
 	}
 
-	mysql_free_result($result);
+	$result->close();
 	return $list;
 }
 
-function db_select2 ($table, $columns = null, $where = null, $order = null, $group = null)
+function db_select2 ($db, $table, $columns = null, $where = null, $order = null, $group = null)
 {
 	if (isset($columns)) {
 		if (is_array($columns))
@@ -88,17 +90,15 @@ function db_select2 ($table, $columns = null, $where = null, $order = null, $gro
 		$query .= ' order by ' . $order;
 	}
 
-	$db = db_get_database();
-
 	//echo "$query;<br>";
-	$result = mysql_query($query);
+	$result = $db->query($query);
 
 	$list = array();
-	while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+	while ($row = $result->fetch_array(MYSQLI_ASSOC)) {
 		$list[] = $row;
 	}
 
-	mysql_free_result($result);
+	$result->close();
 	return $list;
 }
 
@@ -113,20 +113,19 @@ function db_date($date)
 	return $result;
 }
 
-function db_route_delete ($ids, $date)
+function db_route_delete ($db, $ids, $date)
 {
 	if (count ($ids) == 0)
 		return null;
 
 	$retval = array();
 
-	$db = db_get_database();
 	$id_list = implode (',', $ids);
 
 	$query = "update route set date_end = '$date' where id in ($id_list)";	// date needs to be passed in
-	$result = mysql_query($query);
+	$result = $db->query($query);
 	if ($result === true) {
-		$retval['routes'] = mysql_affected_rows();
+		$retval['routes'] = $db->affected_rows();
 	} else {
 		$retval['routes'] = -1;
 	}
@@ -134,26 +133,22 @@ function db_route_delete ($ids, $date)
 	return $retval;
 }
 
-function db_get_last_update()
+function db_get_last_update($db)
 {
 	include 'db_names.php';
 
-	$db = db_get_database();
-
 	$query = "select value from $DB_DATA where name = 'last_update'";
 
-	$result = mysql_query($query);
+	$result = $db->query($query);
 
-	$row = mysql_fetch_array($result, MYSQL_ASSOC);
-	mysql_free_result($result);
+	$row = $result->fetch_array(MYSQLI_ASSOC);
+	$result->close();
 
 	return $row['value'];
 }
 
-function db_set_last_update($date = '')
+function db_set_last_update($db, $date = '')
 {
-	$db = db_get_database();
-
 	if (empty ($date))
 		$date = date ('Y-m-d');
 
@@ -162,32 +157,30 @@ function db_set_last_update($date = '')
 	$query .= "where name='last_update';";
 
 	//var_dump ($query);
-	$result = mysql_query($query);
+	$result = $db->query($query);
 	//var_dump ($result);
 
 	return $result;
 }
 
-function db_get_data ($name)
+function db_get_data ($db, $name)
 {
 	include 'db_names.php';
 
-	$db = db_get_database();
-
 	$query = "select value from $DB_DATA where name = '$name'";
 
-	$result = mysql_query($query);
+	$result = $db->query($query);
 	if (!$result) {
 		return false;
 	}
 
-	$row = mysql_fetch_array($result, MYSQL_ASSOC);
-	mysql_free_result($result);
+	$row = $result->fetch_array(MYSQLI_ASSOC);
+	$result->close();
 
 	return $row['value'];
 }
 
-function db_count($table, $column, $where = null)
+function db_count($db, $table, $column, $where = null)
 {
 	$query = "select count({$column}) as total from {$table}";
 
@@ -199,11 +192,9 @@ function db_count($table, $column, $where = null)
 		$query .= ' where ' . $w;
 	}
 
-	$db = db_get_database();
-
-	$result = mysql_query($query);
-	$row = mysql_fetch_array($result, MYSQL_ASSOC);
-	mysql_free_result($result);
+	$result = $db->query($query);
+	$row = $result->fetch_array(MYSQLI_ASSOC);
+	$result->close();
 
 	return $row['total'];
 }

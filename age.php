@@ -5,7 +5,7 @@ set_include_path ('libs');
 include_once 'db.php';
 include_once 'utils.php';
 
-function stats_age()
+function stats_age($db)
 {
 	include 'db_names.php';
 
@@ -14,7 +14,7 @@ function stats_age()
 	$table   = $DB_V_ROUTE;
 	$columns = array('id', 'date_set');
 
-	$list = db_select($table, $columns);
+	$list = db_select($db, $table, $columns);
 
 	$totals = array();
 	for ($i = -1; $i < 8; $i++) {
@@ -48,9 +48,11 @@ function stats_age()
 
 function stats_main()
 {
+	$db = db_get_database();
+
 	$type = get_url_variable('type');
 
-	$last_update = date ('j M Y', strtotime (db_get_last_update()));
+	$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 	$output  = '<body>';
 
@@ -61,7 +63,7 @@ function stats_main()
 	$output .= "<h1>Craggy Routes</h1>";
 	$output .= '</div>';
 
-	$output .= stats_age();
+	$output .= stats_age($db);
 	$output .= '</div>';
 	$output .= get_errors();
 	$output .= '</body>';

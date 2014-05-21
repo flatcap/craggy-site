@@ -14,7 +14,9 @@ function routes_main($options)
 	$order   = 'panel_seq, grade_seq, colour';
 	//$order  .= ' limit 10';
 
-	$list = db_select($table, $columns, null, $order);
+	$db = db_get_database();
+
+	$list = db_select($db, $table, $columns, null, $order);
 
 	process_date ($list, 'date_set', true);
 	process_key ($list);
@@ -32,7 +34,7 @@ function routes_main($options)
 	$output = '';
 	switch ($options['format']) {
 		case 'html':
-			$last_update = date ('j M Y', strtotime (db_get_last_update()));
+			$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 			$output .= html_header ('Routes');
 			$output .= '<body>';

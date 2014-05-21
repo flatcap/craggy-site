@@ -6,6 +6,7 @@ set_include_path ('../libs');
 
 include_once 'db.php';
 include_once 'utils.php';
+include_once 'xml.php';
 
 include 'db_names.php';
 
@@ -102,6 +103,8 @@ function setter_list($db)
 //		<name>Ruth</name>
 //		<count>4</count>
 //	</setter>
+	global $DB_SETTER;
+	global $DB_ROUTE;
 
 	$table   = $DB_SETTER .
 			" left join $DB_ROUTE on (setter_id=$DB_SETTER.id)";
@@ -134,7 +137,7 @@ function setter_main()
 	}
 
 	if (!array_key_exists ('action', $_GET)) {
-		echo 'NO ACTION';
+		#echo 'NO ACTION';
 		return;
 	}
 	$action = $_GET['action'];
@@ -150,7 +153,6 @@ function setter_main()
 	//$fh = fopen ('/tmp/db_log', 'a');
 	//fwrite ($fh, "action=$action,data=$data\n");
 
-	echo "action = $action<br>";
 	// action: delete, list, update
 	switch ($action) {
 		case 'list':
@@ -174,3 +176,4 @@ function setter_main()
 header('Pragma: no-cache');
 
 echo setter_main();
+

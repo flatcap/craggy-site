@@ -112,10 +112,10 @@ function panel_do_save($db)
 		$name     = urldecode ($a->name);
 		$sequence = urldecode ($a->sequence);
 		$height   = urldecode ($a->height);
-		$height = substr ($height, 0, -1);	//XXX lose the 'm'
+		$height   = substr ($height, 0, -1);	//XXX lose the 'm'
 		$tags     = urldecode ($a->tags);
 
-		$climb_type = climb_type_match (urldecode ($a->climb_type));
+		$climb_type = climb_type_match ($db, urldecode ($a->climb_type));
 		$climb_type_id = $climb_type['id'];
 
 		panel_commit ($db, $a, $id, $name, $sequence, $climb_type_id, $height, $tags);

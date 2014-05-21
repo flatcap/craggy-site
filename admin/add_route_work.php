@@ -12,16 +12,17 @@ include_once 'date.php';
 include_once 'grade.php';
 include_once 'panel.php';
 include_once 'setter.php';
+include_once 'xml.php';
 
 include 'db_names.php';
 
-function validate_route (&$route)
+function validate_route ($db, &$route)
 {
-	$colour = colour_match_xml ($route, urldecode ($route->colour));
-	$date   = date_match_xml   ($route, urldecode ($route->date));
-	$grade  = grade_match_xml  ($route, urldecode ($route->grade));
-	$panel  = panel_match_xml  ($route, urldecode ($route->panel));
-	$setter = setter_match_xml ($route, urldecode ($route->setter));
+	$colour = colour_match_xml ($db, $route, urldecode ($route->colour));
+	$date   = date_match_xml   (     $route, urldecode ($route->date));
+	$grade  = grade_match_xml  ($db, $route, urldecode ($route->grade));
+	$panel  = panel_match_xml  ($db, $route, urldecode ($route->panel));
+	$setter = setter_match_xml ($db, $route, urldecode ($route->setter));
 
 	$route->notes = urldecode ($route->notes);				// XXX check for invalid characters?
 
@@ -36,7 +37,7 @@ function db_route_add ($db, $route)
 
 	$result = $db->query($query);
 	if ($result === true) {
-		$route_id = $db->insert_id();
+		$route_id = $db->insert_id;
 	} else {
 		$route_id = false;
 	}
@@ -45,7 +46,7 @@ function db_route_add ($db, $route)
 }
 
 
-function route_add ($date, $setter, $data)
+function route_add ($db, $date, $setter, $data)
 {
 	//printf ("data = >>$data<<\n");
 	// parse:
@@ -63,7 +64,7 @@ function route_add ($date, $setter, $data)
 		return null;
 	}
 
-	$setter = setter_match ($setter, $message);
+	$setter = setter_match ($db, $setter, $message);
 	if ($setter === null) {
 		echo $message;
 		return null;
@@ -81,7 +82,7 @@ function route_add ($date, $setter, $data)
 	foreach ($list as $item) {
 		$item = trim ($item);
 		list ($colour, $grade) = explode (' ', $item, 2);
-		$c = colour_match($colour);
+		$c = colour_match($db, $colour);
 		if ($c !== null) {
 			$colour = $c['colour'];
 		}
@@ -103,11 +104,13 @@ function route_save ($db, $data)
 	for ($i = 0; $i < $xml->count(); $i++) {
 		$message = array();
 		$a = $xml->route[$i];
-		$route = validate_route ($a);
+		$route = validate_route ($db, $a);
 		if ($route !== false) {
 			$route_id = db_route_add ($db, $a);
+			printf ("valid route\n");
 		} else {
 			$route_id = false;
+			printf ("invalid route\n");
 		}
 
 		if ($route_id !== false) {
@@ -166,7 +169,7 @@ function route_main()
 	switch ($action) {
 		case 'add':
 			header('Content-Type: application/xml; charset=ISO-8859-1');
-			$response = route_add($date, $setter, $routes);
+			$response = route_add($db, $date, $setter, $routes);
 			break;
 		case 'save':
 			header('Content-Type: application/xml; charset=ISO-8859-1');

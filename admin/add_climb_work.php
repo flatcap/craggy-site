@@ -28,9 +28,9 @@ function climb_get_panels ($db, $panels)
 	return db_select ($db, $table, $columns, $where, $order);
 }
 
-function climb_lookup_success ($text)
+function climb_lookup_success ($db, $text)
 {
-	$success = success_get();
+	$success = success_get($db);
 
 	foreach ($success as $s) {
 		if ($s['outcome'] == $text)
@@ -40,9 +40,9 @@ function climb_lookup_success ($text)
 	return null;
 }
 
-function climb_lookup_difficulty ($text)
+function climb_lookup_difficulty ($db, $text)
 {
-	$difficulty = difficulty_get();
+	$difficulty = difficulty_get($db);
 
 	foreach ($difficulty as $s) {
 		if ($s['description'] == $text)
@@ -91,7 +91,7 @@ function climb_lookup_climber (&$xml, $name)
 }
 
 
-function climb_parse_climb (&$xml, $text)
+function climb_parse_climb ($db, &$xml, $text)
 {
 	//      clean
 	// (c)  clean
@@ -123,7 +123,7 @@ function climb_parse_climb (&$xml, $text)
 		// We'll deal with this later
 		$result['colour'] = $colour;
 	} else {
-		$c = colour_match ($colour);
+		$c = colour_match ($db, $colour);
 		if ($c === null) {
 			xml_add_error ($xml, sprintf ("'%s' is not a valid colour\n", $colour));
 			return null;
@@ -401,7 +401,7 @@ function climb_do_add ($db, &$xml)
 	$climbs = array();
 	$errors = 0;
 	foreach ($parts as $colour) {
-		$p = climb_parse_climb ($xml, $colour);
+		$p = climb_parse_climb ($db, $xml, $colour);
 		if ($p === null) {
 			$errors++;
 			continue;
@@ -467,7 +467,7 @@ function climb_do_save ($db, &$xml)
 		return;
 	}
 
-	if (!climber_match_xml ($xml, $_GET['climber']))
+	if (!climber_match_xml ($db, $xml, $_GET['climber']))
 		return;
 
 	$cxml = simplexml_load_string ($climbs);
@@ -501,8 +501,8 @@ function climb_do_save ($db, &$xml)
 			continue;
 		}
 
-		$success_id = climb_lookup_success (urldecode ($a->success));
-		$difficulty_id = climb_lookup_difficulty (urldecode ($a->difficulty));
+		$success_id = climb_lookup_success ($db, urldecode ($a->success));
+		$difficulty_id = climb_lookup_difficulty ($db, urldecode ($a->difficulty));
 		$nice = (string) urldecode ($a->nice);
 		$notes = (string) urldecode ($a->notes);
 
@@ -572,6 +572,8 @@ function climb_main (&$xml)
 	}
 
 	$action  = $_GET['action'];
+
+	$db = db_get_database();
 
 	switch ($action) {
 	case 'add':

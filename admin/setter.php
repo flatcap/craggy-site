@@ -39,6 +39,11 @@ function setter_main()
 	$output .= '</div>';
 	$output .= '</div>';
 
+	$output .= "<script type='text/javascript' src='complete.js'></script>";
+	$output .= "<script type='text/javascript' src='dialog.js'></script>";
+	$output .= "<script type='text/javascript' src='notify.js'></script>";
+	$output .= "<script type='text/javascript' src='table.js'></script>";
+	$output .= "<script type='text/javascript' src='xml.js'></script>";
 	$output .= "<script type='text/javascript' src='setter.js'></script>";
 	$output .= get_errors();
 	$output .= '</body>';

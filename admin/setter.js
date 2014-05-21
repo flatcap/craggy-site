@@ -236,6 +236,9 @@ function callback_list()
 	if ((this.readyState != 4) || (this.status != 200))
 		return;
 
+	if (display_errors (this))
+		return;
+
 	var txt = "<table cellspacing=0 border=1>" +
 		"<thead>" +
 		"<tr>" +

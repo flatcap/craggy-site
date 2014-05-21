@@ -4,7 +4,7 @@ set_include_path ('../libs');
 
 include_once 'utils.php';
 
-function setter_get()
+function setter_get($db)
 {
 	static $setter = null;
 
@@ -12,15 +12,15 @@ function setter_get()
 		include_once 'db.php';
 		include 'db_names.php';
 		$columns = array ('id', 'initials', 'first_name', 'surname', 'trim(concat(first_name, " ", surname)) as name');
-		$setter = db_select ($DB_SETTER, $columns);
+		$setter = db_select ($db, $DB_SETTER, $columns);
 	}
 
 	return $setter;
 }
 
-function setter_match ($test)
+function setter_match ($db, $test)
 {
-	$setter = setter_get();
+	$setter = setter_get($db);
 	if (!$setter)
 		return null;
 
@@ -50,9 +50,9 @@ function setter_match ($test)
 	}
 }
 
-function setter_match_xml (&$xml, $test)
+function setter_match_xml ($db, &$xml, $test)
 {
-	$setter = setter_match ($test);
+	$setter = setter_match ($db, $test);
 	if ($setter === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid setter", $test));
 		return false;

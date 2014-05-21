@@ -31,7 +31,7 @@ function cache_uptodate ($name)
 	return ($time_cache > $time_db);
 }
 
-function cache_get_table ($name)
+function cache_get_table ($db, $name)
 {
 	static $cache = array();
 
@@ -43,7 +43,7 @@ function cache_get_table ($name)
 
 		}
 	} else {
-		$cache[$name] = db_select ($name);
+		$cache[$name] = db_select ($db, $name);
 		// if db_select fails I don't want to put null into my local cache
 		$data = serialize ($cache[$name]);
 		apc_store ("table_$name", $data);

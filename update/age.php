@@ -16,7 +16,11 @@ function age_main()
 	$table   = $DB_V_ROUTE;
 	$columns = array('id', 'date_set');
 
-	$list = db_select($table, $columns);
+	$db = db_get_database();
+
+	$list = db_select($db, $table, $columns);
+
+	$db->close();
 
 	$totals = array();
 	for ($i = -1; $i < 8; $i++) {

@@ -4,22 +4,22 @@ set_include_path ('../libs');
 
 include_once 'utils.php';
 
-function colour_get()
+function colour_get($db)
 {
 	static $colours = null;
 
 	if ($colours === null) {
 		include_once 'db.php';
 		include 'db_names.php';
-		$colours = db_select($DB_COLOUR);
+		$colours = db_select($db, $DB_COLOUR);
 	}
 
 	return $colours;
 }
 
-function colour_match_single ($test)
+function colour_match_single ($db, $test)
 {
-	$colours = colour_get();
+	$colours = colour_get($db);
 	if (!$colours)
 		return nulll;
 
@@ -53,9 +53,9 @@ function colour_match_single ($test)
 	}
 }
 
-function colour_match ($test)
+function colour_match ($db, $test)
 {
-	$col1 = colour_match_single ($test);
+	$col1 = colour_match_single ($db, $test);
 	if ($col1 !== null)
 		return $col1;
 
@@ -63,18 +63,18 @@ function colour_match ($test)
 	if ($pos === false)
 		return null;
 
-	$col1 = colour_match_single (substr($test, 0, $pos));
-	$col2 = colour_match_single (substr($test, $pos+1));
+	$col1 = colour_match_single ($db, substr($test, 0, $pos));
+	$col2 = colour_match_single ($db, substr($test, $pos+1));
 
 	if (($col1 === null) || ($col2 === null))
 		return null;
 
-	return colour_match_single ($col1['colour'].'/'.$col2['colour']);
+	return colour_match_single ($db, $col1['colour'].'/'.$col2['colour']);
 }
 
-function colour_match_xml (&$xml, $test)
+function colour_match_xml ($db, &$xml, $test)
 {
-	$colour = colour_match ($test);
+	$colour = colour_match ($db, $test);
 	if ($colour === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid colour", $test));
 		return false;

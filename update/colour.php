@@ -17,7 +17,11 @@ function colour_main()
 	$order   = 'count desc';
 	$group   = 'colour';
 
-	$list = db_select($table, $columns, $where, $order, $group);
+	$db = db_get_database();
+
+	$list = db_select($db, $table, $columns, $where, $order, $group);
+
+	$db->close();
 
 	$output = '';
 	foreach ($list as $colour) {

@@ -191,7 +191,11 @@ function checklist_main ()
 	$table   = $DB_V_ROUTE;
 	$columns = array ('id', 'panel', 'climb_type', 'colour', 'grade', 'grade_seq', 'notes', 'date_set', 'height');
 
-	$list = db_select($table, $columns);
+	$db = db_get_database();
+
+	$list = db_select($db, $table, $columns);
+
+	$db->close();
 
 	usort($list, 'cmp_panel');
 

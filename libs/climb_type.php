@@ -4,22 +4,22 @@ set_include_path ('../libs');
 
 include_once 'utils.php';
 
-function climb_type_get()
+function climb_type_get($db)
 {
 	static $climb_type = null;
 
 	if ($climb_type === null) {
 		include_once 'db.php';
 		include 'db_names.php';
-		$climb_type = db_select ($DB_CLIMB_TYPE);
+		$climb_type = db_select ($db, $DB_CLIMB_TYPE);
 	}
 
 	return $climb_type;
 }
 
-function climb_type_match ($test)
+function climb_type_match ($db, $test)
 {
-	$climb_type = climb_type_get();
+	$climb_type = climb_type_get($db);
 	if (!$climb_type)
 		return null;
 
@@ -47,9 +47,9 @@ function climb_type_match ($test)
 	}
 }
 
-function climb_type_match_xml (&$xml, $test)
+function climb_type_match_xml ($db, &$xml, $test)
 {
-	$climb_type = climb_type_match ($test);
+	$climb_type = climb_type_match ($db, $test);
 	if ($climb_type === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid climb type", $test));
 		return false;

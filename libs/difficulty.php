@@ -4,22 +4,22 @@ set_include_path ('../libs');
 
 include_once 'utils.php';
 
-function difficulty_get()
+function difficulty_get($db)
 {
 	static $difficulty = null;
 
 	if ($difficulty === null) {
 		include_once 'db.php';
 		include 'db_names.php';
-		$difficulty = db_select($DB_DIFFICULTY);
+		$difficulty = db_select($db, $DB_DIFFICULTY);
 	}
 
 	return $difficulty;
 }
 
-function difficulty_match ($test)
+function difficulty_match ($db, $test)
 {
-	$difficulty = difficulty_get();
+	$difficulty = difficulty_get($db);
 	if (!$difficulty)
 		return null;
 
@@ -47,9 +47,9 @@ function difficulty_match ($test)
 	}
 }
 
-function difficulty_match_xml (&$xml, $test)
+function difficulty_match_xml ($db, &$xml, $test)
 {
-	$difficulty = difficulty_match ($test);
+	$difficulty = difficulty_match ($db, $test);
 	if ($difficulty === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid difficulty", $test));
 		return false;

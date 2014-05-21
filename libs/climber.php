@@ -18,9 +18,9 @@ function climber_get($db)
 	return $climber;
 }
 
-function climber_match ($str)
+function climber_match ($db, $str)
 {
-	$climbers = climber_get();
+	$climbers = climber_get($db);
 	if (!$climbers)
 		return null;
 
@@ -47,9 +47,9 @@ function climber_match ($str)
 	}
 }
 
-function climber_match_xml (&$xml, $test)
+function climber_match_xml ($db, &$xml, $test)
 {
-	$climber = climber_match ($test);
+	$climber = climber_match ($db, $test);
 	if ($climber === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid climber", $test));
 		return false;

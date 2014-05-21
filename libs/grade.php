@@ -2,22 +2,22 @@
 
 set_include_path ('../libs');
 
-function grade_get()
+function grade_get($db)
 {
 	static $grade = null;
 
 	if ($grade === null) {
 		include_once 'db.php';
 		include 'db_names.php';
-		$grade = db_select($DB_GRADE);
+		$grade = db_select($db, $DB_GRADE);
 	}
 
 	return $grade;
 }
 
-function grade_match ($test)
+function grade_match ($db, $test)
 {
-	$grade = grade_get();
+	$grade = grade_get($db);
 	if (!$grade)
 		return null;
 
@@ -33,9 +33,9 @@ function grade_match ($test)
 	return null;
 }
 
-function grade_match_xml (&$xml, $test)
+function grade_match_xml ($db, &$xml, $test)
 {
-	$grade = grade_match ($test);
+	$grade = grade_match ($db, $test);
 	if ($grade === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid grade", $test));
 		return false;

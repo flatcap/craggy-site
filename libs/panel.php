@@ -2,22 +2,22 @@
 
 set_include_path ('../libs');
 
-function panel_get()
+function panel_get($db)
 {
 	static $panel = null;
 
 	if ($panel === null) {
 		include_once 'db.php';
 		include 'db_names.php';
-		$panel = db_select($DB_PANEL);
+		$panel = db_select($db, $DB_PANEL);
 	}
 
 	return $panel;
 }
 
-function panel_match ($test)
+function panel_match ($db, $test)
 {
-	$panel = panel_get();
+	$panel = panel_get($db);
 	if (!$panel)
 		return null;
 
@@ -33,9 +33,9 @@ function panel_match ($test)
 	return null;
 }
 
-function panel_match_xml (&$xml, $test)
+function panel_match_xml ($db, &$xml, $test)
 {
-	$panel = panel_match ($test);
+	$panel = panel_match ($db, $test);
 	if ($panel === null) {
 		$xml->addChild ('error', sprintf ("'%s' is not a valid panel", $test));
 		return false;

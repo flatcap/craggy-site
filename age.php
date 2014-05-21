@@ -22,7 +22,7 @@ function stats_age()
 	}
 	$totals[-1]['age'] = 'N/A';
 
-	$today = strtotime ('today');
+	$today = strtotime ('2012-09-14');	// RAR was 'today'
 	foreach ($list as $row) {
 		$date = $row['date_set'];
 		if (empty ($date) || ($date == '0000-00-00'))

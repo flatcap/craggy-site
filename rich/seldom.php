@@ -77,7 +77,7 @@ function seldom_climbs ($ranges, $climber_id)
 	process_type ($list);
 	process_date ($list, 'date_climbed', true);
 
-	$today = strtotime('today');
+	$today = strtotime('2012-09-14');	// RAR was 'today'
 	$results = array();
 	foreach ($list as $index => $row) {
 		$m = $row['months'];

@@ -7,12 +7,14 @@ include "utils.php";
 
 function rss_get_routes()
 {
+	$db = db_get_database();
+
 	$table   = "v_route";
 	$columns = array ("id", "panel", "colour", "grade", "date_set", "setter");
 	$where   = null;
 	$order   = "date_set desc, panel_seq, grade_seq";
 
-	$list = db_select($table, $columns, $where, $order);
+	$list = db_select ($db, $table, $columns, $where, $order);
 
 	return $list;
 }

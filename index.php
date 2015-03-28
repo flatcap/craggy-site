@@ -38,8 +38,7 @@ function index_main()
 	$output .= "</div>";
 	*/
 
-	$output .= '</body>';
-	$output .= '</html>';
+	$output .= html_footer();
 
 	$db->close();
 	return $output;

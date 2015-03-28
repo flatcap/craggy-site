@@ -125,8 +125,7 @@ function climbs_main ($options, $climber_id)
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0], [2,0], [1,0]]}');
 			$output .= '</div>';
 			$output .= get_errors();
-			$output .= '</body>';
-			$output .= '</html>';
+			$output .= html_footer();
 			break;
 
 		case 'csv':

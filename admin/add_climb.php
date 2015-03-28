@@ -55,8 +55,7 @@ function add_main()
 	$output .= "<script type='text/javascript' src='add_climb.js'></script>";
 
 	$output .= get_errors();
-	$output .= '</body>';
-	$output .= '</html>';
+	$output .= html_footer();
 
 	return $output;
 }

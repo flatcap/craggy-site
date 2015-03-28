@@ -48,8 +48,7 @@ function route_main()
 	$output .= "<script type='text/javascript' src='edit_route.js'></script>";
 
 	$output .= get_errors();
-	$output .= '</body>';
-	$output .= '</html>';
+	$output .= html_footer();
 
 	return $output;
 }

@@ -75,8 +75,7 @@ function routes_main($options)
 			$output .= "</div>";
 			*/
 
-			$output .= '</body>';
-			$output .= '</html>';
+			$output .= html_footer();
 			break;
 
 		case 'csv':

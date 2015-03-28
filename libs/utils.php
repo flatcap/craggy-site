@@ -7,24 +7,12 @@ function html_header ($title, $reldir = '')
 	$output .= "<!DOCTYPE html PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'>";
 	$output .= '<html>';
 	$output .= '<head>';
-	$output .= "<link rel='stylesheet' title='green' href='{$reldir}style/style.css' type='text/css'>";
-	$output .= "<link rel='alternate' title='Craggy RSS' href='https://flatcap.org/craggy/rss.xml' type='application/rss+xml'>";
-	$output .= "<link rel='icon' type='image/png' href='{$reldir}style/favicon.png'>";
 	$output .= "<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
+	$output .= "<link type='text/css' rel='stylesheet' href='{$reldir}style/style.css' title='green'>";
+	$output .= "<link type='text/css' rel='stylesheet' href='{$reldir}style/tablesorter.css'>";
+	$output .= "<link type='image/png' rel='icon' href='{$reldir}style/favicon.png'>";
+	$output .= "<link type='application/rss+xml' rel='alternate' title='Craggy RSS' href='https://flatcap.org/craggy/rss.xml'>";
 	$output .= "<title>$title - Craggy Island</title>";
-
-	// Google Analytics - not for home server
-	if (isset ($_SERVER) && array_key_exists ('SERVER_ADDR', $_SERVER) && ($_SERVER['SERVER_ADDR'] != '192.168.2.2')) {
-		$output .= "<script type='text/javascript' src='{$reldir}style/analytics.js'></script>";
-	}
-
-	// Table Sorter
-	$output .= "<link rel='stylesheet' href='{$reldir}style/tablesorter.css' type='text/css'>";
-	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.js'></script>";
-	$output .= "<script type='text/javascript' src='{$reldir}style/jquery.metadata.js'></script>";
-	$output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script>";
-	$output .= "<script type='text/javascript' src='{$reldir}style/initialise.js'></script>";
-
 	$output .= '</head>';
 
 	return $output;
@@ -95,6 +83,22 @@ function html_menu($reldir = '')
 	}
 
 	$output .= '</div>';
+
+	return $output;
+}
+
+function html_footer()
+{
+	/* $output  = "<script type='text/javascript' src='{$reldir}style/jquery.js'></script>"; */
+	/* $output .= "<script type='text/javascript' src='{$reldir}style/jquery.metadata.js'></script>"; */
+	/* $output .= "<script type='text/javascript' src='${reldir}style/jquery.tablesorter.js'></script>"; */
+	/* $output .= "<script type='text/javascript' src='{$reldir}style/initialise.js'></script>"; */
+	/* $output .= "<script type='text/javascript' src='{$reldir}style/analytics.js'></script>"; */
+
+	$output  = "<script type='text/javascript' src='{$reldir}style/all.js'></script>";
+
+	$output .= '</body>';
+	$output .= '</html>';
 
 	return $output;
 }

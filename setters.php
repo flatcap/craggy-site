@@ -60,8 +60,7 @@ function stats_main()
 	$output .= stats_setters($db);
 	$output .= '</div>';
 	$output .= get_errors();
-	$output .= '</body>';
-	$output .= '</html>';
+	$output .= html_footer();
 
 	$header  = html_header ('Setter');
 

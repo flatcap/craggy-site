@@ -72,8 +72,7 @@ function six_main ($options)
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[0,0],[2,0],[1,0]]}');
 			$output .= '</div>';	// content
 			$output .= get_errors();
-			$output .= '</body>';
-			$output .= '</html>';
+			$output .= html_footer();
 			break;
 
 		case 'csv':

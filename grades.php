@@ -139,8 +139,7 @@ function stats_main()
 	$output .= stats_grade($db);
 	$output .= '</div>';
 	$output .= get_errors();
-	$output .= '</body>';
-	$output .= '</html>';
+	$output .= html_footer();
 
 	$header  = html_header ('Grades');
 

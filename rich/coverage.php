@@ -157,8 +157,7 @@ function coverage_main ($options, $climber_id)
 			$output .= list_render_html ($list, $columns, $widths, '{sortlist: [[1,1]]}');
 			$output .= '</div>';
 			$output .= get_errors();
-			$output .= '</body>';
-			$output .= '</html>';
+			$output .= html_footer();
 			break;
 
 		case 'csv':

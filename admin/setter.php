@@ -46,8 +46,7 @@ function setter_main()
 	$output .= "<script type='text/javascript' src='xml.js'></script>";
 	$output .= "<script type='text/javascript' src='setter.js'></script>";
 	$output .= get_errors();
-	$output .= '</body>';
-	$output .= '</html>';
+	$output .= html_footer();
 
 	return $output;
 }

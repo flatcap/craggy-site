@@ -175,8 +175,7 @@ function seldom_main ($options, $climber_id)
 		case 'html':
 			$output .= '</div>';
 			$output .= get_errors();
-			$output .= '</body>';
-			$output .= '</html>';
+			$output .= html_footer();
 			break;
 
 		case 'csv':

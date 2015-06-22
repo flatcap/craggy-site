@@ -69,7 +69,7 @@ function add_route ($panel, $colour, $grade, $key)
 
 	$this->SetFont ('Times', '', 9);
 	$this->Cell (5, $h, $panel, $b, 0, 'R');
-	$this->SetFont ('WingDing', '', 9);
+	$this->SetFont ('WingDings2', '', 9);
 	$this->SetTextColor (220, 220, 220);
 	$this->Cell (4, $h, "R", $b);
 	$this->SetFont ('Times', '', 9);
@@ -270,7 +270,7 @@ function checklist_main ()
 	$pdf->SetAuthor ('Richard Russon');
 	$pdf->SetSubject ('Craggy Routes');
 	$pdf->SetCompression (true);
-	$pdf->AddFont('WingDing','','wingding.php');
+	$pdf->AddFont('WingDings2','','wingdings2.php');
 	$pdf->SetCol (0);
 
 	$titles = array (3 => 'Grade 3', 4 => 'Grade 4', 5 => 'Grade 5', 6 => 'Grade 6a', 7 => 'Grade 6b', 8 => 'Grade 6c...');
@@ -281,8 +281,10 @@ function checklist_main ()
 		$count = count ($list);
 
 		//if (($gb == 6) || ($gb == 8))
-		if ($gb == 6)
-			$pdf->new_column();
+		// temporarily commented out
+		// because 5s fill the column exactly causing a double new_column
+		// if ($gb == 6)
+		// 	$pdf->new_column();
 
 		$pdf->print_grade ($title, $count);
 

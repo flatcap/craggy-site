@@ -87,7 +87,7 @@ function html_menu($reldir = '')
 	return $output;
 }
 
-function html_footer()
+function html_footer($reldir = '')
 {
 	/* $output  = "<script type='text/javascript' src='{$reldir}style/jquery.js'></script>"; */
 	/* $output .= "<script type='text/javascript' src='{$reldir}style/jquery.metadata.js'></script>"; */

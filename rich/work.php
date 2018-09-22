@@ -127,7 +127,7 @@ function work_all_climbs ($db, $climber_id)
 	$list = db_select2($db, $table, $columns, $where);
 	$list = process_best ($list);
 
-	$today = strtotime('2012-09-14');	// RAR was 'today'
+	$today = strtotime('2018-09-14');	// RAR was 'today'
 	foreach ($list as $index => &$row) {
 		$s = $row['success_id'];
 		$g = $row['grade_seq'];

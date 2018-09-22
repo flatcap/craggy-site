@@ -276,7 +276,7 @@ function csv_table_header (&$columns)
 function process_date(&$list, $field, $add_age = false)
 {
 	// Manipulate dates ('0000-00-00' -> '')
-	$today = strtotime('2012-09-14');	// RAR was 'today'
+	$today = strtotime('2018-09-14');	// RAR was 'today'
 	foreach ($list as $index => $row) {
 		$d = $row[$field];
 		if (empty ($d) || ($d == '0000-00-00'))
@@ -314,7 +314,7 @@ function process_type(&$list)
 
 function process_key (&$list)
 {
-	$today = strtotime('2012-09-14');	// RAR was 'today'
+	$today = strtotime('2018-09-14');	// RAR was 'today'
 	foreach ($list as $index => $row) {
 		$d = $row['date_set'];
 		if ($d == '0000-00-00')
@@ -429,7 +429,7 @@ function get_stats ($db)
 	$age_count    = 0;
 	$age_total    = 0;
 	$route_height = 0;
-	$today        = strtotime ('2012-09-14');	// RAR was 'today'
+	$today        = strtotime ('2018-09-14');	// RAR was 'today'
 	foreach ($all_routes as $r) {
 		$route_height += $r['height'];
 		$date = $r['date_set'];

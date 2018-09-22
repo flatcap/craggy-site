@@ -39,6 +39,7 @@ function stats_main()
 	$last_update = date ('j M Y', strtotime (db_get_last_update($db)));
 
 	$output  = '<body>';
+	$output .= '<div style="background: red; color: white; text-align: center;">This is historic climb data</div>';
 	$output .= html_menu();
 
 	$output .= "<div class='content'>";

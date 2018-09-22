@@ -70,6 +70,7 @@ function checklist_main ($options)
 
 			$output .= html_header ('Checklist');
 			$output .= '<body>';
+			$output .= '<div style="background: red; color: white; text-align: center;">This is historic climb data</div>';
 
 			$output .= html_menu();
 

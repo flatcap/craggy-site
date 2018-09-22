@@ -52,6 +52,7 @@ function six_main ($options)
 
 			$output .= html_header ('6a');
 			$output .= '<body>';
+			$output .= '<div style="background: red; color: white; text-align: center;">This is historic climb data</div>';
 
 			$output .= html_menu();
 

@@ -13,6 +13,7 @@ function index_main()
 
 	$output  = html_header ('Overview');
 	$output .= '<body>';
+	$output .= '<div style="background: red; color: white; text-align: center;">This is historic climb data</div>';
 
 	$output .= html_menu();
 
